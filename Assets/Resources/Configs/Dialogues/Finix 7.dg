@@ -40,7 +40,8 @@ MonoBehaviour:
         - rid: 4204129564721152724
         - rid: 4204129564721152731
         - rid: 4204129564721152738
-        m_GraphStickyNoteModels: []
+        m_GraphStickyNoteModels:
+        - rid: 4204129574371459094
         m_GraphPlacematModels: []
         m_GraphVariableModels: []
         m_GraphPortalModels: []
@@ -50,9 +51,9 @@ MonoBehaviour:
         m_LastKnownBounds:
           serializedVersion: 2
           x: -5250
-          y: 287
+          y: 120
           width: 1655
-          height: 189
+          height: 356
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 8661944816858801698
@@ -587,3 +588,25 @@ MonoBehaviour:
     - rid: 4204129564721152740
       type: {class: ActionNode, ns: Editor, asm: Assembly-CSharp-Editor}
       data: 
+    - rid: 4204129574371459094
+      type: {class: StickyNoteModel, ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Guid:
+          m_Value0: 6559296194771568524
+          m_Value1: 15256142696857194497
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 8c47eef1224d075b01d0d7c8f3b4b8d3
+        m_Version: 2
+        m_Title: "\u0410\u043D\u0438\u043C\u043A\u0430 \u043E\u0442\u043E\u0433\u0440\u0435\u0432\u0430\u043D\u0438\u044F,
+          \u043F\u043E\u0441\u043B\u0435 \u043D\u0435\u0435 \u0441\u0440\u0430\u0437\u0443
+          \u0441\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439 \u0434\u0438\u0430\u043B\u043E\u0433"
+        m_Contents: 
+        m_ThemeName: Classic
+        m_TextSizeName: Small
+        m_Position:
+          serializedVersion: 2
+          x: -3821.45
+          y: 119.60002
+          width: 200
+          height: 160

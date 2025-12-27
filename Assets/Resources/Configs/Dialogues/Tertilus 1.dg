@@ -42,7 +42,8 @@ MonoBehaviour:
         - rid: 4204129564721152021
         - rid: 4204129564721152028
         - rid: 4204129564721152035
-        m_GraphStickyNoteModels: []
+        m_GraphStickyNoteModels:
+        - rid: 4204129574371459082
         m_GraphPlacematModels: []
         m_GraphVariableModels: []
         m_GraphPortalModels: []
@@ -52,9 +53,9 @@ MonoBehaviour:
         m_LastKnownBounds:
           serializedVersion: 2
           x: -125
-          y: 245
+          y: 66
           width: 2037
-          height: 193
+          height: 372
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 3401007876496321997
@@ -523,7 +524,8 @@ MonoBehaviour:
     - rid: 4204129564721152025
       type: {class: 'Constant`1[[System.String, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
       data:
-        m_Value: "{playerName}, \u043F\u043E\u0448\u043B\u0438 \u0437\u0430 \u043C\u043D\u043E\u0439!"
+        m_Value: "{playerName}, \u0430 \u043F\u043E\u0448\u043B\u0438 \u0437\u0430
+          \u043C\u043D\u043E\u0439!"
     - rid: 4204129564721152026
       type: {class: TextNode, ns: Editor, asm: Assembly-CSharp-Editor}
       data: 
@@ -709,3 +711,27 @@ MonoBehaviour:
     - rid: 4204129564721152037
       type: {class: ActionNode, ns: Editor, asm: Assembly-CSharp-Editor}
       data: 
+    - rid: 4204129574371459082
+      type: {class: StickyNoteModel, ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Guid:
+          m_Value0: 9308235060177068519
+          m_Value1: 5232795935841322543
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: e7e1b057787e2d812f06eed92da09e48
+        m_Version: 2
+        m_Title: "\u0422\u0435\u0440\u0442\u0438\u043B\u0443\u0441 \u0443\u0445\u043E\u0434\u0438\u0442
+          \u043A \u043F\u0435\u0440\u0432\u043E\u0439 \u0433\u043E\u043B\u043E\u0432\u043E\u043B\u043E\u043C\u043A\u0435"
+        m_Contents: "+ \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u0442\u0441\u044F
+          \u0442\u0440\u0438\u0433\u0433\u0435\u0440 \u0440\u044F\u0434\u043E\u043C
+          \u0441 \u043D\u043E\u0432\u043E\u0439 \u043F\u043E\u0437\u0438\u0446\u0438\u0435\u0439
+          \u043D\u0430 \u043D\u043E\u0432\u044B\u0439 \u0434\u0438\u0430\u043B\u043E\u0433"
+        m_ThemeName: Classic
+        m_TextSizeName: Small
+        m_Position:
+          serializedVersion: 2
+          x: 1675.6075
+          y: 66.125015
+          width: 200
+          height: 160
