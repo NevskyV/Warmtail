@@ -16,6 +16,7 @@ namespace Systems
         public static Action OnApplyedAll = delegate {};
         public static Action OnCanceledAll = delegate {};
         public static Action OnUIDraggableUpdated = delegate {};
+        public static Action OnResetedInventory = delegate {};
         private GlobalData _globalData;
         private HouseManager _houseManager;
 
@@ -29,12 +30,12 @@ namespace Systems
 
             if (_globalData.Get<SavablePlayerData>().Inventory == null)
                 _globalData.Edit<SavablePlayerData>(data => data.Inventory = new());
-            InventoryCurrent = new(_globalData.Get<SavablePlayerData>().Inventory);
+            ResetInventory();
             
             var houseItems = _globalData.Get<HouseData>().PlacedHouseItems;
             foreach (PairForHouseItem item in houseItems)
             {
-                DraggableObject gm = InstantiateDraggableObject(_houseManager.IdsForHouseItemsData[item.HouseItemDataId].ItemPref, new Vector2(item.PositionX, item.PositionY), true);
+                DraggableObject gm = InstantiateDraggableObject(_houseManager._itemsHouseIdConf.IdsForHouseItemsData[item.HouseItemDataId].ItemPref, new Vector2(item.PositionX, item.PositionY), true);
                 gm.transform.position = new Vector2(item.PositionX, item.PositionY);
             }
         }
@@ -65,6 +66,12 @@ namespace Systems
                 if (!data.Inventory.ContainsKey(itemId)) data.Inventory[itemId] = 0;
                 data.Inventory[itemId] += how;
             });
+        }
+        
+        public void ResetInventory()
+        {
+            InventoryCurrent = new(_globalData.Get<SavablePlayerData>().Inventory);
+            OnResetedInventory?.Invoke();
         }
 #endregion
 #region apply and cancel

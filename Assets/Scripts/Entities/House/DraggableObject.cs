@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using Data.House;
 using Zenject;
 using Systems;
+using Entities.UI;
 
 namespace Entities.House
 {
@@ -16,7 +17,8 @@ namespace Entities.House
         [SerializeField] private HouseItemData _houseItemData;
         private PlacementSystem _placementSystem;
         private InputAction _leftClickAction;
-        private BoxCollider _boxCollider;
+        private BoxCollider2D _boxCollider;
+        private UIStateSystem _uiStateSystem;
         private Vector2 _posObjectOnPointerDown;
         private Vector2 _posMouseOnPointerDown;
         private Vector2 _posObjectOnConfirmedState;
@@ -31,7 +33,7 @@ namespace Entities.House
             PlacementSystem.OnApplyedAll += ApplyEditing;
             PlacementSystem.OnCanceledAll += CancelEdited;
             
-            _boxCollider = GetComponent<BoxCollider>();
+            _boxCollider = GetComponent<BoxCollider2D>();
         }
         void OnDestroy()
         {
@@ -40,15 +42,25 @@ namespace Entities.House
         }
 
         [Inject]
-        private void Construct(PlacementSystem placementSystem, PlayerInput input)
+        private void Construct(PlacementSystem placementSystem, PlayerInput input, UIStateSystem uiStateSystem)
         {
             _leftClickAction = input.actions.FindAction("LeftMouse");
             _placementSystem = placementSystem;
+            _uiStateSystem = uiStateSystem;
         }
         public void Initialize(bool isConfirmed)
         {
             _posObjectOnConfirmedState = (isConfirmed ? transform.position : Vector2.positiveInfinity);
             _isConfirmed = isConfirmed;
+        }
+        
+        private void StartBuild()
+        {
+            if (_uiStateSystem.CurrentState != UIState.Building)
+            {
+                _placementSystem.ResetInventory();
+                _uiStateSystem.SwitchCurrentStateAsync(UIState.Building);
+            }
         }
 #endregion
 #region interaction
@@ -63,6 +75,7 @@ namespace Entities.House
             {
                 Vector2 v2 = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
                 transform.position = _posObjectOnPointerDown + (v2 - _posMouseOnPointerDown);
+                StartBuild();
             }
         }
         
@@ -71,7 +84,7 @@ namespace Entities.House
             _isPlacementing = true;
             _posMouseOnPointerDown = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             _posObjectOnPointerDown = transform.position;
-            _isClickedNow = true; 
+            _isClickedNow = true;
             EnableMenu();
         }
         public void OnPointerUp(PointerEventData pointerEventData)
@@ -146,6 +159,7 @@ namespace Entities.House
             _child.SetActive(false);
             _boxCollider.enabled = false;
             _isVisible = false;
+            StartBuild();
             RemoveFromInventory();
         }
 

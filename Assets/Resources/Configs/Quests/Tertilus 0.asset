@@ -19,7 +19,8 @@ MonoBehaviour:
   <Sequence>k__BackingField:
   - Actions:
     - rid: 4204129410323054879
-    Tasks: []
+    Tasks:
+    - rid: 5607584703621628007
   - Actions: []
     Tasks:
     - rid: 4204129410323054881
@@ -45,3 +46,7 @@ MonoBehaviour:
       type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _action: {fileID: -3218134202904356782, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - rid: 5607584703621628007
+      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _action: {fileID: -8825077126060833141, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}

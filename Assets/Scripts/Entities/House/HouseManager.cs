@@ -10,15 +10,13 @@ namespace Entities.House
 {
     public class HouseManager : MonoBehaviour
     {
-        [SerializeField] private ItemsHouseIdConf _itemsHouseIdConf;
+        public ItemsHouseIdConf _itemsHouseIdConf;
         [SerializeField] private SerializedDictionary<Character,SpeakableCharacter> _npc;
-        [HideInInspector] public HouseItemData[] IdsForHouseItemsData;
         [Inject] private PlacementSystem _placementSystem; 
         [Inject] private GlobalData _globalData; 
 
         void Awake()
         {
-            IdsForHouseItemsData = _itemsHouseIdConf.IdsForHouseItemsData;
             EnableNpc(_globalData.Get<NpcSpawnData>().CurrentHomeNpc);
         }
 
@@ -29,6 +27,11 @@ namespace Entities.House
         public void CancelAll()
         {
             _placementSystem.CancelAll();
+        }
+
+        public void ResetInventory()
+        {
+            _placementSystem.ResetInventory();
         }
 
         private void EnableNpc(Character? character)
