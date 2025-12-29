@@ -45,7 +45,7 @@ namespace Editor
                     ConditionNode _  => new Data.Nodes.ConditionNode {NodeId = nodeIdMap[iNode]},
                     SetNode _  => new Data.Nodes.SetNode {NodeId = nodeIdMap[iNode]},
                 };
-                runtimeNode.Setup(iNode, nodeIdMap);
+                ((DialogueNode)iNode).Setup(runtimeNode, nodeIdMap);
                 runtimeGraph.AllNodes.Add(runtimeNode);
             }
 

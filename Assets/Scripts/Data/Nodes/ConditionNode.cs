@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using Systems;
-using Unity.GraphToolkit.Editor;
 using Zenject;
 using UnityEngine;
 
@@ -10,32 +8,16 @@ namespace Data.Nodes
 {
     public class ConditionNode : RuntimeNode
     {
-        [SerializeField] private List<ConditionStruct> _conditions  = new();
+        [field: SerializeField] public List<ConditionStruct> Conditions { get; private set; } = new();
 
         [Inject] private GlobalData _globalData;
         [Inject] private DialogueSystem _dialogueSystem;
-
-        public override void Setup(INode node, Dictionary<INode, string> nodeIdMap)
-        {
-            var inputs = node.GetInputPorts().ToArray();
-            var outputs = node.GetOutputPorts().ToArray();
-            for (int i = 0; i < outputs.Length; i++)
-            {
-                _conditions.Add(NodePortHelper.GetPortValue<ConditionStruct>(inputs[i+1]));
-              
-                var nextNode = outputs[i]?.firstConnectedPort;
-                if (nextNode != null)
-                {
-                    NextNodeIds.Add(nodeIdMap[nextNode.GetNode()]);
-                }
-            }
-        }
 
         public override void Activate()
         {
             var varDataList = _globalData.Get<DialogueVarData>().Variables;
             var targetOutput = 0;
-            foreach (var condStruct in _conditions)
+            foreach (var condStruct in Conditions)
             {
                 var dialogueVar = varDataList.Find(x => x.Name == condStruct.VarName);
             
