@@ -49,7 +49,7 @@ namespace Editor
                 runtimeGraph.AllNodes.Add(runtimeNode);
             }
 
-            LocalizationManager.UploadToSheets(runtimeGraph);
+            LocalizationExporter.UploadToSheets(runtimeGraph);
             ctx.AddObjectToAsset("RuntimeData", runtimeGraph);
             ctx.SetMainObject(runtimeGraph);
         }
