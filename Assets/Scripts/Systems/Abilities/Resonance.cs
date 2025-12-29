@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using Zenject;
 using System.Threading;
 
+
 namespace Systems.Abilities.Concrete
 {
     [Serializable]
@@ -15,9 +16,10 @@ namespace Systems.Abilities.Concrete
     {
         [SerializeField] private float _searchRadius = 12f;
         [SerializeField] private float _interactRadius = 5f;
-        [SerializeField] private float _warmthDrainPerSecond = 2f;
-        [SerializeField] private float _tickDelay = 0.1f;
-
+        [SerializeField] private float _warmthDrain = 2f;
+        [SerializeField] private float _drainInterval = 1f;
+       
+        [SerializeField] private Vector2 _returnPosition;
         private WarmthSystem _warmthSystem;
         private Transform _playerTransform;
         private Player _player;
@@ -26,8 +28,8 @@ namespace Systems.Abilities.Concrete
         private SwarmController _activeSwarm;
         private Vector2 _moveInput;
 
-        private float _warmthAccumulator;
         private CancellationTokenSource _tickCts;
+        private CancellationTokenSource _warmthCts;
 
         [Inject]
         public void Construct(Player player, WarmthSystem warmth, PlayerInput input, CinemachineCamera cam)
@@ -37,7 +39,7 @@ namespace Systems.Abilities.Concrete
             _warmthSystem = warmth;
             _input = input;
             _vCam = cam;
-            
+
             var moveAction = _input.actions.FindAction("Move");
             if (moveAction != null)
             {
@@ -49,17 +51,18 @@ namespace Systems.Abilities.Concrete
             EndAbility += OnEnd;
         }
 
-        private CancellationTokenSource _warmthCts;
-
         private void OnStart()
         {
             _activeSwarm = FindNearestSwarm();
+            if (_activeSwarm != null)
+            {
+                _returnPosition = _activeSwarm.transform.position;
+            }
+
             if (_activeSwarm == null)
                 return;
 
-            if (_player != null)
-                _player.StartResonance(_activeSwarm.GetComponent<Rigidbody2D>());
-
+            _player?.StartResonance(_activeSwarm.GetComponent<Rigidbody2D>());
             _activeSwarm.SetControlled(true);
 
             if (_vCam != null)
@@ -68,17 +71,17 @@ namespace Systems.Abilities.Concrete
                 _vCam.LookAt = _activeSwarm.transform;
             }
 
-            _warmthAccumulator = 0f;
-
+            // Запуск цикла обработки роя
             _tickCts?.Cancel();
             _tickCts = new CancellationTokenSource();
             TickCycle(_tickCts.Token).Forget();
 
-            // ← Запуск новой корутины, списывающей тепло каждую секунду
+            // Запуск цикла траты тепла раз в _drainInterval
             _warmthCts?.Cancel();
             _warmthCts = new CancellationTokenSource();
             WarmthDrainLoop(_warmthCts.Token).Forget();
         }
+
         private async UniTaskVoid WarmthDrainLoop(CancellationToken token)
         {
             try
@@ -88,17 +91,17 @@ namespace Systems.Abilities.Concrete
                     if (_activeSwarm == null)
                         break;
 
-                   
-                    ApplyWarmthDrainPerSecond();
+                    ApplyWarmthDrain();
 
-                    await UniTask.Delay(TimeSpan.FromSeconds(1f), cancellationToken: token);
+                    await UniTask.Delay(TimeSpan.FromSeconds(_drainInterval), cancellationToken: token);
                 }
             }
-            catch (OperationCanceledException) {}
+            catch (OperationCanceledException) { }
         }
-        private void ApplyWarmthDrainPerSecond()
+
+        private void ApplyWarmthDrain()
         {
-            int cost = Mathf.FloorToInt(_warmthDrainPerSecond);
+            int cost = Mathf.FloorToInt(_warmthDrain);
 
             if (cost <= 0)
                 return;
@@ -112,7 +115,6 @@ namespace Systems.Abilities.Concrete
             _warmthSystem.DecreaseWarmth(cost);
         }
 
-
         private async UniTaskVoid TickCycle(CancellationToken token)
         {
             try
@@ -123,17 +125,14 @@ namespace Systems.Abilities.Concrete
                         break;
 
                     ProcessSwarmInteraction();
-                    await UniTask.Delay(TimeSpan.FromSeconds(_tickDelay), cancellationToken: token);
+                    await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token); // маленький тик для обновления движения
                 }
             }
-            catch (OperationCanceledException)
-            {
-            }
+            catch (OperationCanceledException) { }
         }
 
         private void ProcessSwarmInteraction()
         {
-            // Новое условие: тепло тратится только если рой выбран
             if (_activeSwarm == null)
                 return;
 
@@ -151,47 +150,23 @@ namespace Systems.Abilities.Concrete
                 }
             }
 
-            if (!anyNear)
-            {
-                _activeSwarm.SetControlInput(Vector2.zero);
-                return;
-            }
-
-            _activeSwarm.SetControlInput(_moveInput);
-
-            // Тепло тратится только если рой выбран → условие уже выполнено выше
-            ApplyWarmthDrain();
-        }
-
-
-        private void ApplyWarmthDrain()
-        {
-            float drain = _warmthDrainPerSecond * _tickDelay;
-            _warmthAccumulator += drain;
-
-            int consumeUnits = Mathf.FloorToInt(_warmthAccumulator);
-            if (consumeUnits <= 0)
-                return;
-
-            if (!_warmthSystem.CheckWarmCost(consumeUnits))
-            {
-                EndAbility?.Invoke();
-                return;
-            }
-
-            _warmthSystem.DecreaseWarmth(consumeUnits);
-            _warmthAccumulator -= consumeUnits;
+            _activeSwarm.SetControlInput(anyNear ? _moveInput : Vector2.zero);
         }
 
         private void OnEnd()
         {
+            if (_activeSwarm != null)
+            {
+                _activeSwarm.SetControlled(false);
+                ReturnSwarmToPosition(_returnPosition, 0.5f).Forget();
+            }
             _tickCts?.Cancel();
+            _warmthCts?.Cancel();
 
             if (_activeSwarm != null)
                 _activeSwarm.SetControlled(false);
 
-            if (_player != null)
-                _player.StopResonance();
+            _player?.StopResonance();
 
             if (_vCam != null && _playerTransform != null)
             {
@@ -200,9 +175,7 @@ namespace Systems.Abilities.Concrete
             }
 
             _moveInput = Vector2.zero;
-            _warmthAccumulator = 0f;
             _activeSwarm = null;
-            
         }
 
         private SwarmController FindNearestSwarm()
@@ -222,7 +195,25 @@ namespace Systems.Abilities.Concrete
                     nearest = s;
                 }
             }
+
             return nearest;
+        }
+        
+        private async UniTask ReturnSwarmToPosition(Vector2 target, float duration)
+        {
+            if (_activeSwarm == null) return;
+
+            Vector2 start = _activeSwarm.transform.position;
+            float t = 0f;
+
+            while (t < 1f)
+            {
+                t += Time.deltaTime / duration;
+                _activeSwarm.transform.position = Vector2.Lerp(start, target, t);
+                await UniTask.Yield();
+            }
+
+            _activeSwarm.transform.position = target;
         }
     }
 }

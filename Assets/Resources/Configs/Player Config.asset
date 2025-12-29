@@ -61,6 +61,7 @@ MonoBehaviour:
         _dashCooldownDuration: 1
         _normalSpeed: 60
         _dashSpeed: 100
+        _surfacingCost: 15
     - rid: 2564828074214424678
       type: {class: MetabolismAbility, ns: Systems.Abilities.Concrete, asm: Assembly-CSharp}
       data:
@@ -85,8 +86,9 @@ MonoBehaviour:
           rid: -2
         _searchRadius: 12
         _interactRadius: 5
-        _warmthDrainPerSecond: 2
-        _tickDelay: 0.1
+        _warmthDrain: 2
+        _drainInterval: 1
+        _returnPosition: {x: -28, y: 4}
     - rid: 4204129077871247439
       type: {class: WarmingVisual, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
       data:
