@@ -4203,12 +4203,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  _maxWarmPercent: 0
-  <CanWarm>k__BackingField: 1
-  _warmAction:
-    m_PersistentCalls:
-      m_Calls: []
-  _isInHome: 0
   <SavableState>k__BackingField: []
 --- !u!1 &104768881
 GameObject:
@@ -4353,17 +4347,6 @@ Transform:
   - {fileID: 1306332227}
   m_Father: {fileID: 573790502}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &112597885 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5134695667444349692, guid: fde4ac21e8e61dd4abd0e41c34c48baa, type: 3}
-  m_PrefabInstance: {fileID: 5750922}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487e2823a5537cd4ea37fe6a8bfa93ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1001 &124474735
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7336,36 +7319,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d4ec781b32447ea1df47582e8c5c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.WarmEventTrigger
-  _id:
-    Value: 87c4b94f-5c4a-44c8-aeca-0e531e097783
-  _warmCapacity: 3
-  _warmAction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 328641787}
-        m_TargetAssemblyTypeName: Entities.NPC.SpeakableCharacter, Assembly-CSharp
-        m_MethodName: set_Graph
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 24d21eb421fb0be45bf7a4f2c3793420, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Data.Nodes.DialogueGraph, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 328641787}
-        m_TargetAssemblyTypeName: Entities.NPC.SpeakableCharacter, Assembly-CSharp
-        m_MethodName: SaveNpcState
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &218002496
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8104,12 +8057,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  _maxWarmPercent: 0
-  <CanWarm>k__BackingField: 1
-  _warmAction:
-    m_PersistentCalls:
-      m_Calls: []
-  _isInHome: 0
   <SavableState>k__BackingField: []
 --- !u!61 &227735203
 BoxCollider2D:
@@ -33855,12 +33802,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  _maxWarmPercent: 0
-  <CanWarm>k__BackingField: 1
-  _warmAction:
-    m_PersistentCalls:
-      m_Calls: []
-  _isInHome: 0
   <SavableState>k__BackingField: []
 --- !u!114 &631191973
 MonoBehaviour:
@@ -41763,96 +41704,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d4ec781b32447ea1df47582e8c5c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.WarmEventTrigger
-  _id:
-    Value: 52a8cc79-a359-4bf6-8e04-718c87918ae2
-  _warmCapacity: 10
-  _warmAction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 101201558}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Entities.NPC.QuestSystem, Assembly-CSharp
-        m_MethodName: EndQuest
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: c157059172963d4409bc21527944bb42, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Entities.NPC.QuestSystem, Assembly-CSharp
-        m_MethodName: StartQuest
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 3fe2484c1014a8c45a7a34eebb84f64f, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 811469949}
-        m_TargetAssemblyTypeName: Entities.Triggers.AddEventToQuest, Assembly-CSharp
-        m_MethodName: Add
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1932971937}
-        m_TargetAssemblyTypeName: Entities.Puzzle.DrawPuzzle, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 112597885}
-        m_TargetAssemblyTypeName: Entities.Puzzle.DrawPuzzle, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1329205310}
-        m_TargetAssemblyTypeName: Entities.Puzzle.DrawPuzzle, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &811469949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67834,17 +67685,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1551218342859599613, guid: 2d052e266c32cc540b879e29713d5184, type: 3}
   m_PrefabInstance: {fileID: 1327779389}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1329205310 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5134695667444349692, guid: fde4ac21e8e61dd4abd0e41c34c48baa, type: 3}
-  m_PrefabInstance: {fileID: 1191463206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487e2823a5537cd4ea37fe6a8bfa93ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1001 &1331638021
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74412,9 +74252,9 @@ MonoBehaviour:
   _count: 15
   _spawnRadius: 4
   CohesionWeight: 1
-  AlignmentWeight: 1
+  AlignmentWeight: 4
   SeparationWeight: 1.5
-  TargetWeight: 4
+  TargetWeight: 3
   NeighborRadius: 3
 --- !u!50 &1483867790
 Rigidbody2D:
@@ -84395,24 +84235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94d4ec781b32447ea1df47582e8c5c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.WarmEventTrigger
-  _id:
-    Value: a700592a-5164-4b42-b553-63401f3526c6
-  _warmCapacity: 3
-  _warmAction:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 328641787}
-        m_TargetAssemblyTypeName: Entities.NPC.SpeakableCharacter, Assembly-CSharp
-        m_MethodName: set_Graph
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 24d21eb421fb0be45bf7a4f2c3793420, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Data.Nodes.DialogueGraph, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!61 &1790267877
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -96795,17 +96617,6 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 2001860937977475805, guid: 655b74bf51918114787a27be9b0a35ea, type: 3}
   m_PrefabInstance: {fileID: 4850367469887768431}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1932971937 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5134695667444349692, guid: fde4ac21e8e61dd4abd0e41c34c48baa, type: 3}
-  m_PrefabInstance: {fileID: 1580231322}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487e2823a5537cd4ea37fe6a8bfa93ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
 --- !u!1001 &1936904306
 PrefabInstance:
   m_ObjectHideFlags: 0
