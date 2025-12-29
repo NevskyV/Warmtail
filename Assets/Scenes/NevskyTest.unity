@@ -6387,6 +6387,7 @@ GameObject:
   - component: {fileID: 878410544}
   - component: {fileID: 878410543}
   - component: {fileID: 878410542}
+  - component: {fileID: 878410545}
   m_Layer: 0
   m_Name: Closed Sprite Shape (1)
   m_TagString: Untagged
@@ -6409,33 +6410,33 @@ MonoBehaviour:
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
-    - position: {x: 2.1098557, y: 17.793118, z: 0}
-      leftTangent: {x: -3.4657364, y: -3.0158577, z: 0}
-      rightTangent: {x: 3.6241302, y: 3.1536884, z: 0}
+    - position: {x: 19.871445, y: 24.0388, z: 0}
+      leftTangent: {x: -3.4657288, y: -3.015852, z: 0}
+      rightTangent: {x: 3.6241302, y: 3.1537018, z: 0}
       mode: 1
       height: 1
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 15.0811, y: 17.45688, z: 0}
-      leftTangent: {x: -3.853527, y: 5.9705753, z: 0}
-      rightTangent: {x: 2.000183, y: -3.099043, z: 0}
+    - position: {x: 42.575817, y: 22.476713, z: 0}
+      leftTangent: {x: -3.8535233, y: 5.9705925, z: 0}
+      rightTangent: {x: 2.000183, y: -3.0990448, z: 0}
       mode: 1
       height: 1
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 23.864979, y: 6.035031, z: 0}
-      leftTangent: {x: 1.8788414, y: 2.1859603, z: 0}
-      rightTangent: {x: -2.5131836, y: -2.923995, z: 0}
+    - position: {x: 44.549103, y: 12.323263, z: 0}
+      leftTangent: {x: 1.8788452, y: 2.1859627, z: 0}
+      rightTangent: {x: -2.5131836, y: -2.923994, z: 0}
       mode: 1
       height: 1
       spriteIndex: 0
       corner: 1
       m_CornerMode: 1
-    - position: {x: 7.6649857, y: 2.2695146, z: 0}
+    - position: {x: 18.569393, y: 11.577047, z: 0}
       leftTangent: {x: 3.516426, y: -0.42197037, z: 0}
-      rightTangent: {x: -4.52388, y: 1.8787451, z: 0}
+      rightTangent: {x: -4.5238876, y: 1.878746, z: 0}
       mode: 2
       height: 1
       spriteIndex: 0
@@ -6526,8 +6527,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 12.476496, y: 11.6366825, z: 0}
-    m_Extent: {x: 13.433083, y: 11.289149, z: 0}
+    m_Center: {x: 30.699583, y: 18.673737, z: 0}
+    m_Extent: {x: 16.467281, y: 9.840859, z: 0}
   m_SpriteSortPoint: 0
 --- !u!4 &878410544
 Transform:
@@ -6537,205 +6538,28 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 878410541}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -74.18395, y: 4.4260554, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1694982956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1039161468
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1039161472}
-  - component: {fileID: 1039161471}
-  - component: {fileID: 1039161470}
-  - component: {fileID: 1039161469}
-  m_Layer: 0
-  m_Name: Closed Sprite Shape (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1039161469
+--- !u!114 &878410545
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039161468}
+  m_GameObject: {fileID: 878410541}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 737ba9f7dba3e1e43a18430087718dfb, type: 3}
+  m_Script: {fileID: 11500000, guid: 1c3eb1d33a6f9114bb5b51099948d2ce, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteShapeHoleCutter
-  mainShape: {fileID: 1039161470}
-  holeShapes:
-  - {fileID: 878410542}
-  - {fileID: 878410542}
-  updateInterval: 0.2
-  updateInPlayMode: 1
-  updateInEditMode: 1
-  timer: 0
-  cachedMain: {fileID: 1039161470}
-  cachedMainHash: -624756301
-  cachedHoleHashes: e28e1eb0
---- !u!114 &1039161470
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039161468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Spline:
-    m_IsOpenEnded: 0
-    m_ControlPoints:
-    - position: {x: 17.435133, y: -0.7954082, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 2
-      height: 1
-      spriteIndex: 0
-      corner: 0
-      m_CornerMode: 1
-    - position: {x: 31.061169, y: 2.1909637, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 1
-      height: 1
-      spriteIndex: 0
-      corner: 0
-      m_CornerMode: 1
-    - position: {x: 23.672928, y: 11.2494545, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 1
-      height: 1
-      spriteIndex: 0
-      corner: 0
-      m_CornerMode: 1
-    - position: {x: 12.762638, y: 11.516119, z: 0}
-      leftTangent: {x: 0, y: 0, z: 0}
-      rightTangent: {x: 0, y: 0, z: 0}
-      mode: 1
-      height: 1
-      spriteIndex: 0
-      corner: 0
-      m_CornerMode: 1
-  m_SpriteShape: {fileID: 11400000, guid: f24cddf7c09a6442abbce710a6fd7397, type: 2}
-  m_FillPixelPerUnit: 256
-  m_StretchTiling: 1
-  m_SplineDetail: 16
-  m_AdaptiveUV: 1
-  m_StretchUV: 0
-  m_WorldSpaceUV: 0
-  m_CornerAngleThreshold: 30
-  m_ColliderDetail: 16
-  m_ColliderOffset: 0.5
-  m_UpdateCollider: 1
-  m_EnableTangents: 0
-  m_GeometryCached: 0
-  m_UTess2D: 1
-  m_UpdateShadow: 0
-  m_ShadowDetail: 16
-  m_ShadowOffset: 0.5
-  m_BoundsScale: 2
-  m_UpdateGeometry: 1
-  m_Creator: {fileID: 0}
-  m_Modifiers: []
-  m_ColliderSegment: []
-  m_ShadowSegment: []
---- !u!1971053207 &1039161471
-SpriteShapeRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039161468}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 0
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RayTracingAccelStructBuildFlagsOverride: 0
-  m_RayTracingAccelStructBuildFlags: 1
-  m_SmallMeshCulling: 1
-  m_ForceMeshLod: -1
-  m_MeshLodSelectionBias: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
-  m_Sprites:
-  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
-  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
-  m_LocalAABB:
-    m_Center: {x: 21.927933, y: 5.3224, z: 0}
-    m_Extent: {x: 9.369307, y: 6.4402466, z: 0}
-  m_SpriteSortPoint: 0
---- !u!4 &1039161472
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1039161468}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -87.2476, y: 7.6985, z: 0}
-  m_LocalScale: {x: 1.1889, y: 1.2609, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::SpriteShapeExtras.Sprinkler
+  m_Prefab: {fileID: 0}
+  m_UseNormals: 0
+  m_Instances: 10
 --- !u!1 &1129732877
 GameObject:
   m_ObjectHideFlags: 0
@@ -7822,7 +7646,6 @@ GameObject:
   - component: {fileID: 1694982956}
   - component: {fileID: 1694982955}
   - component: {fileID: 1694982954}
-  - component: {fileID: 1694982953}
   m_Layer: 0
   m_Name: Closed Sprite Shape
   m_TagString: Untagged
@@ -7830,27 +7653,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1694982953
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1694982952}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 737ba9f7dba3e1e43a18430087718dfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpriteShapeCutter
-  mainShape: {fileID: 1694982954}
-  holeShapes: []
-  updateInterval: 0.2
-  updateInPlayMode: 1
-  updateInEditMode: 1
-  timer: 0
-  cachedMain: {fileID: 1694982954}
-  cachedMainHash: 0
-  cachedHoleHashes: 
 --- !u!114 &1694982954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7865,8 +7667,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Spline:
     m_IsOpenEnded: 0
-    m_ControlPoints: []
-  m_SpriteShape: {fileID: 11400000, guid: f24cddf7c09a6442abbce710a6fd7397, type: 2}
+    m_ControlPoints:
+    - position: {x: 19.871445, y: 24.0388, z: 0}
+      leftTangent: {x: -3.4657288, y: -3.015852, z: 0}
+      rightTangent: {x: 3.6241302, y: 3.1537018, z: 0}
+      mode: 1
+      height: 1
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
+    - position: {x: 42.575817, y: 22.476713, z: 0}
+      leftTangent: {x: -3.8535233, y: 5.9705925, z: 0}
+      rightTangent: {x: 2.000183, y: -3.0990448, z: 0}
+      mode: 1
+      height: 1
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
+    - position: {x: 44.549103, y: 12.323263, z: 0}
+      leftTangent: {x: 1.8788452, y: 2.1859627, z: 0}
+      rightTangent: {x: -2.5131836, y: -2.923994, z: 0}
+      mode: 1
+      height: 1
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
+    - position: {x: 20.874886, y: 14.792604, z: 0}
+      leftTangent: {x: 3.516426, y: -0.42197037, z: 0}
+      rightTangent: {x: -4.5238876, y: 1.878746, z: 0}
+      mode: 2
+      height: 1
+      spriteIndex: 0
+      corner: 1
+      m_CornerMode: 1
+  m_SpriteShape: {fileID: 11400000, guid: a5fd6a2c47226774c93737a99faa2de4, type: 2}
   m_FillPixelPerUnit: 256
   m_StretchTiling: 1
   m_SplineDetail: 16
@@ -7936,12 +7770,12 @@ SpriteShapeRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
-  m_ShapeTexture: {fileID: 2800000, guid: b281b91a70a624a0da1c43adc1c30c7b, type: 3}
+  m_ShapeTexture: {fileID: 0}
   m_Sprites:
-  - {fileID: 21300000, guid: 0ae2b74b1edd14bb18dd7b65ae916a54, type: 3}
+  - {fileID: 21300000, guid: 313aac008d74a474fb3b12e1a4563d55, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -7951,8 +7785,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 24.283203, y: 21.370525, z: 0}
-    m_Extent: {x: 8.304638, y: 9.09428, z: 0}
+    m_Center: {x: 31.34506, y: 19.04472, z: 0}
+    m_Extent: {x: 14.978422, y: 8.627056, z: 0}
   m_SpriteSortPoint: 0
 --- !u!4 &1694982956
 Transform:
@@ -7962,11 +7796,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1694982952}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -88.3, y: -8, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -76.29395, y: 4.2160554, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 878410544}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1695753104
@@ -8502,6 +8337,4 @@ SceneRoots:
   - {fileID: 1800946975}
   - {fileID: 1581239565}
   - {fileID: 1694982956}
-  - {fileID: 878410544}
   - {fileID: 429886034}
-  - {fileID: 1039161472}

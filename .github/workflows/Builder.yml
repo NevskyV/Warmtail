@@ -90,11 +90,11 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           allowDirtyBuild: true
-          versioning: None
+          versioning: Custom
+          customVersion: ${{ needs.version-check.outputs.buildVersion }}
           buildName: ${{ vars.GAME_NAME }}
           targetPlatform: StandaloneWindows64
-          customParameters: >
-            -buildVersion ${{ needs.version-check.outputs.buildVersion }}
+
 
       - name: Create zip
         uses: ihiroky/archive-action@v1
