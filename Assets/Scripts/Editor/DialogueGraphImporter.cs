@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Data.Nodes;
+using Entities.Localization;
 using Systems;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.AssetImporters;
@@ -48,9 +49,33 @@ namespace Editor
                 runtimeGraph.AllNodes.Add(runtimeNode);
             }
 
-            LocalizationExporter.UploadToSheets(runtimeGraph);
+            UploadToSheets(runtimeGraph);
             ctx.AddObjectToAsset("RuntimeData", runtimeGraph);
             ctx.SetMainObject(runtimeGraph);
+        }
+        
+        public void UploadToSheets(RuntimeDialogueGraph graph)
+        {
+            foreach (var table in LocalizationManager.NameToGid.Keys)
+                LocalizationExporter.DeleteRows(graph.DialogueId, table);
+
+            foreach (var node in graph.AllNodes.OfType<Data.Nodes.TextNode>())
+            {
+                var sheet = node.Character.ToString();
+                var key = $"{sheet}_{graph.DialogueId}_{node.NodeId}";
+                LocalizationExporter.InsertRow(sheet, key, node.Text);
+            }
+
+            foreach (var node in graph.AllNodes.OfType<Data.Nodes.ChoiceNode>())
+            {
+                int i = 0;
+                foreach (var line in node.Choices)
+                {
+                    var key = $"Player_{graph.DialogueId}_{node.NodeId}_{i}";
+                    LocalizationExporter.InsertRow("Player", key, line);
+                    i++;
+                }
+            }
         }
     }
 }

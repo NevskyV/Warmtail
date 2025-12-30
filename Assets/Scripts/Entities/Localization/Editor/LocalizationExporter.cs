@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using Data;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Sheets.v4;
@@ -37,7 +35,7 @@ namespace Editor
             });
         }
 
-        private static void DeleteRows(int dialogueId, string sheetName)
+        public static void DeleteRows(int dialogueId, string sheetName)
         {
             var service = CreateService();
 
@@ -84,7 +82,7 @@ namespace Editor
         }
 
 
-        private static void InsertRow(string sheetName, string key, string ru)
+        public static void InsertRow(string sheetName, string key, string ru)
         {
             var service = CreateService();
 
@@ -113,30 +111,6 @@ namespace Editor
                 SpreadsheetsResource.ValuesResource.AppendRequest.ValueInputOptionEnum.USERENTERED;
 
             request.Execute();
-        }
-
-        public static void UploadToSheets(RuntimeDialogueGraph graph)
-        {
-            foreach (var table in _nameToGid.Keys)
-                DeleteRows(graph.DialogueId, table);
-
-            foreach (var node in graph.AllNodes.OfType<Data.Nodes.TextNode>())
-            {
-                var sheet = node.Character.ToString();
-                var key = $"{sheet}_{graph.DialogueId}_{node.NodeId}";
-                InsertRow(sheet, key, node.Text);
-            }
-
-            foreach (var node in graph.AllNodes.OfType<Data.Nodes.ChoiceNode>())
-            {
-                int i = 0;
-                foreach (var line in node.Choices)
-                {
-                    var key = $"Player_{graph.DialogueId}_{node.NodeId}_{i}";
-                    InsertRow("Player", key, line);
-                    i++;
-                }
-            }
         }
     }
 }
