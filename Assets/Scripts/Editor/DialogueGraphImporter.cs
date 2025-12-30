@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Data.Nodes;
-using Entities.Localization;
 using Systems;
 using Unity.GraphToolkit.Editor;
 using UnityEditor.AssetImporters;
