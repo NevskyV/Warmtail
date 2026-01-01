@@ -16,7 +16,6 @@ namespace Editor
     {
         public override void OnImportAsset(AssetImportContext ctx)
         {
-            if (Environment.UserName != "Nevsky") return;
             var editorGraph = GraphDatabase.LoadGraphForImporter<DialogueGraph>(ctx.assetPath);
             var runtimeGraph = ScriptableObject.CreateInstance<RuntimeDialogueGraph>();
             runtimeGraph.AllNodes = new();
