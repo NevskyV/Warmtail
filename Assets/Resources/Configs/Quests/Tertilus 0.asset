@@ -18,34 +18,16 @@ MonoBehaviour:
   <Layer>k__BackingField: 0
   <Sequence>k__BackingField:
   - Actions:
-    - rid: 4204129410323054879
+    - rid: -2
     Tasks:
     - rid: 5607584703621628007
-  - Actions: []
-    Tasks:
-    - rid: 4204129410323054881
-  <OnComplete>k__BackingField:
-  - rid: 4204129410323054880
+  <OnComplete>k__BackingField: []
   <OnFail>k__BackingField: []
   references:
     version: 2
     RefIds:
-    - rid: 4204129410323054879
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - c9622f9e-9822-4adc-87d6-dd5652746d29
-    - rid: 4204129410323054880
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - c9622f9e-9822-4adc-87d6-dd5652746d29
-    - rid: 4204129410323054881
-      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _action: {fileID: -3218134202904356782, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 5607584703621628007
       type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:

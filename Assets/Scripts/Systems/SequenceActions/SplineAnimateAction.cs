@@ -11,6 +11,7 @@ namespace Systems.SequenceActions
         public void Invoke()
         {
             SavableObjectsResolver.FindObjectById<SplineAnimate>(_objectId).Restart(false);
+            SavableObjectsResolver.FindObjectById<SplineAnimate>(_objectId).Play();
         }
     }
 }
