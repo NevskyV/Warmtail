@@ -56,26 +56,38 @@ namespace Editor
         
         public void UploadToSheets(RuntimeDialogueGraph graph)
         {
-            foreach (var table in LocalizationManager.NameToGid.Keys)
-                LocalizationExporter.DeleteRows(graph.DialogueId, table);
+            List<(string key, string ru)> mainLines = new();
+            HashSet<Character> uniqueCharacters = new();
 
             foreach (var node in graph.AllNodes.OfType<Data.Nodes.TextNode>())
             {
                 var sheet = node.Character.ToString();
+                uniqueCharacters.Add(node.Character);
                 var key = $"{sheet}_{graph.DialogueId}_{node.NodeId}";
-                LocalizationExporter.InsertRow(sheet, key, node.Text);
+                mainLines.Add((key, node.Text));
             }
 
+            foreach (var uniqueCharacter in uniqueCharacters)
+            {
+                LocalizationExporter.Export(
+                    uniqueCharacter.ToString(),
+                    graph.DialogueId,
+                    mainLines.Where(x => x.key.StartsWith(uniqueCharacter.ToString())));
+            }
+
+            List<(string key, string ru)> choicesLines = new();
             foreach (var node in graph.AllNodes.OfType<Data.Nodes.ChoiceNode>())
             {
                 int i = 0;
                 foreach (var line in node.Choices)
                 {
                     var key = $"Player_{graph.DialogueId}_{node.NodeId}_{i}";
-                    LocalizationExporter.InsertRow("Player", key, line);
+                    choicesLines.Add((key, line));
                     i++;
                 }
             }
+            LocalizationExporter.Export("Player",graph.DialogueId, choicesLines);
+            LocalizationManager.LoadLocalizationTable();
         }
     }
 }

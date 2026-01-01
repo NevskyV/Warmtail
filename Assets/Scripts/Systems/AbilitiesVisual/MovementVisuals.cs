@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Data.Player;
+using DG.Tweening;
 using Entities.PlayerScripts;
 using Interfaces;
-using PrimeTween;
 using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;
@@ -56,11 +56,8 @@ namespace Systems.AbilitiesVisual
             _player.ObjectSfx.PlayLoopSfx(_loopSfx, 500);
             
             UpdatePlayerStats();
-            
-            Tween.Custom(_camera.Lens.OrthographicSize,9,new TweenSettings(1), x =>
-            {
-                _camera.Lens.OrthographicSize = x;
-            });
+
+            DOTween.To(() => _camera.Lens.OrthographicSize, x => _camera.Lens.OrthographicSize = x, 9,1);
             var loopVfxObj = (await ObjectSpawnSystem.Spawn(_loopVfx, _player.Rigidbody.position, _player.Rigidbody.transform,200)).gameObject;
             loopVfxObj.transform.localRotation = Quaternion.Euler(new Vector3(0,0,160));
             loopVfxObj.transform.localPosition += _vfxOffset;
@@ -76,10 +73,10 @@ namespace Systems.AbilitiesVisual
         {
             UpdatePlayerStats();
             _player.ObjectSfx.StopLoopSfx();
-            await Tween.Custom(_camera.Lens.OrthographicSize,_lastSettings.OrthographicSize,new TweenSettings(1), x =>
+            DOTween.To(() => _camera.Lens.OrthographicSize, x =>
             {
-                if(_ability.Enabled) _camera.Lens.OrthographicSize = x;
-            });
+                if(_ability.Enabled)_camera.Lens.OrthographicSize = x;
+            }, 9,1);
             await UniTask.Delay(200);
             foreach (var obj in _loopVfxObjs)
             {

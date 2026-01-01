@@ -1,5 +1,5 @@
-﻿using Interfaces;
-using PrimeTween;
+﻿using DG.Tweening;
+using Interfaces;
 using Systems;
 using UnityEngine;
 using UnityEngine.Events;
@@ -13,7 +13,7 @@ namespace Entities.Probs
         [SerializeField] private SpriteShapeRenderer _renderer;
         
         private ResettableTimer _timer;
-        private Tween? _tween;
+        private Tween _tween;
         private MaterialPropertyBlock _propertyBlock;
 
         private void Start()
@@ -51,18 +51,19 @@ namespace Entities.Probs
         private async void UpdateRenderer(float lastAmount, float newAmount)
         {
             if (!_renderer) return;
-            _tween?.Stop();
-            _tween = Tween.Custom(lastAmount, newAmount, 0.3f, x =>
-            {
+            _tween?.Pause();
+            _tween = DOTween.To(() => lastAmount, x =>{
                 if (!_renderer)
                 {
-                    _tween?.Stop();
+                    _tween?.Pause();
                     return;
                 }
+
+                lastAmount = x;
                 _propertyBlock.SetFloat(DissolveAmount, x);
                 _renderer.SetPropertyBlock(_propertyBlock);
-            });
-            await _tween.Value;
+            }, newAmount, 0.5f);
+            await _tween.AsyncWaitForCompletion();
         }
     }
 }

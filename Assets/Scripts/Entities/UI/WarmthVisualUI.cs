@@ -1,6 +1,6 @@
 using Data;
 using Data.Player;
-using PrimeTween;
+using DG.Tweening;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +14,7 @@ namespace Entities.UI
         [SerializeField, LabelText("Heat Fill Bar")] private Image _heatFillBar;
 
         private GlobalData _globalData;
-        private Tween? _tween;
+        private Tween _tween;
 
         [Inject]
         private void Construct(GlobalData globalData)
@@ -32,13 +32,9 @@ namespace Entities.UI
             if (data == null) return;
 
             if (_heatFillBar == null && data.Stars > 0) return;
-            _tween?.Stop();
-            var lastAmount = _heatFillBar.fillAmount;
+            _tween?.Pause();
             var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);
-            _tween = Tween.Custom(lastAmount, newAmount, 1f, x =>
-            {
-                _heatFillBar.fillAmount = x;
-            });
+            _tween = _heatFillBar.DOFillAmount(newAmount, 1f);
         }
     }
 }
