@@ -1,12 +1,19 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Data.Nodes;
+using Systems;
 using Unity.GraphToolkit.Editor;
 using UnityEngine;
 
 namespace Editor
 {
+    public abstract class DialogueNode : Node
+    {
+        public abstract void Setup(RuntimeNode node, Dictionary<INode, string> nodeIdMap);
+    }
+    
     [Serializable]
     public class StartNode : Node
     {
@@ -18,7 +25,7 @@ namespace Editor
     }
     
     [Serializable]
-    public class TextNode : Node
+    public class TextNode : DialogueNode
     {
         protected override void OnDefinePorts(IPortDefinitionContext context)
         {
@@ -30,10 +37,22 @@ namespace Editor
             context.AddInputPort<CharacterEmotion>("Emotion").Build();
             context.AddInputPort<string>("Text").Build();
         }
+        
+        public override void Setup(RuntimeNode node, Dictionary<INode, string> nodeIdMap)
+        {
+            var textNode = (Data.Nodes.TextNode)node;
+            var nextNode = GetOutputPortByName("out")?.firstConnectedPort;
+            if(nextNode != null)
+                node.NextNodeIds.Add(nodeIdMap[nextNode.GetNode()]);
+            textNode.Character = NodePortHelper.GetPortValue<Character>(GetInputPortByName("Character"));
+            textNode.Emotion = NodePortHelper.GetPortValue<CharacterEmotion>(GetInputPortByName("Emotion"));
+            textNode.DisplayName = NodePortHelper.GetPortValue<string>(GetInputPortByName("Override Name"));
+            textNode.Text = NodePortHelper.GetPortValue<string>(GetInputPortByName("Text"));
+        }
     }
     
     [Serializable]
-    public class ChoiceNode : Node
+    public class ChoiceNode : DialogueNode
     {
         private const string _optionId = "Port Count";
         
@@ -54,10 +73,25 @@ namespace Editor
         {
             context.AddOption<int>(_optionId).WithDefaultValue(2).Delayed();
         }
+        
+        public override void Setup(RuntimeNode node, Dictionary<INode, string> nodeIdMap)
+        {
+            var inputs = GetInputPorts().ToArray();
+            var outputs = GetOutputPorts().ToArray();
+            for (int i = 0; i < outputs.Length; i++)
+            {
+                ((Data.Nodes.ChoiceNode)node).Choices.Add(NodePortHelper.GetPortValue<string>(inputs[i+1]));
+                var nextNode = outputs[i]?.firstConnectedPort;
+                if (nextNode != null)
+                {
+                    node.NextNodeIds.Add(nodeIdMap[nextNode.GetNode()]);
+                }
+            }
+        }
     }
 
     [Serializable]
-    public class ConditionNode : Node
+    public class ConditionNode : DialogueNode
     {
         private const string PortCountOptionId = "PortCount";
         protected override void OnDefinePorts(IPortDefinitionContext context)
@@ -80,6 +114,23 @@ namespace Editor
                 .WithDefaultValue(2)
                 .Delayed();
         }
+        
+        public override void Setup(RuntimeNode node, Dictionary<INode, string> nodeIdMap)
+        {
+            var inputs = GetInputPorts().ToArray();
+            var outputs = GetOutputPorts().ToArray();
+            for (int i = 0; i < outputs.Length; i++)
+            {
+                ((Data.Nodes.ConditionNode)node).Conditions.Add(NodePortHelper.GetPortValue<ConditionStruct>(inputs[i+1]));
+              
+                var nextNode = outputs[i]?.firstConnectedPort;
+                if (nextNode != null)
+                {
+                    node.NextNodeIds.Add(nodeIdMap[nextNode.GetNode()]);
+                }
+            }
+        }
+        
 #if UNITY_EDITOR
         [UnityEditor.CustomPropertyDrawer(typeof(SetStruct))]
         public class SetStructDrawer : UnityEditor.PropertyDrawer
@@ -108,7 +159,7 @@ namespace Editor
     }
 
     [Serializable]
-    public class ActionNode : Node
+    public class ActionNode : DialogueNode
     {
         protected override void OnDefinePorts(IPortDefinitionContext context)
         {
@@ -117,10 +168,18 @@ namespace Editor
             
             context.AddInputPort<int>("Event Index").Build();
         }
+        
+        public override void Setup(RuntimeNode node, Dictionary<INode, string> nodeIdMap)
+        {
+            var nextNode = GetOutputPortByName("out")?.firstConnectedPort;
+            if(nextNode != null)
+                node.NextNodeIds.Add(nodeIdMap[nextNode.GetNode()]);
+            ((Data.Nodes.ActionNode)node).EventInd = NodePortHelper.GetPortValue<int>(GetInputPortByName("Event Index"));
+        }
     }
     
     [Serializable]
-    public class SetNode : Node
+    public class SetNode : DialogueNode
     {
         private const string _optionId = "Port Count";
         
@@ -140,6 +199,22 @@ namespace Editor
         protected override void OnDefineOptions(IOptionDefinitionContext context)
         {
             context.AddOption<int>(_optionId).WithDefaultValue(2).Delayed();
+        }
+        
+        public override void Setup(RuntimeNode node, Dictionary<INode, string> nodeIdMap)
+        {
+            var inputs = GetInputPorts().ToArray();
+            var outputs = GetOutputPorts().ToArray();
+            for (int i = 0; i < outputs.Length; i++)
+            {
+                ((Data.Nodes.SetNode)node).Variables.Add(NodePortHelper.GetPortValue<SetStruct>(inputs[i+1]));
+              
+                var nextNode = outputs[i]?.firstConnectedPort;
+                if (nextNode != null)
+                {
+                    node.NextNodeIds.Add(nodeIdMap[nextNode.GetNode()]);
+                }
+            }
         }
         
 #if UNITY_EDITOR

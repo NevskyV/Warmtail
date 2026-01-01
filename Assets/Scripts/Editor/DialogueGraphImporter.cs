@@ -16,6 +16,7 @@ namespace Editor
     {
         public override void OnImportAsset(AssetImportContext ctx)
         {
+            if (Environment.UserName != "Nevsky") return;
             var editorGraph = GraphDatabase.LoadGraphForImporter<DialogueGraph>(ctx.assetPath);
             var runtimeGraph = ScriptableObject.CreateInstance<RuntimeDialogueGraph>();
             runtimeGraph.AllNodes = new();
@@ -44,13 +45,37 @@ namespace Editor
                     ConditionNode _  => new Data.Nodes.ConditionNode {NodeId = nodeIdMap[iNode]},
                     SetNode _  => new Data.Nodes.SetNode {NodeId = nodeIdMap[iNode]},
                 };
-                runtimeNode.Setup(iNode, nodeIdMap);
+                ((DialogueNode)iNode).Setup(runtimeNode, nodeIdMap);
                 runtimeGraph.AllNodes.Add(runtimeNode);
             }
 
-            LocalizationManager.UploadToSheets(runtimeGraph);
+            UploadToSheets(runtimeGraph);
             ctx.AddObjectToAsset("RuntimeData", runtimeGraph);
             ctx.SetMainObject(runtimeGraph);
+        }
+        
+        public void UploadToSheets(RuntimeDialogueGraph graph)
+        {
+            foreach (var table in LocalizationManager.NameToGid.Keys)
+                LocalizationExporter.DeleteRows(graph.DialogueId, table);
+
+            foreach (var node in graph.AllNodes.OfType<Data.Nodes.TextNode>())
+            {
+                var sheet = node.Character.ToString();
+                var key = $"{sheet}_{graph.DialogueId}_{node.NodeId}";
+                LocalizationExporter.InsertRow(sheet, key, node.Text);
+            }
+
+            foreach (var node in graph.AllNodes.OfType<Data.Nodes.ChoiceNode>())
+            {
+                int i = 0;
+                foreach (var line in node.Choices)
+                {
+                    var key = $"Player_{graph.DialogueId}_{node.NodeId}_{i}";
+                    LocalizationExporter.InsertRow("Player", key, line);
+                    i++;
+                }
+            }
         }
     }
 }

@@ -19,9 +19,11 @@ namespace Systems.Abilities.Concrete
         [SerializeField] private float _dashCooldownDuration = 1f;
         [SerializeField] private int _normalSpeed = 60;
         [SerializeField] private int _dashSpeed = 100;
+        [SerializeField] private int _surfacingCost = 15;
         private float _lastDashTime = -Mathf.Infinity;
+        private UniTask _dashTask;
         private bool _dashLoopRunning;
-
+       
 
         private PlayerConfig _playerConfig;
         private Rigidbody2D _playerRb;
@@ -30,7 +32,7 @@ namespace Systems.Abilities.Concrete
 
         private Vector2 _moveInput;
         private float _layerInput;
-
+        private bool IsFree => IsComboActive && _secondaryComboType == typeof(MetabolismAbility);
         [Inject]
         public void Construct(PlayerConfig playerConfig, Player player, WarmthSystem warmth, SurfacingSystem surfacing,
             PlayerInput input, DiContainer container)
@@ -51,47 +53,49 @@ namespace Systems.Abilities.Concrete
         }
 
 
-        public async void Tick()
+        public void Tick()
         {
             if (!Enabled) return;
-            bool isFree = IsComboActive && _secondaryComboType == typeof(MetabolismAbility);
 
             if (Mathf.Abs(_layerInput) > 0.1f)
             {
-                Debug.Log("ChangeLayer");
                 int dir = (int)Mathf.Sign(_layerInput);
+
                 if (_surfacingSystem.TryChangeLayer(dir))
                 {
-                    if (!isFree) _warmthSystem.DecreaseWarmth(_dashCost);
+                    if (!IsFree)
+                        _warmthSystem.DecreaseWarmth(_surfacingCost);
+
                     _layerInput = 0;
                 }
             }
 
-            if (_moveInput.magnitude > 0.1f )
+            if (_moveInput.magnitude > 0.1f)
             {
                 if (!_dashLoopRunning)
                 {
                     _dashLoopRunning = true;
-                    DashLoop();
+                    _dashTask = DashLoop();
                 }
             }
             else
             {
                 _dashLoopRunning = false;
             }
-
-
-            
-            await UniTask.Delay(500);
         }
+
         
-        private async void DashLoop()
+        private async UniTask DashLoop()
         {
             try
             {
                 while (Enabled && _dashLoopRunning && _moveInput.magnitude > 0.1f)
                 {
                     Dash();
+
+                    if (!IsFree)
+                        _warmthSystem.DecreaseWarmth(_dashCost);
+
                     await UniTask.Delay(500);
                 }
             }
@@ -109,13 +113,6 @@ namespace Systems.Abilities.Concrete
         {
             HandleObstacleDestruction();
             ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _dashSpeed;
-
-            bool isFree = IsComboActive && _secondaryComboType == typeof(MetabolismAbility);
-
-            if (!isFree)
-                _warmthSystem.DecreaseWarmth(_dashCost);
-
-            Debug.Log("Dash");
         }
 
         private void HandleObstacleDestruction()
