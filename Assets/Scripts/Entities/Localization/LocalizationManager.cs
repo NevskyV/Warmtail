@@ -40,7 +40,7 @@ namespace Entities.Localization
         }
 
         [Button("Pull Table")]
-        private void LoadLocalizationTable()
+        public static void LoadLocalizationTable()
         {
             List<string> loaded = new();
             foreach (var tableName in NameToGid.Keys)
@@ -84,7 +84,7 @@ namespace Entities.Localization
             SetValuesForTextsId();
         }
         
-        public void SetValuesForTextsId()
+        public static void SetValuesForTextsId()
         {
             foreach (var tableName in NameToGid.Keys)
             {
