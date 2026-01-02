@@ -27,19 +27,21 @@ MonoBehaviour:
     - rid: 5607584705780384059
     - rid: 5607584705780384068
     - rid: 5607584705780384069
-    - rid: 5607584705780384025
     Tasks:
     - rid: 5607584705780383998
   - Actions:
     - rid: 5607584705780384046
     - rid: 5607584705780384070
-    - rid: 5607584705780384085
     Tasks:
     - rid: 5607584705780384086
   - Actions:
     - rid: 5607584705780384076
     Tasks:
     - rid: 5607584705780384075
+  - Actions:
+    - rid: 7345390818244952211
+    Tasks:
+    - rid: 7345390817231241217
   references:
     version: 2
     RefIds:
@@ -72,13 +74,6 @@ MonoBehaviour:
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _objectId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 5607584705780384025
-      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _spawn: 1
-        _questData: {fileID: 11400000, guid: 56f437edbb8080249a589b9fe742f9c2, type: 2}
-        _position: {x: 8, y: 30}
-        _questVisualsId: c6c6f49d-b8ee-4bf0-8891-99d1a82cdbec
     - rid: 5607584705780384046
       type: {class: EndQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -121,15 +116,17 @@ MonoBehaviour:
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _objectId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 5607584705780384085
-      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _spawn: 0
-        _questData: {fileID: 11400000, guid: 56f437edbb8080249a589b9fe742f9c2, type: 2}
-        _position: {x: 8, y: 30}
-        _questVisualsId: c6c6f49d-b8ee-4bf0-8891-99d1a82cdbec
     - rid: 5607584705780384086
       type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
         _position: {x: 8, y: 30}
+    - rid: 7345390817231241217
+      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
+        _position: {x: 23.5, y: 97}
+    - rid: 7345390818244952211
+      type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _quest: {fileID: 11400000, guid: 56f437edbb8080249a589b9fe742f9c2, type: 2}
