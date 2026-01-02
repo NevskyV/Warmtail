@@ -1,5 +1,5 @@
 ﻿using System;
-using PrimeTween;
+using DG.Tweening;
 using TMPro;
 using TriInspector;
 using UnityEngine;
@@ -30,14 +30,16 @@ namespace Data
             Prefab ??= data.Prefab;
             AnimDuration = data.AnimDuration;
             _instanceTf = Object.Instantiate(Prefab, parent).transform;
-            Tween.Scale(_instanceTf, 0, 1, AnimDuration);
+            _instanceTf.localScale = Vector3.zero;
+            _instanceTf.DOScale( 1, AnimDuration);
             _instanceTf.GetChild(0).GetComponent<TMP_Text>().text = Header;
             _instanceTf.GetChild(1).GetComponent<TMP_Text>().text = Text;
         }
 
         public async void ClosePopup()
         {
-            await Tween.Scale(_instanceTf, 1, 0, AnimDuration);
+            _instanceTf.localScale = Vector3.one;
+            await _instanceTf.DOScale( 0, AnimDuration).AsyncWaitForCompletion();
             Object.Destroy(_instanceTf?.gameObject);
         }
     }

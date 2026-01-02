@@ -1,7 +1,7 @@
 ﻿using Data;
 using Data.Player;
 using Interfaces;
-using PrimeTween;
+using DG.Tweening;
 using Systems;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,7 +17,7 @@ namespace Entities.Probs
         private ResettableTimer _timer;
         private MaterialPropertyBlock _propertyBlock;
         private SpriteRenderer _renderer;
-        private Tween? _tween;
+        private Tween _tween;
  
         [Inject]
         public void Construct(GlobalData globalData)
@@ -103,18 +103,19 @@ namespace Entities.Probs
         private async void UpdateRenderer(float lastAmount, float newAmount)
         {
             if (!_renderer) return;
-            _tween?.Stop();
-            _tween = Tween.Custom(lastAmount, newAmount, 0.5f, x =>
-            {
+            _tween?.Pause();
+            _tween = DOTween.To(() => lastAmount, x =>{
                 if (!_renderer)
                 {
-                    _tween?.Stop();
+                    _tween?.Pause();
                     return;
                 }
+
+                lastAmount = x;
                 _propertyBlock.SetFloat(DissolveAmount, x);
                 _renderer.SetPropertyBlock(_propertyBlock);
-            });
-            await _tween.Value;
+            }, newAmount, 0.5f);
+            await _tween.AsyncWaitForCompletion();
         }
     }
 }

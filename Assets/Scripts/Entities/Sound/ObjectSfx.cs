@@ -1,7 +1,8 @@
-using System.Collections;
+
+using System.Threading.Tasks;
 using AYellowpaper.SerializedCollections;
 using Cysharp.Threading.Tasks;
-using PrimeTween;
+using DG.Tweening;
 using UnityEngine;
 
 namespace Entities.Sound
@@ -10,12 +11,12 @@ namespace Entities.Sound
     {
         [SerializeField] private AudioSource _source;
         [SerializeField] private SerializedDictionary<string, AudioClip> _clips = new();
-        private IEnumerator _awaitable;
+        private Task _awaitable;
         public void PlaySfx(string sfxName)
         {
             if (_awaitable != null)
             {
-                StopCoroutine(_awaitable);
+                _awaitable.Dispose();
                 _awaitable = null;
             }
             _source.PlayOneShot(_clips[sfxName]);
@@ -25,7 +26,7 @@ namespace Entities.Sound
         {
             if (_awaitable != null)
             {
-                StopCoroutine(_awaitable);
+                DOTween.Kill(_awaitable);
                 _awaitable = null;
             }
             _source.PlayOneShot(sfx);
@@ -36,7 +37,7 @@ namespace Entities.Sound
             await UniTask.Delay(delay);
             if (_awaitable != null)
             {
-                StopCoroutine(_awaitable);
+                DOTween.Kill(_awaitable);
                 _awaitable = null;
             }
             _source.clip = sfx;
@@ -45,7 +46,7 @@ namespace Entities.Sound
         
         public async void StopLoopSfx()
         {
-            _awaitable = Tween.AudioVolume(_source, 0f, 0.2f);
+            _awaitable = _source.DOFade(0f, 0.2f).AsyncWaitForCompletion();
             await _awaitable;
             _source.Stop();
             _source.volume = 1;

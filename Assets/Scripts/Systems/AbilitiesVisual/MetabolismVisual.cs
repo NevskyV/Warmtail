@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Data.Player;
+using DG.Tweening;
 using Entities.PlayerScripts;
 using Entities.Sound;
 using Interfaces;
-using PrimeTween;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.U2D;
@@ -36,7 +36,8 @@ namespace Systems.AbilitiesVisual
         {
             if (!_ability.Enabled) return;
             _playerSfx.PlaySfx(_sfx);
-            Tween.Custom(0, 1f, 1f, x => _struct.Volume.weight = x);
+            _struct.Volume.weight = 0;
+            DOTween.To(() => _struct.Volume.weight,x => _struct.Volume.weight = x, 1f, 1f);
             _lastTextures.Clear();
             _struct.Walls.ForEach(wall =>
             {
@@ -51,7 +52,8 @@ namespace Systems.AbilitiesVisual
 
         public void EndAbility()
         {
-            Tween.Custom(1f, 0f, 1f, x => _struct.Volume.weight = x);
+            _struct.Volume.weight = 0;
+            DOTween.To(() => _struct.Volume.weight,x => _struct.Volume.weight = x, 1f, 1f);
             _struct.Walls.ForEach(wall =>
             {
                 wall.fillTexture = _lastTextures[ _struct.Walls.IndexOf(wall)];
