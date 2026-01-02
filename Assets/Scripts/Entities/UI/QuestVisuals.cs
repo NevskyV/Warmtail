@@ -4,6 +4,7 @@ using Data;
 using Data.Player;
 using Entities.Localization;
 using Systems.Environment;
+using Systems;
 using TMPro;
 using TriInspector;
 using UnityEngine;
@@ -57,6 +58,15 @@ namespace Entities.UI
             _createdQuests.Add(data,newQuest.gameObject);
             _createdMarks.Add(data, new());
             CheckLayer(data, newQuest);
+        }
+
+        public void StartQuest(QuestData data)
+        {
+            QuestSystem.StartQuest(data);
+        }
+        public void EndQuest(QuestData data)
+        {
+            QuestSystem.EndQuest(data);
         }
 
         private void CheckLayer(QuestData data, Transform questObj)

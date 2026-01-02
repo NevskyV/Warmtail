@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System;
 using Data;
 using Data.Player;
 using Entities.UI;
@@ -14,6 +15,9 @@ namespace Systems
     {
         private static GlobalData _globalData;
         private static QuestVisuals _questVisuals;
+        
+        public static Action<QuestData> OnQuestStarted = delegate {};
+        public static Action<QuestData> OnQuestEnded = delegate {};
 
         [Inject]
         private void Construct(GlobalData globalData, QuestVisuals visuals)
@@ -33,6 +37,8 @@ namespace Systems
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
 
             if (data.Scene != SceneManager.GetActiveScene().path) return;
+
+            OnQuestStarted?.Invoke(data);
 
             _questVisuals.SpawnQuest(data);
             for (int i = 0; i < questState; i++)
@@ -67,6 +73,7 @@ namespace Systems
         
         public static void EndQuest(QuestData data)
         {
+            OnQuestEnded?.Invoke(data);
             data.OnComplete.ForEach(x => x.Invoke());
             if(_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData=> playerData.QuestIds.Remove(data.Id));
