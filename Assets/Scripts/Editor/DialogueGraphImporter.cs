@@ -6,6 +6,7 @@ using Data.Nodes;
 using Entities.Localization;
 using Systems;
 using Unity.GraphToolkit.Editor;
+using UnityEditor;
 using UnityEditor.AssetImporters;
 using UnityEngine;
 
@@ -47,10 +48,8 @@ namespace Editor
                 ((DialogueNode)iNode).Setup(runtimeNode, nodeIdMap);
                 runtimeGraph.AllNodes.Add(runtimeNode);
             }
-
+            AssetDatabase.CreateAsset(runtimeGraph, $"Assets/Resources/Configs/Dialogues/{runtimeGraph.DialogueId}.asset");
             UploadToSheets(runtimeGraph);
-            ctx.AddObjectToAsset("RuntimeData", runtimeGraph);
-            ctx.SetMainObject(runtimeGraph);
         }
         
         public void UploadToSheets(RuntimeDialogueGraph graph)

@@ -1,58 +1,61 @@
 {
   "runtimeTarget": {
-    "name": ".NETCoreApp,Version=v10.0",
+    "name": ".NETCoreApp,Version=v8.0",
     "signature": ""
   },
   "compilationOptions": {},
   "targets": {
-    ".NETCoreApp,Version=v10.0": {
+    ".NETCoreApp,Version=v8.0": {
       "ConsoleApp2/1.0.0": {
         "dependencies": {
+          "Google.Apis": "1.73.0",
+          "Google.Apis.Auth": "1.73.0",
+          "Google.Apis.Core": "1.73.0",
           "Google.Apis.Sheets.v4": "1.72.0.3966"
         },
         "runtime": {
           "ConsoleApp2.dll": {}
         }
       },
-      "Google.Apis/1.72.0": {
+      "Google.Apis/1.73.0": {
         "dependencies": {
-          "Google.Apis.Core": "1.72.0"
+          "Google.Apis.Core": "1.73.0"
         },
         "runtime": {
           "lib/net6.0/Google.Apis.dll": {
-            "assemblyVersion": "1.72.0.0",
-            "fileVersion": "1.72.0.0"
+            "assemblyVersion": "1.73.0.0",
+            "fileVersion": "1.73.0.0"
           }
         }
       },
-      "Google.Apis.Auth/1.72.0": {
+      "Google.Apis.Auth/1.73.0": {
         "dependencies": {
-          "Google.Apis": "1.72.0",
-          "Google.Apis.Core": "1.72.0",
+          "Google.Apis": "1.73.0",
+          "Google.Apis.Core": "1.73.0",
           "System.Management": "7.0.2"
         },
         "runtime": {
           "lib/net6.0/Google.Apis.Auth.dll": {
-            "assemblyVersion": "1.72.0.0",
-            "fileVersion": "1.72.0.0"
+            "assemblyVersion": "1.73.0.0",
+            "fileVersion": "1.73.0.0"
           }
         }
       },
-      "Google.Apis.Core/1.72.0": {
+      "Google.Apis.Core/1.73.0": {
         "dependencies": {
           "Newtonsoft.Json": "13.0.4"
         },
         "runtime": {
           "lib/net6.0/Google.Apis.Core.dll": {
-            "assemblyVersion": "1.72.0.0",
-            "fileVersion": "1.72.0.0"
+            "assemblyVersion": "1.73.0.0",
+            "fileVersion": "1.73.0.0"
           }
         }
       },
       "Google.Apis.Sheets.v4/1.72.0.3966": {
         "dependencies": {
-          "Google.Apis": "1.72.0",
-          "Google.Apis.Auth": "1.72.0"
+          "Google.Apis": "1.73.0",
+          "Google.Apis.Auth": "1.73.0"
         },
         "runtime": {
           "lib/net6.0/Google.Apis.Sheets.v4.dll": {
@@ -104,26 +107,26 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Google.Apis/1.72.0": {
+    "Google.Apis/1.73.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-QbSJ08W7QuqsfzDPOZDHl1aFzCYwMcfBoHqQRh7koglwDN5WacShCKYMpU/zR1Pf3h3sH6JTGEeM/txAxaJuEg==",
-      "path": "google.apis/1.72.0",
-      "hashPath": "google.apis.1.72.0.nupkg.sha512"
+      "sha512": "sha512-TnCjEyV2aCLQ6Zl40OCbEJULDuEkEWc6C/g81KYw5l1PqGo+G7pFZrV+YH8XgUL0JRUanz+IrUp8SsKF4dzkqg==",
+      "path": "google.apis/1.73.0",
+      "hashPath": "google.apis.1.73.0.nupkg.sha512"
     },
-    "Google.Apis.Auth/1.72.0": {
+    "Google.Apis.Auth/1.73.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-RBoFwFKBHKUjuyJf2weEnqICQLaY0TdIrdFv2yC8bsiR2VFYxizOn3C/qN1FWCCb0Uh9GhW+zwAV1yUxPjiocw==",
-      "path": "google.apis.auth/1.72.0",
-      "hashPath": "google.apis.auth.1.72.0.nupkg.sha512"
+      "sha512": "sha512-wEu12uhnRv3zrPBSqv4E2vPH6lYLtc1RPAnU9MJRCMFlBVwZ7Lnq3NfbYXi6VG7EurkYInTaMpeBZkbM/HrAog==",
+      "path": "google.apis.auth/1.73.0",
+      "hashPath": "google.apis.auth.1.73.0.nupkg.sha512"
     },
-    "Google.Apis.Core/1.72.0": {
+    "Google.Apis.Core/1.73.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ZmYX1PU0vTKFT42c7gp4zaYcb/0TFAXrt9qw8yEz0wjvaug85+/WddlPTfT525Qei8iIUsF6t4bHYrsb2O7crg==",
-      "path": "google.apis.core/1.72.0",
-      "hashPath": "google.apis.core.1.72.0.nupkg.sha512"
+      "sha512": "sha512-vSc7CY4KCP7HE4QTElDx/ExnGLbg9kXb89MS6cdvI+0D4sxvTYb16vGtXmF2jSDMV3iDmykSXdIUPTz8TDS6gg==",
+      "path": "google.apis.core/1.73.0",
+      "hashPath": "google.apis.core.1.73.0.nupkg.sha512"
     },
     "Google.Apis.Sheets.v4/1.72.0.3966": {
       "type": "package",
