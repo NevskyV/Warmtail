@@ -3,13 +3,14 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
+using Interfaces;
 using UnityEngine;
 using Zenject;
 
 namespace Systems
 {
 
-    public class WarmthSystem
+    public class WarmthSystem : IWarmthSystem
     {
         private const int WarmthIncreaseRate = 1;
         private const float IncreaseIntervalSeconds = 1f;

@@ -1,12 +1,13 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Entities.PlayerScripts;
+using Interfaces;
 using Systems.Swarm;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
-using System.Threading;
 
 
 namespace Systems.Abilities.Concrete
@@ -20,7 +21,7 @@ namespace Systems.Abilities.Concrete
         [SerializeField] private float _drainInterval = 1f;
        
         [SerializeField] private Vector2 _returnPosition;
-        private WarmthSystem _warmthSystem;
+        private IWarmthSystem _warmthSystem;
         private Transform _playerTransform;
         private Player _player;
         private CinemachineCamera _vCam;
@@ -32,7 +33,7 @@ namespace Systems.Abilities.Concrete
         private CancellationTokenSource _warmthCts;
 
         [Inject]
-        public void Construct(Player player, WarmthSystem warmth, PlayerInput input, CinemachineCamera cam)
+        public void Construct(Player player, IWarmthSystem warmth, PlayerInput input, CinemachineCamera cam)
         {
             _player = player;
             _playerTransform = player.Rigidbody.transform;
@@ -74,15 +75,15 @@ namespace Systems.Abilities.Concrete
             // Запуск цикла обработки роя
             _tickCts?.Cancel();
             _tickCts = new CancellationTokenSource();
-            TickCycle(_tickCts.Token).Forget();
+            ControlSwarm(_tickCts.Token).Forget();
 
             // Запуск цикла траты тепла раз в _drainInterval
             _warmthCts?.Cancel();
             _warmthCts = new CancellationTokenSource();
-            WarmthDrainLoop(_warmthCts.Token).Forget();
+            DrainWarmthPeriodically(_warmthCts.Token).Forget();
         }
 
-        private async UniTaskVoid WarmthDrainLoop(CancellationToken token)
+        private async UniTaskVoid DrainWarmthPeriodically(CancellationToken token)
         {
             try
             {
@@ -115,7 +116,7 @@ namespace Systems.Abilities.Concrete
             _warmthSystem.DecreaseWarmth(cost);
         }
 
-        private async UniTaskVoid TickCycle(CancellationToken token)
+        private async UniTaskVoid ControlSwarm(CancellationToken token)
         {
             try
             {
@@ -155,16 +156,16 @@ namespace Systems.Abilities.Concrete
 
         private void OnEnd()
         {
-            if (_activeSwarm != null)
-            {
-                _activeSwarm.SetControlled(false);
-                ReturnSwarmToPosition(_returnPosition, 0.5f).Forget();
-            }
+            var swarmToReturn = _activeSwarm;
+            Vector2 returnPos = _returnPosition;
+            
             _tickCts?.Cancel();
             _warmthCts?.Cancel();
 
             if (_activeSwarm != null)
+            {
                 _activeSwarm.SetControlled(false);
+            }
 
             _player?.StopResonance();
 
@@ -176,6 +177,11 @@ namespace Systems.Abilities.Concrete
 
             _moveInput = Vector2.zero;
             _activeSwarm = null;
+
+            if (swarmToReturn != null)
+            {
+                ReturnSwarmToPosition(swarmToReturn, returnPos, 0.5f).Forget();
+            }
         }
 
         private SwarmController FindNearestSwarm()
@@ -199,21 +205,21 @@ namespace Systems.Abilities.Concrete
             return nearest;
         }
         
-        private async UniTask ReturnSwarmToPosition(Vector2 target, float duration)
+        private async UniTask ReturnSwarmToPosition(SwarmController swarm, Vector2 target, float duration)
         {
-            if (_activeSwarm == null) return;
+            if (swarm == null) return;
 
-            Vector2 start = _activeSwarm.transform.position;
+            Vector2 start = swarm.transform.position;
             float t = 0f;
 
             while (t < 1f)
             {
                 t += Time.deltaTime / duration;
-                _activeSwarm.transform.position = Vector2.Lerp(start, target, t);
+                swarm.transform.position = Vector2.Lerp(start, target, t);
                 await UniTask.Yield();
             }
 
-            _activeSwarm.transform.position = target;
+            swarm.transform.position = target;
         }
     }
 }
