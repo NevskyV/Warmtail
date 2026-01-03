@@ -48,6 +48,7 @@ namespace Systems
 
         private void OnMove(InputAction.CallbackContext context)
         {
+            Debug.Log((Enabled));
             if (Enabled)
             {
                 _moveInput = context.ReadValue<Vector2>();
