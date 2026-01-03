@@ -21,13 +21,13 @@ namespace Systems.Abilities.Concrete
         [SerializeField] private int _explosionCost = 50;
 
         private Transform _playerTransform;
-        private WarmthSystem _warmthSystem;
+        private IWarmthSystem _warmthSystem;
         private PlayerInput _playerInput;
         private bool _isRunning;
         private bool _canActivate;
 
         [Inject]
-        public void Construct(Player player, PlayerInput playerInput, WarmthSystem warmth)
+        public void Construct(Player player, PlayerInput playerInput, IWarmthSystem warmth)
         {
             _playerTransform = player.Rigidbody.transform;
             _warmthSystem = warmth;
@@ -84,11 +84,10 @@ namespace Systems.Abilities.Concrete
                 timer += Time.deltaTime;
                 float currentRadius = Mathf.Lerp(0, _explosionMaxRadius, timer / _explosionDuration);
                 
-                var hits = Physics2D.OverlapCircleAll(_playerTransform.position, currentRadius);
-                foreach (var hit in hits)
+                var warmableObjects = FindWarmableObjects(_playerTransform.position, currentRadius);
+                foreach (var warmable in warmableObjects)
                 {
-                    if (hit.TryGetComponent<Warmable>(out var warmable))
-                        warmable.WarmComplete();
+                    warmable.WarmComplete();
                 }
                 await UniTask.Yield();
             }
@@ -103,23 +102,41 @@ namespace Systems.Abilities.Concrete
                 StopWarm();
                 return;
             }
-            var hits = Physics2D.OverlapCircleAll(_playerTransform.position, _radius);
-            bool success = false;
-            foreach (var hit in hits)
-            {
-                if (hit.TryGetComponent<Warmable>(out var warmable))
-                {
-                    warmable.Warm();
-                    success = true;
-                }
-            }
 
-            if (success)
+            if (WarmObjectsInRadius())
             {
                 _warmthSystem.DecreaseWarmth(_cost);
                 UsingAbility?.Invoke();
             }
-         
+        }
+
+        private System.Collections.Generic.List<Warmable> FindWarmableObjects(Vector2 position, float radius)
+        {
+            var hits = Physics2D.OverlapCircleAll(position, radius);
+            var warmableObjects = new System.Collections.Generic.List<Warmable>();
+            
+            foreach (var hit in hits)
+            {
+                if (hit.TryGetComponent<Warmable>(out var warmable))
+                {
+                    warmableObjects.Add(warmable);
+                }
+            }
+            
+            return warmableObjects;
+        }
+
+        private bool WarmObjectsInRadius()
+        {
+            var warmableObjects = FindWarmableObjects(_playerTransform.position, _radius);
+            
+            foreach (var warmable in warmableObjects)
+            {
+                warmable.Warm();
+            }
+            
+            return warmableObjects.Count > 0;
         }
     }
 }
+

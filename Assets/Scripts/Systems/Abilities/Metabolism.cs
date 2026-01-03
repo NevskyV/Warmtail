@@ -1,7 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Data;
-using Data.Player;
+using Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -13,14 +12,14 @@ namespace Systems.Abilities.Concrete
         [SerializeField] private int _heatDrainPerSecond = 8;
         [SerializeField] private float _speedMultiplier = 2f;
 
-        private GlobalData _globalData;
-        private WarmthSystem _warmthSystem;
+        private IPlayerDataProvider _playerDataProvider;
+        private IWarmthSystem _warmthSystem;
         private int _baseSpeed;
 
         [Inject]
-        public void Construct(GlobalData globalData, WarmthSystem warmthSystem)
+        public void Construct(IPlayerDataProvider playerDataProvider, IWarmthSystem warmthSystem)
         {
-            _globalData = globalData;
+            _playerDataProvider = playerDataProvider;
             _warmthSystem = warmthSystem;
             
             StartAbility += OnStart;
@@ -30,9 +29,20 @@ namespace Systems.Abilities.Concrete
         private void OnStart()
         { 
             Debug.Log("MetabolismAbility.OnStart()");
-            _baseSpeed = _globalData.Get<RuntimePlayerData>().Speed;
-            _globalData.Edit<RuntimePlayerData>(d => d.Speed = Mathf.RoundToInt(_baseSpeed * _speedMultiplier));
+            _baseSpeed = _playerDataProvider.GetSpeed();
+            ApplySpeedModifier();
             DrainRoutine().Forget();
+        }
+
+        private void ApplySpeedModifier()
+        {
+            int newSpeed = Mathf.RoundToInt(_baseSpeed * _speedMultiplier);
+            _playerDataProvider.SetSpeed(newSpeed);
+        }
+
+        private void RestoreSpeed()
+        {
+            _playerDataProvider.SetSpeed(_baseSpeed);
         }
 
         private async UniTaskVoid DrainRoutine()
@@ -41,14 +51,19 @@ namespace Systems.Abilities.Concrete
             while (Enabled)
             {
                 Debug.Log("MetabolismAbility.DrainRoutine(DDDD)");
-                _warmthSystem.DecreaseWarmth(_heatDrainPerSecond);
+                DrainWarmth();
                 await UniTask.Delay(1000);
             }
         }
 
+        private void DrainWarmth()
+        {
+            _warmthSystem.DecreaseWarmth(_heatDrainPerSecond);
+        }
+
         private void OnEnd()
         {
-            _globalData.Edit<RuntimePlayerData>(d => d.Speed = _baseSpeed);
+            RestoreSpeed();
         }
     }
 }

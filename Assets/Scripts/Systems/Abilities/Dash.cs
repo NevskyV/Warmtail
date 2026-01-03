@@ -28,13 +28,13 @@ namespace Systems.Abilities.Concrete
         private PlayerConfig _playerConfig;
         private Rigidbody2D _playerRb;
         private SurfacingSystem _surfacingSystem;
-        private WarmthSystem _warmthSystem;
+        private IWarmthSystem _warmthSystem;
 
         private Vector2 _moveInput;
         private float _layerInput;
         private bool IsFree => IsComboActive && _secondaryComboType == typeof(MetabolismAbility);
         [Inject]
-        public void Construct(PlayerConfig playerConfig, Player player, WarmthSystem warmth, SurfacingSystem surfacing,
+        public void Construct(PlayerConfig playerConfig, Player player, IWarmthSystem warmth, SurfacingSystem surfacing,
             PlayerInput input, DiContainer container)
         {
 
@@ -63,7 +63,7 @@ namespace Systems.Abilities.Concrete
 
                 if (_surfacingSystem.TryChangeLayer(dir))
                 {
-                    if (!IsFree)
+                    if (ShouldApplyCost())
                         _warmthSystem.DecreaseWarmth(_surfacingCost);
 
                     _layerInput = 0;
@@ -93,7 +93,7 @@ namespace Systems.Abilities.Concrete
                 {
                     Dash();
 
-                    if (!IsFree)
+                    if (ShouldApplyCost())
                         _warmthSystem.DecreaseWarmth(_dashCost);
 
                     await UniTask.Delay(500);
@@ -111,13 +111,18 @@ namespace Systems.Abilities.Concrete
 
         private void Dash()
         {
-            HandleObstacleDestruction();
+            DestroyObstaclesInRadius(_destroyRadius);
             ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _dashSpeed;
         }
 
-        private void HandleObstacleDestruction()
+        private bool ShouldApplyCost()
         {
-            var hits = Physics2D.OverlapCircleAll(_playerRb.position, _destroyRadius);
+            return !IsFree;
+        }
+
+        private void DestroyObstaclesInRadius(float radius)
+        {
+            var hits = Physics2D.OverlapCircleAll(_playerRb.position, radius);
             foreach (var hit in hits)
             {
                 if (hit.TryGetComponent<IDestroyable>(out var dest))
