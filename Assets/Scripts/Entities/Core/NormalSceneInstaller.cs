@@ -47,7 +47,8 @@ namespace Entities.Core
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
-            Container.Bind<WarmthSystem>().FromNew().AsSingle();
+            Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
+            Container.Bind<Interfaces.IPlayerDataProvider>().To<Systems.Abilities.PlayerDataProvider>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
             Container.Inject(_questSystem);

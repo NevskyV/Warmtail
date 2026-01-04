@@ -40,6 +40,8 @@ namespace Entities.Localization
         }
 
         [Button("Pull Table")]
+        private void PullTable() => LoadLocalizationTable();
+        
         public static void LoadLocalizationTable()
         {
             List<string> loaded = new();
