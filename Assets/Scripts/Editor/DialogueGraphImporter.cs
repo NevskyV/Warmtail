@@ -16,10 +16,10 @@ namespace Editor
     public class DialogueGraphImporter : ScriptableSingleton<DialogueGraphImporter>
     {
         [SerializeField] private int[] editorGraphs;
-        [Button]
+        private string UserName => Environment.UserName;
+        [Button, ShowIf(nameof(UserName), "Nevsky")]
         public void ImportDialogues()
         {
-            if (Environment.UserName != "Nevsky") return;
             foreach (var graphPath in editorGraphs)
             {
                 var editorGraph = GraphDatabase.LoadGraph<DialogueGraph>($"Assets/Editor/Dialogues/{graphPath}.dg");

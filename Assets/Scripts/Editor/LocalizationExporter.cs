@@ -7,8 +7,7 @@ namespace Editor
 {
     public static class LocalizationExporter
     {
-        private static string ToolName = "SheetsTool.exe";
-        private static string ToolPath => Application.dataPath + "/Tools/SheetsTool/" + ToolName;
+        private static string ToolPath = "C:/Users/Nevsky/RiderProjects/ConsoleApp2/ConsoleApp2/bin/Release/net10.0/ConsoleApp2.exe";
  
         public static void Export(
             string sheetName,
