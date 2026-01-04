@@ -32,7 +32,7 @@ namespace Entities.NPC
         public void Interact()
         {
             if (!Graph || (_uiStateSystem && _uiStateSystem.CurrentState == UIState.Shop)) return;
-            _dialogueSystem.StartDialogue(Graph, _visuals, this);
+            _dialogueSystem.StartDialogue(Graph, _visuals, Id, this);
             if (SceneManager.GetActiveScene().name == "Gameplay") Graph = null;
         }
         
