@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Data.Player.PlayerConfig
   <Abilities>k__BackingField:
   - rid: 1601399544975982592
-  - rid: 1601399524581179738
+  - rid: 4061568565155201106
   - rid: 2564828074214424679
   - rid: 4204128997775507718
   - rid: 2564828074214424678
@@ -24,18 +24,9 @@ MonoBehaviour:
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1601399524581179738
-      type: {class: InteractionSystem, ns: , asm: Assembly-CSharp}
-      data:
-        <Enabled>k__BackingField: 1
-        <Visual>k__BackingField:
-          rid: -2
-        _interactionRadius: 2
-        _interactionOffset: {x: 0, y: 0, z: 0}
     - rid: 1601399544975982592
       type: {class: PlayerMovement, ns: Systems, asm: Assembly-CSharp}
       data:
-        <Enabled>k__BackingField: 1
         <Visual>k__BackingField:
           rid: 1601399779124052047
         MoveForce: 60
@@ -79,6 +70,13 @@ MonoBehaviour:
         _explosionMaxRadius: 10
         _explosionDuration: 0.5
         _explosionCost: 50
+    - rid: 4061568565155201106
+      type: {class: InteractionAbility, ns: , asm: Assembly-CSharp}
+      data:
+        <Visual>k__BackingField:
+          rid: -2
+        _interactionRadius: 2
+        _interactionOffset: {x: 0, y: 0, z: 0}
     - rid: 4204128997775507718
       type: {class: ResonanceAbility, ns: Systems.Abilities.Concrete, asm: Assembly-CSharp}
       data:

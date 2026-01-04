@@ -1,19 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Editor
 {
     public static class LocalizationExporter
     {
-        private static string ToolPath =>
-            Path.Combine(
-                Application.dataPath,
-                "Tools/SheetsTool/SheetsTool.exe"
-            );
+        private static string ToolName = "SheetsTool.exe";
+        private static string ToolPath => Application.dataPath + "/Tools/SheetsTool/" + ToolName;
+ 
         public static void Export(
             string sheetName,
             int dialogueIndex,
@@ -22,12 +18,11 @@ namespace Editor
             var args = new List<string>
             {
                 sheetName,
-                $"{sheetName}_{dialogueIndex}_",
-                "key\tru\ten"
+                $"{sheetName}_{dialogueIndex}_"
             };
 
             args.AddRange(lines.Select(l =>
-                $"{l.key}\t{l.ru}\t=GOOGLETRANSLATE(INDIRECT(ADDRESS(ROW(),COLUMN()-1)),\"ru\",\"en\")"
+                l.key+"\t"+l.ru+"\t=GOOGLETRANSLATE(INDIRECT(ADDRESS(ROW(),COLUMN()-1)),\"ru\",\"en\")"
             ));
 
             RunTool(args);
@@ -35,16 +30,15 @@ namespace Editor
 
         static void RunTool(List<string> args)
         {
-            var startInfo = new ProcessStartInfo
-            {
-                FileName = ToolPath,
-                Arguments = string.Join(" ", args.Select(a => $"\"{a}\"")),
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                WorkingDirectory = Path.GetDirectoryName(ToolPath)
-            };
+            var p = new Process();
+            p.StartInfo.FileName = ToolPath;
+            p.StartInfo.UseShellExecute = false;
 
-            Process.Start(startInfo)?.WaitForExit();
+            foreach (var arg in args)
+                p.StartInfo.ArgumentList.Add(arg);
+
+            p.Start();
+            p.WaitForExit();
         }
 
     }

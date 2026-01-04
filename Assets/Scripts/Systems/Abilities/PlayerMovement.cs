@@ -11,7 +11,7 @@ namespace Systems
     [Serializable]
     public class PlayerMovement : IAbility
     {
-        [field: SerializeReference] public bool Enabled { get; set; } = true;
+        public bool Enabled { get; set; } = true;
         public Action StartAbility { get; set; }
         public Action UsingAbility { get; set; }
         public Action EndAbility { get; set; }
