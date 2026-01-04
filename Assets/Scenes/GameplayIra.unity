@@ -34192,6 +34192,7 @@ GameObject:
   - component: {fileID: 648476693}
   - component: {fileID: 648476695}
   - component: {fileID: 648476694}
+  - component: {fileID: 648476696}
   m_Layer: 0
   m_Name: TertilusQuest
   m_TagString: Untagged
@@ -34303,6 +34304,24 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2.848503, y: 2.8477952}
   m_EdgeRadius: 0
+--- !u!114 &648476696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648476692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 132af9e0bcff40ed9ce9e7d3120af866, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.CameraTrigger
+  _id:
+    Value: 1fea2b9f-2354-448c-b004-1aa5793f1a78
+  _destroyAfter: 1
+  _stunTime: 1
+  _target: {fileID: 1036735274}
+  _zoom: 8
 --- !u!1 &652866213
 GameObject:
   m_ObjectHideFlags: 0

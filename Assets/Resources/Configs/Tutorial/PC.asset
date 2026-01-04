@@ -27,11 +27,12 @@ MonoBehaviour:
   - Actions:
     - rid: 7345390844638658706
     - rid: 5607584705780384057
-    - rid: 5607584705780384059
     - rid: 5607584705780384068
-    - rid: 5607584705780384069
+    - rid: 7345390883105669217
     Tasks:
     - rid: 7345390844638658714
+  - Actions: []
+    Tasks: []
   references:
     version: 2
     RefIds:
@@ -58,20 +59,8 @@ MonoBehaviour:
         _active: 0
         _objectIds:
         - c1d34549-f2a9-448e-a47e-032936d53a1c
-    - rid: 5607584705780384059
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - c1d34549-f2a9-448e-a47e-032936d53a1c
     - rid: 5607584705780384068
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - 66f14755-7230-4397-a700-752074cb8608
-    - rid: 5607584705780384069
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
         _objectIds:
@@ -94,3 +83,8 @@ MonoBehaviour:
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+    - rid: 7345390883105669217
+      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _graph: {fileID: 11400000, guid: 534c4acde52ceb54a853813085877dee, type: 2}
+        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
