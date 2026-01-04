@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa871b3d15394443b22bf02d69a17fd0, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: Assembly-CSharp::Data.RuntimeDialogueGraph
-  <EntryNodeId>k__BackingField: 749f60d9-6683-4cc5-a37d-98b3a7fad94a
+  <EntryNodeId>k__BackingField: cbfe5bb3-c854-4aaf-be40-c7f5f52d8254
   <AllNodes>k__BackingField:
   - rid: 1000
   - rid: 1001
@@ -29,9 +29,9 @@ MonoBehaviour:
     - rid: 1000
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: fcdea47d-fb79-4452-b7e1-84dd81a985d8
+        NodeId: 33d2b643-6e4f-4de6-94d2-2f47e37f8b5d
         NextNodeIds:
-        - 3be955a5-e3ef-4b6d-82d2-8307c7015907
+        - a1017486-6af5-4abb-abda-478ff3edbea5
         Text: "\u0421\u043F\u0430\u0441\u0438\u0431\u043E \u0431\u043E\u043B\u044C\u0448\u043E\u0435!"
         Character: 1
         Emotion: 1
@@ -39,9 +39,9 @@ MonoBehaviour:
     - rid: 1001
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 3be955a5-e3ef-4b6d-82d2-8307c7015907
+        NodeId: a1017486-6af5-4abb-abda-478ff3edbea5
         NextNodeIds:
-        - 3f718fb6-9df3-46f7-829f-96e288500d35
+        - 6278305c-a9a4-4331-a0e7-9a9cf50e9433
         Text: "\u0414\u0430 \u043D\u0435 \u0437\u0430 \u0447\u0442\u043E."
         Character: 0
         Emotion: 1
@@ -49,9 +49,9 @@ MonoBehaviour:
     - rid: 1002
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 3f718fb6-9df3-46f7-829f-96e288500d35
+        NodeId: 6278305c-a9a4-4331-a0e7-9a9cf50e9433
         NextNodeIds:
-        - 8ba6c05c-6fb3-4eac-a4ac-cbef684db74f
+        - bf120fbe-c367-4e91-b4d3-d0a0047f2256
         Text: "\u0421\u043B\u0443\u0448\u0430\u0439, \u0442\u0435\u0431\u0435 \u0436\u0435
           \u043D\u0435\u0433\u0434\u0435 \u0436\u0438\u0442\u044C \u043F\u043E\u043B\u0443\u0447\u0430\u0435\u0442\u0441\u044F?"
         Character: 1
@@ -60,7 +60,7 @@ MonoBehaviour:
     - rid: 1003
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 3d56bb54-e168-46da-b8d5-656d75f92cb2
+        NodeId: f67c1646-7238-4222-831f-73f892f19462
         NextNodeIds: []
         Text: "<link=wave>\u041E\u0445, \u0442\u0440\u043E\u0441\u0442\u044C, \u043C\u043E\u044F
           \u0442\u0440\u043E\u0441\u0442\u044C...</link>"
@@ -70,10 +70,10 @@ MonoBehaviour:
     - rid: 1004
       type: {class: ConditionNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 749f60d9-6683-4cc5-a37d-98b3a7fad94a
+        NodeId: cbfe5bb3-c854-4aaf-be40-c7f5f52d8254
         NextNodeIds:
-        - 3d56bb54-e168-46da-b8d5-656d75f92cb2
-        - fcdea47d-fb79-4452-b7e1-84dd81a985d8
+        - f67c1646-7238-4222-831f-73f892f19462
+        - 33d2b643-6e4f-4de6-94d2-2f47e37f8b5d
         <Conditions>k__BackingField:
         - VarName: getStick
           Operation: 0
@@ -84,9 +84,9 @@ MonoBehaviour:
     - rid: 1005
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 8ba6c05c-6fb3-4eac-a4ac-cbef684db74f
+        NodeId: bf120fbe-c367-4e91-b4d3-d0a0047f2256
         NextNodeIds:
-        - 71304cb4-b251-403e-8d9e-d9ed0d446927
+        - 3248215d-d8e1-4dac-abf9-2c3f9b553d87
         Text: "\u0412\u044B\u0445\u043E\u0434\u0438\u0442 \u0442\u0430\u043A..."
         Character: 0
         Emotion: 2
@@ -94,9 +94,9 @@ MonoBehaviour:
     - rid: 1006
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 71304cb4-b251-403e-8d9e-d9ed0d446927
+        NodeId: 3248215d-d8e1-4dac-abf9-2c3f9b553d87
         NextNodeIds:
-        - 35276c03-0e50-4b1f-bea4-0009a02a74f2
+        - c67c76ed-9980-457c-bf7a-56ce9f4d7572
         Text: "\u0422\u043E\u0433\u0434\u0430 \u0430\u0439\u0434\u0430 \u0437\u0430
           \u043C\u043D\u043E\u0439!"
         Character: 1
@@ -105,6 +105,6 @@ MonoBehaviour:
     - rid: 1007
       type: {class: ActionNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 35276c03-0e50-4b1f-bea4-0009a02a74f2
+        NodeId: c67c76ed-9980-457c-bf7a-56ce9f4d7572
         NextNodeIds: []
         EventInd: 6

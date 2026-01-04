@@ -7,11 +7,14 @@ namespace Systems.SequenceActions
 {
     public class SplineAnimateAction: ISequenceAction
     {
-        [SerializeField] private string _objectId;
+        [SerializeField] private string _characterId;
+        [SerializeField] private string _splineId;
         public void Invoke()
         {
-            SavableObjectsResolver.FindObjectById<SplineAnimate>(_objectId).Restart(false);
-            SavableObjectsResolver.FindObjectById<SplineAnimate>(_objectId).Play();
+            var character = SavableObjectsResolver.FindObjectById<SplineAnimate>(_characterId);
+            character.Container = SavableObjectsResolver.FindObjectById<SplineContainer>(_splineId);
+            character.Restart(false);
+            character.Play();
         }
     }
 }
