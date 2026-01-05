@@ -23,9 +23,9 @@ namespace Entities.UI
         [SerializeField, Dropdown(nameof(GetDropdownStrings))]
         private string _incorrectLayerState;
         [Title("UI")]
-        [SerializeField] private RectTransform _markPrefab;
+        [SerializeField] private GameObject _markPrefab;
         [SerializeField] private RectTransform _markHud;
-        [SerializeField] private RectTransform _questPrefab;
+        [SerializeField] private GameObject _questPrefab;
         [SerializeField] private RectTransform _questHud;
 
         private Dictionary<QuestData, List<MarkUIData>> _createdMarks;
@@ -56,16 +56,20 @@ namespace Entities.UI
             newQuest.GetChild(1).GetComponent<LocalizedText>().SetNewKey("quest_desc_" + data.Id);
             _createdQuests.Add(data,newQuest.gameObject);
             _createdMarks.Add(data, new());
-            CheckLayer(data, newQuest);
+            UpdateProgress(data, newQuest);
         }
 
-        private void CheckLayer(QuestData data, Transform questObj)
+        public void UpdateProgress(QuestData data, Transform questObj = null)
         {
+            if (questObj == null)
+            {
+                questObj = _createdQuests[data].transform;
+            }
             if(_surfacingSystem.CurrentLayerIndex == data.Layer){
                 var allQuestCount = data.Sequence.Count;
                 var questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id];
                 questObj.GetChild(2).GetComponent<LocalizedText>().SetNewKey(_correctLayerState);
-                questObj.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text = ((questState + 1)/allQuestCount).ToString();
+                questObj.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text = $"{questState}/{allQuestCount}";
             }
             else
             {

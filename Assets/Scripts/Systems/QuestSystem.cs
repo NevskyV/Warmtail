@@ -42,6 +42,7 @@ namespace Systems
 
             foreach (var task in data.Sequence[questState].Tasks)
             {
+                task.Activate();
                 task.OnComplete += () => TryIterateSequence(data);
             }
 
@@ -60,7 +61,11 @@ namespace Systems
                 x =>
                 {
                     if (x == data.Sequence.Count) EndQuest(data);
-                    else _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds[data.Id] = x);
+                    else
+                    {
+                        _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds[data.Id] = x);
+                        _questVisuals.UpdateProgress(data);
+                    }
                 });
             }
         }

@@ -22,11 +22,14 @@ namespace Systems
             
             currentState++;
             onStateChangedAction.Invoke(currentState);
+            Debug.Log($"currentState {currentState}");
             if (currentState == data.Count) return;
+            Debug.Log($"Tasks.Count {data[currentState].Tasks.Count}");
             if (data[currentState].Tasks.Count > 0)
             {
                 foreach (var task in data[currentState].Tasks)
                 {
+                    Debug.Log($"Activated task {task}");
                     task.Activate();
                     task.OnComplete += () => TryIterateSequence(data, currentState, onStateChangedAction);
                 }
