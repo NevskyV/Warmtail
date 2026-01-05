@@ -17,15 +17,32 @@ MonoBehaviour:
   <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
   <Layer>k__BackingField: 0
   <Sequence>k__BackingField:
-  - Actions: []
+  - Actions:
+    - rid: 7345390883105669850
     Tasks:
-    - rid: 5607584703621628007
+    - rid: 7345390883105669774
+  - Actions:
+    - rid: 7345390883105669852
+    Tasks:
+    - rid: 7345390883105669775
   <OnComplete>k__BackingField: []
   <OnFail>k__BackingField: []
   references:
     version: 2
     RefIds:
-    - rid: 5607584703621628007
-      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+    - rid: 7345390883105669774
+      type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _action: {fileID: -8825077126060833141, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+        _puzzleId: c0bf4d56-83cc-49dc-b929-339f1d29790f
+    - rid: 7345390883105669775
+      type: {class: InteractTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _triggerId: 77cd1b7e-580b-4254-9147-7baf1f964b62
+    - rid: 7345390883105669850
+      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _graph: {fileID: 11400000, guid: 2161cc893dff2d945852dc5b02bdd5fb, type: 2}
+        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+    - rid: 7345390883105669852
+      type: {class: StickAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data: 

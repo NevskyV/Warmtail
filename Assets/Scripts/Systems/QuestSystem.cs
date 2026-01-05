@@ -37,12 +37,10 @@ namespace Systems
 
             Debug.Log(_globalData.Get<SavablePlayerData>().QuestIds.Count);
             if(!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
-            {
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
-                _questVisuals.SpawnQuest(data);
-            }
 
             OnQuestStarted?.Invoke(data);
+            _questVisuals.SpawnQuest(data);
 
             for (int i = 0; i < questState; i++)
             {
@@ -68,7 +66,6 @@ namespace Systems
                 SequenceIterationSystem.TryIterateSequence(data.Sequence, questState,
                 x =>
                 {
-                    Debug.Log("Ira iterate x="+x+"; data.Id="+data.Id);
                     if (x == data.Sequence.Count) EndQuest(data);
                     else
                     {

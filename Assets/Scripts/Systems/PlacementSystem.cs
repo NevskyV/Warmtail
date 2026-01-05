@@ -66,7 +66,6 @@ namespace Systems
                 if (!data.Inventory.ContainsKey(itemId)) data.Inventory[itemId] = 0;
                 data.Inventory[itemId] += how;
             });
-            QuestSystem.EndQuest(_houseManager.BuildQuest);
         }
         
         public void ResetInventory()

@@ -16,13 +16,11 @@ namespace Systems.Tasks
 
         public void Activate()
         {
-            Debug.Log("Ira3 ");
             var observable = Object.Instantiate(_prefab, _position, Quaternion.identity);
             observable.OnTriggerEnter2DAsObservable().Subscribe(c =>
             {
                 if (c.CompareTag("Player"))
                 {
-                    Debug.Log("Ira4 ");
                     Completed = true;
                     OnComplete?.Invoke();
                     Object.Destroy(observable.gameObject);

@@ -12,7 +12,6 @@ namespace Entities.House
     public class HouseManager : MonoBehaviour
     {
         public ItemsHouseIdConf _itemsHouseIdConf;
-        public QuestData BuildQuest;
         [SerializeField] private SerializedDictionary<Character,SpeakableCharacter> _npc;
         [Inject] private PlacementSystem _placementSystem; 
         [Inject] private GlobalData _globalData; 

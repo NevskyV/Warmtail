@@ -17,7 +17,6 @@ namespace Systems.Tasks
 
         public void Activate()
         {
-            Debug.Log("Ira1 ");
             Shell.OnShellsChanged += MarkComplete;
         }
 
@@ -25,7 +24,6 @@ namespace Systems.Tasks
         {
             Completed = true;
             OnComplete?.Invoke();
-            Debug.Log("Ira2 " );
             Shell.OnShellsChanged -= MarkComplete;
         }
     }

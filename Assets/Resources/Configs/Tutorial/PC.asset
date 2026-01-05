@@ -25,26 +25,18 @@ MonoBehaviour:
     Tasks:
     - rid: 7345390844638658705
   - Actions:
-    - rid: 7345390844638658706
-    - rid: 5607584705780384057
-    - rid: 7345390883105669220
-    - rid: 7345390883105669217
-    Tasks:
-    - rid: 7345390844638658714
-  - Actions:
-    - rid: 7345390883105669222
+    - rid: 7345390883105669848
+    - rid: 7345390883105669849
+    - rid: 7345390883105669866
+    - rid: 7345390883105669868
     Tasks:
     - rid: 7345390883105669221
   - Actions:
-    - rid: 7345390883105669224
+    - rid: 7345390844638658706
+    - rid: 5607584705780384057
+    - rid: 7345390883105669217
     Tasks:
-    - rid: 7345390883105669223
-  - Actions:
-    - rid: 7345390883105669231
-    - rid: 7345390883105669227
-    - rid: 7345390883105669230
-    Tasks:
-    - rid: 7345390883105669225
+    - rid: 7345390883105669845
   - Actions:
     - rid: 7345390883105669234
     Tasks:
@@ -85,7 +77,7 @@ MonoBehaviour:
       data:
         _active: 0
         _objectIds:
-        - c1d34549-f2a9-448e-a47e-032936d53a1c
+        - b25582bf-3620-40ac-8f08-2522dd708fd1
     - rid: 7345390844638658705
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -95,63 +87,21 @@ MonoBehaviour:
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-        _splineId: f1d85757-23b1-465d-b9af-e82fed8506f7
+        _splineId: 0dbcaf53-a94a-40ed-ab48-4bdda97ec04c
     - rid: 7345390844638658707
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _graph: {fileID: 11400000, guid: e0425e3b33f2e6d4c97a07660592ee2a, type: 2}
         _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 7345390844638658714
-      type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
     - rid: 7345390883105669217
-      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _graph: {fileID: 11400000, guid: 534c4acde52ceb54a853813085877dee, type: 2}
-        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 7345390883105669220
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - 66f14755-7230-4397-a700-752074cb8608
-    - rid: 7345390883105669221
-      type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 7345390883105669222
-      type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _quest: {fileID: 11400000, guid: 890df765c8bdd084bbf049f139a867cf, type: 2}
-    - rid: 7345390883105669223
-      type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _questData: {fileID: 11400000, guid: 890df765c8bdd084bbf049f139a867cf, type: 2}
-        _start: 0
-    - rid: 7345390883105669224
-      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _graph: {fileID: 11400000, guid: 2161cc893dff2d945852dc5b02bdd5fb, type: 2}
-        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 7345390883105669225
-      type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 7345390883105669227
-      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-        _splineId: 0dbcaf53-a94a-40ed-ab48-4bdda97ec04c
-    - rid: 7345390883105669230
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _graph: {fileID: 11400000, guid: 8266e6ea59151b741ab722d126132c08, type: 2}
         _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 7345390883105669231
-      type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+    - rid: 7345390883105669221
+      type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _quest: {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}
+        _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
     - rid: 7345390883105669233
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -182,3 +132,30 @@ MonoBehaviour:
         _active: 1
         _objectIds:
         - 569870c1-2c15-4579-9212-d24ecf8aa86e
+    - rid: 7345390883105669845
+      type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _questData: {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}
+        _start: 1
+    - rid: 7345390883105669848
+      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _splineId: f1d85757-23b1-465d-b9af-e82fed8506f7
+    - rid: 7345390883105669849
+      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _graph: {fileID: 11400000, guid: 534c4acde52ceb54a853813085877dee, type: 2}
+        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+    - rid: 7345390883105669866
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 0
+        _objectIds:
+        - c1d34549-f2a9-448e-a47e-032936d53a1c
+    - rid: 7345390883105669868
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _objectIds:
+        - 66f14755-7230-4397-a700-752074cb8608

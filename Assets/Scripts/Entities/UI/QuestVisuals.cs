@@ -51,9 +51,9 @@ namespace Entities.UI
         public void SpawnQuest(QuestData data)
         {
             if (data == null) return;
+            if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
             var newQuest = _diContainer.InstantiatePrefab(_questPrefab, _questHud).transform;
             if (!newQuest) return;
-            if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
             newQuest.GetChild(0).GetComponent<LocalizedText>().SetNewKey("quest_header_" + data.Id);
             newQuest.GetChild(1).GetComponent<LocalizedText>().SetNewKey("quest_desc_" + data.Id);
             _createdQuests.Add(data,newQuest.gameObject);
@@ -91,11 +91,10 @@ namespace Entities.UI
         
         public void DestroyQuest(QuestData data)
         {
-            Debug.Log("Ira destrpy");
-            Destroy(_createdQuests[data]);
-            DestroyMarks(data);
-            _createdMarks.Remove(data);
-            _createdQuests.Remove(data);
+            if (_createdQuests.ContainsKey(data)) Destroy(_createdQuests[data]);
+            if (_createdMarks.ContainsKey(data)) DestroyMarks(data);
+            if (_createdMarks.ContainsKey(data)) _createdMarks.Remove(data);
+            if (_createdQuests.ContainsKey(data)) _createdQuests.Remove(data);
         }
         
         public void SpawnMarks(QuestData data, Vector2 markPos)
