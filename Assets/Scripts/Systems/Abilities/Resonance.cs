@@ -17,8 +17,8 @@ namespace Systems.Abilities.Concrete
     {
         [SerializeField] private float _searchRadius = 12f;
         [SerializeField] private float _interactRadius = 5f;
-        [SerializeField] private float _warmthDrain = 2f;
-        [SerializeField] private float _drainInterval = 1f;
+        [SerializeField] private float _warmthDrain = 1f;
+        [SerializeField] private float _drainInterval = 0.5f;
        
         [SerializeField] private Vector2 _returnPosition;
         private IWarmthSystem _warmthSystem;
@@ -87,13 +87,9 @@ namespace Systems.Abilities.Concrete
         {
             try
             {
-                while (!token.IsCancellationRequested && Enabled)
+                while (!token.IsCancellationRequested)
                 {
-                    if (_activeSwarm == null)
-                        break;
-
                     ApplyWarmthDrain();
-
                     await UniTask.Delay(TimeSpan.FromSeconds(_drainInterval), cancellationToken: token);
                 }
             }
