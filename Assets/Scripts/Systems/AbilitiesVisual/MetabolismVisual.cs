@@ -53,7 +53,7 @@ namespace Systems.AbilitiesVisual
         public void EndAbility()
         {
             _struct.Volume.weight = 0;
-            DOTween.To(() => _struct.Volume.weight,x => _struct.Volume.weight = x, 1f, 1f);
+            DOTween.To(() => _struct.Volume.weight,x => _struct.Volume.weight = x, 0f, 1f);
             _struct.Walls.ForEach(wall =>
             {
                 wall.fillTexture = _lastTextures[ _struct.Walls.IndexOf(wall)];

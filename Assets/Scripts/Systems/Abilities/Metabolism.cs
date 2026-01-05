@@ -9,6 +9,11 @@ namespace Systems.Abilities.Concrete
     [Serializable]
     public class MetabolismAbility : BaseAbility
     {
+        [SerializeField] private float _cooldownDuration = 1f;
+
+        private bool _canActivate = true;
+        private bool _isRunning;
+        
         [SerializeField] private int _heatDrainPerSecond = 8;
         [SerializeField] private float _speedMultiplier = 2f;
 
@@ -28,6 +33,11 @@ namespace Systems.Abilities.Concrete
 
         private void OnStart()
         { 
+            if (!_canActivate) return;
+
+            _canActivate = false;
+            _isRunning = true;
+            
             Debug.Log("MetabolismAbility.OnStart()");
             _baseSpeed = _playerDataProvider.GetSpeed();
             ApplySpeedModifier();
@@ -48,7 +58,7 @@ namespace Systems.Abilities.Concrete
         private async UniTaskVoid DrainRoutine()
         {
             Debug.Log("MetabolismAbility.DrainRoutine()");
-            while (Enabled)
+            while (Enabled && _isRunning)
             {
                 Debug.Log("MetabolismAbility.DrainRoutine(DDDD)");
                 DrainWarmth();
@@ -61,9 +71,13 @@ namespace Systems.Abilities.Concrete
             _warmthSystem.DecreaseWarmth(_heatDrainPerSecond);
         }
 
-        private void OnEnd()
+        private async void OnEnd()
         {
+            _isRunning = false;
             RestoreSpeed();
+
+            await UniTask.Delay(TimeSpan.FromSeconds(_cooldownDuration));
+            _canActivate = true;
         }
     }
 }

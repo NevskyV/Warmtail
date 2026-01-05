@@ -21,6 +21,7 @@ namespace Systems.Abilities.Concrete
         [SerializeField] private int _dashSpeed = 100;
         [SerializeField] private int _surfacingCost = 15;
         private float _lastDashTime = -Mathf.Infinity;
+        private bool _canDash = true;
         private UniTask _dashTask;
         private bool _dashLoopRunning;
        
@@ -28,13 +29,13 @@ namespace Systems.Abilities.Concrete
         private PlayerConfig _playerConfig;
         private Rigidbody2D _playerRb;
         private SurfacingSystem _surfacingSystem;
-        private IWarmthSystem _warmthSystem;
+        private WarmthSystem _warmthSystem;
 
         private Vector2 _moveInput;
         private float _layerInput;
         private bool IsFree => IsComboActive && _secondaryComboType == typeof(MetabolismAbility);
         [Inject]
-        public void Construct(PlayerConfig playerConfig, Player player, IWarmthSystem warmth, SurfacingSystem surfacing,
+        public void Construct(PlayerConfig playerConfig, Player player, WarmthSystem warmth, SurfacingSystem surfacing,
             PlayerInput input, DiContainer container)
         {
 
@@ -51,7 +52,7 @@ namespace Systems.Abilities.Concrete
 
             UsingAbility += Tick;
         }
-
+        
 
         public void Tick()
         {
@@ -72,15 +73,12 @@ namespace Systems.Abilities.Concrete
 
             if (_moveInput.magnitude > 0.1f)
             {
-                if (!_dashLoopRunning)
+                if (!_dashLoopRunning && _canDash)
                 {
+                    _canDash = false;  
                     _dashLoopRunning = true;
                     _dashTask = DashLoop();
                 }
-            }
-            else
-            {
-                _dashLoopRunning = false;
             }
         }
 
@@ -101,7 +99,8 @@ namespace Systems.Abilities.Concrete
             }
             finally
             {
-                // ГАРАНТИРОВАННЫЙ сброс состояния
+                await UniTask.Delay(TimeSpan.FromSeconds(_dashCooldownDuration));
+                _canDash = true;
                 _dashLoopRunning = false;
                 ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
             }
@@ -132,3 +131,4 @@ namespace Systems.Abilities.Concrete
     }
     
 }
+
