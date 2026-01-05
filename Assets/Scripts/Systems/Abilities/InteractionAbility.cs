@@ -30,6 +30,7 @@ public class InteractionAbility : IAbility, IDisposable
     
     public void Interact(InputAction.CallbackContext context)
     {
+        Enabled = true;
         if (!Enabled) return;
         var colliders = Physics2D.OverlapCircleAll(_player.Rigidbody.transform.position + _interactionOffset, _interactionRadius);
         

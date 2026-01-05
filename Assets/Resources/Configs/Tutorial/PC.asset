@@ -56,15 +56,12 @@ MonoBehaviour:
     - rid: 7345390883105669257
     Tasks:
     - rid: 7345390883105669256
-  - Actions:
-    - rid: -2
+  - Actions: []
     Tasks:
     - rid: 7345390883105669248
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 4204129410323054672
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -101,7 +98,7 @@ MonoBehaviour:
     - rid: 7345390844638658707
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _graph: {fileID: 0}
+        _graph: {fileID: 11400000, guid: e0425e3b33f2e6d4c97a07660592ee2a, type: 2}
         _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
     - rid: 7345390844638658714
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
@@ -110,7 +107,7 @@ MonoBehaviour:
     - rid: 7345390883105669217
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _graph: {fileID: 0}
+        _graph: {fileID: 11400000, guid: 534c4acde52ceb54a853813085877dee, type: 2}
         _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
     - rid: 7345390883105669220
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
@@ -134,7 +131,7 @@ MonoBehaviour:
     - rid: 7345390883105669224
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _graph: {fileID: 0}
+        _graph: {fileID: 11400000, guid: 2161cc893dff2d945852dc5b02bdd5fb, type: 2}
         _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
     - rid: 7345390883105669225
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
@@ -148,7 +145,7 @@ MonoBehaviour:
     - rid: 7345390883105669230
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _graph: {fileID: 0}
+        _graph: {fileID: 11400000, guid: 8266e6ea59151b741ab722d126132c08, type: 2}
         _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
     - rid: 7345390883105669231
       type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}

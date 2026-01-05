@@ -14,11 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
   <Id>k__BackingField: 1
   <IsPermanent>k__BackingField: 1
-  <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
+  <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
   <Layer>k__BackingField: 0
   <Sequence>k__BackingField:
-  - Actions:
-    - rid: -2
+  - Actions: []
     Tasks:
     - rid: 5607584703621628007
   <OnComplete>k__BackingField: []
@@ -26,8 +25,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 5607584703621628007
       type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
