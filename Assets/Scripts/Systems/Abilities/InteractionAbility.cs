@@ -21,6 +21,7 @@ public class InteractionAbility : IAbility, IDisposable
     [Inject]
     public void Construct(Player player, PlayerInput playerInput)
     {
+        Enabled = true;
         _player = player;
         _playerInput = playerInput;
         _playerInput.actions["LeftMouse"].started += _ => StartAbility?.Invoke();

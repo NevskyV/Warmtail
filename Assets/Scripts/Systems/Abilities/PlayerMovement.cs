@@ -30,6 +30,7 @@ namespace Systems
         [Inject]
         public void Construct(Player player, PlayerInput playerInput, GlobalData data)
         {
+            Enabled = true;
             _globalData = data;
             _player = player;
 
