@@ -39,6 +39,7 @@ MonoBehaviour:
     - rid: 7345390883105669845
   - Actions:
     - rid: 7345390883105669234
+    - rid: 7345390921796026541
     Tasks:
     - rid: 7345390883105669233
   - Actions: []
@@ -159,3 +160,9 @@ MonoBehaviour:
         _active: 1
         _objectIds:
         - 66f14755-7230-4397-a700-752074cb8608
+    - rid: 7345390921796026541
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _objectIds:
+        - 2ab202c4-8aaa-4080-91f8-d8d963efea21
