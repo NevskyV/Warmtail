@@ -47,10 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8b226c62794d4a93151665258e3c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Probs.WarmableIce
+  _warmFactor: 0.34
+  _warmEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _renderer: {fileID: 1673893891031567906}
-  _warmCapacity: 3
 --- !u!1971053207 &1673893891031567906
 SpriteShapeRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,8 +101,8 @@ SpriteShapeRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Color: {r: 0.9502237, g: 0.7688679, b: 1, a: 1}
   m_MaskInteraction: 0
+  m_Color: {r: 0.9502237, g: 0.7688679, b: 1, a: 1}
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
   - {fileID: -2664096631168847452, guid: b8dd576d16ec9ed4f8dcc6e48884b2cc, type: 3}
