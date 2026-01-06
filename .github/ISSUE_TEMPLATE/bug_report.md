@@ -7,22 +7,19 @@ assignees: ''
 
 ---
 
-**Describe the bug**
-A clear and concise description of what the bug is.
+**Опишите баг**
 
-**To Reproduce**
-Steps to reproduce the behavior:
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+**Чтобы воспроизвести**
+Напишите ввиде шагов:
+1. Идите '...'
+2. Нажмите на '....'
+3. Пролистайте '....'
+4. Ошибка!
 
-**Expected behavior**
-A clear and concise description of what you expected to happen.
+**Ошидаемое поведение**
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+**Изображения**
 
-**Device**
+**Устройство**
  - OS: [e.g. Windows 11]
  - Version or commit [e.g. 0.0.1]
