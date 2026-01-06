@@ -2949,7 +2949,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.House.HouseManager
   _itemsHouseIdConf: {fileID: 11400000, guid: 834733c1263e2bf4392ab5c2e6d7b2b8, type: 2}
-  BuildQuest: {fileID: 11400000, guid: 37bd43537256fbb4e9d2c07105777df8, type: 2}
   _npc:
     _serializedList:
     - Key: 1
@@ -3193,6 +3192,11 @@ CanvasGroup:
 --- !u!224 &899467492 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3347595861233721655, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
+  m_PrefabInstance: {fileID: 899467490}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &899467493 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 4253318843041039975, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
   m_PrefabInstance: {fileID: 899467490}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &910719001
@@ -4032,6 +4036,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7785308419957750846, guid: 68e089b5b6dc7ce4a8487823b12a9022, type: 3}
   m_PrefabInstance: {fileID: 1116368720}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &1130264224 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 7901887455616614930, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
+  m_PrefabInstance: {fileID: 899467490}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1130326492 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 828077756927800478, guid: f4daa986b08a5854cbac23fa7ed3addc, type: 3}
@@ -4070,7 +4079,7 @@ Transform:
   - {fileID: 424214787}
   - {fileID: 1836109678}
   - {fileID: 952794402}
-  - {fileID: 1692990483}
+  - {fileID: 1601918593}
   - {fileID: 865195739}
   - {fileID: 1897004855}
   m_Father: {fileID: 0}
@@ -5180,6 +5189,63 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7785308419957750846, guid: 68e089b5b6dc7ce4a8487823b12a9022, type: 3}
   m_PrefabInstance: {fileID: 1600425432}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1601918592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1601918593}
+  - component: {fileID: 1601918594}
+  m_Layer: 0
+  m_Name: QuestVisuals
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1601918593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601918592}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1204636205}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1601918594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1601918592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b94735800a9a459681f079f3f88db243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.QuestVisuals
+  _allQuests:
+  - {fileID: 11400000, guid: 56f437edbb8080249a589b9fe742f9c2, type: 2}
+  - {fileID: 11400000, guid: 890df765c8bdd084bbf049f139a867cf, type: 2}
+  - {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}
+  - {fileID: 11400000, guid: 37bd43537256fbb4e9d2c07105777df8, type: 2}
+  _markOffset: {x: 0, y: 0, z: 0}
+  _cam: {fileID: 404321504}
+  _correctLayerState: quest_progress
+  _incorrectLayerState: incorrect_layer
+  _markPrefab: {fileID: 10223315964271821, guid: e374e174dc25cce4a946958607fc9975, type: 3}
+  _markHud: {fileID: 899467493}
+  _questPrefab: {fileID: 6104912841410499881, guid: dfc1f7d1234a9bc41bd397b469b9a1f4, type: 3}
+  _questHud: {fileID: 1130264224}
 --- !u!1001 &1630664592
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5599,50 +5665,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4919893853094644452, guid: 655b74bf51918114787a27be9b0a35ea, type: 3}
   m_PrefabInstance: {fileID: 1205241275}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1692990481
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1692990483}
-  - component: {fileID: 1692990482}
-  m_Layer: 0
-  m_Name: QuestSystem
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1692990482
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692990481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 46684abaf92f4e47ae3375d9324b0dde, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Systems.QuestSystem
---- !u!4 &1692990483
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1692990481}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1204636205}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1715233447
 GameObject:
   m_ObjectHideFlags: 0
@@ -8881,7 +8903,7 @@ MonoBehaviour:
   _uiStateSystem: {fileID: 88475865}
   _shoppingManager: {fileID: 1897004854}
   _dialogueVisuals: {fileID: 952794403}
-  _questVisuals: {fileID: 0}
+  _questVisuals: {fileID: 1601918594}
   _cam: {fileID: 120628539}
 --- !u!1 &2062651858
 GameObject:

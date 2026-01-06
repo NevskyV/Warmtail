@@ -20,10 +20,12 @@ namespace Systems.Tasks
         {
             _trigger = SavableObjectsResolver.FindObjectById<UnityEventTrigger>(_triggerId);
             _trigger._event.AddListener(MarkComplete);
+            Debug.Log("Ira activate inteact");
         }
 
         private void MarkComplete()
         {
+            Debug.Log("Ira inteact");
             Completed = true;
             OnComplete?.Invoke();
             if (_trigger) _trigger._event.RemoveListener(MarkComplete);

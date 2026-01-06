@@ -47,7 +47,7 @@ namespace Systems
                 data.Sequence[i].Actions.ForEach(x => x.Invoke());
             }
 
-            data.Sequence[questState].Tasks[0].Activate();
+            //data.Sequence[questState].Tasks[0].Activate();
             foreach (var task in data.Sequence[questState].Tasks)
             {
                 task.Activate();

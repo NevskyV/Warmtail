@@ -19,13 +19,14 @@ MonoBehaviour:
   <Sequence>k__BackingField:
   - Actions: []
     Tasks:
-    - rid: 7345390883105669823
+    - rid: 7345390921796026468
   <OnComplete>k__BackingField: []
   <OnFail>k__BackingField: []
   references:
     version: 2
     RefIds:
-    - rid: 7345390883105669823
-      type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+    - rid: 7345390921796026468
+      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
+        _position: {x: -100, y: -100}

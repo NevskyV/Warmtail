@@ -27,6 +27,10 @@ namespace Entities.NPC
             _dialogueSystem = dialogueSystem;
             _visuals = visuals;
             _uiStateSystem = uiStateSystem;
+        }
+
+        void Awake()
+        {
             if (SceneManager.GetActiveScene().name == "Home" || SceneManager.GetActiveScene().name == "HomeIra")
                 Interact();
         }

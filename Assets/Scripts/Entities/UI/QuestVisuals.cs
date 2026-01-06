@@ -3,6 +3,7 @@ using System.IO;
 using Data;
 using Data.Player;
 using Entities.Localization;
+using Systems.SequenceActions;
 using Systems.Environment;
 using Systems;
 using TMPro;
@@ -46,6 +47,7 @@ namespace Entities.UI
             _surfacingSystem = surfacingSystem;
             _createdMarks = new();
             _createdQuests = new();
+            StickAction.OnStickTaked += StickQuest;
         }
 
         public void SpawnQuest(QuestData data)
@@ -181,6 +183,16 @@ namespace Entities.UI
             }
 
             return list;
+        }
+
+        private void StickQuest()
+        {
+            _globalData.Edit<DialogueVarData>(data => {
+                var a = data.Variables.Find(x => x.Name == "getStick");
+                int pos = data.Variables.IndexOf(a);
+                data.Variables[pos].Value = "true";
+            });
+            StickAction.OnStickTaked -= StickQuest;
         }
     }
 }
