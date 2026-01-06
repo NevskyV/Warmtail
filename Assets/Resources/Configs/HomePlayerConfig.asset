@@ -14,24 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Data.Player.PlayerConfig
   <Abilities>k__BackingField:
   - rid: 1601399544975982592
-  - rid: 1601399524581179738
+  - rid: 7345390921796026557
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1601399524581179738
-      type: {class: InteractionSystem, ns: , asm: Assembly-CSharp}
-      data:
-        <Enabled>k__BackingField: 1
-        <Visual>k__BackingField:
-          rid: -2
-        _interactionRadius: 2
-        _interactionOffset: {x: 0, y: 0, z: 0}
     - rid: 1601399544975982592
       type: {class: PlayerMovement, ns: Systems, asm: Assembly-CSharp}
       data:
-        <Enabled>k__BackingField: 1
         <Visual>k__BackingField:
           rid: 4204128976498851933
         MoveForce: 60
@@ -47,3 +38,10 @@ MonoBehaviour:
         _startSfx: {fileID: 8300000, guid: 540bc4c2f9bad6e4283b045dda24cee6, type: 3}
         _loopSfx: {fileID: 8300000, guid: 0f057e302baea5c47b0ad7980f779296, type: 3}
         _vfxOffset: {x: 18, y: 0, z: 0}
+    - rid: 7345390921796026557
+      type: {class: InteractionAbility, ns: , asm: Assembly-CSharp}
+      data:
+        <Visual>k__BackingField:
+          rid: -2
+        _interactionRadius: 2
+        _interactionOffset: {x: 0, y: 0, z: 0}
