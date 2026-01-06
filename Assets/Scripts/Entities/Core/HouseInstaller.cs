@@ -11,7 +11,6 @@ using Entities.House;
 using Entities.NPC;
 using Systems.Environment;
 using Unity.Cinemachine;
-using Systems.Environment;
 
 namespace Entities.Core
 {
@@ -40,7 +39,6 @@ namespace Entities.Core
             Container.Bind<CinemachineCamera>().FromInstance(_cam).AsSingle();
             Container.Bind<DialogueVisuals>().FromInstance(_dialogueVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
-            Container.Bind<SurfacingSystem>().FromInstance(null).AsSingle();
             Container.Bind<NPCMethods>().FromNew().AsSingle();
             Container.Bind<ShoppingSystem>().FromNew().AsSingle();
             Container.Bind<PlacementSystem>().FromNew().AsSingle();

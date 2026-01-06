@@ -24,21 +24,17 @@ namespace Systems
         {
             _globalData = globalData;
             _questVisuals = visuals;
-            foreach (var id in _globalData.Get<SavablePlayerData>().QuestIds)
-            {
-                var quest = visuals.AllQuests.Find(x => x.Id == id.Key);
-                if(quest) StartQuest(quest, id.Value);
-            }
         }
         
         public static void StartQuest(QuestData data, int questState = 0)
         {
+            Debug.Log("Ira quest 1 " + data.Id);
             if (data.Scene != SceneManager.GetActiveScene().path) return;
 
-            Debug.Log(_globalData.Get<SavablePlayerData>().QuestIds.Count);
             if(!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
 
+            Debug.Log("Ira quest 2 " + data.Id);
             OnQuestStarted?.Invoke(data);
             _questVisuals.SpawnQuest(data);
 
@@ -47,7 +43,6 @@ namespace Systems
                 data.Sequence[i].Actions.ForEach(x => x.Invoke());
             }
 
-            //data.Sequence[questState].Tasks[0].Activate();
             foreach (var task in data.Sequence[questState].Tasks)
             {
                 task.Activate();

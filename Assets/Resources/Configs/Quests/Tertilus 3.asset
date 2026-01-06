@@ -18,9 +18,13 @@ MonoBehaviour:
   <Layer>k__BackingField: 0
   <Sequence>k__BackingField:
   - Actions: []
-    Tasks: []
+    Tasks:
+    - rid: 7345390921796026622
   <OnComplete>k__BackingField: []
   <OnFail>k__BackingField: []
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 7345390921796026622
+      type: {class: DecorateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data: 

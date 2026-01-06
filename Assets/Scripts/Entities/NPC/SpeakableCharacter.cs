@@ -4,11 +4,13 @@ using Entities.Probs;
 using Entities.UI;
 using Interfaces;
 using Systems;
+using System;
 using Data;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Zenject;
+using UnityEngine.Splines;
 
 namespace Entities.NPC
 {
@@ -20,6 +22,7 @@ namespace Entities.NPC
         private DialogueSystem _dialogueSystem;
         private DialogueVisuals _visuals;
         private UIStateSystem _uiStateSystem;
+        private SplineAnimate _splineAnimate;
 
         [Inject]
         private void Construct(DialogueSystem dialogueSystem, DialogueVisuals visuals, UIStateSystem uiStateSystem)
@@ -29,13 +32,20 @@ namespace Entities.NPC
             _uiStateSystem = uiStateSystem;
         }
 
-        void Awake()
+        void Start()
         {
+            _splineAnimate = GetComponent<SplineAnimate>();
             if (SceneManager.GetActiveScene().name == "Home" || SceneManager.GetActiveScene().name == "HomeIra")
                 Interact();
         }
         
         public void Interact()
+        {
+            if (_splineAnimate && Math.Abs(_splineAnimate.ElapsedTime - _splineAnimate.Duration) > 0.1f && _splineAnimate.ElapsedTime > 0.1f) return;
+            InteractTrigger();
+        }
+
+        public void InteractTrigger()
         {
             if (!Graph || (_uiStateSystem && _uiStateSystem.CurrentState == UIState.Shop)) return;
             _dialogueSystem.StartDialogue(Graph, _visuals, Id, this);

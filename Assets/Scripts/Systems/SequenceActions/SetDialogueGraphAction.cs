@@ -13,6 +13,7 @@ namespace Systems.SequenceActions
         
         public void Invoke()
         {
+            Debug.Log("Ira emm " + SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_npcId));
             SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_npcId).Graph = _graph;
         }
     }
