@@ -15,16 +15,16 @@ jobs:
 
       - name: Create or Update Pull Request
         uses: peter-evans/create-pull-request@v6
-          with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            commit-message: "Auto update from ${{ github.ref_name }}"
-            title: "Auto: ${{ github.ref_name }} → ${{ startsWith(github.ref_name, 'fixes-') && 'fixes' || 'new' }}"
-            body: |
-              Автоматически созданный/обновлённый PR из ветки **${{ github.ref_name }}**.
-              
-              Последний коммит: ${{ github.event.head_commit.message }}
-            branch: ${{ github.ref_name }}
-            base: ${{ startsWith(github.ref_name, 'fixes-') && 'fixes' || 'new' }}
-            labels: automerge,auto-pr
-            draft: false
-            delete-branch: false
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "Auto update from ${{ github.ref_name }}"
+          title: "Auto: ${{ github.ref_name }} → ${{ startsWith(github.ref_name, 'fixes-') && 'fixes' || 'new' }}"
+          body: |
+            Автоматически созданный/обновлённый PR из ветки **${{ github.ref_name }}**.
+            
+            Последний коммит: ${{ github.event.head_commit.message }}
+          branch: ${{ github.ref_name }}
+          base: ${{ startsWith(github.ref_name, 'fixes-') && 'fixes' || 'new' }}
+          labels: automerge,auto-pr
+          draft: false
+          delete-branch: false
