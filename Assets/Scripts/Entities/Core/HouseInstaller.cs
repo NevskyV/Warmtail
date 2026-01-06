@@ -9,6 +9,7 @@ using Zenject;
 using Systems;
 using Entities.House;
 using Entities.NPC;
+using Systems.Environment;
 using Unity.Cinemachine;
 using Systems.Environment;
 
@@ -25,9 +26,11 @@ namespace Entities.Core
         [SerializeField] private DialogueVisuals _dialogueVisuals;
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private CinemachineCamera _cam;
+        [SerializeField] private SurfacingSystem _surfacingSystem;
 
         public override void InstallBindings()
         {
+            Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.Bind<Player>().FromInstance(_player).AsSingle();
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();
             Container.Bind<HouseManager>().FromInstance(_houseManager).AsSingle();
