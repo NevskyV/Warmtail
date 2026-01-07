@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 using Data;
 using Data.Nodes;
 using Interfaces;
@@ -23,6 +24,9 @@ namespace Systems
         public RuntimeDialogueGraph DialogueGraph => _dialogueGraph;
         public IEventInvoker Character { get; private set; }
 
+        private string _id;
+        public static Action<string> OnEndedDialogue = delegate{};
+
         [Inject]
         private void Construct(DiContainer container, PlayerInput input)
         {
@@ -30,13 +34,14 @@ namespace Systems
             _input = input;
         }
         
-        public void StartDialogue(RuntimeDialogueGraph graph, ITextVisual visual, IEventInvoker character = null)
+        public void StartDialogue(RuntimeDialogueGraph graph, ITextVisual visual, string id, IEventInvoker character = null)
         {
             if(graph.EntryNodeId == null) return;
             graph.AllNodes.ForEach(x => _nodeLookup.Add(x.NodeId, x));
             _dialogueGraph = graph;
             _currentNode = _nodeLookup[_dialogueGraph.EntryNodeId];
             
+            _id = id;
             _visuals = visual;
             _visuals.ShowVisuals();
             Character = character;
@@ -69,6 +74,7 @@ namespace Systems
         
         private void EndDialogue()
         {
+            OnEndedDialogue?.Invoke(_id);
             _nodeLookup.Clear();
             Character = null;
             _dialogueGraph = null;

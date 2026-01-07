@@ -11,7 +11,7 @@ namespace Systems
     [Serializable]
     public class PlayerMovement : IAbility
     {
-        public bool Enabled { get; set; } = true;
+        public bool Enabled { get; set; } = true ;
         public Action StartAbility { get; set; }
         public Action UsingAbility { get; set; }
         public Action EndAbility { get; set; }
@@ -49,6 +49,8 @@ namespace Systems
 
         private void OnMove(InputAction.CallbackContext context)
         {
+            Enabled = true;
+            Debug.Log((Enabled));
             if (Enabled)
             {
                 _moveInput = context.ReadValue<Vector2>();

@@ -24,13 +24,15 @@ namespace Entities.House
         void Awake()
         {
             PlacementSystem.OnUIDraggableUpdated += SetPreferencesUI;
+            PlacementSystem.OnResetedInventory += SetPreferencesUI;
         }
         void OnDestroy()
         {
             PlacementSystem.OnUIDraggableUpdated -= SetPreferencesUI;
+            PlacementSystem.OnResetedInventory -= SetPreferencesUI;
         }
 
-        private void Start()
+        private void OnEnable()
         {
             SetPreferencesUI();
         }

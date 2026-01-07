@@ -1,4 +1,5 @@
 ﻿using Data;
+using System;
 using Data.Player;
 using Interfaces;
 using DG.Tweening;
@@ -12,6 +13,7 @@ namespace Entities.Probs
     public class Shell : Warmable
     {
         private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
+        public static Action OnShellsChanged = delegate {};
         [SerializeField] private int _shellsAmount;
         private GlobalData _globalData;
         private ResettableTimer _timer;
@@ -62,6 +64,7 @@ namespace Entities.Probs
             _globalData.Edit<ShellsData>(data => {
                 data.ShellsActive[ConvertFloatsToString (transform.position.x, transform.position.y)] = false;
             });
+            OnShellsChanged?.Invoke();
             _timer.Stop();
             Destroy(gameObject);
         }

@@ -32,7 +32,7 @@ namespace Entities.UI
 
         public void StartMonologue(RuntimeDialogueGraph graph, IEventInvoker invoker)
         {
-            _dialogueSystem.StartDialogue(graph, this, invoker);
+            _dialogueSystem.StartDialogue(graph, this, null, invoker);
             ProcessDialogue();
         }
         

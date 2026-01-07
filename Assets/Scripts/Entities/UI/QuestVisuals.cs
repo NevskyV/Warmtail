@@ -3,7 +3,9 @@ using System.IO;
 using Data;
 using Data.Player;
 using Entities.Localization;
+using Systems.SequenceActions;
 using Systems.Environment;
+using Systems;
 using TMPro;
 using TriInspector;
 using UnityEngine;
@@ -45,11 +47,13 @@ namespace Entities.UI
             _surfacingSystem = surfacingSystem;
             _createdMarks = new();
             _createdQuests = new();
+            StickAction.OnStickTaked += StickQuest;
         }
 
         public void SpawnQuest(QuestData data)
         {
             if (data == null) return;
+            if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
             var newQuest = _diContainer.InstantiatePrefab(_questPrefab, _questHud).transform;
             if (!newQuest) return;
             newQuest.GetChild(0).GetComponent<LocalizedText>().SetNewKey("quest_header_" + data.Id);
@@ -57,6 +61,15 @@ namespace Entities.UI
             _createdQuests.Add(data,newQuest.gameObject);
             _createdMarks.Add(data, new());
             UpdateProgress(data, newQuest);
+        }
+
+        public void StartQuest(QuestData data)
+        {
+            QuestSystem.StartQuest(data);
+        }
+        public void EndQuest(QuestData data)
+        {
+            QuestSystem.EndQuest(data);
         }
 
         public void UpdateProgress(QuestData data, Transform questObj = null)
@@ -80,10 +93,10 @@ namespace Entities.UI
         
         public void DestroyQuest(QuestData data)
         {
-            Destroy(_createdQuests[data]);
-            DestroyMarks(data);
-            _createdMarks.Remove(data);
-            _createdQuests.Remove(data);
+            if (_createdQuests.ContainsKey(data)) Destroy(_createdQuests[data]);
+            if (_createdMarks.ContainsKey(data)) DestroyMarks(data);
+            if (_createdMarks.ContainsKey(data)) _createdMarks.Remove(data);
+            if (_createdQuests.ContainsKey(data)) _createdQuests.Remove(data);
         }
         
         public void SpawnMarks(QuestData data, Vector2 markPos)
@@ -170,6 +183,16 @@ namespace Entities.UI
             }
 
             return list;
+        }
+
+        private void StickQuest()
+        {
+            _globalData.Edit<DialogueVarData>(data => {
+                var a = data.Variables.Find(x => x.Name == "getStick");
+                int pos = data.Variables.IndexOf(a);
+                data.Variables[pos].Value = "true";
+            });
+            StickAction.OnStickTaked -= StickQuest;
         }
     }
 }

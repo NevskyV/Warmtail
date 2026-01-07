@@ -4,6 +4,7 @@ using Rng = UnityEngine.Random;
 using UnityEngine.Events;
 using UnityEngine;
 using Interfaces;
+using System;
 
 namespace Entities.Puzzle
 {
@@ -14,6 +15,7 @@ namespace Entities.Puzzle
         [SerializeField] private int _leverCount;
         [SerializeField] private int _leverActive;
 
+        public static Action<string> OnPuzzleSolved = delegate {};
         public UnityEvent OnSolved = new();
 
         void Awake()
@@ -49,6 +51,7 @@ namespace Entities.Puzzle
         public void Solve()
         {
             OnSolved.Invoke();
+            OnPuzzleSolved?.Invoke(Id);
             Debug.Log("LevesPuzzle выполнено");
             Invoke("DestroyPuzzle", 0.5f);
         }

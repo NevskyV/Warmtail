@@ -14,51 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
   <Id>k__BackingField: 0
   <IsPermanent>k__BackingField: 1
-  <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
+  <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
   <Layer>k__BackingField: 0
   <Sequence>k__BackingField:
-  - Actions:
-    - rid: 4204129410323054879
-    Tasks: []
   - Actions: []
     Tasks:
-    - rid: 4204129410323054881
+    - rid: 7345390883105669387
   - Actions: []
     Tasks:
-    - rid: 4061568589683228756
+    - rid: 7345390883105669495
   - Actions: []
     Tasks:
-    - rid: 4061568589683228765
-  <OnComplete>k__BackingField:
-  - rid: 4204129410323054880
+    - rid: 7345390883105669496
+  <OnComplete>k__BackingField: []
   <OnFail>k__BackingField: []
   references:
     version: 2
     RefIds:
-    - rid: 4061568589683228756
-      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+    - rid: 7345390883105669387
+      type: {class: ShellsTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-        _action: E
-    - rid: 4061568589683228765
-      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+        _id: 0
+    - rid: 7345390883105669495
+      type: {class: ShellsTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-        _action: E
-    - rid: 4204129410323054879
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+        _id: 1
+    - rid: 7345390883105669496
+      type: {class: ShellsTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _active: 1
-        _objectIds:
-        - c9622f9e-9822-4adc-87d6-dd5652746d29
-    - rid: 4204129410323054880
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - c9622f9e-9822-4adc-87d6-dd5652746d29
-    - rid: 4204129410323054881
-      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-        _action: E
+        _id: 2

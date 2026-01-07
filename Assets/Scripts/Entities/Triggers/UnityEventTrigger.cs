@@ -10,7 +10,7 @@ namespace Entities.Triggers
     public class UnityEventTrigger : SavableStateObject
     {
         [SerializeField] private bool _destroyAfter;
-        [SerializeField] private UnityEvent _event;
+        public UnityEvent _event;
         [Inject] private GlobalData _data;
         
         private void OnTriggerEnter2D(Collider2D other)

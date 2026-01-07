@@ -1,7 +1,8 @@
 using AYellowpaper.SerializedCollections;
-using Data;
+using System.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using Data;
 using Systems;
 using Data.House;
 using Entities.NPC;
@@ -10,15 +11,13 @@ namespace Entities.House
 {
     public class HouseManager : MonoBehaviour
     {
-        [SerializeField] private ItemsHouseIdConf _itemsHouseIdConf;
+        public ItemsHouseIdConf _itemsHouseIdConf;
         [SerializeField] private SerializedDictionary<Character,SpeakableCharacter> _npc;
-        [HideInInspector] public HouseItemData[] IdsForHouseItemsData;
         [Inject] private PlacementSystem _placementSystem; 
         [Inject] private GlobalData _globalData; 
 
         void Awake()
         {
-            IdsForHouseItemsData = _itemsHouseIdConf.IdsForHouseItemsData;
             EnableNpc(_globalData.Get<NpcSpawnData>().CurrentHomeNpc);
         }
 
@@ -31,10 +30,25 @@ namespace Entities.House
             _placementSystem.CancelAll();
         }
 
+        public void ResetInventory()
+        {
+            _placementSystem.ResetInventory();
+        }
+
         private void EnableNpc(Character? character)
         {
             if(character != null && _npc.ContainsKey(character.Value))
                 _npc[character.Value].ChangeState(true);
+        }
+
+        public void LeaveNpc(int character)
+        {
+            LeaveNpcAsync((Character)character);
+        }
+        private async void LeaveNpcAsync(Character character)
+        {
+            await Task.Delay(2000);
+            if (_npc.ContainsKey(character)) _npc[character].ChangeState(false);
         }
     }
 }
