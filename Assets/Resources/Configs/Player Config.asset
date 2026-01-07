@@ -58,6 +58,7 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: 4204129077871247440
+        _cooldownDuration: 1
         _heatDrainPerSecond: 1
         _speedMultiplier: 2
     - rid: 2564828074214424679
@@ -75,7 +76,7 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: -2
-        _interactionRadius: 2
+        _interactionRadius: 1
         _interactionOffset: {x: 0, y: 0, z: 0}
     - rid: 4204128997775507718
       type: {class: ResonanceAbility, ns: Systems.Abilities.Concrete, asm: Assembly-CSharp}
@@ -92,7 +93,7 @@ MonoBehaviour:
       data:
         <AbilityIndex>k__BackingField: 2
         _warmthMaterial: {fileID: 2100000, guid: 7788a4d30335c3c4da08933d83361488, type: 2}
-        _opacityNotUsing: 0.2
+        _opacityNotUsing: 0.15
         _opacityUsing: 0.5
         _sfx: {fileID: 8300000, guid: 512f8806fb510cb47b578c1136ccf0e6, type: 3}
     - rid: 4204129077871247440
