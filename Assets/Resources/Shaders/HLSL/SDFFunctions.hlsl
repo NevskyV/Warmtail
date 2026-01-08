@@ -1,8 +1,10 @@
 ﻿struct Shape {
-    float3 position;
-    float2 UV;
-    float radius;
-    float materialID;
+    int type;
+    float2 position;
+    float rotation;
+    float2 size;
+    float4 cornerRadius;
+    float additionalRounding;
 };
 
 StructuredBuffer<Shape> _Shapes;
@@ -45,43 +47,89 @@ void InlineSDF_float(float Distance, float Thickness, out float Dist)
 
 void SmoothUnion_float(float a, float b, float k, out float Out)
 {
-    float h = clamp(0.5 + 0.5 + (b - a) / k, 0.0, 1.0);
+    float h = clamp(0.5 + 0.5 * (b - a) / k, 0.0, 1.0);
     Out = lerp(b, a, h) - k * h * (1.0 - h);
 }
 
 void SmoothIntersection_float(float a, float b, float k, out float Out)
 {
-    float h = clamp(0.5 + 0.5 + (a - b) / k, 0.0, 1.0);
-    Out = lerp(b, a, h) - k * h * (1.0 - h);
+    float h = clamp(0.5 - 0.5 * (b - a) / k, 0.0, 1.0);
+    Out = lerp(b, a, h) + k * h * (1.0 - h);
 }
 
 void SmoothDifference_float(float a, float b, float k, out float Out)
 {
-    float h = clamp(0.5 + 0.5 + (a - (-b)) / k, 0.0, 1.0);
-    Out = lerp(-b, a, h) + k * h * (1.0 - h);
+    float h = clamp(0.5 - 0.5 * (b + a) / k, 0.0, 1.0);
+    Out = lerp(b, -a, h) + k * h * (1.0 - h);
 }
 
-void SceneSDF_float(float3 worldPos, float smoothness, out float dist, out float materialID) {
-    dist = 1e10;
-    materialID = 0;
+float2 RotateUV(float2 uv, float angle)
+{
+    float c = cos(angle);
+    float s = sin(angle);
+    return float2(uv.x * c - uv.y * s, uv.x * s + uv.y * c);
+}
 
-    [loop]
-    for (int i = 0; i < _ShapeCount; i++) {
-        Shape s = _Shapes[i];
-        float d;
-        CircleSDF_float(s.UV, s.radius,  d);
-
-        // Если текущая фигура ближе без blending — обновляем материал
-        if (d < dist) {
-            materialID = s.materialID;
-        }
-
-        // Smooth union
-        float temp;
-        SmoothUnion_float(dist, d, smoothness, temp);
-        dist = temp;
+float GetShapeSDF(float2 uv, Shape s)
+{
+    float2 offset = (0.5, 0.5);
+    float2 localUV = uv - offset - s.position;
+    
+    localUV = RotateUV(localUV, -s.rotation);
+    
+    if (s.type == 0)
+    {
+        float dist;
+        CircleSDF_float(localUV, s.size.x, dist);
+        return dist;
     }
+    else
+    {
+        float dist;
+        RectangleSDF_float(localUV, s.size, s.cornerRadius, s.additionalRounding, dist);
+        return dist;
+    }
+}
 
-    // Если фигур нет — возвращаем большое расстояние
-    if (_ShapeCount == 0) dist = 1e10;
+void SceneSDF_float(float2 UV, float Smoothness, float InterType, out float Dist)
+{
+    Dist = 1e10;
+    if (InterType == 1) Dist = -1e10;
+    if (InterType == 2)
+    {
+        [loop]
+        for (int i = 1; i < _ShapeCount; i++)
+        {
+            Shape s = _Shapes[i];
+            float d = GetShapeSDF(UV, s);
+                
+            float temp;
+            SmoothUnion_float(Dist, d, Smoothness, temp);
+            Dist = temp;
+        }
+        Shape s = _Shapes[0];
+        float d = GetShapeSDF(UV, s);
+        float temp;
+        SmoothDifference_float(Dist, d, Smoothness, temp);
+        Dist = temp;
+    }
+    else
+    {
+        [loop]
+        for (int i = 0; i < _ShapeCount; i++)
+        {
+            Shape s = _Shapes[i];
+            float d = GetShapeSDF(UV, s);
+        
+            float temp;
+            if (InterType == 0)
+                SmoothUnion_float(Dist, d, Smoothness, temp);
+            else if (InterType == 1)
+                SmoothIntersection_float(Dist, d, Smoothness, temp);
+            Dist = temp;
+        }
+    }
+    
+    if (_ShapeCount == 0)
+        Dist = 1e10;
 }
