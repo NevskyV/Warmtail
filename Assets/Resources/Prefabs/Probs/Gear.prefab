@@ -36,6 +36,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4644494243135170636
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -81,6 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -3422382358654288852, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -90,7 +92,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &8781006117168163047
 BoxCollider2D:
@@ -150,7 +151,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27dbbac399bd27948b58561ceb02c3c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Gear
-  _warmCapacity: 3
+  _warmFactor: 0.5
+  _warmEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _spriteRenderer: {fileID: 4644494243135170636}
   _twistingSprite: {fileID: -5214183216297019944, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}
   _untwistSprite: {fileID: -3422382358654288852, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}

@@ -13,6 +13,7 @@ namespace Systems
     {
         public Dictionary<int, int> InventoryCurrent;
         private List<PairForHouseItem> _houseItemsEditingInfo = new();
+        public static Action OnApplyed = delegate {};
         public static Action OnApplyedAll = delegate {};
         public static Action OnCanceledAll = delegate {};
         public static Action OnUIDraggableUpdated = delegate {};
@@ -66,6 +67,7 @@ namespace Systems
                 if (!data.Inventory.ContainsKey(itemId)) data.Inventory[itemId] = 0;
                 data.Inventory[itemId] += how;
             });
+            OnApplyed?.Invoke();
         }
         
         public void ResetInventory()

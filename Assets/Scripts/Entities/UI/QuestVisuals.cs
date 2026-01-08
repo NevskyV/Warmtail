@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using AYellowpaper.SerializedCollections;
+using System.Collections.Generic;
 using System.IO;
 using Data;
 using Data.Player;
@@ -30,8 +31,8 @@ namespace Entities.UI
         [SerializeField] private GameObject _questPrefab;
         [SerializeField] private RectTransform _questHud;
 
-        private Dictionary<QuestData, List<MarkUIData>> _createdMarks;
-        private Dictionary<QuestData, GameObject> _createdQuests;
+        [SerializeField]public SerializedDictionary<QuestData, List<MarkUIData>> _createdMarks;
+        [SerializeField]public SerializedDictionary<QuestData, GameObject> _createdQuests;
 
         public List<QuestData> AllQuests => _allQuests;
 
@@ -50,6 +51,15 @@ namespace Entities.UI
             StickAction.OnStickTaked += StickQuest;
         }
 
+        private void Start()
+        {
+            foreach (var id in _globalData.Get<SavablePlayerData>().QuestIds)
+            {
+                var quest = AllQuests.Find(x => x.Id == id.Key);
+                if(quest) QuestSystem.StartQuest(quest, id.Value);
+            }
+        }
+
         public void SpawnQuest(QuestData data)
         {
             if (data == null) return;
@@ -65,10 +75,12 @@ namespace Entities.UI
 
         public void StartQuest(QuestData data)
         {
+            if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
             QuestSystem.StartQuest(data);
         }
         public void EndQuest(QuestData data)
         {
+            if (!_createdQuests.ContainsKey(data) || !_createdMarks.ContainsKey(data)) return;
             QuestSystem.EndQuest(data);
         }
 

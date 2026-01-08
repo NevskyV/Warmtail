@@ -53,8 +53,8 @@ namespace Entities.Probs
         
         public void ChangeState(bool active)
         {
-            _globalData.Edit<WorldData>(worldData => 
-                { worldData.SavableObjects[_id.Value] = active; });
+            _globalData.Edit<WorldData>(worldData => {
+                worldData.SavableObjects[_id.Value] = active; });
             gameObject.SetActive(active);
         }
 

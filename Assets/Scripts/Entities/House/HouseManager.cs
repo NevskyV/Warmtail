@@ -16,7 +16,7 @@ namespace Entities.House
         [Inject] private PlacementSystem _placementSystem; 
         [Inject] private GlobalData _globalData; 
 
-        void Awake()
+        private void Awake()
         {
             EnableNpc(_globalData.Get<NpcSpawnData>().CurrentHomeNpc);
         }
@@ -43,11 +43,12 @@ namespace Entities.House
 
         public void LeaveNpc(int character)
         {
+            _globalData.Edit<NpcSpawnData>(data => data.CurrentHomeNpc = (Character)0);
             LeaveNpcAsync((Character)character);
         }
         private async void LeaveNpcAsync(Character character)
         {
-            await Task.Delay(2000);
+            await Task.Delay(5000);
             if (_npc.ContainsKey(character)) _npc[character].ChangeState(false);
         }
     }

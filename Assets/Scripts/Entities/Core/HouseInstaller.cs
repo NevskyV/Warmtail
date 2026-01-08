@@ -11,7 +11,6 @@ using Entities.House;
 using Entities.NPC;
 using Systems.Environment;
 using Unity.Cinemachine;
-using Systems.Environment;
 
 namespace Entities.Core
 {
@@ -27,6 +26,7 @@ namespace Entities.Core
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private CinemachineCamera _cam;
         [SerializeField] private SurfacingSystem _surfacingSystem;
+        private QuestSystem _questSystem = new();
 
         public override void InstallBindings()
         {
@@ -40,12 +40,12 @@ namespace Entities.Core
             Container.Bind<CinemachineCamera>().FromInstance(_cam).AsSingle();
             Container.Bind<DialogueVisuals>().FromInstance(_dialogueVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
-            Container.Bind<SurfacingSystem>().FromInstance(null).AsSingle();
             Container.Bind<NPCMethods>().FromNew().AsSingle();
             Container.Bind<ShoppingSystem>().FromNew().AsSingle();
             Container.Bind<PlacementSystem>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
-            Container.Bind<QuestSystem>().FromNew().AsSingle();
+            Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
+            Container.Inject(_questSystem);
             Container.Bind<DailySystem>().FromNew().AsSingle();
             
             Container.Bind<List<IAbility>>()
