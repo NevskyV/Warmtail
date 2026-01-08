@@ -14,13 +14,11 @@ namespace Systems.Tasks
 
         public void Activate()
         {
-            Debug.Log("ira2  " + _puzzleId);
             LeversPuzzle.OnPuzzleSolved += MarkComplete;
         }
 
         private void MarkComplete(string id)
         {
-            Debug.Log("ira1  " + id);
             if (_puzzleId != id) return;
             Completed = true;
             OnComplete?.Invoke();

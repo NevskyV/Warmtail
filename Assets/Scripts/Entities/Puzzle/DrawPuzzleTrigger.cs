@@ -25,13 +25,11 @@ namespace Entities.Puzzle
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("Ira collider " );
             i1 = _abilitiesManager.ActiveAbility;
             i2 = _abilitiesManager.ComboAbility;
             if (other.CompareTag("Player") && _abilitiesManager.ActiveAbility is WarmingAbility or DashAbility && 
                 _abilitiesManager.ComboAbility is WarmingAbility or DashAbility)
             {
-                Debug.Log("Ira collider player");
                 if (_drawPuzzle.TriggerConform(_triggerId, _isActive))
                 {
                     Disable();

@@ -32,7 +32,7 @@ namespace Entities.NPC
             _uiStateSystem = uiStateSystem;
         }
 
-        void Start()
+        private void Start()
         {
             _splineAnimate = GetComponent<SplineAnimate>();
             if (SceneManager.GetActiveScene().name == "Home" || SceneManager.GetActiveScene().name == "HomeIra")

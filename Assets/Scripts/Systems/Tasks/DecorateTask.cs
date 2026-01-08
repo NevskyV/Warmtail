@@ -16,12 +16,10 @@ namespace Systems.Tasks
         public void Activate()
         {
             PlacementSystem.OnApplyed += MarkComplete;
-            Debug.Log("Iraaa1");
         }
 
         private void MarkComplete()
         {
-            Debug.Log("Iraaa2");
             Completed = true;
             OnComplete?.Invoke();
             PlacementSystem.OnApplyed -= MarkComplete;

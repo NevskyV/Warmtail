@@ -26,6 +26,7 @@ namespace Entities.Core
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private CinemachineCamera _cam;
         [SerializeField] private SurfacingSystem _surfacingSystem;
+        private QuestSystem _questSystem = new();
 
         public override void InstallBindings()
         {
@@ -43,7 +44,8 @@ namespace Entities.Core
             Container.Bind<ShoppingSystem>().FromNew().AsSingle();
             Container.Bind<PlacementSystem>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
-            Container.Bind<QuestSystem>().FromNew().AsSingle();
+            Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
+            Container.Inject(_questSystem);
             Container.Bind<DailySystem>().FromNew().AsSingle();
             
             Container.Bind<List<IAbility>>()

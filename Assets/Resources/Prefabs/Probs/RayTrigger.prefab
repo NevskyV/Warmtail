@@ -37,6 +37,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3770353278937336770
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -82,6 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: -7738729461754461498, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -91,7 +93,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &7137063830739163307
 BoxCollider2D:
@@ -151,9 +152,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49acd9f274f6e2e4f948d2740874ba64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.RayTrigger
+  _warmFactor: 0.5
+  _warmEvent:
+    m_PersistentCalls:
+      m_Calls: []
   _parentRayCollector: {fileID: 0}
   _isActiveInitially: 0
-  _warmCapacity: 3
   _rayImage: {fileID: 5772105093456126334}
 --- !u!1001 &8820815055045759325
 PrefabInstance:

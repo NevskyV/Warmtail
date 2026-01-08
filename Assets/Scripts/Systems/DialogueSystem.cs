@@ -5,6 +5,7 @@ using Data.Nodes;
 using Interfaces;
 using UnityEngine.InputSystem;
 using Zenject;
+using UnityEngine;
 
 namespace Systems
 {
@@ -74,6 +75,7 @@ namespace Systems
         
         private void EndDialogue()
         {
+            if (_visuals == null || _input == null) return;
             OnEndedDialogue?.Invoke(_id);
             _nodeLookup.Clear();
             Character = null;

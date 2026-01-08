@@ -62,13 +62,10 @@ namespace Entities.UI
 
         public void SpawnQuest(QuestData data)
         {
-            Debug.Log("Ira quest 3 " + data.Id);
             if (data == null) return;
             if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
             var newQuest = _diContainer.InstantiatePrefab(_questPrefab, _questHud).transform;
-            Debug.Log("Ira quest 4 " + data.Id);
             if (!newQuest) return;
-            Debug.Log("Ira quest 5 " + data.Id);
             newQuest.GetChild(0).GetComponent<LocalizedText>().SetNewKey("quest_header_" + data.Id);
             newQuest.GetChild(1).GetComponent<LocalizedText>().SetNewKey("quest_desc_" + data.Id);
             _createdQuests.Add(data,newQuest.gameObject);
