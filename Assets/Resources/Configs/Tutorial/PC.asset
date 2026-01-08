@@ -27,14 +27,8 @@ MonoBehaviour:
   - Actions:
     - rid: 7345390883105669848
     - rid: 7345390883105669849
-    - rid: 7345390883105669866
-    - rid: 7345390883105669868
     Tasks:
     - rid: 7345390883105669221
-  - Actions:
-    - rid: 7345390956647809126
-    Tasks:
-    - rid: 7345390956647809125
   - Actions:
     - rid: 7345390921796026668
     - rid: 7345390921796026669
@@ -48,8 +42,6 @@ MonoBehaviour:
     - rid: 7345390883105669845
   - Actions:
     - rid: 7345390883105669234
-    - rid: 7345390921796026541
-    - rid: 7345390956647809216
     Tasks:
     - rid: 7345390883105669233
   - Actions: []
@@ -132,24 +124,6 @@ MonoBehaviour:
       data:
         _graph: {fileID: 11400000, guid: 534c4acde52ceb54a853813085877dee, type: 2}
         _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-    - rid: 7345390883105669866
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - c1d34549-f2a9-448e-a47e-032936d53a1c
-    - rid: 7345390883105669868
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - 66f14755-7230-4397-a700-752074cb8608
-    - rid: 7345390921796026541
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - 2ab202c4-8aaa-4080-91f8-d8d963efea21
     - rid: 7345390921796026623
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -168,20 +142,3 @@ MonoBehaviour:
     - rid: 7345390921796026669
       type: {class: StickAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data: 
-    - rid: 7345390956647809125
-      type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _questData: {fileID: 11400000, guid: 890df765c8bdd084bbf049f139a867cf, type: 2}
-        _start: 1
-    - rid: 7345390956647809126
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - 66f14755-7230-4397-a700-752074cb8608
-    - rid: 7345390956647809216
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - 2ab202c4-8aaa-4080-91f8-d8d963efea21

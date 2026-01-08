@@ -49,7 +49,6 @@ namespace Systems
 
         private void OnMove(InputAction.CallbackContext context)
         {
-            Enabled = true;
             Debug.Log((Enabled));
             if (Enabled)
             {
