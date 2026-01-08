@@ -1,10 +1,5 @@
-﻿using UnityEngine;
-using Interfaces;
+﻿using Interfaces;
 using System;
-using Data;
-using Entities.Core;
-using Entities.Probs;
-using Systems;
 
 namespace Systems.Tasks
 {

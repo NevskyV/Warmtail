@@ -24,17 +24,24 @@ namespace Entities.UI
             UpdateVisual();
         }
 
-        private async void UpdateVisual()
+        private void UpdateVisual()
         {
             var data = _globalData.Get<SavablePlayerData>();
             var runtimeData = _globalData.Get<RuntimePlayerData>();
-            
-            if (data == null) return;
 
-            if (_heatFillBar == null && data.Stars > 0) return;
-            _tween?.Pause();
-            var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);
-            _tween = _heatFillBar.DOFillAmount(newAmount, 1f);
+            if (data.Stars == 0)
+            {
+                _heatFillBar.gameObject.SetActive(false);
+                _heatFillBar.fillAmount = 0;
+            }
+            else
+            {
+                _heatFillBar.gameObject.SetActive(true);
+                //TODO animation
+                _tween?.Pause();
+                var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);
+                _tween = _heatFillBar.DOFillAmount(newAmount, 1f);
+            }
         }
     }
 }

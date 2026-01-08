@@ -2,7 +2,6 @@
 using Interfaces;
 using Entities.Puzzle;
 using UnityEngine;
-using Entities.Probs;
 
 namespace Systems.Tasks
 {

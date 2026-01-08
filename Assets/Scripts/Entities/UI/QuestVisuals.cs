@@ -10,6 +10,7 @@ using Systems;
 using TMPro;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Entities.UI
@@ -71,6 +72,7 @@ namespace Entities.UI
             _createdQuests.Add(data,newQuest.gameObject);
             _createdMarks.Add(data, new());
             UpdateProgress(data, newQuest);
+            newQuest.parent.GetComponent<VerticalLayoutGroup>().CalculateLayoutInputVertical();
         }
 
         public void StartQuest(QuestData data)

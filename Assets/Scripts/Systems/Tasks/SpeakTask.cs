@@ -1,10 +1,6 @@
 ﻿using System;
 using Interfaces;
-using UniRx;
-using Data;
-using UniRx.Triggers;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Systems.Tasks
 {

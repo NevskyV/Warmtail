@@ -10,6 +10,7 @@ using Interfaces;
 using Systems;
 using Systems.Abilities.Concrete;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Entities.PlayerScripts
@@ -34,14 +35,16 @@ namespace Entities.PlayerScripts
         private List<Rigidbody2D> _rbs = new();
 
         [SerializeField] private Rigidbody2D _originalPlayerRb;  
-        [SerializeField] private Rigidbody2D _swarmRb;          
+        [SerializeField] private Rigidbody2D _swarmRb; 
+        private PlayerInput _input;
 
         [Inject]
-        private void Construct(GlobalData globalData, PlayerConfig config, DiContainer container)
+        private void Construct(GlobalData globalData, PlayerConfig config, DiContainer container, PlayerInput input)
         {
             _globalData = globalData;
             _config = config;
             _container = container;
+            _input = input;
         }
 
         private void Start()
@@ -127,13 +130,15 @@ namespace Entities.PlayerScripts
         
         public async void WakeUp()
         {
+            _input.SwitchCurrentActionMap("UI");
             DisableAllAbilities();
-            Animator.enabled = false;
-            await UniTask.Delay(50);
             Animator.enabled = true;
             Animator.SetBool(IsSleeping, false);
             _rbs.ForEach(x => x.simulated = false);
             await UniTask.Delay(3000);
+            
+            _input.SwitchCurrentActionMap("Player");
+            
             Animator.enabled = false;
             EnableLastAbilities();
             _rbs.ForEach(x => x.simulated = true);

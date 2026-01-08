@@ -3407,8 +3407,8 @@ RectTransform:
   - {fileID: 1929969488}
   - {fileID: 1106936077}
   - {fileID: 1759550861}
-  - {fileID: 370276060}
   - {fileID: 692558670}
+  - {fileID: 370276060}
   - {fileID: 2039595035}
   - {fileID: 1981389960}
   m_Father: {fileID: 136286261}
@@ -16317,24 +16317,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.MonologueTrigger
   _id:
     Value: a655b7cc-2769-4725-b9a0-10569eedca2d
-  _graph: {fileID: 3965311268370046156, guid: 419d65fe817dba746bbc82c17430c297, type: 3}
+  _graph: {fileID: 11400000, guid: 006ab5a93e84b5c4b9020b3f8b88ec2f, type: 2}
   <Actions>k__BackingField:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 370276059}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1630664595}
+        m_TargetAssemblyTypeName: Entities.PlayerScripts.Player, Assembly-CSharp
+        m_MethodName: Sleep
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
-  - m_PersistentCalls:
-      m_Calls:
       - m_Target: {fileID: 698317664}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
@@ -18269,6 +18267,7 @@ GameObject:
   - component: {fileID: 370276060}
   - component: {fileID: 370276062}
   - component: {fileID: 370276061}
+  - component: {fileID: 370276063}
   m_Layer: 5
   m_Name: BlackScreen
   m_TagString: Untagged
@@ -18336,6 +18335,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370276059}
   m_CullTransparentMesh: 1
+--- !u!114 &370276063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370276059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2f3f295d904a1496486c18c69a4958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Probs.SavableStateObject
+  _id:
+    Value: df2bd107-5710-43ec-8898-1a3a1d213a9c
 --- !u!1001 &376981912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61538,6 +61551,7 @@ GameObject:
   - component: {fileID: 1232825463}
   - component: {fileID: 1232825462}
   - component: {fileID: 1232825461}
+  - component: {fileID: 1232825465}
   m_Layer: 5
   m_Name: Confirm
   m_TagString: Untagged
@@ -61697,6 +61711,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1232825459}
   m_CullTransparentMesh: 1
+--- !u!114 &1232825465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232825459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2f3f295d904a1496486c18c69a4958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Probs.SavableStateObject
+  _id:
+    Value: 305f90b9-cd34-4aef-88d3-a6e77722d476
 --- !u!1001 &1233405728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81404,7 +81432,6 @@ Transform:
   - {fileID: 1548276506}
   - {fileID: 1353704132}
   - {fileID: 1898317225}
-  - {fileID: 1831491410}
   - {fileID: 326829776}
   - {fileID: 1292111652}
   - {fileID: 1959002006}
@@ -92843,115 +92870,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 531f1ebc4d8e9c24ab5d4c010f01b6e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.RayCollector
---- !u!1 &1831491409
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1831491410}
-  - component: {fileID: 1831491412}
-  - component: {fileID: 1831491411}
-  m_Layer: 0
-  m_Name: EndQuestTrigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1831491410
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831491409}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.77, y: 17.4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1662127119}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1831491411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831491409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24c93469137b0e4fb098ac9491f3eb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.UnityEventTrigger
-  _id:
-    Value: 2760e218-aa54-4290-bb76-3fbced9211e0
-  _destroyAfter: 0
-  _event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Entities.NPC.QuestSystem, Assembly-CSharp
-        m_MethodName: EndQuest
-        m_Mode: 2
-        m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 56f437edbb8080249a589b9fe742f9c2, type: 2}
-          m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!61 &1831491412
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831491409}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: -2.0100517, y: -0.6132364}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 11.970116, y: 2.2264729}
-  m_EdgeRadius: 0
 --- !u!1001 &1832938206
 PrefabInstance:
   m_ObjectHideFlags: 0

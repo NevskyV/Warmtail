@@ -63,7 +63,7 @@ namespace Entities.UI
         {
             _currentText.localPosition = ChooseRandomPosition();
             _currentText.GetComponent<TMP_Text>().text = 
-                LocalizationManager.GetStringFromKey("cutscene_"+ _dialogueSystem.DialogueGraph.DialogueId+ "_" + node.NodeId);
+                LocalizationManager.GetStringFromKey("Star_"+ _dialogueSystem.DialogueGraph.DialogueId+ "_" + node.NodeId);
             _currentText.GetComponent<TextEffect>().Refresh();
         }
         

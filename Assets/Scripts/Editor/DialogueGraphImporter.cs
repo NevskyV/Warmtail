@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Data;
 using Data.Nodes;
 using Entities.Localization;
@@ -17,13 +18,14 @@ namespace Editor
     {
         [SerializeField] private int[] editorGraphs;
         private string UserName => Environment.UserName;
+
         [Button, ShowIf(nameof(UserName), "Nevsky")]
         public void ImportDialogues()
         {
             foreach (var graphPath in editorGraphs)
             {
                 var editorGraph = GraphDatabase.LoadGraph<DialogueGraph>($"Assets/Editor/Dialogues/{graphPath}.dg");
-                var runtimeGraph = ScriptableObject.CreateInstance<RuntimeDialogueGraph>();
+                var runtimeGraph = CreateInstance<RuntimeDialogueGraph>();
                 runtimeGraph.AllNodes = new();
 
                 var nodeIdMap = new Dictionary<INode, string>();

@@ -17,6 +17,11 @@ MonoBehaviour:
     - rid: 4204129410323054672
     Tasks: []
   - Actions:
+    - rid: 4061568655744827581
+    - rid: 4061568655744827586
+    Tasks:
+    - rid: 4061568655744827587
+  - Actions:
     - rid: 4204129410323054675
     Tasks:
     - rid: 4204129410323054674
@@ -50,13 +55,30 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4204129410323054672
+    - rid: 4061568655744827581
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
         _objectIds:
         - 71ff479c-1a67-454c-a376-234bc69d0179
-        - 71ff479c-1a67-454c-a376-234bc69d0179
+    - rid: 4061568655744827586
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 0
+        _objectIds:
+        - a655b7cc-2769-4725-b9a0-10569eedca2d
+        - df2bd107-5710-43ec-8898-1a3a1d213a9c
+    - rid: 4061568655744827587
+      type: {class: ButtonTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _buttonId: 305f90b9-cd34-4aef-88d3-a6e77722d476
+    - rid: 4204129410323054672
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _objectIds:
+        - a655b7cc-2769-4725-b9a0-10569eedca2d
+        - df2bd107-5710-43ec-8898-1a3a1d213a9c
     - rid: 4204129410323054674
       type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:

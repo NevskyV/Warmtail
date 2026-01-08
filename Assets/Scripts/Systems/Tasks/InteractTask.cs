@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using Interfaces;
 using System;
-using Data;
 using Entities.Triggers;
 using Entities.Core;
-using Entities.Probs;
-using UnityEngine.Events;
 
 namespace Systems.Tasks
 {

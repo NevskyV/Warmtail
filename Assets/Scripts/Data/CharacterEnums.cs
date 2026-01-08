@@ -1,6 +1,6 @@
 public enum Character
 {
-    Player, Tertilus, Finix, Octoboss, Skyper, Jelica
+    Player, Tertilus, Finix, Octoboss, Skyper, Jelica, Star
 }
 
 public enum CharacterEmotion
