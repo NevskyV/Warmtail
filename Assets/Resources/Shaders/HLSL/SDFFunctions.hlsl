@@ -249,14 +249,17 @@ void SmoothUnion_float(float a, float b, float k, out float result) {
     result = lerp(b, a, h) - k * h * (1.0 - h);
 }
 
-void SmoothIntersection_float(float a, float b, float k, out float result) {
+void SmoothIntersection_float(float a, float b, float k, out float Out)
+{
     float h = clamp(0.5 - 0.5 * (b - a) / k, 0.0, 1.0);
-    result = lerp(b, a, h) + k * h * (1.0 - h);
+    Out = lerp(b, a, h) + k * h * (1.0 - h);
 }
 
-void SmoothDifference_float(float a, float b, float k, out float result) {
-    float h = clamp(0.5 - 0.5 * (a + b) / k, 0.0, 1.0);
-    result = lerp(-b, a, h) + k * h * (1.0 - h);
+
+void SmoothDifference_float(float a, float b, float k, out float Out)
+{
+    float h = clamp(0.5 - 0.5 * (b + a) / k, 0.0, 1.0);
+    Out = lerp(b, -a, h) + k * h * (1.0 - h);
 }
 
 float2 RotateUV(float2 uv, float angle) {

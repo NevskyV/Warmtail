@@ -28,6 +28,7 @@ namespace Entities.UI.SDF
                 _image = gameObject.AddComponent<Image>();
             }
             _parentRect = GetComponent<RectTransform>();
+            _instanceMaterial = _image.material;
             CreateMaterial();
             UpdateFigures();
         }
