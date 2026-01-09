@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,19 +39,7 @@ namespace Entities.UI.SDF
 
         private void Update()
         {
-            if (transform.childCount != _figures.Count || NeedUpdate())
-            {
-                UpdateFigures();
-            }
-        }
-
-        private bool NeedUpdate()
-        {
-            foreach (var fig in _figures)
-            {
-                if (!fig) return true;
-            }
-            return false;
+            UpdateFigures();
         }
 
         private void UpdateFigures()
@@ -78,18 +67,18 @@ namespace Entities.UI.SDF
                 f.ShapeData.Type = (int)f.Type;
                 f.ShapeData.Position = localPos;
                 f.ShapeData.Rotation = f.transform.localEulerAngles.z * Mathf.Deg2Rad;
+                f.ShapeData.Size = f.GetComponent<RectTransform>().rect.size / parentSize / 2;
                 data[i] = f.ShapeData;
             }
 
             if (_shapeBuffer != null) _shapeBuffer.Release();
-            _shapeBuffer = new ComputeBuffer(data.Length, sizeof(float) * 10 + sizeof(int)); // примерно
+            _shapeBuffer = new ComputeBuffer(data.Length, sizeof(float) * 13 + sizeof(int));
             _shapeBuffer.SetData(data);
 
             if (_instanceMaterial)
             {
                 SetBufferCount(data.Length);
                 _instanceMaterial.SetBuffer("_Shapes", _shapeBuffer);
-                //_instanceMaterial.SetFloat("_Smoothness", _smoothness);
             }
         }
 
@@ -98,6 +87,21 @@ namespace Entities.UI.SDF
             if (_baseMaterial != null && _instanceMaterial == null)
             {
                 _instanceMaterial = new Material(_baseMaterial);
+                
+#if UNITY_EDITOR
+                string path = UnityEditor.AssetDatabase.GetAssetPath(this);
+                if (string.IsNullOrEmpty(path))
+                {
+                    string folder = "Assets/Resources/Materials/SDF_Groups";
+                    if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
+                        UnityEditor.AssetDatabase.CreateFolder("Assets/Materials", "SDF_Groups");
+
+                    string assetPath = $"{folder}/{gameObject.name}_SDFMaterial.mat";
+                    UnityEditor.AssetDatabase.CreateAsset(_instanceMaterial, assetPath);
+                    UnityEditor.AssetDatabase.SaveAssets();
+                    Debug.Log($"Создан и сохранён материал: {assetPath}", _instanceMaterial);
+                }
+#endif
                 _image.material = _instanceMaterial;
             }
         }
