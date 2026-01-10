@@ -21,7 +21,7 @@ void InlineSDF_float(float Distance, float Thickness, out float Dist)
     Dist = max(Distance, -Distance - Thickness);
 }
 
-void Circle(float2 p, float r, out float Dist) {
+void Circle_float(float2 p, float r, out float Dist) {
     Dist = length(p) - r;
 }
 
@@ -35,7 +35,7 @@ void ChamferBox(float2 p, float2 b, float chamfer, out float Dist) {
     else Dist = length(p);
 }
 
-void Box(float2 UV, float2 Size, float4 CornerRounding, float cornerRounding, out float Dist)
+void Box_float(float2 UV, float2 Size, float4 CornerRounding, float cornerRounding, out float Dist)
 {
     float2 centered = UV;
     float2 q = abs(centered);
@@ -220,28 +220,38 @@ void Cross(float2 p, float2 b, float r, out float Dist) {
     Dist = sign(k) * length(max(w, 0.0)) + r;
 }
 
-void RoundedCross(float2 p, float h, out float Dist) {
-    float k = 0.5*(h+1.0/h);
-    p = abs(p);
-    Dist = (p.x<1.0 && p.y <p.x*(k-h) + h) ?
-           k-sqrt(dot(p-float2(1,k),p-float2(1,k))) :
-           sqrt(min(dot(p-float2(0,h),p-float2(0,h)),
-                    dot(p-float2(1,0),p-float2(1,0))));
+void Heart(float2 p, out float Dist) {
+    p.x = abs(p.x);
+    if (p.y + p.x > 1.0)
+        Dist = sqrt(dot(p - float2(0.25, 0.75), p - float2(0.25, 0.75))) - sqrt(2.0)/4.0;
+    Dist = sqrt(min(
+        dot(p - float2(0.00, 1.00), p - float2(0.00, 1.00)),
+        dot(p - 0.5 * max(p.x + p.y, 0.0), p - 0.5 * max(p.x + p.y, 0.0))
+    )) * sign(p.x - p.y);
 }
 
 void RoundedX(float2 p, float w, float r, out float Dist) {
     p = abs(p);
     Dist = length(p - min(p.x + p.y, w) * 0.5) - r;
 }
-void Heart(float2 p, float scale, out float Dist) {
-    p /= scale;
-    p.x = abs(p.x);
-    if (p.y + p.x > 1.0)
-        Dist = sqrt(dot(p - float2(0.25, 0.75), p - float2(0.25, 0.75))) - sqrt(2.0) / 4.0;
-    else
-        Dist = sqrt(min(dot(p - float2(0.00, 1.00), p - float2(0.00, 1.00)),
-        dot(p - 0.5 * max(p.x + p.y, 0.0), p - 0.5 * max(p.x + p.y, 0.0)))) * sign(p.x - p.y);
-    Dist *= scale;
+
+void RoundedCross(float2 pos, float he, out float Dist) {
+    pos = abs(pos);
+    float2 p = float2(abs(pos.x - pos.y), 1.0 - pos.x - pos.y) / sqrt(2.0);
+    float pp = (he - p.y - 0.25 / he) / (6.0 * he);
+    float qq = p.x / (he * he * 16.0);
+    float hh = qq * qq - pp * pp * pp;
+    float x;
+    if (hh > 0.0) {
+        float r = sqrt(hh);
+        x = pow(qq + r, 1.0/3.0) - pow(abs(qq - r), 1.0/3.0) * sign(r - qq);
+    } else {
+        float r = sqrt(pp);
+        x = 2.0 * r * cos(acos(qq / (pp * r)) / 3.0);
+    }
+    x = min(x, sqrt(2.0)/2.0);
+    float2 z = float2(x, he * (1.0 - 2.0 * x * x)) - p;
+    Dist = length(z) * sign(z.y);
 }
 
 void SmoothUnion_float(float a, float b, float k, out float result) {
@@ -274,9 +284,9 @@ float GetShapeSDF(float2 uv, Shape s) {
     localUV = RotateUV(localUV, -s.rotation);
     float dist;
     
-    if (s.type == 0)  Circle(localUV, s.size.x, dist);
+    if (s.type == 0)  Circle_float(localUV, s.size.x, dist);
     else if (s.type == 1)  ChamferBox(localUV, s.size, s.paramsA.x, dist);
-    else if (s.type == 2)  Box(localUV, s.size, s.paramsA, s.paramsB.x, dist);
+    else if (s.type == 2)  Box_float(localUV, s.size, s.paramsA, s.paramsB.x, dist);
     else if (s.type == 3)  Segment(localUV, s.paramsA.xy, s.paramsA.zw, dist);
     else if (s.type == 4)  Rhombus(localUV, s.size, dist);
     else if (s.type == 5)  Trapezoid(localUV, s.paramsA.x, s.paramsA.y, s.paramsA.z, dist);
@@ -296,51 +306,86 @@ float GetShapeSDF(float2 uv, Shape s) {
     else if (s.type == 19) Cross(localUV, s.size, s.paramsA.x, dist);
     else if (s.type == 20) RoundedCross(localUV, s.size.x, dist);
     else if (s.type == 19) RoundedX(localUV, s.size.x, s.paramsA.x, dist);
-    else if (s.type == 20) Heart(localUV, s.size.x, dist);
+    else if (s.type == 20) Heart(localUV, dist);
     else dist = 1e10;
     
     return dist;
 }
 
-void SceneSDF_float(float2 UV, float Smoothness, float InterType, out float Dist)
+float GetLocalWavePerturbation(float2 localUV, float GlobalTime, float WaveFreq, float WaveAmp, float WaveSpeed) {
+    if (WaveAmp < 0.00001) return 0.0;
+    float angle = atan2(localUV.y, localUV.x);
+    return sin(angle * WaveFreq + GlobalTime * WaveSpeed) * WaveAmp;
+}
+
+void SceneSDF_float(
+    float2 UV,
+    float Smoothness,
+    float InterType,
+    float GlobalTime,
+    float OutlineThickness,
+    float InOutlineThickness,
+    float WaveFreq,
+    float WaveAmp,
+    float WaveSpeed,
+    out float fillMask,
+    out float outlineMask)
 {
-    Dist = 1e10;
-    if (InterType == 1) Dist = -1e10;
-    if (InterType == 2)
-    {
-        [loop]
-        for (int i = 1; i < _ShapeCount; i++)
-        {
-            Shape s = _Shapes[i];
-            float d = GetShapeSDF(UV, s);
-                
-            float temp;
-            SmoothUnion_float(Dist, d, Smoothness, temp);
-            Dist = temp;
-        }
-        Shape s = _Shapes[0];
-        float d = GetShapeSDF(UV, s);
-        float temp;
-        SmoothDifference_float(Dist, d, Smoothness, temp);
-        Dist = temp;
-    }
-    else
-    {
-        [loop]
-        for (int i = 0; i < _ShapeCount; i++)
-        {
-            Shape s = _Shapes[i];
-            float d = GetShapeSDF(UV, s);
-        
-            float temp;
-            if (InterType == 0)
-                SmoothUnion_float(Dist, d, Smoothness, temp);
-            else if (InterType == 1)
-                SmoothIntersection_float(Dist, d, Smoothness, temp);
-            Dist = temp;
-        }
-    }
+    float combinedBaseSDF = (InterType == 1) ? -1e10 : 1e10;
+    float combinedWavySDF = (InterType == 1) ? -1e10 : 1e10;
+    outlineMask = 0.0;
     
     if (_ShapeCount == 0)
-        Dist = 1e10;
+    {
+        fillMask = 0.0;
+        return;
+    }
+
+    [loop]
+    for (int i = 0; i < _ShapeCount; i++)
+    {
+        Shape s = _Shapes[i];
+        
+        float2 offset = float2(0.5, 0.5);
+        float2 localUV = UV - offset - s.position;
+        localUV = RotateUV(localUV, -s.rotation);
+        
+        float baseDist = GetShapeSDF(UV, s);
+        
+        float wavePerturbation = GetLocalWavePerturbation(localUV, GlobalTime, WaveFreq, WaveAmp, WaveSpeed);
+        float wavyDist = baseDist - wavePerturbation;
+        
+        float tempBase;
+        if (InterType == 0)
+            SmoothUnion_float(combinedBaseSDF, baseDist, Smoothness, tempBase);
+        else if (InterType == 1)
+            SmoothIntersection_float(combinedBaseSDF, baseDist, Smoothness, tempBase);
+        else if (InterType == 2 && i > 0)
+            SmoothDifference_float(baseDist, combinedBaseSDF, Smoothness, tempBase);
+        else
+            tempBase = baseDist;
+        
+        combinedBaseSDF = tempBase;
+        
+        float tempWavy;
+        if (InterType == 0)
+            SmoothUnion_float(combinedWavySDF, wavyDist, Smoothness, tempWavy);
+        else if (InterType == 1)
+            SmoothIntersection_float(combinedWavySDF, wavyDist, Smoothness, tempWavy);
+        else if (InterType == 2 && i > 0)
+            SmoothDifference_float(wavyDist, combinedWavySDF, Smoothness, tempWavy);
+        else
+            tempWavy = wavyDist;
+        
+        combinedWavySDF = tempWavy;
+    }
+    
+    float bias = WaveAmp * InOutlineThickness;
+    
+    float outlineDist = abs(combinedWavySDF + bias) - (OutlineThickness + bias);
+    
+    outlineMask = smoothstep(OutlineThickness * 0.5, 0.0, outlineDist);
+    outlineMask *= step(0.0, combinedWavySDF + bias);
+    
+    fillMask = combinedBaseSDF;
 }
