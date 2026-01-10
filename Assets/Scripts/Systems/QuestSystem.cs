@@ -28,11 +28,13 @@ namespace Systems
         
         public static void StartQuest(QuestData data, int questState = 0)
         {
+            Debug.Log("Ira quest 2 " + data.name);
             if (data.Scene != SceneManager.GetActiveScene().path) return;
 
             if(!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
 
+            Debug.Log("Ira quest 3 " + data.name);
             OnQuestStarted?.Invoke(data);
             _questVisuals.SpawnQuest(data);
 

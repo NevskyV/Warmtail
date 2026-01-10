@@ -13,6 +13,7 @@ namespace Systems.Tasks
         public Action OnComplete { get; set; }
         [SerializeField] private Collider2D _prefab;
         [SerializeField] private Vector2 _position;
+        [TextArea] [SerializeField] private string description;
 
         public void Activate()
         {

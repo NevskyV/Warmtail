@@ -11,6 +11,7 @@ namespace Systems.Tasks
         public Action OnComplete { get; set; }
         [SerializeField] private QuestData _questData;
         [SerializeField] private bool _start;
+        [TextArea] [SerializeField] private string description;
 
         public void Activate()
         {
