@@ -10,10 +10,13 @@ namespace Systems.Tasks
         public bool Completed { get; set; }
         public Action OnComplete { get; set; }
         [SerializeField] private string _puzzleId;
+        [TextArea] [SerializeField] private string description;
 
         public void Activate()
         {
             LeversPuzzle.OnPuzzleSolved += MarkComplete;
+            RayPuzzle.OnPuzzleSolved += MarkComplete;
+            GearsPuzzle.OnPuzzleSolved += MarkComplete;
         }
 
         private void MarkComplete(string id)
@@ -22,6 +25,8 @@ namespace Systems.Tasks
             Completed = true;
             OnComplete?.Invoke();
             LeversPuzzle.OnPuzzleSolved -= MarkComplete;
+            RayPuzzle.OnPuzzleSolved -= MarkComplete;
+            GearsPuzzle.OnPuzzleSolved -= MarkComplete;
         }
     }
 }

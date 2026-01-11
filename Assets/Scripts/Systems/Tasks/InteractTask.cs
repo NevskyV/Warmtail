@@ -12,6 +12,7 @@ namespace Systems.Tasks
         public Action OnComplete { get; set; }
         private UnityEventTrigger _trigger;
         [SerializeField] private string _triggerId;
+        [TextArea] [SerializeField] private string description;
 
         public void Activate()
         {

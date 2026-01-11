@@ -11,6 +11,7 @@ namespace Systems.Tasks
         public Action OnComplete { get; set; }
         [SerializeField] private InputActionAsset _asset;
         [SerializeReference] private string _action;
+        [TextArea] [SerializeField] private string description;
 
         public void Activate()
         {

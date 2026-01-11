@@ -4,6 +4,7 @@ using Rng = UnityEngine.Random;
 using UnityEngine.Events;
 using UnityEngine;
 using Interfaces;
+using System;
 
 namespace Entities.Puzzle
 {
@@ -17,6 +18,7 @@ namespace Entities.Puzzle
 
         public static UnityEvent OnReseted = new();
         public UnityEvent OnSolved = new();
+        public static Action<string> OnPuzzleSolved = delegate {};
 
         void Awake()
         {
@@ -49,6 +51,7 @@ namespace Entities.Puzzle
 
         public void Solve()
         {
+            OnPuzzleSolved?.Invoke(Id);
             OnSolved.Invoke();
             Debug.Log("GearsPuzzle выполнено");
             Invoke("DestroyPuzzle", 0.5f);

@@ -9,12 +9,13 @@ namespace Systems.SequenceActions
     {
         [SerializeField] private string _characterId;
         [SerializeField] private string _splineId;
+        [SerializeField] private bool _move = true;
         public void Invoke()
         {
             var character = SavableObjectsResolver.FindObjectById<SplineAnimate>(_characterId);
             character.Container = SavableObjectsResolver.FindObjectById<SplineContainer>(_splineId);
             character.Restart(false);
-            character.Play();
+            if (_move) character.Play();
         }
     }
 }

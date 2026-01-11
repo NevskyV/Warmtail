@@ -161,7 +161,7 @@ namespace Entities.PlayerScripts
                 pos.Add(p.ToUnity());
 
             var rbParent = Rigidbody.transform.parent;
-            rbParent.position = pos.GetRandom() - Rigidbody.transform.localPosition;
+            rbParent.position = pos.GetRandom() - Rigidbody.transform.position + Rigidbody.transform.parent.position;
         }
     }
 }

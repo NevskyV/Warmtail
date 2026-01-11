@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 2677430010170927980}
   - component: {fileID: 5503290816783287035}
   - component: {fileID: 8243539184266544157}
+  - component: {fileID: 3180322118476950225}
   m_Layer: 0
   m_Name: Finix
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2033780425777345213
 Transform:
   m_ObjectHideFlags: 0
@@ -48,21 +49,88 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.NPC.SpeakableCharacter
   _id:
     Value: 
-  <Graph>k__BackingField: {fileID: 11400000, guid: 21b471d5c6fd0134c847a6b743b25ecd, type: 2}
+  <Graph>k__BackingField: {fileID: 11400000, guid: 46a86c5142330b44681a46cd28dda3fb, type: 2}
   <Actions>k__BackingField:
   - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  - m_PersistentCalls:
       m_Calls: []
   - m_PersistentCalls:
       m_Calls: []
-  _maxWarmPercent: 0
-  <CanWarm>k__BackingField: 1
-  _warmAction:
-    m_PersistentCalls:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Entities.UI.QuestVisuals, Assembly-CSharp
+        m_MethodName: StartQuest
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  - m_PersistentCalls:
       m_Calls: []
-  _isInHome: 0
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Entities.UI.QuestVisuals, Assembly-CSharp
+        m_MethodName: StartQuest
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 808a613be07c6734f8f1ec6234beb68d, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Entities.UI.QuestVisuals, Assembly-CSharp
+        m_MethodName: StartQuest
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
+          m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <SavableState>k__BackingField: []
 --- !u!212 &5503290816783287035
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -108,6 +176,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 96d77f103ffa1bb439bce7e2dcc74855, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -117,7 +186,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &8243539184266544157
 BoxCollider2D:
@@ -165,3 +233,26 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.1880827, y: 5.173565}
   m_EdgeRadius: 0
+--- !u!114 &3180322118476950225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6263624876928639049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a074d529cf945029ef7cf40540c9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Splines::UnityEngine.Splines.SplineAnimate
+  m_Target: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_LoopMode: 0
+  m_Method: 1
+  m_Duration: 1
+  m_MaxSpeed: 15
+  m_EasingMode: 3
+  m_AlignmentMode: 2
+  m_ObjectForwardAxis: 2
+  m_ObjectUpAxis: 1
+  m_StartOffset: 0

@@ -1,0 +1,21 @@
+﻿using System;
+using Interfaces;
+using UnityEngine;
+using Entities.Probs;
+using Entities.Core;
+using Entities.NPC;
+
+namespace Systems.SequenceActions
+{
+    public class SetPositionAction : ISequenceAction
+    {
+        [SerializeField] private string _id;
+        [SerializeField] private Vector2 _newPosition;
+
+        public void Invoke()
+        {
+            Debug.Log(_id + " = " + SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_id) );
+            SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_id).transform.position = _newPosition;
+        }
+    }
+}

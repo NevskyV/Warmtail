@@ -32,8 +32,8 @@ namespace Entities.UI
         [SerializeField] private GameObject _questPrefab;
         [SerializeField] private RectTransform _questHud;
 
-        [SerializeField]public SerializedDictionary<QuestData, List<MarkUIData>> _createdMarks;
-        [SerializeField]public SerializedDictionary<QuestData, GameObject> _createdQuests;
+        private SerializedDictionary<QuestData, List<MarkUIData>> _createdMarks;
+        private SerializedDictionary<QuestData, GameObject> _createdQuests;
 
         public List<QuestData> AllQuests => _allQuests;
 
@@ -70,7 +70,7 @@ namespace Entities.UI
             newQuest.GetChild(0).GetComponent<LocalizedText>().SetNewKey("quest_header_" + data.Id);
             newQuest.GetChild(1).GetComponent<LocalizedText>().SetNewKey("quest_desc_" + data.Id);
             _createdQuests.Add(data,newQuest.gameObject);
-            _createdMarks.Add(data, new());
+            if (!_createdMarks.ContainsKey(data)) _createdMarks[data] = new();
             UpdateProgress(data, newQuest);
             newQuest.parent.GetComponent<VerticalLayoutGroup>().CalculateLayoutInputVertical();
         }
@@ -116,6 +116,7 @@ namespace Entities.UI
         public void SpawnMarks(QuestData data, Vector2 markPos)
         {
             var newMark = Instantiate(_markPrefab, _markHud);
+            if (!_createdMarks.ContainsKey(data)) _createdMarks[data] = new();
             _createdMarks[data].Add(new MarkUIData
             {
                 Object = newMark.gameObject,
@@ -126,6 +127,7 @@ namespace Entities.UI
         public void DestroyMark(QuestData data, Vector2 markPos)
         {
             var mark = _createdMarks[data].Find(x => x.WorldPos == markPos);
+            if (mark == null) return;
             Destroy(mark.Object);
             _createdMarks[data].Remove(mark);
         }

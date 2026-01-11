@@ -2904,7 +2904,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f36ee083d969ca4c97f510ee8611fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.WarmthVisual
-  _heatFillBar: {fileID: 0}
+  _heatFillBar: {fileID: 899467495}
 --- !u!1 &865195738
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,6 +3174,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5686298266033415308, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -3205,6 +3209,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7901887455616614930, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
   m_PrefabInstance: {fileID: 899467490}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &899467495 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5686298266033415308, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
+  m_PrefabInstance: {fileID: 899467490}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!1001 &910719001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6390,9 +6405,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.QuestVisuals
   _allQuests:
-  - {fileID: 11400000, guid: 56f437edbb8080249a589b9fe742f9c2, type: 2}
-  - {fileID: 11400000, guid: 890df765c8bdd084bbf049f139a867cf, type: 2}
-  - {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}
   - {fileID: 11400000, guid: 37bd43537256fbb4e9d2c07105777df8, type: 2}
   _markOffset: {x: 0, y: 0, z: 0}
   _cam: {fileID: 404321504}
@@ -6402,10 +6414,6 @@ MonoBehaviour:
   _markHud: {fileID: 899467493}
   _questPrefab: {fileID: 6104912841410499881, guid: dfc1f7d1234a9bc41bd397b469b9a1f4, type: 3}
   _questHud: {fileID: 899467494}
-  _createdMarks:
-    _serializedList: []
-  _createdQuests:
-    _serializedList: []
 --- !u!114 &1964680902
 MonoBehaviour:
   m_ObjectHideFlags: 0
