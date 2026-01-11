@@ -13,6 +13,7 @@ namespace Entities.UI
         
         public void ShowPopup(PopupBase data)
         {
+            Debug.Log("Popup show " + data);
             PopupBase normalData = null;
             switch (data.Type)
             {

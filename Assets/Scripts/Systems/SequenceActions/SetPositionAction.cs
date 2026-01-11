@@ -3,6 +3,7 @@ using Interfaces;
 using UnityEngine;
 using Entities.Probs;
 using Entities.Core;
+using Entities.NPC;
 
 namespace Systems.SequenceActions
 {
@@ -13,7 +14,8 @@ namespace Systems.SequenceActions
 
         public void Invoke()
         {
-            SavableObjectsResolver.FindObjectById<SavableStateObject>(_id).transform.position = _newPosition;
+            Debug.Log(_id + " = " + SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_id) );
+            SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_id).transform.position = _newPosition;
         }
     }
 }
