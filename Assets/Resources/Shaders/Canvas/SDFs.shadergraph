@@ -70,6 +70,9 @@
         },
         {
             "m_Id": "be5c1fc4fbdb452093d5422feec90680"
+        },
+        {
+            "m_Id": "3299f997956245aaa711572f33fe0638"
         }
     ],
     "m_Nodes": [
@@ -3046,10 +3049,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -241.60006713867188,
-            "y": 17.59998893737793,
-            "width": 125.60008239746094,
-            "height": 117.60000610351563
+            "x": -241.5999755859375,
+            "y": 21.600006103515626,
+            "width": 125.5999755859375,
+            "height": 117.59999084472656
         }
     },
     "m_Slots": [
@@ -3334,6 +3337,24 @@
         "w": 0.0
     },
     "m_LiteralMode": false
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.CategoryData",
+    "m_ObjectId": "3299f997956245aaa711572f33fe0638",
+    "m_Name": "Noise",
+    "m_ChildObjectList": [
+        {
+            "m_Id": "944c4944c262478ead006afd771f4ec5"
+        },
+        {
+            "m_Id": "5bb04033b65a448482028b2c8ac1c3c7"
+        },
+        {
+            "m_Id": "11ca667b56fc40dab141c9eae19e699d"
+        }
+    ]
 }
 
 {
@@ -3980,10 +4001,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -103.9999771118164,
-            "y": 17.599992752075197,
+            "x": -104.0,
+            "y": 21.600006103515626,
             "width": 128.0,
-            "height": 93.60000610351563
+            "height": 93.59999084472656
         }
     },
     "m_Slots": [
@@ -5252,8 +5273,8 @@
     "m_ObjectId": "636ea1fa4f9c4324bf5895303355ca70",
     "m_Title": "Final Color",
     "m_Position": {
-        "x": -267.2001953125,
-        "y": -379.99993896484377
+        "x": -267.1996765136719,
+        "y": -379.9999694824219
     }
 }
 
@@ -5968,10 +5989,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -760.7999267578125,
-            "y": 80.00000762939453,
+            "x": -760.800048828125,
+            "y": 68.0,
             "width": 56.0,
-            "height": 24.00000762939453
+            "height": 24.000022888183595
         }
     },
     "m_Slots": [
@@ -6945,15 +6966,6 @@
         },
         {
             "m_Id": "38a5d2a48d2d4870834e069724dbd432"
-        },
-        {
-            "m_Id": "944c4944c262478ead006afd771f4ec5"
-        },
-        {
-            "m_Id": "5bb04033b65a448482028b2c8ac1c3c7"
-        },
-        {
-            "m_Id": "11ca667b56fc40dab141c9eae19e699d"
         }
     ]
 }
@@ -7727,7 +7739,7 @@
     "m_ObjectId": "ac8bb85b1d504d74aac0f4be636b255e",
     "m_Title": "Inline",
     "m_Position": {
-        "x": -1260.0,
+        "x": -1259.9998779296875,
         "y": 1453.5997314453125
     }
 }
@@ -7818,10 +7830,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -529.5999755859375,
-            "y": 17.600000381469728,
-            "width": 208.00003051757813,
-            "height": 301.60003662109377
+            "x": -467.20001220703127,
+            "y": 21.600006103515626,
+            "width": 125.60003662109375,
+            "height": 117.59999084472656
         }
     },
     "m_Slots": [
@@ -7841,7 +7853,7 @@
         "plus"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -7899,8 +7911,8 @@
     "m_ObjectId": "b47d48f095e24b6f80cc161eb0292650",
     "m_Title": "Outline Antilasing",
     "m_Position": {
-        "x": -1280.800048828125,
-        "y": -251.99996948242188
+        "x": -1280.8001708984375,
+        "y": -252.0
     }
 }
 
@@ -8251,7 +8263,7 @@
     "m_Title": "Shape Antilasing ",
     "m_Position": {
         "x": -1162.4000244140625,
-        "y": 19.20000457763672
+        "y": 19.19997787475586
     }
 }
 
@@ -10262,8 +10274,8 @@
     "m_ObjectId": "ffee8ebb59964bb1b01fe5f51e449c93",
     "m_Title": "NoiseSettings",
     "m_Position": {
-        "x": -1958.4000244140625,
-        "y": 524.0
+        "x": -1958.3997802734375,
+        "y": 523.9999389648438
     }
 }
 

@@ -1,24 +1,28 @@
-﻿using Systems.Effects;
+﻿using EasyTextEffects.Editor.MyBoxCopy.Extensions;
+using Systems.Effects;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.U2D;
 
 namespace Entities.Triggers
 {
     public class RoomTransitionTrigger : MonoBehaviour
     {
-        [SerializeField] private Collider2D[] _showCollider;
-        [SerializeField] private Collider2D[] _hideCollider;
+        [SerializeField] private Collider2D[] _normalColliders;
+        [SerializeField] private Collider2D[] _hiddenColliders;
         [SerializeField] private SpriteShapeRenderer[] _normalSprites;
         [SerializeField] private SpriteShapeRenderer[] _hiddenSprites;
+        [SerializeField] private ShadowCaster2D[] _normalShadowCasters;
+        [SerializeField] private ShadowCaster2D[] _hiddenShadowCasters;
 
         private void Start()
         {
-            for (int i = 0; i < _showCollider.Length; i++)
+            for (int i = 0; i < _normalColliders.Length; i++)
             {
-                _showCollider[i].OnTriggerEnter2DAsObservable().Subscribe(TriggerEnter2D);
-                _hideCollider[i].OnTriggerEnter2DAsObservable().Subscribe(HiddenTriggerEnter2D);
+                _normalColliders[i].OnTriggerEnter2DAsObservable().Subscribe(TriggerEnter2D);
+                _hiddenColliders[i].OnTriggerEnter2DAsObservable().Subscribe(HiddenTriggerEnter2D);
             }
         }
         
@@ -30,11 +34,11 @@ namespace Entities.Triggers
                 {
                     Fade(_normalSprites[i], _hiddenSprites[i]);
                 }
-                for (int i = 0; i < _showCollider.Length; i++)
-                {
-                    _showCollider[i].gameObject.SetActive(false);
-                    _hideCollider[i].gameObject.SetActive(true);
-                }
+                _normalColliders.ForEach(c => c.gameObject.SetActive(false));
+                _hiddenColliders.ForEach(c => c.gameObject.SetActive(true));
+                
+                _normalShadowCasters.ForEach(c => c.enabled = false);
+                _hiddenShadowCasters.ForEach(c => c.enabled = true);
             }
         }
 
@@ -46,11 +50,11 @@ namespace Entities.Triggers
                 {
                     Fade(_hiddenSprites[i], _normalSprites[i]);
                 }
-                for (int i = 0; i < _showCollider.Length; i++)
-                {
-                    _showCollider[i].gameObject.SetActive(true);
-                    _hideCollider[i].gameObject.SetActive(false);
-                }
+                _normalColliders.ForEach(c => c.gameObject.SetActive(true));
+                _hiddenColliders.ForEach(c => c.gameObject.SetActive(false));
+                
+                _normalShadowCasters.ForEach(c => c.enabled = true);
+                _hiddenShadowCasters.ForEach(c => c.enabled = false);
             }
         }
 
