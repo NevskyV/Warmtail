@@ -57,7 +57,7 @@ namespace Systems.AbilitiesVisual
             
             UpdatePlayerStats();
 
-            DOTween.To(() => _camera.Lens.OrthographicSize, x => _camera.Lens.OrthographicSize = x, 9,1);
+            DOTween.To(() => _camera.Lens.OrthographicSize, x => _camera.Lens.OrthographicSize = x, 11,1);
             var loopVfxObj = (await ObjectSpawnSystem.Spawn(_loopVfx, _player.Rigidbody.position, _player.Rigidbody.transform,200)).gameObject;
             loopVfxObj.transform.localRotation = Quaternion.Euler(new Vector3(0,0,160));
             loopVfxObj.transform.localPosition += _vfxOffset;
