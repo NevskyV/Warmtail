@@ -44,21 +44,24 @@ MonoBehaviour:
     - rid: 7345390956647809365
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _puzzleId: 017c6ef6-41a2-4e1c-a0ae-fd94fb7059a7
+        _puzzleId: cd292478-7dcb-4814-a8cf-4e1f75a44741
+        description: 
     - rid: 7345390956647809369
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _puzzleId: 88de1918-85cb-482a-98ee-af33a33182c5
+        _puzzleId: 1ace8e4c-eba5-4b8f-bb3d-e45ae11e0296
+        description: 
     - rid: 7345390956647809372
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _puzzleId: 692b16c1-f275-4520-8107-b22cc4dc18e0
+        _puzzleId: 673e2422-01c7-450d-a91b-506298261c32
+        description: 
     - rid: 7345391011349135555
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
-        - 017c6ef6-41a2-4e1c-a0ae-fd94fb7059a7
+        - cd292478-7dcb-4814-a8cf-4e1f75a44741
     - rid: 7345391011349135556
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -71,7 +74,7 @@ MonoBehaviour:
       data:
         _active: 0
         _objectIds:
-        - 88de1918-85cb-482a-98ee-af33a33182c5
+        - 1ace8e4c-eba5-4b8f-bb3d-e45ae11e0296
     - rid: 7345391011349135558
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -84,7 +87,7 @@ MonoBehaviour:
       data:
         _active: 0
         _objectIds:
-        - 692b16c1-f275-4520-8107-b22cc4dc18e0
+        - 673e2422-01c7-450d-a91b-506298261c32
     - rid: 7345391011349135560
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
