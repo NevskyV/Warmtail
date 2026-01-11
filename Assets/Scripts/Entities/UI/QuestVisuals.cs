@@ -50,14 +50,12 @@ namespace Entities.UI
             _createdMarks = new();
             _createdQuests = new();
             StickAction.OnStickTaked += StickQuest;
-            Debug.Log("Ira quest cons ");
         }
 
         private void Start()
         {
             foreach (var id in _globalData.Get<SavablePlayerData>().QuestIds)
             {
-                Debug.Log("Ira quest 0 ");
                 var quest = AllQuests.Find(x => x.Id == id.Key);
                 if(quest) QuestSystem.StartQuest(quest, id.Value);
             }
@@ -65,11 +63,9 @@ namespace Entities.UI
 
         public void SpawnQuest(QuestData data)
         {
-            Debug.Log("Ira quest 4 " + _questHud.name);
             if (data == null) return;
             if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
             var newQuest = _diContainer.InstantiatePrefab(_questPrefab, _questHud).transform;
-            Debug.Log("Ira quest 5 " + newQuest.name);
             if (!newQuest) return;
             newQuest.GetChild(0).GetComponent<LocalizedText>().SetNewKey("quest_header_" + data.Id);
             newQuest.GetChild(1).GetComponent<LocalizedText>().SetNewKey("quest_desc_" + data.Id);
@@ -82,7 +78,6 @@ namespace Entities.UI
         public void StartQuest(QuestData data)
         {
             if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
-            Debug.Log("Ira quest 1 " + data.name);
             QuestSystem.StartQuest(data);
         }
         public void EndQuest(QuestData data)
@@ -120,7 +115,6 @@ namespace Entities.UI
         
         public void SpawnMarks(QuestData data, Vector2 markPos)
         {
-            Debug.Log("Ira quest spawn Mark " );
             var newMark = Instantiate(_markPrefab, _markHud);
             if (!_createdMarks.ContainsKey(data)) _createdMarks[data] = new();
             _createdMarks[data].Add(new MarkUIData
