@@ -4,17 +4,27 @@ using UnityEngine;
 using Entities.Core;
 using Entities.Probs;
 using Entities.UI;
+using Cysharp.Threading.Tasks;
+using TMPro;
 
 namespace Systems.SequenceActions
 {
     public class NotificationAction : ISequenceAction
     {
-        [SerializeField] private NotificationPopup _popup;
-        [SerializeField] private string _systemId;
+        [SerializeField] private GameObject _popup;
+        [SerializeField] private string _parentId;
+        private GameObject _object;
         
         public void Invoke()
         {
-            SavableObjectsResolver.FindObjectById<PopupSystem>(_systemId).ShowPopup(_popup);
+            RectTransform parent = SavableObjectsResolver.FindObjectById<SavableStateObject>(_parentId).GetComponent<RectTransform>();
+            _object = Object.Instantiate(_popup, parent);
+            DestroyPopup();
+        }
+        private async UniTaskVoid DestroyPopup()
+        {
+            await UniTask.Delay(3500);
+            Object.Destroy(_object);
         }
     }
 }

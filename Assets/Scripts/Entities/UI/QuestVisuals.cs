@@ -133,6 +133,7 @@ namespace Entities.UI
         public void DestroyMark(QuestData data, Vector2 markPos)
         {
             var mark = _createdMarks[data].Find(x => x.WorldPos == markPos);
+            if (mark == null) return;
             Destroy(mark.Object);
             _createdMarks[data].Remove(mark);
         }

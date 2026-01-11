@@ -93,11 +93,12 @@ MonoBehaviour:
   - Actions:
     - rid: 7345391042134016141
     - rid: 7345391042134016148
+    - rid: 7345391042134016187
     - rid: 7345391042134016142
     Tasks: []
   - Actions:
-    - rid: 7345391011349135659
     - rid: 7345391042134016147
+    - rid: 7345391042134016188
     - rid: 7345391042134016153
     Tasks:
     - rid: 7345391011349135658
@@ -158,6 +159,7 @@ MonoBehaviour:
       data:
         _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
         _splineId: 0dbcaf53-a94a-40ed-ab48-4bdda97ec04c
+        _move: 1
     - rid: 7345390844638658707
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -202,6 +204,7 @@ MonoBehaviour:
       data:
         _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
         _splineId: f1d85757-23b1-465d-b9af-e82fed8506f7
+        _move: 1
     - rid: 7345390883105669849
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -300,6 +303,7 @@ MonoBehaviour:
       data:
         _characterId: bac3d9a6-fb45-4fab-960f-75aaa41727df
         _splineId: ac5977be-49a5-4aec-bfe8-72da94a8dc50
+        _move: 1
     - rid: 7345391011349135601
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -338,25 +342,21 @@ MonoBehaviour:
         _puzzleId: 89904344-ed20-49f8-bd34-ad51ddc43310
         description: "\u043A\u043E\u0433\u0434\u0430 \u0440\u0435\u0448\u0438\u043B\u0438
           \u0433\u043E\u043B\u043E\u0432\u043E\u043B\u043E\u043C\u043A\u0443, \u0443\u0431\u0438\u0440\u0430\u0435\u043C
-          \u043F\u043E\u0440\u0442a\u043B \u0438 \u0431\u0430\u0440\u044C\u0435\u0440,
-          \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043C \u0442\u0440\u0438\u0433\u0433\u0435\u0440
-          \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430, \u0432\u043E\u0437\u0440\u0430\u0449\u0430\u0435\u043C\u0441\u044F
-          \u0432 \u043D\u0430\u0448 \u043C\u0438\u0440, \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u043C
-          \u043A \u043D\u0430\u043C \u043D\u043F\u0441"
+          \u0431\u0430\u0440\u044C\u0435\u0440, \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043C
+          \u0442\u0440\u0438\u0433\u0433\u0435\u0440 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430,
+          \u0432\u043E\u0437\u0440\u0430\u0449\u0430\u0435\u043C\u0441\u044F \u0432
+          \u043D\u0430\u0448 \u043C\u0438\u0440, \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u043C
+          \u043A \u043D\u0430\u043C \u043D\u043F\u0441, \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u043C
+          \u0441\u043F\u043B\u0430\u0439\u043D\u044B"
     - rid: 7345391011349135658
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _id: a44ada89-02ae-410f-884b-d8a67d49cd51
-        description: "\u0422\u0435\u0442\u0440\u0438\u043B\u0443\u0441 \u0443\u0445\u043E\u0434\u0438\u0442
-          \u0432 \u0437\u0430\u043A\u0430\u0442 \u043F\u043E\u0441\u043B\u0435 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430,
-          \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u043C spline \u0434\u043B\u044F
-          \u0444\u0438\u043D\u0438\u043A\u0441\u0430, \u0443\u0431\u0438\u0440\u0430\u0435\u043C
-          \u0442\u0440\u0438\u0433\u0433\u0435\u0440 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430"
-    - rid: 7345391011349135659
-      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-        _splineId: c8d88477-6bdd-402d-9561-e72428a5dbba
+        description: "\u043F\u043E\u0441\u043B\u0435 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430
+          \u0443\u0431\u0438\u0440\u0430\u0435\u043C \u0442\u0440\u0438\u0433\u0433\u0435\u0440
+          \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430, \u0441\u043F\u0430\u0432\u043D\u0438\u043C
+          \u0434\u0435\u0439\u043B\u0438\u043A\u0438 \u0438 \u0441\u043A\u0440\u044B\u0432\u0430\u0435\u043C
+          \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0445 \u043D\u043F\u0441"
     - rid: 7345391042134016112
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -371,6 +371,7 @@ MonoBehaviour:
       data:
         _characterId: bac3d9a6-fb45-4fab-960f-75aaa41727df
         _splineId: dee05135-04bb-4b98-aa12-239e9aac9f1f
+        _move: 1
     - rid: 7345391042134016130
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -396,32 +397,31 @@ MonoBehaviour:
       type: {class: SetPositionAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-        _newPosition: {x: -2.36, y: 69.88}
+        _newPosition: {x: 3.52, y: 73.97}
     - rid: 7345391042134016142
       type: {class: SetPositionAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _id: bac3d9a6-fb45-4fab-960f-75aaa41727df
-        _newPosition: {x: 6.56, y: 68.81}
+        _newPosition: {x: 4.88, y: 73.71}
     - rid: 7345391042134016147
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
         - a44ada89-02ae-410f-884b-d8a67d49cd51
+        - bac3d9a6-fb45-4fab-960f-75aaa41727df
+        - c0a4e396-bc2b-4d82-8d44-a5455874d1a0
     - rid: 7345391042134016148
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _characterId: bac3d9a6-fb45-4fab-960f-75aaa41727df
         _splineId: 572ff8c4-2115-41a7-b393-02f11a640e9c
+        _move: 1
     - rid: 7345391042134016153
       type: {class: NotificationAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _popup:
-          <Prefab>k__BackingField: {fileID: 1307311160032710671, guid: 59dadbe6c4e811a46bb47fe7b48629a0, type: 3}
-          <AnimDuration>k__BackingField: 0.3
-          <Icon>k__BackingField: {fileID: -5243001738897625605, guid: e6face83a5aace244a02bf7cf60778d3, type: 3}
-          <Duration>k__BackingField: 5000
-        _systemId: 005b9798-d6e0-462f-b16e-30d7b96189a1
+        _popup: {fileID: 6104912841410499881, guid: dfc1f7d1234a9bc41bd397b469b9a1f4, type: 3}
+        _parentId: 90444d67-3ca5-42bc-9e15-25f02be54f15
     - rid: 7345391042134016167
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -429,3 +429,16 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
         _position: {x: -62.6, y: 75.41}
         _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+    - rid: 7345391042134016187
+      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _splineId: c8d88477-6bdd-402d-9561-e72428a5dbba
+        _move: 0
+    - rid: 7345391042134016188
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _objectIds:
+        - 6ac22ed2-b786-45dc-847b-aa6a7faaea6b
+        - cf899f03-2a93-4a36-9cec-dd40289e9c9d
