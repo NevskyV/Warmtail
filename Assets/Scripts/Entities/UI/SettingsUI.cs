@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Data;
 using Entities.Localization;
+using Entities.Probs;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -37,10 +38,12 @@ namespace Entities.UI
         private void Construct(GlobalData globalData)
         {
             _globalData = globalData;
+            Debug.Log("set ui data  " + GetComponent<SavableStateObject>().Id );
         }
 
         private void Awake()
         {
+            Debug.Log("set ui data  " + GetComponent<SavableStateObject>().Id + "  global data = " + _globalData );
             //Load Data
             _localData = _globalData.Get<SettingsData>();
             //Apply Data
