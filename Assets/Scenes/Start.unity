@@ -3163,10 +3163,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8858281329377772425, guid: a357cc27806ce8b43974a4e27332f6a2, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2006202561}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a357cc27806ce8b43974a4e27332f6a2, type: 3}
 --- !u!224 &2006202558 stripped
 RectTransform:
@@ -3178,25 +3175,6 @@ CanvasGroup:
   m_CorrespondingSourceObject: {fileID: 5954684468398431727, guid: a357cc27806ce8b43974a4e27332f6a2, type: 3}
   m_PrefabInstance: {fileID: 2006202557}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2006202560 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8858281329377772425, guid: a357cc27806ce8b43974a4e27332f6a2, type: 3}
-  m_PrefabInstance: {fileID: 2006202557}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2006202561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2006202560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af2f3f295d904a1496486c18c69a4958, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entities.Probs.SavableStateObject
-  _id:
-    Value: 11248ea6-17f7-4b9d-adfb-233d63740705
 --- !u!1 &2050093928
 GameObject:
   m_ObjectHideFlags: 0

@@ -80,9 +80,6 @@ namespace Entities.UI
                 if (targetCanvas) targetCanvas.alpha = b;
             }
         }
-        void Update() {
-            Debug.Log("Cur state = " + CurrentState);
-        }
     }
     
     [Serializable]

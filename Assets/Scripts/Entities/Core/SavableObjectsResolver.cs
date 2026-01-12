@@ -19,6 +19,7 @@ namespace Entities.Core
 
             foreach (var obj in FindObjectsByType<SavableStateObject>(FindObjectsInactive.Include,FindObjectsSortMode.None))
             {
+                if (_objects.ContainsKey(obj.Id)) _objects.Remove(obj.Id);
                 _objects.Add(obj.Id, obj.gameObject);
                 if (changed.ContainsKey(obj.Id))
                 {

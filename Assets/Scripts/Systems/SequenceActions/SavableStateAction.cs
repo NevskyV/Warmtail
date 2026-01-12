@@ -15,9 +15,10 @@ namespace Systems.SequenceActions
         
         public void Invoke()
         {
-            if (!_anotherScene || SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "GameplayIra")
+            if (!_anotherScene || SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "GameplayIra"){
+                Debug.Log("Ira invoke");
                  _objectIds.ForEach(x => 
-                    SavableObjectsResolver.FindObjectById<SavableStateObject>(x).ChangeState(_active));
+                    SavableObjectsResolver.FindObjectById<SavableStateObject>(x).ChangeState(_active));}
         }
     }
 }
