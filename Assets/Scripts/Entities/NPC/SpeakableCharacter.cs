@@ -35,8 +35,6 @@ namespace Entities.NPC
         private void Start()
         {
             _splineAnimate = GetComponent<SplineAnimate>();
-            if (SceneManager.GetActiveScene().name == "Home" || SceneManager.GetActiveScene().name == "HomeIra")
-                Interact();
         }
         
         public void Interact()

@@ -152,6 +152,10 @@ namespace Entities.PlayerScripts
             DisableAllAbilities();
         }
 
+        void Update() {
+            Debug.Log("Cur map = " + _input.currentActionMap);
+        }
+
         public async void Die()
         {
             var pos = new List<Vector3>();

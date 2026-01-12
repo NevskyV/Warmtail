@@ -23,9 +23,13 @@ namespace Entities.UI
         private void Construct(PlayerInput input)
         {
             _playerInput = input;
-            _playerInput.actions["Escape"].performed += EscapeTransition;
         }
 
+        private void OnEnable()
+        {
+            if(_playerInput)
+                _playerInput.actions["Escape"].performed += EscapeTransition;
+        }
         private void OnDisable()
         {
             if(_playerInput)
@@ -75,6 +79,9 @@ namespace Entities.UI
                 if (currentCanvas) currentCanvas.alpha = a;
                 if (targetCanvas) targetCanvas.alpha = b;
             }
+        }
+        void Update() {
+            Debug.Log("Cur state = " + CurrentState);
         }
     }
     
