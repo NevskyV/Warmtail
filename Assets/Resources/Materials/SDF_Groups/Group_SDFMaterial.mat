@@ -12,7 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _INTERSECTION_UNION
+  - _INTERSECTION_DIFFERENCE
   - _NOISETYPE_NONE
   m_InvalidKeywords:
   - _INTERSECTION_A
@@ -52,7 +52,7 @@ Material:
     - _Alpha: 1
     - _ColorMask: 15
     - _CornerRounding: 0.15
-    - _INTERSECTION: 0
+    - _INTERSECTION: 2
     - _InOutlineThickness: 1.5
     - _InlineThickness: 0.01
     - _NOISETYPE: 0
@@ -71,7 +71,7 @@ Material:
     - _UIMaskSoftnessY: 1
     - _WaveAmplitude: 0.01
     - _WaveFrequency: 3
-    - _WaveSpeed: 2
+    - _WaveSpeed: 6.32
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.4547168, b: 0.4547168, a: 1}

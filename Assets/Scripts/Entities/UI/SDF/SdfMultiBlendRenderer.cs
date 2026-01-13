@@ -66,9 +66,10 @@ namespace Entities.UI.SDF
                 }
 
                 Material mat = group.InstanceMaterial;
-
+                
                 GroupProperty prop = new GroupProperty
                 {
+                    InterType = mat.GetInt("_INTERSECTION"),
                     FillColor = mat.GetVector("_FillColor"),
                     Alpha = mat.GetFloat("_Alpha"),
                     OutlineColor = mat.GetVector("_OutlineColor"),
@@ -128,7 +129,7 @@ namespace Entities.UI.SDF
 
             if (data.Count > 0)
             {
-                _propBuffer = new ComputeBuffer(data.Count, sizeof(float) * 19);
+                _propBuffer = new ComputeBuffer(data.Count, sizeof(float) * 19 + sizeof(int));
                 _propBuffer.SetData(data.ToArray());
             }
         }
@@ -142,6 +143,7 @@ namespace Entities.UI.SDF
 
     public struct GroupProperty
     {
+        public int InterType;
         public Vector4 FillColor;
         public float Alpha;
         public Vector4 OutlineColor;

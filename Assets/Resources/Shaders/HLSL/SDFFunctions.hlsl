@@ -1,6 +1,7 @@
 ﻿#define MAX_GROUPS 64
 
 struct GroupProperty {
+    int type;
     float4 fillColor;
     float alpha;
     float4 outlineColor;
@@ -418,7 +419,6 @@ float _InterGroupType;
 void SceneSDF_float(
     float2 UV,
     float Smoothness,
-    float InterType,
     float GlobalTime,
     out float fillMask,
     out float outlineMask,
@@ -435,18 +435,18 @@ void SceneSDF_float(
 
     for (int g = 0; g < _GroupCount; g++)
     {
-        groupFill[g] = (InterType == 1) ? -1e10 : 1e10;
-        groupWavy[g] = (InterType == 1) ? -1e10 : 1e10;
         groupProp[g] = _GroupProps[g];
+        groupFill[g] = (_GroupProps[g].type == 1) ? -1e10 : 1e10;
+        groupWavy[g] = (_GroupProps[g].type == 1) ? -1e10 : 1e10;
     }
-
+    int lastIndex = -1;
     [loop]
     for (int i = 0; i < _ShapeCount; i++)
     {
         Shape s = _AllShapes[i];
         int g = s.groupIndex;
         if (g < 0 || g >= _GroupCount) continue;
-
+        
         float2 offset = float2(0.5, 0.5);
         float2 localUV = UV - offset - s.position;
         localUV = RotateUV(localUV, -s.rotation);
@@ -462,27 +462,26 @@ void SceneSDF_float(
         float wavyDist = baseDist - wavePerturbation;
 
         float tempBase;
-        if (InterType == 0)
+        if (currentGroupProp.type == 0)
             SmoothUnion_float(groupFill[g], baseDist, Smoothness, tempBase);
-        else if (InterType == 1)
+        else if (currentGroupProp.type == 1)
             SmoothIntersection_float(groupFill[g], baseDist, Smoothness, tempBase);
-        else if (InterType == 2 && i > 0)
-            SmoothDifference_float(groupFill[g], baseDist, Smoothness, tempBase);
+        else if (currentGroupProp.type == 2 && lastIndex == g)
+            SmoothDifference_float(baseDist, groupFill[g], Smoothness, tempBase);
         else
             tempBase = baseDist;
-
         groupFill[g] = tempBase;
 
         float tempWavy;
-        if (InterType == 0)
+        if (currentGroupProp.type == 0)
             SmoothUnion_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
-        else if (InterType == 1)
+        else if (currentGroupProp.type == 1)
             SmoothIntersection_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
-        else if (InterType == 2 && i > 0)
-            SmoothDifference_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
+        else if (currentGroupProp.type == 2 && lastIndex == g)
+            SmoothDifference_float(wavyDist,groupWavy[g], Smoothness, tempWavy);
         else
             tempWavy = wavyDist;
-
+        lastIndex = g;
         groupWavy[g] = tempWavy;
     }
 

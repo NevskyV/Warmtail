@@ -48,8 +48,6 @@ namespace Entities.UI.SDF
 
             if (_instanceMaterial == null)
             {
-                _instanceMaterial = new Material(_baseMaterial);
-
 #if UNITY_EDITOR
                 string folder = "Assets/Resources/Materials/SDF_Groups";
                 if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
@@ -62,6 +60,7 @@ namespace Entities.UI.SDF
                 _instanceMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(assetPath);
                 if (!_instanceMaterial)
                 {
+                    _instanceMaterial = new Material(_baseMaterial);
                     UnityEditor.AssetDatabase.CreateAsset(_instanceMaterial, assetPath);
                     UnityEditor.AssetDatabase.SaveAssets();
                 }
