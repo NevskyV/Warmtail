@@ -36,7 +36,8 @@ namespace Entities.UI
             }
             else
             {
-                _heatFillBar.gameObject.SetActive(true);
+                if (_heatFillBar == null) return;
+                 _heatFillBar.gameObject.SetActive(true);
                 //TODO animation
                 _tween?.Pause();
                 var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);

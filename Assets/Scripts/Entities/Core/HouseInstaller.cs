@@ -30,6 +30,7 @@ namespace Entities.Core
 
         public override void InstallBindings()
         {
+            Debug.Log("set ui installer HOUSE");
             Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.Bind<Player>().FromInstance(_player).AsSingle();
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();

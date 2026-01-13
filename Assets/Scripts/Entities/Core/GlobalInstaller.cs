@@ -18,6 +18,7 @@ namespace Entities.Core
 
         public override void InstallBindings()
         {
+            Debug.Log("set ui installer GLOBAL");
             Container.Bind<SaveSystem>().FromNew().AsSingle();
             Container.Bind<ManualSaveSystem>().FromNew().AsSingle();
             Container.Bind<CrossfadeEffect>().FromNew().AsSingle();

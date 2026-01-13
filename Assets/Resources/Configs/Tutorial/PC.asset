@@ -147,6 +147,7 @@ MonoBehaviour:
         _active: 0
         _objectIds:
         - b25582bf-3620-40ac-8f08-2522dd708fd1
+        _anotherScene: 0
     - rid: 7345390844638658705
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -191,6 +192,7 @@ MonoBehaviour:
         _active: 0
         _objectIds:
         - c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _anotherScene: 0
     - rid: 7345390883105669845
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -239,6 +241,7 @@ MonoBehaviour:
         _active: 1
         _objectIds:
         - bac3d9a6-fb45-4fab-960f-75aaa41727df
+        _anotherScene: 1
     - rid: 7345390956647809377
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -261,6 +264,7 @@ MonoBehaviour:
         _active: 1
         _objectIds:
         - 017c6ef6-41a2-4e1c-a0ae-fd94fb7059a7
+        _anotherScene: 0
     - rid: 7345391011349135589
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -302,7 +306,7 @@ MonoBehaviour:
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _characterId: bac3d9a6-fb45-4fab-960f-75aaa41727df
-        _splineId: ac5977be-49a5-4aec-bfe8-72da94a8dc50
+        _splineId: 94160207-8372-42c0-8566-81bbcc29bf90
         _move: 1
     - rid: 7345391011349135601
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
@@ -316,18 +320,21 @@ MonoBehaviour:
         _objectIds:
         - 15dc0a4f-7c39-48e1-86a6-f733a92cb656
         - 35fae2a6-038a-42a1-91b3-38e37033f3c3
+        _anotherScene: 0
     - rid: 7345391011349135611
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
         _objectIds:
         - 0032e980-097c-4e32-872b-f26fe50cbce0
+        _anotherScene: 0
     - rid: 7345391011349135636
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
         - 15dc0a4f-7c39-48e1-86a6-f733a92cb656
+        _anotherScene: 0
     - rid: 7345391011349135644
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -336,6 +343,7 @@ MonoBehaviour:
         - bac3d9a6-fb45-4fab-960f-75aaa41727df
         - c0a4e396-bc2b-4d82-8d44-a5455874d1a0
         - a44ada89-02ae-410f-884b-d8a67d49cd51
+        _anotherScene: 0
     - rid: 7345391011349135653
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -393,6 +401,7 @@ MonoBehaviour:
         _objectIds:
         - 0032e980-097c-4e32-872b-f26fe50cbce0
         - 35fae2a6-038a-42a1-91b3-38e37033f3c3
+        _anotherScene: 0
     - rid: 7345391042134016141
       type: {class: SetPositionAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -411,6 +420,7 @@ MonoBehaviour:
         - a44ada89-02ae-410f-884b-d8a67d49cd51
         - bac3d9a6-fb45-4fab-960f-75aaa41727df
         - c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _anotherScene: 0
     - rid: 7345391042134016148
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -442,3 +452,4 @@ MonoBehaviour:
         _objectIds:
         - 6ac22ed2-b786-45dc-847b-aa6a7faaea6b
         - cf899f03-2a93-4a36-9cec-dd40289e9c9d
+        _anotherScene: 0

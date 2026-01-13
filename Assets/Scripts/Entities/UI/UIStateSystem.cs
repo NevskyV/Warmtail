@@ -23,9 +23,13 @@ namespace Entities.UI
         private void Construct(PlayerInput input)
         {
             _playerInput = input;
-            _playerInput.actions["Escape"].performed += EscapeTransition;
         }
 
+        private void OnEnable()
+        {
+            if(_playerInput)
+                _playerInput.actions["Escape"].performed += EscapeTransition;
+        }
         private void OnDisable()
         {
             if(_playerInput)
