@@ -11,6 +11,8 @@ namespace Systems.Abilities
         public Action UsingAbility { get; set; }
         public Action EndAbility { get; set; }
         [field: SerializeReference] public IAbilityVisual Visual { get; set; }
+        [SerializeField] private Sprite _icon;
+        public Sprite Icon => _icon;
         
         public Type AbilityType => this.GetType();
         public bool IsComboActive { get; set; }

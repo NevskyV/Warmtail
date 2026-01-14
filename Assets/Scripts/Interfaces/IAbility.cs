@@ -1,4 +1,5 @@
-﻿using System;
+using System;
+using UnityEngine;
 
 namespace Interfaces
 {
@@ -9,5 +10,6 @@ namespace Interfaces
         public Action UsingAbility { get; set; }
         public Action EndAbility { get; set; }
         public IAbilityVisual Visual { get; set; }
+        public Sprite Icon { get; }
     }
 }

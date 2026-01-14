@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Threading;
 using Entities.PlayerScripts;
 using UnityEngine;
@@ -14,7 +14,7 @@ namespace Entities.UI
         private float _currentFreeze;
         private CancellationTokenSource _token;
         private bool _isFreezing;
-        [Inject] private Player _player;
+        [Inject] private PlayerStateController _stateController;
         [Inject] private UIStateSystem _uiStateSystem;
         
         public IEnumerator StartDrain()
@@ -38,7 +38,7 @@ namespace Entities.UI
             }
             _currentFreeze = 0;
             _freezeMaterial.SetFloat(DissolveAmount, 1);
-            _player.Die();
+            _stateController.Die();
         }
         
         public IEnumerator StopDrain()

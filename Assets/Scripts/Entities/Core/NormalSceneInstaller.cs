@@ -38,6 +38,8 @@ namespace Entities.Core
             Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.Bind<PlayerConfig>().FromInstance(_playerConfig).AsSingle();
             Container.Bind<Player>().FromInstance(_player).AsSingle();
+            Container.Bind<PlayerStateController>().FromNewComponentOn(_player.gameObject).AsSingle().NonLazy();
+            Container.Bind<PlayerAbilityController>().FromNewComponentOn(_player.gameObject).AsSingle().NonLazy();
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();
             Container.Bind<DialogueVisuals>().FromInstance(_dialogueVisuals).AsSingle();
             Container.Bind<MonologueVisuals>().FromInstance(_monologueVisuals).AsSingle();

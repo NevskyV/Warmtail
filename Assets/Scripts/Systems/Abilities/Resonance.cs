@@ -31,12 +31,17 @@ namespace Systems.Abilities.Concrete
 
         private CancellationTokenSource _tickCts;
         private CancellationTokenSource _warmthCts;
+        
+        private Rigidbody2D _originalPlayerRb;
+        private Rigidbody2D _currentPlayerRb;
 
         [Inject]
         public void Construct(Player player, IWarmthSystem warmth, PlayerInput input, CinemachineCamera cam)
         {
             _player = player;
             _playerTransform = player.Rigidbody.transform;
+            _originalPlayerRb = player.Rigidbody;
+            _currentPlayerRb = player.Rigidbody;
             _warmthSystem = warmth;
             _input = input;
             _vCam = cam;
@@ -63,7 +68,7 @@ namespace Systems.Abilities.Concrete
             if (_activeSwarm == null)
                 return;
 
-            _player?.StartResonance(_activeSwarm.GetComponent<Rigidbody2D>());
+            StartResonanceInternal(_activeSwarm.GetComponent<Rigidbody2D>());
             _activeSwarm.SetControlled(true);
 
             if (_vCam != null)
@@ -163,7 +168,7 @@ namespace Systems.Abilities.Concrete
                 _activeSwarm.SetControlled(false);
             }
 
-            _player?.StopResonance();
+            StopResonanceInternal();
 
             if (_vCam != null && _playerTransform != null)
             {
@@ -216,6 +221,24 @@ namespace Systems.Abilities.Concrete
             }
 
             swarm.transform.position = target;
+        }
+        
+        private void StartResonanceInternal(Rigidbody2D swarmRb)
+        {
+            if (swarmRb == null)
+                return;
+            
+            _currentPlayerRb = swarmRb;
+            _player.Rigidbody = _currentPlayerRb;
+        }
+        
+        private void StopResonanceInternal()
+        {
+            if (_originalPlayerRb != null)
+            {
+                _currentPlayerRb = _originalPlayerRb;
+                _player.Rigidbody = _originalPlayerRb;
+            }
         }
     }
 }

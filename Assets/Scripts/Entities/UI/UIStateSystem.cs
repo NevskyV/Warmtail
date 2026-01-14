@@ -17,12 +17,14 @@ namespace Entities.UI
 
         [SerializeField] private Player _player;
         [SerializeField] private PlayerInput _playerInput;
+        private PlayerAbilityController _abilityController;
         public UIState CurrentState { get; private set; }
 
         [Inject]
-        private void Construct(PlayerInput input)
+        private void Construct(PlayerInput input, [InjectOptional] PlayerAbilityController abilityController)
         {
             _playerInput = input;
+            _abilityController = abilityController;
         }
 
         private void OnEnable()
@@ -46,15 +48,15 @@ namespace Entities.UI
         
         public async void SwitchCurrentStateAsync(UIState state)
         {
-            if (SceneManager.GetActiveScene().name != "Start")
+            if (SceneManager.GetActiveScene().name != "Start" && _abilityController != null)
             {
                 switch (state)
                 {
                     case UIState.Normal:
-                        _player.EnableLastAbilities();
+                        _abilityController.EnableLastAbilities();
                         break;
                     case UIState.Pause:
-                        _player.DisableAllAbilities();
+                        _abilityController.DisableAllAbilities();
                         break;
                 }
             }

@@ -16,6 +16,7 @@ namespace Systems
         public Action UsingAbility { get; set; }
         public Action EndAbility { get; set; }
         [field: SerializeReference] public IAbilityVisual Visual { get; set; }
+        public Sprite Icon => null; // PlayerMovement не отображается в UI
 
         [Header("Movement Settings")]
         public float MoveForce = 100f;

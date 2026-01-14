@@ -1,6 +1,8 @@
+using Data.Player;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using Zenject;
 
 public class AbilitiesUI : MonoBehaviour
 {
@@ -16,9 +18,19 @@ public class AbilitiesUI : MonoBehaviour
     private float comboTime = 0.2f;
 
     private int selectedIndex = 0;
+    private PlayerConfig _playerConfig;
+
+    [Inject]
+    private void Construct(PlayerConfig playerConfig)
+    {
+        _playerConfig = playerConfig;
+    }
 
     void Awake()
     {
+        // Устанавливаем иконки из PlayerConfig
+        InitializeAbilityIcons();
+
         keys = new InputAction[]
         {
             inputActions.FindAction("1"),
@@ -33,6 +45,22 @@ public class AbilitiesUI : MonoBehaviour
 
         rightClick = inputActions.FindAction("RightMouse");
         rightClick.Enable();
+    }
+
+    private void InitializeAbilityIcons()
+    {
+        if (_playerConfig == null || _playerConfig.Abilities == null)
+            return;
+
+        // Устанавливаем иконки для первых 4 способностей
+        for (int i = 0; i < images.Length && i < _playerConfig.Abilities.Count; i++)
+        {
+            var ability = _playerConfig.Abilities[i];
+            if (ability != null && ability.Icon != null && images[i] != null)
+            {
+                images[i].sprite = ability.Icon;
+            }
+        }
     }
 
     void Update()

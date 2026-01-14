@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Cysharp.Threading.Tasks;
 using Data;
 using Entities.PlayerScripts;
@@ -17,15 +17,17 @@ namespace Entities.Triggers
         [SerializeField] private Transform _target;
         [SerializeField] private float _zoom;
         private Player _player;
+        private PlayerAbilityController _abilityController;
         private CinemachineCamera _camera;
         private GlobalData _data;
         private float _lastZoom;
         
         [Inject]
-        private void Construct(Player player, CinemachineCamera cam, GlobalData data)
+        private void Construct(Player player, PlayerAbilityController abilityController, CinemachineCamera cam, GlobalData data)
         {
             _camera = cam;
             _player = player;
+            _abilityController = abilityController;
             _data = data;
         }
 
@@ -33,7 +35,7 @@ namespace Entities.Triggers
         {
             if (other.CompareTag("Player"))
             {
-                _player.DisableAllAbilities();
+                _abilityController.DisableAllAbilities();
                 _camera.Target.TrackingTarget = _target;
                 _lastZoom = _camera.Lens.OrthographicSize;
                 _camera.Lens.Lerp(new LensSettings
@@ -50,7 +52,7 @@ namespace Entities.Triggers
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_stunTime));
             
-            _player.EnableLastAbilities();
+            _abilityController.EnableLastAbilities();
             _camera.Target.TrackingTarget = _player.Rigidbody.transform;
             _camera.Lens.Lerp(new LensSettings
             {

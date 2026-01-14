@@ -26,8 +26,21 @@ namespace Entities.UI
 
         private void UpdateVisual()
         {
+            // Проверка В НАЧАЛЕ метода
+            if (_heatFillBar == null)
+            {
+                Debug.LogWarning("WarmthVisualUI: Heat fill bar is null!");
+                return;
+            }
+            
             var data = _globalData.Get<SavablePlayerData>();
             var runtimeData = _globalData.Get<RuntimePlayerData>();
+
+            if (data == null || runtimeData == null)
+            {
+                Debug.LogWarning("WarmthVisualUI: Player data is null!");
+                return;
+            }
 
             if (data.Stars == 0)
             {
@@ -36,8 +49,7 @@ namespace Entities.UI
             }
             else
             {
-                if (_heatFillBar == null) return;
-                 _heatFillBar.gameObject.SetActive(true);
+                _heatFillBar.gameObject.SetActive(true);
                 //TODO animation
                 _tween?.Pause();
                 var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);
