@@ -5,7 +5,6 @@ using Interfaces;
 using DG.Tweening;
 using Systems;
 using UnityEngine;
-using UnityEngine.Events;
 using Zenject;
 
 namespace Entities.Probs

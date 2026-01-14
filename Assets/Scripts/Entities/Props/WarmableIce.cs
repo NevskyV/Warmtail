@@ -2,7 +2,6 @@
 using Interfaces;
 using Systems;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.U2D;
 
 namespace Entities.Probs

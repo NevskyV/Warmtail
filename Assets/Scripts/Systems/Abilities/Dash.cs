@@ -12,7 +12,7 @@ using Cysharp.Threading.Tasks;
 namespace Systems.Abilities.Concrete
 {
     [Serializable]
-    public class DashAbility : BaseAbility, ITickable
+    public class DashAbility : BaseAbility, IFixedTickable
     {
         [SerializeField] private int _dashCost = 15;
         [SerializeField] private float _destroyRadius = 1.5f;
@@ -49,15 +49,13 @@ namespace Systems.Abilities.Concrete
             
             input.actions["Surfacing"].performed += ctx => _layerInput = ctx.ReadValue<float>();
             input.actions["Surfacing"].canceled += _ => _layerInput = 0;
-
-            UsingAbility += Tick;
         }
         
 
-        public void Tick()
+        public void FixedTick()
         {
             if (!Enabled) return;
-
+            Debug.Log("Dash Ability");
             if (Mathf.Abs(_layerInput) > 0.1f)
             {
                 int dir = (int)Mathf.Sign(_layerInput);

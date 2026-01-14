@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System;
 using Data;
 using Data.Player;
 using Entities.UI;
-using Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;

@@ -1,11 +1,6 @@
-using System.Collections.Generic;
-using System.Linq;
 using Data.Player;
-using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 using Entities.UI;
 using Interfaces;
-using Systems;
-using UnityEngine;
 using Zenject;
 
 namespace Entities.Probs

@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Rendering;
 using System.Collections.Generic;
 
 namespace Entities.UI.SDF

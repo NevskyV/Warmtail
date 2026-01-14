@@ -1,7 +1,5 @@
-﻿using System;
-using Interfaces;
+﻿using Interfaces;
 using UnityEngine;
-using Entities.Probs;
 using Entities.Core;
 using Entities.NPC;
 
