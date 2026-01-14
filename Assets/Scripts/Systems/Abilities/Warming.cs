@@ -2,6 +2,8 @@ using System;
 using Cysharp.Threading.Tasks;
 using Entities.PlayerScripts;
 using Interfaces;
+using Systems.Abilities;
+using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -25,6 +27,9 @@ namespace Systems.Abilities.Concrete
         private PlayerInput _playerInput;
         private bool _isRunning;
         private bool _canActivate;
+        
+        private AbilityTriggerZone<Warmable> _triggerZone;
+        private CompositeDisposable _disposables = new();
 
         [Inject]
         public void Construct(Player player, PlayerInput playerInput, IWarmthSystem warmth)
@@ -32,19 +37,78 @@ namespace Systems.Abilities.Concrete
             _playerTransform = player.Rigidbody.transform;
             _warmthSystem = warmth;
             _playerInput = playerInput;
+            
+            // Найти или создать триггер-зону
+            _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
+            
+            // Подписаться на вход объектов в триггер
+            if (_triggerZone != null)
+            {
+                _triggerZone.OnObjectEnter
+                    .Subscribe(_ => OnWarmableEntered())
+                    .AddTo(_disposables);
+            }
+            else
+            {
+                Debug.LogError("WarmingAbility: Trigger zone is null!");
+            }
 
             StartAbility += StartWarm;
             EndAbility += StopWarm;
         }
+        
+        private AbilityTriggerZone<Warmable> GetOrCreateTriggerZone(Player player, string name, float radius)
+        {
+            if (player == null || player.transform == null)
+            {
+                Debug.LogError($"WarmingAbility: Player or Player.transform is null!");
+                return null;
+            }
+            
+            var triggerObj = player.transform.Find(name)?.gameObject;
+            if (triggerObj == null)
+            {
+                triggerObj = new GameObject(name);
+                triggerObj.transform.SetParent(player.transform);
+                triggerObj.transform.localPosition = Vector3.zero;
+                triggerObj.AddComponent<CircleCollider2D>();
+            }
+            
+            var zone = triggerObj.GetComponent<AbilityTriggerZone<Warmable>>();
+            if (zone == null)
+                zone = triggerObj.AddComponent<AbilityTriggerZone<Warmable>>();
+            
+            if (zone != null)
+            {
+                zone.SetRadius(radius);
+                zone.SetActive(false); // Изначально выключен
+            }
+            else
+            {
+                Debug.LogError($"WarmingAbility: Failed to create trigger zone!");
+            }
+            
+            return zone;
+        }
+        
+        private void OnWarmableEntered()
+        {
+            if (_isRunning)
+                UsingAbility?.Invoke(); // Вызывать сразу при входе в радиус
+        }
 
         private void StartWarm()
         {
+            if (_triggerZone != null)
+                _triggerZone.SetActive(true); // Включить триггер
             ActiveRoutine().Forget();
             _canActivate = false;
         }
         
         private async void StopWarm()
         {
+            if (_triggerZone != null)
+                _triggerZone.SetActive(false); // Выключить триггер
             _isRunning = false;
             await UniTask.Delay(1000);
             _canActivate = true;
@@ -110,6 +174,7 @@ namespace Systems.Abilities.Concrete
             }
         }
 
+        // Используется только для взрыва (combo) с динамическим радиусом
         private System.Collections.Generic.List<Warmable> FindWarmableObjects(Vector2 position, float radius)
         {
             var hits = Physics2D.OverlapCircleAll(position, radius);
@@ -128,7 +193,10 @@ namespace Systems.Abilities.Concrete
 
         private bool WarmObjectsInRadius()
         {
-            var warmableObjects = FindWarmableObjects(_playerTransform.position, _radius);
+            if (_triggerZone == null) return false;
+            
+            var warmableObjects = _triggerZone.ObjectsInRange;
+            if (warmableObjects == null) return false;
             
             foreach (var warmable in warmableObjects)
             {

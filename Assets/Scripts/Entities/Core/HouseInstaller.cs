@@ -33,6 +33,8 @@ namespace Entities.Core
             Debug.Log("set ui installer HOUSE");
             Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.Bind<Player>().FromInstance(_player).AsSingle();
+            Container.Bind<PlayerStateController>().FromNewComponentOn(_player.gameObject).AsSingle().NonLazy();
+            Container.Bind<PlayerAbilityController>().FromNewComponentOn(_player.gameObject).AsSingle().NonLazy();
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();
             Container.Bind<HouseManager>().FromInstance(_houseManager).AsSingle();
             Container.Bind<PlayerConfig>().FromInstance(_playerConfig).AsSingle();

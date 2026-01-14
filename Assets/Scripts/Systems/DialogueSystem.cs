@@ -38,18 +38,41 @@ namespace Systems
         
         public void StartDialogue(RuntimeDialogueGraph graph, ITextVisual visual, string id, IEventInvoker character = null)
         {
-            if(graph.EntryNodeId == null) return;
+            if (graph == null)
+            {
+                Debug.LogError("DialogueSystem: Graph is null!");
+                return;
+            }
+            
+            if (graph.EntryNodeId == null)
+            {
+                Debug.LogError($"DialogueSystem: EntryNodeId is null for dialogue '{id}'");
+                return;
+            }
+            
+            if (graph.AllNodes == null || graph.AllNodes.Count == 0)
+            {
+                Debug.LogError($"DialogueSystem: AllNodes is null or empty for dialogue '{id}'");
+                return;
+            }
+            
+            _nodeLookup.Clear(); // Очистить перед заполнением
             graph.AllNodes.ForEach(x => _nodeLookup.Add(x.NodeId, x));
+            
             _dialogueGraph = graph;
             _currentNode = _nodeLookup[_dialogueGraph.EntryNodeId];
             
             _id = id;
             _visuals = visual;
-            _visuals.ShowVisuals();
+            _visuals?.ShowVisuals();
             Character = character;
             _prevActionMap = "Player";
-            _input.SwitchCurrentActionMap("Dialogue");
-            Debug.Log("Ira 1 " + _input);
+            
+            if (_input != null)
+            {
+                _input.SwitchCurrentActionMap("Dialogue");
+                Debug.Log("Ira 1 " + _input);
+            }
             
             ActivateNewNode();
         }

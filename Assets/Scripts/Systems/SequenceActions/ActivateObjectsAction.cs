@@ -12,7 +12,20 @@ namespace Systems.SequenceActions
             
         public void Invoke()
         {
-            _objectIds.ForEach(x => SavableObjectsResolver.FindObjectById(x).SetActive(_active));
+            if (_objectIds == null || _objectIds.Count == 0) return;
+            
+            foreach (var id in _objectIds)
+            {
+                var obj = SavableObjectsResolver.FindObjectById(id);
+                if (obj != null)
+                {
+                    obj.SetActive(_active);
+                }
+                else
+                {
+                    Debug.LogWarning($"ActivateObjectsAction: Object with ID '{id}' not found!");
+                }
+            }
         }
     }
 }
