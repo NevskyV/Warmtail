@@ -187,7 +187,7 @@ namespace Systems.Abilities.Concrete
 
         private SwarmController FindNearestSwarm()
         {
-            var swarms = GameObject.FindObjectsOfType<SwarmController>();
+            var swarms = UnityEngine.Object.FindObjectsByType<SwarmController>(FindObjectsSortMode.None);
             SwarmController nearest = null;
 
             float bestDist = float.MaxValue;

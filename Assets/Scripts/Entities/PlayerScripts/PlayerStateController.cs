@@ -67,7 +67,7 @@ namespace Entities.PlayerScripts
             _abilityController.DisableAllAbilities();
         }
 
-        public async void Die()
+        public void Die()
         {
             var pos = new List<Vector3>();
             var systemPos = _globalData.Get<SavablePlayerData>().RespawnPositions;

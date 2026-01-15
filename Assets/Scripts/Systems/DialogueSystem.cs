@@ -38,41 +38,37 @@ namespace Systems
         
         public void StartDialogue(RuntimeDialogueGraph graph, ITextVisual visual, string id, IEventInvoker character = null)
         {
-            if (graph == null)
+            if (graph == null || graph.EntryNodeId == null || graph.AllNodes == null)
             {
-                Debug.LogError("DialogueSystem: Graph is null!");
+                Debug.LogWarning($"DialogueSystem: Invalid dialogue graph for id '{id}'");
                 return;
             }
             
-            if (graph.EntryNodeId == null)
+            _nodeLookup.Clear();
+            graph.AllNodes.ForEach(x =>
             {
-                Debug.LogError($"DialogueSystem: EntryNodeId is null for dialogue '{id}'");
+                if (x != null && x.NodeId != null && !_nodeLookup.ContainsKey(x.NodeId))
+                {
+                    _nodeLookup.Add(x.NodeId, x);
+                }
+            });
+            
+            if (!_nodeLookup.ContainsKey(graph.EntryNodeId))
+            {
+                Debug.LogWarning($"DialogueSystem: Entry node '{graph.EntryNodeId}' not found in graph");
                 return;
             }
-            
-            if (graph.AllNodes == null || graph.AllNodes.Count == 0)
-            {
-                Debug.LogError($"DialogueSystem: AllNodes is null or empty for dialogue '{id}'");
-                return;
-            }
-            
-            _nodeLookup.Clear(); // Очистить перед заполнением
-            graph.AllNodes.ForEach(x => _nodeLookup.Add(x.NodeId, x));
             
             _dialogueGraph = graph;
             _currentNode = _nodeLookup[_dialogueGraph.EntryNodeId];
             
             _id = id;
             _visuals = visual;
-            _visuals?.ShowVisuals();
+            _visuals.ShowVisuals();
             Character = character;
             _prevActionMap = "Player";
-            
-            if (_input != null)
-            {
-                _input.SwitchCurrentActionMap("Dialogue");
-                Debug.Log("Ira 1 " + _input);
-            }
+            _input.SwitchCurrentActionMap("Dialogue");
+            Debug.Log("Ira 1 " + _input);
             
             ActivateNewNode();
         }
