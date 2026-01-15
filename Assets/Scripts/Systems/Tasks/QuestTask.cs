@@ -2,6 +2,8 @@
 using Interfaces;
 using Data;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 namespace Systems.Tasks
 {
@@ -11,20 +13,25 @@ namespace Systems.Tasks
         public Action OnComplete { get; set; }
         [SerializeField] private QuestData _questData;
         [SerializeField] private bool _start;
+        [SerializeField] private bool _home = false;
         [TextArea] [SerializeField] private string description;
 
         public void Activate()
         {
-            if (_start) QuestSystem.OnQuestStarted += MarkComplete;
-            else QuestSystem.OnQuestEnded += MarkComplete;
+            if (!_home && SceneManager.GetActiveScene().name != "Gameplay" && SceneManager.GetActiveScene().name != "GameplayIra") return;
+            if (_home && SceneManager.GetActiveScene().name != "Home" && SceneManager.GetActiveScene().name != "HomeIra") return;
+
+            if (_start) QuestSystem.OnQuestStarted.AddListener(MarkComplete);
+            else QuestSystem.OnQuestEnded.AddListener(MarkComplete);
         }
 
-        private void MarkComplete(QuestData data)
+        private void MarkComplete(QuestData data, bool start)
         {
-            if (data != _questData) return;
+            if (data != _questData || start != _start) return;
             Completed = true;
             OnComplete?.Invoke();
-            QuestSystem.OnQuestEnded -= MarkComplete;
+            if (_start) QuestSystem.OnQuestStarted.RemoveListener(MarkComplete);
+            else QuestSystem.OnQuestEnded.RemoveListener(MarkComplete);
         }
     }
 }

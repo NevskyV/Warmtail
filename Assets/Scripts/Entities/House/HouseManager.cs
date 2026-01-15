@@ -48,7 +48,7 @@ namespace Entities.House
         }
         private async void LeaveNpcAsync(Character character)
         {
-            await Task.Delay(5000);
+            await Task.Delay(10000);
             if (_npc.ContainsKey(character)) _npc[character].ChangeState(false);
         }
     }

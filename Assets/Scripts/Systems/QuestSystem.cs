@@ -4,6 +4,7 @@ using Data;
 using Data.Player;
 using Entities.UI;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -14,8 +15,8 @@ namespace Systems
         private static GlobalData _globalData;
         private static QuestVisuals _questVisuals;
         
-        public static Action<QuestData> OnQuestStarted = delegate {};
-        public static Action<QuestData> OnQuestEnded = delegate {};
+        public static UnityEvent<QuestData, bool> OnQuestStarted = new();
+        public static UnityEvent<QuestData, bool> OnQuestEnded = new();
 
         [Inject]
         private void Construct(GlobalData globalData, QuestVisuals visuals)
@@ -26,14 +27,12 @@ namespace Systems
         
         public static void StartQuest(QuestData data, int questState = 0)
         {
-            Debug.Log("Ira quest 2 " + data.name);
             if (data.Scene != SceneManager.GetActiveScene().path) return;
 
             if(!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
 
-            Debug.Log("Ira quest 3 " + data.name);
-            OnQuestStarted?.Invoke(data);
+            OnQuestStarted.Invoke(data, true);
             _questVisuals.SpawnQuest(data);
 
             for (int i = 0; i < questState; i++)
@@ -71,7 +70,7 @@ namespace Systems
         
         public static void EndQuest(QuestData data)
         {
-            OnQuestEnded?.Invoke(data);
+            OnQuestEnded.Invoke(data, false);
             data.OnComplete.ForEach(x => x.Invoke());
             if(_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData=> playerData.QuestIds.Remove(data.Id));
