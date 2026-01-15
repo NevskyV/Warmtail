@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using Cysharp.Threading.Tasks;
 using Data;
+using DG.Tweening;
 using Entities.PlayerScripts;
 using Entities.Probs;
 using Unity.Cinemachine;
@@ -21,6 +22,7 @@ namespace Entities.Triggers
         private CinemachineCamera _camera;
         private GlobalData _data;
         private float _lastZoom;
+        private Vector2 _targetPos;
         
         [Inject]
         private void Construct(Player player, PlayerAbilityController abilityController, CinemachineCamera cam, GlobalData data)
@@ -29,37 +31,33 @@ namespace Entities.Triggers
             _player = player;
             _abilityController = abilityController;
             _data = data;
+            _targetPos = _target.position;
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private async void OnTriggerEnter2D(Collider2D other)
         {
             if (other.CompareTag("Player"))
             {
                 _abilityController.DisableAllAbilities();
+                _target.position = _player.Rigidbody.transform.position;
                 _camera.Target.TrackingTarget = _target;
                 _lastZoom = _camera.Lens.OrthographicSize;
-                _camera.Lens.Lerp(new LensSettings
-                {
-                    OrthographicSize = _zoom,
-                    FarClipPlane = _camera.Lens.FarClipPlane,
-                    NearClipPlane = _camera.Lens.NearClipPlane,
-                },500);
+                DOTween.To(() => _camera.Lens.OrthographicSize, value => _camera.Lens.OrthographicSize = value, _zoom,
+                    _stunTime * 0.5f);
+
+                await _target.DOMove(_targetPos, _stunTime * 0.5f, true).AsyncWaitForCompletion();
                 Disable();
             }
         }
 
         private async void Disable()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(_stunTime));
-            
             _abilityController.EnableLastAbilities();
+            DOTween.To(() => _camera.Lens.OrthographicSize, value => _camera.Lens.OrthographicSize = value, _lastZoom,
+                _stunTime * 0.5f);
+            await _target.DOMove(_targetPos, _stunTime * 0.5f).AsyncWaitForCompletion();
             _camera.Target.TrackingTarget = _player.Rigidbody.transform;
-            _camera.Lens.Lerp(new LensSettings
-            {
-                OrthographicSize = _lastZoom,
-                FarClipPlane = _camera.Lens.FarClipPlane,
-                NearClipPlane = _camera.Lens.NearClipPlane,
-            }, 500);
+            
             if (_destroyAfter)
             {
                 ChangeState(false);

@@ -19,6 +19,7 @@ MonoBehaviour:
   <Sequence>k__BackingField:
   - Actions:
     - rid: 7345390883105669850
+    - rid: 4061568818575835406
     Tasks:
     - rid: 7345390883105669774
   - Actions:
@@ -30,6 +31,13 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 4061568818575835406
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000}
+        _position: {x: 152.5, y: 93.3}
+        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
     - rid: 7345390883105669774
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
