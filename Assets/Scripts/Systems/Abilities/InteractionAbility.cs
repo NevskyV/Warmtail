@@ -41,11 +41,11 @@ public class InteractionAbility : IAbility, IDisposable
     
     private InteractableTriggerZone GetOrCreateTriggerZone(Player player, string name, float radius)
     {
-        var triggerObj = player.transform.Find(name)?.gameObject;
+        var triggerObj = player.Rigidbody.transform.Find(name)?.gameObject;
         if (triggerObj == null)
         {
             triggerObj = new GameObject(name);
-            triggerObj.transform.SetParent(player.transform);
+            triggerObj.transform.SetParent(player.Rigidbody.transform);
             triggerObj.transform.localPosition = Vector3.zero;
             triggerObj.AddComponent<CircleCollider2D>();
         }

@@ -667,6 +667,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -3649,7 +3650,7 @@ MonoBehaviour:
         m_MethodName: EndQuest
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 94b21be415ce2f04bbab2d67ce80ca55, type: 2}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -4254,7 +4255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.NPC.SpeakableCharacter
   _id:
     Value: ba871e65-4c41-4a8f-9537-777e0d0c8c59
-  <Graph>k__BackingField: {fileID: 11400000, guid: 9bc9f321f5c08c447806b66b7fc2f013, type: 2}
+  <Graph>k__BackingField: {fileID: 0}
   <Actions>k__BackingField:
   - m_PersistentCalls:
       m_Calls:
@@ -8099,7 +8100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.NPC.SpeakableCharacter
   _id:
     Value: 9a513c9b-40ee-48d1-a25c-7ef76cbcdf71
-  <Graph>k__BackingField: {fileID: 11400000, guid: aaea2e96c69d2a7449d49d1ef08c9d10, type: 2}
+  <Graph>k__BackingField: {fileID: 0}
   <Actions>k__BackingField:
   - m_PersistentCalls:
       m_Calls:
@@ -8120,7 +8121,7 @@ MonoBehaviour:
         m_MethodName: EndQuest
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 4ec9451037cd367418c931ec0bf30fbf, type: 2}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -14519,6 +14520,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -15484,14 +15486,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 1291403531}
-  _hideCollider:
-  - {fileID: 899614468}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 1032337901}
   _hiddenSprites:
   - {fileID: 1550497786}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1001 &314922739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18302,6 +18304,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: 30e2712a-adba-4754-b2af-1bcf1ec2df6b
+      objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_ShapeTexture
       value: 
@@ -21098,18 +21104,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 245509214}
-  - {fileID: 931009569}
-  _hideCollider:
-  - {fileID: 151908810}
-  - {fileID: 299948993}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 1943060707}
   - {fileID: 1943060707}
   _hiddenSprites:
   - {fileID: 677794583}
   - {fileID: 1032337901}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1 &428727210
 GameObject:
   m_ObjectHideFlags: 0
@@ -21158,7 +21162,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.MonologueTrigger
   _id:
     Value: 4ee6233e-b6f0-4d39-b9a3-69daceebb53b
-  _graph: {fileID: 11400000, guid: 1f048a20473369345b8d3b74107331d1, type: 2}
+  _graph: {fileID: 0}
   <Actions>k__BackingField:
   - m_PersistentCalls:
       m_Calls:
@@ -22046,7 +22050,7 @@ MonoBehaviour:
         m_MethodName: set_Graph
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 13126013ac7f6dc429088486169dc1f1, type: 2}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Data.Nodes.DialogueGraph, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -22150,6 +22154,10 @@ PrefabInstance:
     - target: {fileID: 1861234805242358670, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: e55db3bb-0504-41b4-b7a1-712a459f5674
       objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_ShapeTexture
@@ -26245,6 +26253,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -31603,22 +31612,23 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.4
   m_Points:
-  - {x: 18.451239, y: 113.11179}
-  - {x: 20.968233, y: 112.9836}
-  - {x: 22.516788, y: 112.8912}
-  - {x: 23.320503, y: 112.83631}
-  - {x: 25.103165, y: 112.69486}
-  - {x: 26.057495, y: 112.607346}
-  - {x: 27.053225, y: 112.50696}
-  - {x: 28.089907, y: 112.39244}
-  - {x: 29.167091, y: 112.262505}
-  - {x: 30.28433, y: 112.115906}
-  - {x: 31.660906, y: 111.917534}
-  - {x: 33.026485, y: 111.68502}
-  - {x: 34.727867, y: 111.36976}
-  - {x: 35.869083, y: 111.13713}
-  - {x: 36.427288, y: 111.00653}
-  - {x: 36.6179, y: 110.95313}
+  - {x: 18.44292, y: 112.95305}
+  - {x: 20.959524, y: 112.824875}
+  - {x: 22.482737, y: 112.73419}
+  - {x: 23.309118, y: 112.67776}
+  - {x: 24.17813, y: 112.6123}
+  - {x: 25.08932, y: 112.53651}
+  - {x: 26.042263, y: 112.44911}
+  - {x: 27.036526, y: 112.34887}
+  - {x: 28.071663, y: 112.23453}
+  - {x: 29.147232, y: 112.10479}
+  - {x: 30.262798, y: 111.95842}
+  - {x: 31.636065, y: 111.76052}
+  - {x: 32.998672, y: 111.52851}
+  - {x: 34.273777, y: 111.294846}
+  - {x: 35.487606, y: 111.05566}
+  - {x: 36.138256, y: 110.91362}
+  - {x: 36.570686, y: 110.801346}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -31684,22 +31694,23 @@ MonoBehaviour:
   m_Creator: {fileID: 0}
   m_Modifiers: []
   m_ColliderSegment:
-  - {x: 18.451239, y: 113.11179}
-  - {x: 20.968233, y: 112.9836}
-  - {x: 22.516788, y: 112.8912}
-  - {x: 23.320503, y: 112.83631}
-  - {x: 25.103165, y: 112.69486}
-  - {x: 26.057495, y: 112.607346}
-  - {x: 27.053225, y: 112.50696}
-  - {x: 28.089907, y: 112.39244}
-  - {x: 29.167091, y: 112.262505}
-  - {x: 30.28433, y: 112.115906}
-  - {x: 31.660906, y: 111.917534}
-  - {x: 33.026485, y: 111.68502}
-  - {x: 34.727867, y: 111.36976}
-  - {x: 35.869083, y: 111.13713}
-  - {x: 36.427288, y: 111.00653}
-  - {x: 36.6179, y: 110.95313}
+  - {x: 18.44292, y: 112.95305}
+  - {x: 20.959524, y: 112.824875}
+  - {x: 22.482737, y: 112.73419}
+  - {x: 23.309118, y: 112.67776}
+  - {x: 24.17813, y: 112.6123}
+  - {x: 25.08932, y: 112.53651}
+  - {x: 26.042263, y: 112.44911}
+  - {x: 27.036526, y: 112.34887}
+  - {x: 28.071663, y: 112.23453}
+  - {x: 29.147232, y: 112.10479}
+  - {x: 30.262798, y: 111.95842}
+  - {x: 31.636065, y: 111.76052}
+  - {x: 32.998672, y: 111.52851}
+  - {x: 34.273777, y: 111.294846}
+  - {x: 35.487606, y: 111.05566}
+  - {x: 36.138256, y: 110.91362}
+  - {x: 36.570686, y: 110.801346}
   m_ShadowSegment: []
 --- !u!1971053207 &604268700
 SpriteShapeRenderer:
@@ -31754,7 +31765,7 @@ SpriteShapeRenderer:
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 1}
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
-  - {fileID: 21300000, guid: 313aac008d74a474fb3b12e1a4563d55, type: 3}
+  - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -31764,8 +31775,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 27.657276, y: 112.0563, z: 0}
-    m_Extent: {x: 9.258255, y: 2.0561218, z: 0}
+    m_Center: {x: 27.752216, y: 111.924866, z: 0}
+    m_Extent: {x: 9.413728, y: 3.0294418, z: 0}
   m_SpriteSortPoint: 0
 --- !u!1 &607902556
 GameObject:
@@ -33988,7 +33999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.NPC.SpeakableCharacter
   _id:
     Value: bbd1c771-db71-4ef1-98fa-f4314bd41b76
-  <Graph>k__BackingField: {fileID: 11400000, guid: dc72e7bc4c413834dad20c9c42ee5690, type: 2}
+  <Graph>k__BackingField: {fileID: 0}
   <Actions>k__BackingField:
   - m_PersistentCalls:
       m_Calls:
@@ -34033,7 +34044,7 @@ MonoBehaviour:
         m_MethodName: EndQuest
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 0c7633a663c55d740b05338e9a5352e6, type: 2}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -34377,14 +34388,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 2135712530}
-  _hideCollider:
-  - {fileID: 2067593499}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 988117700}
   _hiddenSprites:
   - {fileID: 458818459}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1001 &653411761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35457,6 +35468,10 @@ PrefabInstance:
     - target: {fileID: 5140200617738749890, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 146.194
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: 2cd4d383-ebc7-40aa-be9c-5f6854c40ae3
       objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
@@ -36908,18 +36923,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 2137237395}
-  - {fileID: 955526015}
-  _hideCollider:
-  - {fileID: 657137909}
-  - {fileID: 1586561752}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 1943060707}
   - {fileID: 1943060707}
   _hiddenSprites:
   - {fileID: 1432216494}
   - {fileID: 2126817620}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1001 &705486661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -37872,7 +37885,7 @@ MonoBehaviour:
         m_MethodName: StartQuest
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: c157059172963d4409bc21527944bb42, type: 2}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -38359,6 +38372,10 @@ PrefabInstance:
     - target: {fileID: 5140200617738749890, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: 82e1c032-7298-4edf-8684-0a3599fd939d
       objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
@@ -39187,6 +39204,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -43383,7 +43401,7 @@ MonoBehaviour:
         m_MethodName: set_Graph
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 31226b506044b714e99434a7c89dfd25, type: 2}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Data.Nodes.DialogueGraph, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -45832,6 +45850,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: f3cca06a-63d3-4c25-939f-b5ac574d1d9e
+      objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_ShapeTexture
       value: 
@@ -47430,6 +47452,10 @@ PrefabInstance:
     - target: {fileID: 1861234805242358670, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: 12df3638-79ad-402f-b78d-d86dd3098d59
       objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -50015,6 +50041,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -52988,6 +53015,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -54237,69 +54265,74 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.4
   m_Points:
-  - {x: 27.647476, y: 106.89828}
-  - {x: 28.103947, y: 107.11151}
-  - {x: 28.526398, y: 107.35385}
-  - {x: 28.89015, y: 107.61996}
-  - {x: 29.170546, y: 107.9046}
-  - {x: 29.298958, y: 108.10209}
-  - {x: 29.385147, y: 108.38967}
-  - {x: 29.378492, y: 108.694855}
-  - {x: 29.280157, y: 109.104324}
-  - {x: 29.068434, y: 109.58995}
-  - {x: 28.96789, y: 109.7107}
-  - {x: 28.81193, y: 109.81949}
-  - {x: 28.608719, y: 109.91685}
-  - {x: 28.366232, y: 110.003395}
-  - {x: 28.092442, y: 110.079735}
-  - {x: 27.482965, y: 110.20412}
-  - {x: 26.534037, y: 110.328415}
-  - {x: 25.735613, y: 110.39145}
-  - {x: 25.39371, y: 110.40696}
-  - {x: 25.034332, y: 110.40899}
-  - {x: 24.428646, y: 110.36162}
-  - {x: 24.178156, y: 110.3128}
-  - {x: 23.959776, y: 110.247574}
-  - {x: 23.771425, y: 110.16628}
-  - {x: 23.61101, y: 110.06913}
-  - {x: 23.476479, y: 109.956474}
-  - {x: 23.365757, y: 109.82861}
-  - {x: 23.276772, y: 109.685844}
-  - {x: 23.15564, y: 109.35687}
-  - {x: 23.096283, y: 108.972015}
-  - {x: 23.084515, y: 108.75931}
-  - {x: 23.094078, y: 108.53385}
-  - {x: 23.134756, y: 108.27994}
-  - {x: 23.204908, y: 108.00266}
-  - {x: 23.302906, y: 107.7071}
-  - {x: 23.427126, y: 107.39827}
-  - {x: 23.575947, y: 107.081314}
-  - {x: 23.747732, y: 106.7612}
-  - {x: 23.940874, y: 106.44307}
-  - {x: 24.153742, y: 106.13194}
-  - {x: 24.384722, y: 105.83291}
-  - {x: 24.684435, y: 105.4993}
-  - {x: 24.894512, y: 105.29135}
-  - {x: 25.17009, y: 105.05899}
-  - {x: 25.457294, y: 104.858986}
-  - {x: 25.754501, y: 104.69641}
-  - {x: 26.120897, y: 104.58056}
-  - {x: 26.46814, y: 104.52458}
-  - {x: 26.884148, y: 104.4996}
-  - {x: 27.357208, y: 104.51762}
-  - {x: 27.875591, y: 104.59058}
-  - {x: 28.148119, y: 104.65143}
-  - {x: 28.712507, y: 104.829346}
-  - {x: 29.204874, y: 105.04471}
-  - {x: 29.592014, y: 105.24646}
-  - {x: 30.139603, y: 105.58287}
-  - {x: 30.67342, y: 105.96913}
-  - {x: 31.222706, y: 106.41577}
-  - {x: 32.21791, y: 107.29158}
-  - {x: 35.58018, y: 110.33785}
-  - {x: 36.32331, y: 110.99365}
-  - {x: 36.46613, y: 111.097}
-  - {x: 36.407455, y: 111.0249}
+  - {x: 27.709433, y: 106.7519}
+  - {x: 28.176834, y: 106.97024}
+  - {x: 28.612375, y: 107.22015}
+  - {x: 28.99301, y: 107.498764}
+  - {x: 29.204882, y: 107.7004}
+  - {x: 29.374588, y: 107.91622}
+  - {x: 29.492325, y: 108.148506}
+  - {x: 29.5431, y: 108.37182}
+  - {x: 29.53611, y: 108.71546}
+  - {x: 29.43093, y: 109.15467}
+  - {x: 29.243137, y: 109.600075}
+  - {x: 29.075396, y: 109.82779}
+  - {x: 28.892, y: 109.9568}
+  - {x: 28.669855, y: 110.06358}
+  - {x: 28.414324, y: 110.15491}
+  - {x: 28.13122, y: 110.233894}
+  - {x: 27.509478, y: 110.360855}
+  - {x: 26.86312, y: 110.45236}
+  - {x: 25.98291, y: 110.534874}
+  - {x: 25.397127, y: 110.56588}
+  - {x: 25.031017, y: 110.56792}
+  - {x: 24.404501, y: 110.51873}
+  - {x: 24.140162, y: 110.467155}
+  - {x: 23.905441, y: 110.39696}
+  - {x: 23.698586, y: 110.30756}
+  - {x: 23.518543, y: 110.198425}
+  - {x: 23.365011, y: 110.06981}
+  - {x: 23.237831, y: 109.92297}
+  - {x: 23.136236, y: 109.76012}
+  - {x: 23.05833, y: 109.58361}
+  - {x: 22.962215, y: 109.195694}
+  - {x: 22.925554, y: 108.76033}
+  - {x: 22.935923, y: 108.51788}
+  - {x: 22.97907, y: 108.24783}
+  - {x: 23.052313, y: 107.95812}
+  - {x: 23.15365, y: 107.652405}
+  - {x: 23.281385, y: 107.3348}
+  - {x: 23.433918, y: 107.00993}
+  - {x: 23.60971, y: 106.68234}
+  - {x: 23.807291, y: 106.35691}
+  - {x: 24.02519, y: 106.03844}
+  - {x: 24.262033, y: 105.731834}
+  - {x: 24.51647, y: 105.44203}
+  - {x: 24.78728, y: 105.17401}
+  - {x: 25.07333, y: 104.93287}
+  - {x: 25.37361, y: 104.72383}
+  - {x: 25.686068, y: 104.55294}
+  - {x: 25.93336, y: 104.463486}
+  - {x: 26.259699, y: 104.392555}
+  - {x: 26.658613, y: 104.34883}
+  - {x: 27.120222, y: 104.34365}
+  - {x: 27.633526, y: 104.38905}
+  - {x: 27.906012, y: 104.43456}
+  - {x: 28.187094, y: 104.49732}
+  - {x: 28.47529, y: 104.57888}
+  - {x: 28.76908, y: 104.68079}
+  - {x: 29.274319, y: 104.90172}
+  - {x: 29.66949, y: 105.10766}
+  - {x: 30.228148, y: 105.45085}
+  - {x: 30.77057, y: 105.843315}
+  - {x: 31.325434, y: 106.294464}
+  - {x: 31.922268, y: 106.81446}
+  - {x: 33.642868, y: 108.364975}
+  - {x: 35.686474, y: 110.21965}
+  - {x: 36.42466, y: 110.87119}
+  - {x: 36.51587, y: 110.946236}
+  - {x: 36.33824, y: 111.002594}
+  - {x: 36.28844, y: 111.13028}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -54413,69 +54446,74 @@ MonoBehaviour:
   m_Creator: {fileID: 0}
   m_Modifiers: []
   m_ColliderSegment:
-  - {x: 27.647476, y: 106.89828}
-  - {x: 28.103947, y: 107.11151}
-  - {x: 28.526398, y: 107.35385}
-  - {x: 28.89015, y: 107.61996}
-  - {x: 29.170546, y: 107.9046}
-  - {x: 29.298958, y: 108.10209}
-  - {x: 29.385147, y: 108.38967}
-  - {x: 29.378492, y: 108.694855}
-  - {x: 29.280157, y: 109.104324}
-  - {x: 29.068434, y: 109.58995}
-  - {x: 28.96789, y: 109.7107}
-  - {x: 28.81193, y: 109.81949}
-  - {x: 28.608719, y: 109.91685}
-  - {x: 28.366232, y: 110.003395}
-  - {x: 28.092442, y: 110.079735}
-  - {x: 27.482965, y: 110.20412}
-  - {x: 26.534037, y: 110.328415}
-  - {x: 25.735613, y: 110.39145}
-  - {x: 25.39371, y: 110.40696}
-  - {x: 25.034332, y: 110.40899}
-  - {x: 24.428646, y: 110.36162}
-  - {x: 24.178156, y: 110.3128}
-  - {x: 23.959776, y: 110.247574}
-  - {x: 23.771425, y: 110.16628}
-  - {x: 23.61101, y: 110.06913}
-  - {x: 23.476479, y: 109.956474}
-  - {x: 23.365757, y: 109.82861}
-  - {x: 23.276772, y: 109.685844}
-  - {x: 23.15564, y: 109.35687}
-  - {x: 23.096283, y: 108.972015}
-  - {x: 23.084515, y: 108.75931}
-  - {x: 23.094078, y: 108.53385}
-  - {x: 23.134756, y: 108.27994}
-  - {x: 23.204908, y: 108.00266}
-  - {x: 23.302906, y: 107.7071}
-  - {x: 23.427126, y: 107.39827}
-  - {x: 23.575947, y: 107.081314}
-  - {x: 23.747732, y: 106.7612}
-  - {x: 23.940874, y: 106.44307}
-  - {x: 24.153742, y: 106.13194}
-  - {x: 24.384722, y: 105.83291}
-  - {x: 24.684435, y: 105.4993}
-  - {x: 24.894512, y: 105.29135}
-  - {x: 25.17009, y: 105.05899}
-  - {x: 25.457294, y: 104.858986}
-  - {x: 25.754501, y: 104.69641}
-  - {x: 26.120897, y: 104.58056}
-  - {x: 26.46814, y: 104.52458}
-  - {x: 26.884148, y: 104.4996}
-  - {x: 27.357208, y: 104.51762}
-  - {x: 27.875591, y: 104.59058}
-  - {x: 28.148119, y: 104.65143}
-  - {x: 28.712507, y: 104.829346}
-  - {x: 29.204874, y: 105.04471}
-  - {x: 29.592014, y: 105.24646}
-  - {x: 30.139603, y: 105.58287}
-  - {x: 30.67342, y: 105.96913}
-  - {x: 31.222706, y: 106.41577}
-  - {x: 32.21791, y: 107.29158}
-  - {x: 35.58018, y: 110.33785}
-  - {x: 36.32331, y: 110.99365}
-  - {x: 36.46613, y: 111.097}
-  - {x: 36.407455, y: 111.0249}
+  - {x: 27.709433, y: 106.7519}
+  - {x: 28.176834, y: 106.97024}
+  - {x: 28.612375, y: 107.22015}
+  - {x: 28.99301, y: 107.498764}
+  - {x: 29.204882, y: 107.7004}
+  - {x: 29.374588, y: 107.91622}
+  - {x: 29.492325, y: 108.148506}
+  - {x: 29.5431, y: 108.37182}
+  - {x: 29.53611, y: 108.71546}
+  - {x: 29.43093, y: 109.15467}
+  - {x: 29.243137, y: 109.600075}
+  - {x: 29.075396, y: 109.82779}
+  - {x: 28.892, y: 109.9568}
+  - {x: 28.669855, y: 110.06358}
+  - {x: 28.414324, y: 110.15491}
+  - {x: 28.13122, y: 110.233894}
+  - {x: 27.509478, y: 110.360855}
+  - {x: 26.86312, y: 110.45236}
+  - {x: 25.98291, y: 110.534874}
+  - {x: 25.397127, y: 110.56588}
+  - {x: 25.031017, y: 110.56792}
+  - {x: 24.404501, y: 110.51873}
+  - {x: 24.140162, y: 110.467155}
+  - {x: 23.905441, y: 110.39696}
+  - {x: 23.698586, y: 110.30756}
+  - {x: 23.518543, y: 110.198425}
+  - {x: 23.365011, y: 110.06981}
+  - {x: 23.237831, y: 109.92297}
+  - {x: 23.136236, y: 109.76012}
+  - {x: 23.05833, y: 109.58361}
+  - {x: 22.962215, y: 109.195694}
+  - {x: 22.925554, y: 108.76033}
+  - {x: 22.935923, y: 108.51788}
+  - {x: 22.97907, y: 108.24783}
+  - {x: 23.052313, y: 107.95812}
+  - {x: 23.15365, y: 107.652405}
+  - {x: 23.281385, y: 107.3348}
+  - {x: 23.433918, y: 107.00993}
+  - {x: 23.60971, y: 106.68234}
+  - {x: 23.807291, y: 106.35691}
+  - {x: 24.02519, y: 106.03844}
+  - {x: 24.262033, y: 105.731834}
+  - {x: 24.51647, y: 105.44203}
+  - {x: 24.78728, y: 105.17401}
+  - {x: 25.07333, y: 104.93287}
+  - {x: 25.37361, y: 104.72383}
+  - {x: 25.686068, y: 104.55294}
+  - {x: 25.93336, y: 104.463486}
+  - {x: 26.259699, y: 104.392555}
+  - {x: 26.658613, y: 104.34883}
+  - {x: 27.120222, y: 104.34365}
+  - {x: 27.633526, y: 104.38905}
+  - {x: 27.906012, y: 104.43456}
+  - {x: 28.187094, y: 104.49732}
+  - {x: 28.47529, y: 104.57888}
+  - {x: 28.76908, y: 104.68079}
+  - {x: 29.274319, y: 104.90172}
+  - {x: 29.66949, y: 105.10766}
+  - {x: 30.228148, y: 105.45085}
+  - {x: 30.77057, y: 105.843315}
+  - {x: 31.325434, y: 106.294464}
+  - {x: 31.922268, y: 106.81446}
+  - {x: 33.642868, y: 108.364975}
+  - {x: 35.686474, y: 110.21965}
+  - {x: 36.42466, y: 110.87119}
+  - {x: 36.51587, y: 110.946236}
+  - {x: 36.33824, y: 111.002594}
+  - {x: 36.28844, y: 111.13028}
   m_ShadowSegment: []
 --- !u!1971053207 &1067070738
 SpriteShapeRenderer:
@@ -54530,7 +54568,7 @@ SpriteShapeRenderer:
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 1}
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
-  - {fileID: 21300000, guid: 313aac008d74a474fb3b12e1a4563d55, type: 3}
+  - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -54540,8 +54578,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 29.679394, y: 107.727516, z: 0}
-    m_Extent: {x: 7.59286, y: 4.2258453, z: 0}
+    m_Center: {x: 29.440048, y: 107.51475, z: 0}
+    m_Extent: {x: 8.510449, y: 5.1699524, z: 0}
   m_SpriteSortPoint: 0
 --- !u!1 &1067904655
 GameObject:
@@ -56268,6 +56306,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -57134,6 +57173,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: 00a5d163-247b-40cc-84bd-1dcb263ced2f
+      objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
       value: Crystal
@@ -57327,14 +57370,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 1952800526}
-  _hideCollider:
-  - {fileID: 2048944105}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 677794583}
   _hiddenSprites:
   - {fileID: 1478392115}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1001 &1138692609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -57770,7 +57813,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.MonologueTrigger
   _id:
     Value: 3e86cf91-9316-43a7-9825-b73c66cccd11
-  _graph: {fileID: 11400000, guid: 8b1b69ae056c29146ac594bd66a0a67f, type: 2}
+  _graph: {fileID: 0}
   <Actions>k__BackingField: []
 --- !u!61 &1162580657
 BoxCollider2D:
@@ -58250,6 +58293,10 @@ PrefabInstance:
     - target: {fileID: 1861234805242358670, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: fb72d07f-3127-421a-b012-fdc455e2bbc1
       objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_ShapeTexture
@@ -59193,6 +59240,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3011162131326482961, guid: 365718cfc46e0524a8818289ddd2dcdf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672401423464370930, guid: 365718cfc46e0524a8818289ddd2dcdf, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -60725,18 +60776,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 200915474}
-  - {fileID: 854501375}
-  _hideCollider:
-  - {fileID: 950128581}
-  - {fileID: 1772339408}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 271014846}
   - {fileID: 271014846}
   _hiddenSprites:
   - {fileID: 1281903366}
   - {fileID: 756363485}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1001 &1231003755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60784,6 +60833,10 @@ PrefabInstance:
     - target: {fileID: 5140200617738749890, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: 7bd5ac8b-7120-4577-bf74-5b68fd46699f
       objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
@@ -61584,7 +61637,7 @@ MonoBehaviour:
         m_MethodName: StartQuest
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 4ec9451037cd367418c931ec0bf30fbf, type: 2}
+          m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: Data.QuestData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -63110,6 +63163,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -63530,14 +63584,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 1148689735}
-  _hideCollider:
-  - {fileID: 1929653662}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 523598680}
   _hiddenSprites:
   - {fileID: 2032443472}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1 &1291403529
 GameObject:
   m_ObjectHideFlags: 0
@@ -70384,18 +70438,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 2060081090}
-  - {fileID: 1216823737}
-  _hideCollider:
-  - {fileID: 343748367}
-  - {fileID: 1049807708}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 1943060707}
   - {fileID: 1943060707}
   _hiddenSprites:
   - {fileID: 1008025358}
   - {fileID: 1822006956}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1001 &1379618435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70443,6 +70495,10 @@ PrefabInstance:
     - target: {fileID: 5140200617738749890, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: 26f00fa0-1cc1-4b06-bd54-a629e938833a
       objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
@@ -71223,6 +71279,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: b197f44c-564a-4063-9a8d-a374dcbd79e6
+      objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
       value: Crystal (2)
@@ -71376,14 +71436,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 1379769880}
-  _hideCollider:
-  - {fileID: 525811179}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 2126817620}
   _hiddenSprites:
   - {fileID: 534784274}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1 &1423208655
 GameObject:
   m_ObjectHideFlags: 0
@@ -75748,6 +75808,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: 6f972891-1232-4386-8574-9b2ea0103ea9
+      objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_ShapeTexture
       value: 
@@ -76281,6 +76345,10 @@ PrefabInstance:
     - target: {fileID: 5140200617738749890, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 175.464
+      objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: f2fa2763-da5d-42c4-906a-3a6928c10499
       objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
@@ -80640,6 +80708,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: 248d1511-c8d8-44bd-885c-72be6441b9f6
+      objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
       value: Prism
@@ -80706,6 +80778,10 @@ PrefabInstance:
     - target: {fileID: 1861234805242358670, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: 9ce69ecb-eb96-4afc-990c-fcb1ef4e4f4e
       objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -81349,6 +81425,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3011162131326482961, guid: 365718cfc46e0524a8818289ddd2dcdf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672401423464370930, guid: 365718cfc46e0524a8818289ddd2dcdf, type: 3}
+      propertyPath: m_DynamicOccludee
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -83554,36 +83634,36 @@ EdgeCollider2D:
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0.72
   m_Points:
-  - {x: 93.763855, y: 78.042725}
-  - {x: 92.93638, y: 78.00005}
-  - {x: 91.647934, y: 77.95162}
-  - {x: 90.87757, y: 77.92952}
-  - {x: 89.17738, y: 77.89822}
-  - {x: 88.28455, y: 77.89241}
-  - {x: 87.38791, y: 77.895424}
-  - {x: 86.506096, y: 77.90896}
-  - {x: 85.65784, y: 77.934654}
-  - {x: 84.86203, y: 77.97417}
-  - {x: 84.13803, y: 78.029}
-  - {x: 83.50598, y: 78.10037}
-  - {x: 82.98003, y: 78.19026}
-  - {x: 81.18843, y: 78.55658}
-  - {x: 79.96862, y: 78.79335}
-  - {x: 74.94319, y: 79.7264}
-  - {x: 73.69735, y: 79.962585}
-  - {x: 72.06075, y: 80.28474}
-  - {x: 71.23257, y: 80.45418}
-  - {x: 70.4771, y: 80.64258}
-  - {x: 69.43153, y: 80.94614}
-  - {x: 68.243965, y: 81.32047}
-  - {x: 67.64261, y: 81.52034}
-  - {x: 66.51607, y: 81.91776}
-  - {x: 66.0279, y: 82.10393}
-  - {x: 65.61553, y: 82.27356}
-  - {x: 65.30121, y: 82.41865}
-  - {x: 65.12084, y: 82.519196}
-  - {x: 65.13503, y: 82.404945}
-  - {x: 64.98552, y: 82.183105}
+  - {x: 93.735855, y: 78.47878}
+  - {x: 92.917046, y: 78.436584}
+  - {x: 91.63405, y: 78.38837}
+  - {x: 90.86648, y: 78.36633}
+  - {x: 89.17271, y: 78.33515}
+  - {x: 88.28386, y: 78.32937}
+  - {x: 87.39199, y: 78.332375}
+  - {x: 86.51606, y: 78.3458}
+  - {x: 85.67529, y: 78.37128}
+  - {x: 84.88937, y: 78.41027}
+  - {x: 84.179085, y: 78.46403}
+  - {x: 83.56732, y: 78.53301}
+  - {x: 83.06158, y: 78.619545}
+  - {x: 81.27288, y: 78.985306}
+  - {x: 80.050415, y: 79.22259}
+  - {x: 75.3832, y: 80.08844}
+  - {x: 73.77997, y: 80.39166}
+  - {x: 72.147224, y: 80.71306}
+  - {x: 71.32575, y: 80.88109}
+  - {x: 71.00479, y: 80.95555}
+  - {x: 70.10297, y: 81.20239}
+  - {x: 68.92747, y: 81.56008}
+  - {x: 67.78283, y: 81.93418}
+  - {x: 67.206, y: 82.133354}
+  - {x: 66.66809, y: 82.32742}
+  - {x: 66.18889, y: 82.51015}
+  - {x: 65.79039, y: 82.67401}
+  - {x: 65.386154, y: 82.8664}
+  - {x: 65.57155, y: 82.424706}
+  - {x: 65.11228, y: 81.76494}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -83657,36 +83737,36 @@ MonoBehaviour:
   m_Creator: {fileID: 0}
   m_Modifiers: []
   m_ColliderSegment:
-  - {x: 93.763855, y: 78.042725}
-  - {x: 92.93638, y: 78.00005}
-  - {x: 91.647934, y: 77.95162}
-  - {x: 90.87757, y: 77.92952}
-  - {x: 89.17738, y: 77.89822}
-  - {x: 88.28455, y: 77.89241}
-  - {x: 87.38791, y: 77.895424}
-  - {x: 86.506096, y: 77.90896}
-  - {x: 85.65784, y: 77.934654}
-  - {x: 84.86203, y: 77.97417}
-  - {x: 84.13803, y: 78.029}
-  - {x: 83.50598, y: 78.10037}
-  - {x: 82.98003, y: 78.19026}
-  - {x: 81.18843, y: 78.55658}
-  - {x: 79.96862, y: 78.79335}
-  - {x: 74.94319, y: 79.7264}
-  - {x: 73.69735, y: 79.962585}
-  - {x: 72.06075, y: 80.28474}
-  - {x: 71.23257, y: 80.45418}
-  - {x: 70.4771, y: 80.64258}
-  - {x: 69.43153, y: 80.94614}
-  - {x: 68.243965, y: 81.32047}
-  - {x: 67.64261, y: 81.52034}
-  - {x: 66.51607, y: 81.91776}
-  - {x: 66.0279, y: 82.10393}
-  - {x: 65.61553, y: 82.27356}
-  - {x: 65.30121, y: 82.41865}
-  - {x: 65.12084, y: 82.519196}
-  - {x: 65.13503, y: 82.404945}
-  - {x: 64.98552, y: 82.183105}
+  - {x: 93.735855, y: 78.47878}
+  - {x: 92.917046, y: 78.436584}
+  - {x: 91.63405, y: 78.38837}
+  - {x: 90.86648, y: 78.36633}
+  - {x: 89.17271, y: 78.33515}
+  - {x: 88.28386, y: 78.32937}
+  - {x: 87.39199, y: 78.332375}
+  - {x: 86.51606, y: 78.3458}
+  - {x: 85.67529, y: 78.37128}
+  - {x: 84.88937, y: 78.41027}
+  - {x: 84.179085, y: 78.46403}
+  - {x: 83.56732, y: 78.53301}
+  - {x: 83.06158, y: 78.619545}
+  - {x: 81.27288, y: 78.985306}
+  - {x: 80.050415, y: 79.22259}
+  - {x: 75.3832, y: 80.08844}
+  - {x: 73.77997, y: 80.39166}
+  - {x: 72.147224, y: 80.71306}
+  - {x: 71.32575, y: 80.88109}
+  - {x: 71.00479, y: 80.95555}
+  - {x: 70.10297, y: 81.20239}
+  - {x: 68.92747, y: 81.56008}
+  - {x: 67.78283, y: 81.93418}
+  - {x: 67.206, y: 82.133354}
+  - {x: 66.66809, y: 82.32742}
+  - {x: 66.18889, y: 82.51015}
+  - {x: 65.79039, y: 82.67401}
+  - {x: 65.386154, y: 82.8664}
+  - {x: 65.57155, y: 82.424706}
+  - {x: 65.11228, y: 81.76494}
   m_ShadowSegment: []
 --- !u!1971053207 &1749621601
 SpriteShapeRenderer:
@@ -83741,7 +83821,7 @@ SpriteShapeRenderer:
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 1}
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
-  - {fileID: 21300000, guid: 313aac008d74a474fb3b12e1a4563d55, type: 3}
+  - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -83751,8 +83831,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 78.851105, y: 80.01024, z: 0}
-    m_Extent: {x: 14.99477, y: 3.3978233, z: 0}
+    m_Center: {x: 78.45703, y: 79.9921, z: 0}
+    m_Extent: {x: 15.442867, y: 4.2227325, z: 0}
   m_SpriteSortPoint: 0
 --- !u!1001 &1751782337
 PrefabInstance:
@@ -92387,11 +92467,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 987249838922042923, guid: b1ce084d41cf6374b9b26ae2c9bff109, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37.7
+      value: 15.3
       objectReference: {fileID: 0}
     - target: {fileID: 987249838922042923, guid: b1ce084d41cf6374b9b26ae2c9bff109, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 59.9
+      value: -9.9
       objectReference: {fileID: 0}
     - target: {fileID: 987249838922042923, guid: b1ce084d41cf6374b9b26ae2c9bff109, type: 3}
       propertyPath: m_LocalPosition.z
@@ -92490,6 +92570,10 @@ PrefabInstance:
     - target: {fileID: 1861234805242358670, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: f89142b0-e203-4343-b303-4dec042015cb
       objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
@@ -93471,6 +93555,10 @@ PrefabInstance:
     - target: {fileID: 4821867591634227064, guid: 365718cfc46e0524a8818289ddd2dcdf, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.x
       value: 6.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672401423464370930, guid: 365718cfc46e0524a8818289ddd2dcdf, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -94481,6 +94569,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -96276,14 +96365,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 275408859}
-  _hideCollider:
-  - {fileID: 950102368}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 1087859645}
   _hiddenSprites:
   - {fileID: 1970605237}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1 &1918130740
 GameObject:
   m_ObjectHideFlags: 0
@@ -96504,14 +96593,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 2005852971}
-  _hideCollider:
-  - {fileID: 1764554248}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 4380897}
   _hiddenSprites:
   - {fileID: 1858261500}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1001 &1926036228
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100552,6 +100641,7 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
+  - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
@@ -100610,16 +100700,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 1571468437}
-  _hideCollider:
-  - {fileID: 542307029}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 1473391976}
   - {fileID: 1473391976}
   _hiddenSprites:
   - {fileID: 1069804811}
   - {fileID: 481985295}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1 &1973580029
 GameObject:
   m_ObjectHideFlags: 0
@@ -101112,18 +101202,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 1727493943}
-  - {fileID: 1603870124}
-  _hideCollider:
-  - {fileID: 670838443}
-  - {fileID: 220445025}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 1943060707}
   - {fileID: 1943060707}
   _hiddenSprites:
   - {fileID: 1473391976}
   - {fileID: 523598680}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1 &1981389959
 GameObject:
   m_ObjectHideFlags: 0
@@ -102794,6 +102882,10 @@ PrefabInstance:
     - target: {fileID: 1861234805242358670, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: c9f7773f-6633-4a8a-bcca-3bb9c833947a
       objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_ShapeTexture
@@ -104864,14 +104956,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 656541491}
-  _hideCollider:
-  - {fileID: 1634591957}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 677794583}
   _hiddenSprites:
   - {fileID: 1535762012}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1001 &2058516906
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107401,14 +107493,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4ededdfbcdb4aa2b9fe42ed3fb1ad39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.RoomTransitionTrigger
-  _showCollider:
-  - {fileID: 275352061}
-  - {fileID: 1978042103}
-  - {fileID: 20519315}
-  _hideCollider:
-  - {fileID: 1507194563}
-  - {fileID: 1113959461}
-  - {fileID: 164931947}
+  _normalColliders: []
+  _hiddenColliders: []
   _normalSprites:
   - {fileID: 1008025358}
   - {fileID: 1822006956}
@@ -107417,6 +107503,8 @@ MonoBehaviour:
   - {fileID: 1996332436}
   - {fileID: 180793933}
   - {fileID: 52062420}
+  _normalShadowCasters: []
+  _hiddenShadowCasters: []
 --- !u!1 &2131000040
 GameObject:
   m_ObjectHideFlags: 0
@@ -107937,6 +108025,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8202830985372183251, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
+      propertyPath: _id.Value
+      value: 2c85e3d3-9a48-4208-9e5e-07f56e82cfa2
+      objectReference: {fileID: 0}
     - target: {fileID: 8773938243209774053, guid: 23a5489035191e0458cc5a0f1a9519f9, type: 3}
       propertyPath: m_Name
       value: Crystal
@@ -108019,6 +108111,10 @@ PrefabInstance:
     - target: {fileID: 3011162131326482961, guid: 365718cfc46e0524a8818289ddd2dcdf, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: -78.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 8672401423464370930, guid: 365718cfc46e0524a8818289ddd2dcdf, type: 3}
+      propertyPath: m_DynamicOccludee
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -108174,6 +108270,10 @@ PrefabInstance:
     - target: {fileID: 2170158736746965586, guid: a357cc27806ce8b43974a4e27332f6a2, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519228163450043134, guid: a357cc27806ce8b43974a4e27332f6a2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 354.03027
       objectReference: {fileID: 0}
     - target: {fileID: 3598030584493855862, guid: a357cc27806ce8b43974a4e27332f6a2, type: 3}
       propertyPath: m_Pivot.x
@@ -108508,7 +108608,7 @@ PrefabInstance:
       objectReference: {fileID: 72172640}
     - target: {fileID: 4015447661144327305, guid: 5ecb33a813d6d2d42b1edbd921cae07b, type: 3}
       propertyPath: m_Duration
-      value: 6.128576
+      value: 9.192863
       objectReference: {fileID: 0}
     - target: {fileID: 4015447661144327305, guid: 5ecb33a813d6d2d42b1edbd921cae07b, type: 3}
       propertyPath: m_ObjectUpAxis
@@ -108619,6 +108719,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 88475864}
     m_Modifications:
+    - target: {fileID: 1179163620888367316, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
+      propertyPath: _id.Value
+      value: 367a5f51-62b1-48ac-b0d6-262fb0780aaa
+      objectReference: {fileID: 0}
     - target: {fileID: 2192035786329948499, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
       propertyPath: m_Name
       value: HUD
@@ -108746,6 +108850,10 @@ PrefabInstance:
     - target: {fileID: 3665951358061534445, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -140.305
+      objectReference: {fileID: 0}
+    - target: {fileID: 4253318843041039975, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -26.265137
       objectReference: {fileID: 0}
     - target: {fileID: 4334564818270559517, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
       propertyPath: m_AnchorMax.y
@@ -110086,6 +110194,10 @@ PrefabInstance:
     - target: {fileID: 1861234805242358670, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287886685913731223, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
+      propertyPath: _id.Value
+      value: 9de90930-5591-4542-acd9-ec9c47c02c8c
       objectReference: {fileID: 0}
     - target: {fileID: 4893845983615761778, guid: 80d095340ef23d94abcfb92366f9f5da, type: 3}
       propertyPath: m_ShapeTexture
