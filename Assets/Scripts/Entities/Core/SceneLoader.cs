@@ -4,6 +4,7 @@ using Data;
 using Data.Player;
 using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 using Entities.Localization;
+using Systems;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -21,6 +22,7 @@ namespace Entities.Core
         private AsyncOperation _asyncLoad;
         [Inject] private DiContainer _container;
         [Inject] private GlobalData _globalData;
+        [Inject] private ScreenshotSystem _screenshotSystem;
         
         private void Start()
         {
@@ -37,8 +39,7 @@ namespace Entities.Core
                 _container.Inject(x);
                 x.UpdateString();
             });
-            if(sceneInd != "Start")
-                _globalData.Edit<SavablePlayerData>(data => data.LastScene = sceneInd);
+            _screenshotSystem.DisableAutoScreenshot();
             SceneStartLoading?.Invoke();
             
             await UniTask.Delay(_animDuration);
@@ -50,6 +51,11 @@ namespace Entities.Core
             Destroy(animator);
             
             SceneLoaded?.Invoke(sceneInd);
+            if (sceneInd != "Start")
+            {
+                _globalData.Edit<SavablePlayerData>(data => data.LastScene = sceneInd);
+                _screenshotSystem.EnableAutoScreenshot();
+            }
         }
     }
 }

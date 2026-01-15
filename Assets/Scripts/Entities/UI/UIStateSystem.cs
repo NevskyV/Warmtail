@@ -1,6 +1,7 @@
 using System;
 using AYellowpaper.SerializedCollections;
 using Entities.PlayerScripts;
+using Systems;
 using Systems.Effects;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -18,24 +19,33 @@ namespace Entities.UI
         [SerializeField] private Player _player;
         [SerializeField] private PlayerInput _playerInput;
         private PlayerAbilityController _abilityController;
+        private ScreenshotSystem _screenshotSystem;
         public UIState CurrentState { get; private set; }
 
         [Inject]
-        private void Construct(PlayerInput input, [InjectOptional] PlayerAbilityController abilityController)
+        private void Construct(PlayerInput input, ScreenshotSystem screenshotSystem, [InjectOptional] PlayerAbilityController abilityController)
         {
             _playerInput = input;
             _abilityController = abilityController;
+            _screenshotSystem = screenshotSystem;
+        }
+
+        private void ChangeObjectState(bool state)
+        {
+            gameObject.SetActive(state);
         }
 
         private void OnEnable()
         {
             if(_playerInput)
                 _playerInput.actions["Escape"].performed += EscapeTransition;
+            _screenshotSystem.ScreenShotState += ChangeObjectState;
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
             if(_playerInput)
                 _playerInput.actions["Escape"].performed -= EscapeTransition;
+            _screenshotSystem.ScreenShotState -= ChangeObjectState;
         }
 
         private void EscapeTransition(InputAction.CallbackContext ctx)

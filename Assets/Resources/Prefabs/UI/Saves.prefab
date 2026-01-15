@@ -843,7 +843,6 @@ GameObject:
   m_Component:
   - component: {fileID: 828077756927800478}
   - component: {fileID: 2045674526032176510}
-  - component: {fileID: 6228935844956080533}
   - component: {fileID: 2566067387720239715}
   m_Layer: 5
   m_Name: Saves
@@ -885,38 +884,6 @@ CanvasGroup:
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
---- !u!114 &6228935844956080533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5021421450971537281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bc2e2c13a7c4013a8565fd3b95664fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.ManualSavesUI
-  _saveNameInput: {fileID: 6577355538257898546}
-  _newSaveButton: {fileID: 4632744898882992318}
-  _savePrefab: {fileID: 303016832174792484, guid: 5a4b43d2cfd7a3c4bab52495bbf17e10, type: 3}
-  _saveParent: {fileID: 5652228926769971000}
-  _saveButtonEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6228935844956080533}
-        m_TargetAssemblyTypeName: Entities.UI.ManualSavesUI, Assembly-CSharp
-        m_MethodName: CreateNewSave
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  _persistentGlobalData: {fileID: 6645744535049247407, guid: a43cab36c9db6d44b8511f36d251fc2d, type: 3}
 --- !u!114 &2566067387720239715
 MonoBehaviour:
   m_ObjectHideFlags: 0

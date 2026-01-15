@@ -206,8 +206,9 @@ GameObject:
   - component: {fileID: 1160444218148585166}
   - component: {fileID: 1982266522565290325}
   - component: {fileID: 1312445480993399344}
+  - component: {fileID: 7683896003264709486}
   m_Layer: 5
-  m_Name: Saves
+  m_Name: Screen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -314,10 +315,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Entities.UI.UIStateSystem, Assembly-CSharp
-        m_MethodName: SwitchCurrentState
-        m_Mode: 3
+      - m_Target: {fileID: 7683896003264709486}
+        m_TargetAssemblyTypeName: Entities.UI.Buttons.CreateScreenshotButton, Assembly-CSharp
+        m_MethodName: TakeScreenshot
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -326,6 +327,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &7683896003264709486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2664252443612427670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64560e8269154314a3b8c54219b6adcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.Buttons.CreateScreenshotButton
 --- !u!1 &2722203126511011855
 GameObject:
   m_ObjectHideFlags: 0
