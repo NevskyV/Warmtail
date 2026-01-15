@@ -20,7 +20,7 @@ public class InteractionAbility : IAbility, IDisposable
     
     private Player _player;
     private PlayerInput _playerInput;
-    private AbilityTriggerZone<IInteractable> _triggerZone;
+    private InteractableTriggerZone _triggerZone;
     private CompositeDisposable _disposables = new();
     
     [Inject]
@@ -32,28 +32,15 @@ public class InteractionAbility : IAbility, IDisposable
         
         // Создать триггер-зону
         _triggerZone = GetOrCreateTriggerZone(player, "InteractionTrigger", _interactionRadius);
-        if (_triggerZone != null)
-        {
-            _triggerZone.SetActive(true); // Всегда активна
-        }
-        else
-        {
-            Debug.LogError("InteractionAbility: Trigger zone is null!");
-        }
+        _triggerZone.SetActive(true); // Всегда активна
         
         _playerInput.actions["LeftMouse"].started += _ => StartAbility?.Invoke();
         _playerInput.actions["LeftMouse"].performed += Interact;
         _playerInput.actions["LeftMouse"].canceled += _ => EndAbility?.Invoke();
     }
     
-    private AbilityTriggerZone<IInteractable> GetOrCreateTriggerZone(Player player, string name, float radius)
+    private InteractableTriggerZone GetOrCreateTriggerZone(Player player, string name, float radius)
     {
-        if (player == null || player.transform == null)
-        {
-            Debug.LogError($"InteractionAbility: Player or Player.transform is null!");
-            return null;
-        }
-        
         var triggerObj = player.transform.Find(name)?.gameObject;
         if (triggerObj == null)
         {
@@ -63,28 +50,20 @@ public class InteractionAbility : IAbility, IDisposable
             triggerObj.AddComponent<CircleCollider2D>();
         }
         
-        var zone = triggerObj.GetComponent<AbilityTriggerZone<IInteractable>>();
+        var zone = triggerObj.GetComponent<InteractableTriggerZone>();
         if (zone == null)
-            zone = triggerObj.AddComponent<AbilityTriggerZone<IInteractable>>();
+            zone = triggerObj.AddComponent<InteractableTriggerZone>();
         
-        if (zone != null)
-        {
-            zone.SetRadius(radius);
-        }
-        else
-        {
-            Debug.LogError($"InteractionAbility: Failed to create trigger zone!");
-        }
-        
+        zone.SetRadius(radius);
         return zone;
     }
     
     public void Interact(InputAction.CallbackContext context)
     {
-        if (!Enabled || _triggerZone == null) return;
+        if (!Enabled) return;
         
         var objectsInRange = _triggerZone.ObjectsInRange;
-        if (objectsInRange == null || objectsInRange.Count == 0) return;
+        if (objectsInRange.Count == 0) return;
         
         // Взять ближайший объект
         IInteractable closest = null;

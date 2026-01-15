@@ -9,7 +9,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 using Systems.Abilities;
-using Systems.Abilities.Concrete;
 using Systems.Environment;
 using Systems.Swarm;
 using Unity.Cinemachine;
@@ -60,11 +59,6 @@ namespace Entities.Core
             Container.Bind<List<IAbility>>()
                 .FromInstance(_playerConfig.Abilities)
                 .AsSingle();
-
-            Container.BindInterfacesAndSelfTo<DashAbility>().FromInstance(_playerConfig.Abilities
-                .OfType<DashAbility>().First()).AsSingle();
-            Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(_playerConfig.Abilities
-                .OfType<PlayerMovement>().First()).AsSingle();
             
             var extendedAbilities = _playerConfig.Abilities
                 .OfType<IAbilityExtended>()
