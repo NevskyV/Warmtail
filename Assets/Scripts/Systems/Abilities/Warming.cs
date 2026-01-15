@@ -26,7 +26,6 @@ namespace Systems.Abilities.Concrete
         private IWarmthSystem _warmthSystem;
         private PlayerInput _playerInput;
         private bool _isRunning;
-        private bool _canActivate;
         
         private WarmableTriggerZone _triggerZone;
         private CompositeDisposable _disposables = new();
@@ -40,11 +39,6 @@ namespace Systems.Abilities.Concrete
             
             // Найти или создать триггер-зону
             _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
-            
-            // Подписаться на вход объектов в триггер
-            _triggerZone.OnObjectEnter
-                .Subscribe(_ => OnWarmableEntered())
-                .AddTo(_disposables);
 
             StartAbility += StartWarm;
             EndAbility += StopWarm;
@@ -70,31 +64,23 @@ namespace Systems.Abilities.Concrete
             return zone;
         }
         
-        private void OnWarmableEntered()
-        {
-            if (_isRunning)
-                UsingAbility?.Invoke(); // Вызывать сразу при входе в радиус
-        }
-
         private void StartWarm()
         {
+            if (_isRunning) return; // Предотвращаем повторный запуск
+            
             _triggerZone.SetActive(true); // Включить триггер
+            _isRunning = true;
             ActiveRoutine().Forget();
-            _canActivate = false;
         }
         
-        private async void StopWarm()
+        private void StopWarm()
         {
             _triggerZone.SetActive(false); // Выключить триггер
             _isRunning = false;
-            await UniTask.Delay(1000);
-            _canActivate = true;
         }
         
         private async UniTaskVoid ActiveRoutine()
         {
-            if (!_canActivate) return;
-            _isRunning = true;
             if (IsComboActive && _secondaryComboType == typeof(MetabolismAbility))
             {
                 await PerformExplosion();
