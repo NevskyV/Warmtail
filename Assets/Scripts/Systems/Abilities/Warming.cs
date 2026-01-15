@@ -37,7 +37,6 @@ namespace Systems.Abilities.Concrete
             _warmthSystem = warmth;
             _playerInput = playerInput;
             
-            // Найти или создать триггер-зону
             _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
 
             StartAbility += StartWarm;
@@ -60,22 +59,22 @@ namespace Systems.Abilities.Concrete
                 zone = triggerObj.AddComponent<WarmableTriggerZone>();
             
             zone.SetRadius(radius);
-            zone.SetActive(false); // Изначально выключен
+            zone.SetActive(false);
             return zone;
         }
         
         private void StartWarm()
         {
-            if (_isRunning) return; // Предотвращаем повторный запуск
+            if (_isRunning) return;
             
-            _triggerZone.SetActive(true); // Включить триггер
+            _triggerZone.SetActive(true);
             _isRunning = true;
             ActiveRoutine().Forget();
         }
         
         private void StopWarm()
         {
-            _triggerZone.SetActive(false); // Выключить триггер
+            _triggerZone.SetActive(false);
             _isRunning = false;
         }
         
@@ -137,7 +136,6 @@ namespace Systems.Abilities.Concrete
             }
         }
 
-        // Используется только для взрыва (combo) с динамическим радиусом
         private System.Collections.Generic.List<Warmable> FindWarmableObjects(Vector2 position, float radius)
         {
             var hits = Physics2D.OverlapCircleAll(position, radius);

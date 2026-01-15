@@ -7,10 +7,6 @@ using UnityEngine;
 
 namespace Systems.Abilities
 {
-    /// <summary>
-    /// Базовый класс для триггер-зон. Содержит всю общую логику.
-    /// Дочерние классы переопределяют только GetComponentFromCollider для указания типа.
-    /// </summary>
     public abstract class AbilityTriggerZoneBase : MonoBehaviour
     {
         protected CircleCollider2D Collider;
@@ -59,9 +55,6 @@ namespace Systems.Abilities
         }
     }
     
-    /// <summary>
-    /// Триггер-зона для Warmable объектов.
-    /// </summary>
     public class WarmableTriggerZone : AbilityTriggerZoneBase
     {
         private HashSet<Warmable> _objectsInRange = new();
@@ -107,9 +100,6 @@ namespace Systems.Abilities
         }
     }
     
-    /// <summary>
-    /// Триггер-зона для IInteractable объектов.
-    /// </summary>
     public class InteractableTriggerZone : AbilityTriggerZoneBase
     {
         private HashSet<IInteractable> _objectsInRange = new();
