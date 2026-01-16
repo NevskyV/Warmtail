@@ -26,7 +26,6 @@ namespace Systems.Abilities.Concrete
         private IWarmthSystem _warmthSystem;
         private PlayerInput _playerInput;
         private bool _isRunning;
-        private bool _canActivate;
         
         private WarmableTriggerZone _triggerZone;
         private CompositeDisposable _disposables = new();
@@ -38,13 +37,7 @@ namespace Systems.Abilities.Concrete
             _warmthSystem = warmth;
             _playerInput = playerInput;
             
-            // Найти или создать триггер-зону
             _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
-            
-            // Подписаться на вход объектов в триггер
-            _triggerZone.OnObjectEnter
-                .Subscribe(_ => OnWarmableEntered())
-                .AddTo(_disposables);
 
             StartAbility += StartWarm;
             EndAbility += StopWarm;
@@ -66,35 +59,27 @@ namespace Systems.Abilities.Concrete
                 zone = triggerObj.AddComponent<WarmableTriggerZone>();
             
             zone.SetRadius(radius);
-            zone.SetActive(false); // Изначально выключен
+            zone.SetActive(false);
             return zone;
         }
         
-        private void OnWarmableEntered()
-        {
-            if (_isRunning)
-                UsingAbility?.Invoke(); // Вызывать сразу при входе в радиус
-        }
-
         private void StartWarm()
         {
-            _triggerZone.SetActive(true); // Включить триггер
+            if (_isRunning) return;
+            
+            _triggerZone.SetActive(true);
+            _isRunning = true;
             ActiveRoutine().Forget();
-            _canActivate = false;
         }
         
-        private async void StopWarm()
+        private void StopWarm()
         {
-            _triggerZone.SetActive(false); // Выключить триггер
+            _triggerZone.SetActive(false);
             _isRunning = false;
-            await UniTask.Delay(1000);
-            _canActivate = true;
         }
         
         private async UniTaskVoid ActiveRoutine()
         {
-            if (!_canActivate) return;
-            _isRunning = true;
             if (IsComboActive && _secondaryComboType == typeof(MetabolismAbility))
             {
                 await PerformExplosion();
@@ -151,7 +136,6 @@ namespace Systems.Abilities.Concrete
             }
         }
 
-        // Используется только для взрыва (combo) с динамическим радиусом
         private System.Collections.Generic.List<Warmable> FindWarmableObjects(Vector2 position, float radius)
         {
             var hits = Physics2D.OverlapCircleAll(position, radius);

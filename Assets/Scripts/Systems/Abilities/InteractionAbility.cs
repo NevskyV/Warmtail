@@ -14,7 +14,7 @@ public class InteractionAbility : IAbility, IDisposable
     public Action UsingAbility { get; set; }
     public Action EndAbility { get; set; }
     [field: SerializeReference] public IAbilityVisual Visual { get; set; }
-    public Sprite Icon => null; // InteractionAbility не отображается в UI
+    public Sprite Icon => null;
     [SerializeField] private float _interactionRadius = 2f;
     [SerializeField] private Vector3 _interactionOffset = Vector3.zero;
     
@@ -30,9 +30,8 @@ public class InteractionAbility : IAbility, IDisposable
         _player = player;
         _playerInput = playerInput;
         
-        // Создать триггер-зону
         _triggerZone = GetOrCreateTriggerZone(player, "InteractionTrigger", _interactionRadius);
-        _triggerZone.SetActive(true); // Всегда активна
+        _triggerZone.SetActive(true);
         
         _playerInput.actions["LeftMouse"].started += _ => StartAbility?.Invoke();
         _playerInput.actions["LeftMouse"].performed += Interact;
@@ -65,7 +64,6 @@ public class InteractionAbility : IAbility, IDisposable
         var objectsInRange = _triggerZone.ObjectsInRange;
         if (objectsInRange.Count == 0) return;
         
-        // Взять ближайший объект
         IInteractable closest = null;
         float minDist = float.MaxValue;
         Vector2 playerPos = _player.Rigidbody.transform.position + _interactionOffset;
