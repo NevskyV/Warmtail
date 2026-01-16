@@ -8,7 +8,7 @@ namespace EditorOnly
     {
         #if UNITY_EDITOR
         [Inject]
-        private void Construct(PlayerInput input, PopupSystem popupSystem, UIStateSystem _uiState)
+        private void Construct(PlayerInput input, PopupVisuals popupVisuals, UIStateSystem _uiState)
         {
             
             // foreach (var action in input.actions)

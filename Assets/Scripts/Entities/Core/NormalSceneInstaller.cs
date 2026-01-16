@@ -23,7 +23,7 @@ namespace Entities.Core
         [SerializeField] private Player _player; 
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private PlayerConfig _playerConfig;
-        [SerializeField] private PopupSystem _popupSystem;
+        [SerializeField] private PopupVisuals _popupVisuals;
         [SerializeField] private UIStateSystem _uiStateSystem;
         [SerializeField] private CinemachineCamera _cam;
         [SerializeField] private SurfacingSystem _surfacingSystem;
@@ -44,7 +44,7 @@ namespace Entities.Core
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();
             Container.Bind<DialogueVisuals>().FromInstance(_dialogueVisuals).AsSingle();
             Container.Bind<MonologueVisuals>().FromInstance(_monologueVisuals).AsSingle();
-            Container.Bind<PopupSystem>().FromInstance(_popupSystem).AsSingle();
+            Container.Bind<PopupVisuals>().FromInstance(_popupVisuals).AsSingle();
             Container.Bind<UIStateSystem>().FromInstance(_uiStateSystem).AsSingle();
             Container.Bind<CinemachineCamera>().FromInstance(_cam).AsSingle();
             Container.Bind<FreezeVisuals>().FromInstance(_freezeVisuals).AsSingle();

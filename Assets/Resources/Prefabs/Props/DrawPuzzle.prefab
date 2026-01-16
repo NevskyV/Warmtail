@@ -1,0 +1,655 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1675130321305310074
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 393652335236981641}
+  - component: {fileID: 5134695667444349692}
+  m_Layer: 0
+  m_Name: DrawPuzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 2488908585195742037, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &393652335236981641
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675130321305310074}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 5181251923719329992}
+  - {fileID: 6603625511509167820}
+  - {fileID: 612222246135421030}
+  - {fileID: 7289116804185867648}
+  - {fileID: 7449032987242972017}
+  - {fileID: 1742904861114164965}
+  - {fileID: 8726804995062436715}
+  - {fileID: 3056987437259371804}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5134695667444349692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1675130321305310074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 487e2823a5537cd4ea37fe6a8bfa93ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _during: 2
+  _triggers:
+  - {fileID: 2668097314044605883}
+  - {fileID: 4126905951219540927}
+  - {fileID: 7682702881936028949}
+  - {fileID: 561076864748136691}
+  - {fileID: 396657047335874050}
+  - {fileID: 8849986469487840150}
+  - {fileID: 2016112463968861720}
+  - {fileID: 5228086058305575023}
+  OnReseted:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSolved:
+    m_PersistentCalls:
+      m_Calls: []
+  _currentTrigger: -1
+--- !u!1001 &348963643778319653
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 393652335236981641}
+    m_Modifications:
+    - target: {fileID: 1208525669164743076, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_Name
+      value: DrawPuzzleTrigger (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 61.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+--- !u!4 &3056987437259371804 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 348963643778319653}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5228086058305575023 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501745112488025418, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 348963643778319653}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb56fa7ac7fa5f45bed123531bbf874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.DrawPuzzleTrigger
+--- !u!1001 &2793447376822315103
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 393652335236981641}
+    m_Modifications:
+    - target: {fileID: 1208525669164743076, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_Name
+      value: DrawPuzzleTrigger (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -14.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 67.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+--- !u!4 &612222246135421030 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 2793447376822315103}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7682702881936028949 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501745112488025418, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 2793447376822315103}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb56fa7ac7fa5f45bed123531bbf874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.DrawPuzzleTrigger
+--- !u!1001 &3930331623937087196
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 393652335236981641}
+    m_Modifications:
+    - target: {fileID: 1208525669164743076, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_Name
+      value: DrawPuzzleTrigger (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.68
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 71.71
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+--- !u!4 &1742904861114164965 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 3930331623937087196}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8849986469487840150 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501745112488025418, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 3930331623937087196}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb56fa7ac7fa5f45bed123531bbf874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.DrawPuzzleTrigger
+--- !u!1001 &5321871008708899656
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 393652335236981641}
+    m_Modifications:
+    - target: {fileID: 1208525669164743076, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_Name
+      value: DrawPuzzleTrigger (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 68.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+--- !u!114 &396657047335874050 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501745112488025418, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 5321871008708899656}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb56fa7ac7fa5f45bed123531bbf874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.DrawPuzzleTrigger
+--- !u!4 &7449032987242972017 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 5321871008708899656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &5445828763794781625
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 393652335236981641}
+    m_Modifications:
+    - target: {fileID: 1208525669164743076, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_Name
+      value: DrawPuzzleTrigger (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -11.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 72.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+--- !u!114 &561076864748136691 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501745112488025418, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 5445828763794781625}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb56fa7ac7fa5f45bed123531bbf874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.DrawPuzzleTrigger
+--- !u!4 &7289116804185867648 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 5445828763794781625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6314200185753756498
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 393652335236981641}
+    m_Modifications:
+    - target: {fileID: 1208525669164743076, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_Name
+      value: DrawPuzzleTrigger (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 67.41
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+--- !u!114 &2016112463968861720 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501745112488025418, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 6314200185753756498}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb56fa7ac7fa5f45bed123531bbf874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.DrawPuzzleTrigger
+--- !u!4 &8726804995062436715 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 6314200185753756498}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7592185347578685681
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 393652335236981641}
+    m_Modifications:
+    - target: {fileID: 1208525669164743076, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_Name
+      value: DrawPuzzleTrigger
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 56.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+--- !u!114 &2668097314044605883 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501745112488025418, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 7592185347578685681}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb56fa7ac7fa5f45bed123531bbf874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.DrawPuzzleTrigger
+--- !u!4 &5181251923719329992 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 7592185347578685681}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8439630386810978037
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 393652335236981641}
+    m_Modifications:
+    - target: {fileID: 1208525669164743076, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_Name
+      value: DrawPuzzleTrigger (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 60.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+--- !u!114 &4126905951219540927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5501745112488025418, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 8439630386810978037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: deb56fa7ac7fa5f45bed123531bbf874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.DrawPuzzleTrigger
+--- !u!4 &6603625511509167820 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3367387905130754105, guid: 40535eed9a61a624e8643dd985efbdb7, type: 3}
+  m_PrefabInstance: {fileID: 8439630386810978037}
+  m_PrefabAsset: {fileID: 0}
