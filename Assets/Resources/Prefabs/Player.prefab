@@ -52,8 +52,6 @@ MonoBehaviour:
   <ObjectSfx>k__BackingField: {fileID: 6727050323366090570}
   <Animator>k__BackingField: {fileID: 4513477223840235920}
   _sleepAwake: 0
-  _originalPlayerRb: {fileID: 0}
-  _swarmRb: {fileID: 0}
 --- !u!114 &15002919680156194
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,13 +328,13 @@ MonoBehaviour:
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
   m_OverlapOperation: 0
-  m_NormalMapDistance: 3
+  m_NormalMapDistance: 60
   m_NormalMapQuality: 1
   m_UseNormalMap: 0
   m_ShadowsEnabled: 1
-  m_ShadowIntensity: 0.603
+  m_ShadowIntensity: 0.4
   m_ShadowSoftness: 1
-  m_ShadowSoftnessFalloffIntensity: 0.3
+  m_ShadowSoftnessFalloffIntensity: 0.32
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:

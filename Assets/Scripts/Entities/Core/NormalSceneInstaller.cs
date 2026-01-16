@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 using Systems.Abilities;
+using Systems.Abilities.Concrete;
 using Systems.Environment;
 using Systems.Swarm;
 using Unity.Cinemachine;
@@ -51,10 +52,15 @@ namespace Entities.Core
             
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
-            Container.Bind<Interfaces.IPlayerDataProvider>().To<Systems.Abilities.PlayerDataProvider>().FromNew().AsSingle();
+            Container.Bind<IPlayerDataProvider>().To<PlayerDataProvider>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
             Container.Inject(_questSystem);
+            
+            Container.BindInterfacesAndSelfTo<DashAbility>().FromInstance(_playerConfig.Abilities
+                .OfType<DashAbility>().First()).AsSingle();
+            Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(_playerConfig.Abilities
+                .OfType<PlayerMovement>().First()).AsSingle();
             
             Container.Bind<List<IAbility>>()
                 .FromInstance(_playerConfig.Abilities)

@@ -9,7 +9,7 @@ using Zenject;
 namespace Systems
 {
     [Serializable]
-    public class PlayerMovement : IAbility
+    public class PlayerMovement : IAbility, IFixedTickable
     {
         public bool Enabled { get; set; } = true ;
         public Action StartAbility { get; set; }
