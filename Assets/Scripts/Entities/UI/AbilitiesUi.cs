@@ -56,9 +56,9 @@ public class AbilitiesUI : MonoBehaviour
         for (int i = 0; i < images.Length && i < _playerConfig.Abilities.Count; i++)
         {
             var ability = _playerConfig.Abilities[i];
-            if (ability != null && ability.Icon != null && images[i] != null)
+            if (ability != null && ability.Visual.Icon != null && images[i] != null)
             {
-                images[i].sprite = ability.Icon;
+                images[i].sprite = ability.Visual.Icon;
             }
         }
     }

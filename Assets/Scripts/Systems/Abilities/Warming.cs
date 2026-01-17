@@ -2,16 +2,15 @@ using System;
 using Cysharp.Threading.Tasks;
 using Entities.PlayerScripts;
 using Interfaces;
-using Systems.Abilities;
 using UniRx;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Systems.Abilities.Concrete
+namespace Systems.Abilities
 {
     [Serializable]
-    public class WarmingAbility : BaseAbility
+    public class WarmingAbility : WarmthAbility
     {
         [Header("Normal Warm")]
         [SerializeField] private float _radius = 3f;
@@ -80,18 +79,11 @@ namespace Systems.Abilities.Concrete
         
         private async UniTaskVoid ActiveRoutine()
         {
-            if (IsComboActive && _secondaryComboType == typeof(MetabolismAbility))
+            Debug.Log("warm");
+            while (Enabled && _isRunning)
             {
-                await PerformExplosion();
-            }
-            else
-            {
-                Debug.Log("warm");
-                while (Enabled && _isRunning)
-                {
-                    PerformTick();
-                    await UniTask.Delay(500);
-                }
+                PerformTick();
+                await UniTask.Delay(500);
             }
         }
 

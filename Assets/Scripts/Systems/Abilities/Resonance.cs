@@ -9,11 +9,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-
-namespace Systems.Abilities.Concrete
+namespace Systems.Abilities
 {
     [Serializable]
-    public class ResonanceAbility : BaseAbility
+    public class ResonanceAbility : WarmthAbility
     {
         [SerializeField] private float _searchRadius = 12f;
         [SerializeField] private float _interactRadius = 5f;

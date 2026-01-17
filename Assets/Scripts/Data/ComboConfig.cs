@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Systems;
-using Systems.Abilities.Concrete;
+using Systems.Abilities;
 using TriInspector;
 using UnityEngine;
 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Data;
 using Data.Player;
 using Entities.PlayerScripts;
 using Entities.UI;
@@ -9,7 +10,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 using Systems.Abilities;
-using Systems.Abilities.Concrete;
 using Systems.Environment;
 using Systems.Swarm;
 using Unity.Cinemachine;
@@ -30,6 +30,7 @@ namespace Entities.Core
         [SerializeField] private SwarmController _swarmController;
         [SerializeField] private FreezeVisuals _freezeVisuals;
         [SerializeField] private QuestVisuals _questVisuals;
+        [SerializeField] private ComboConfig _comboConfig;
         private QuestSystem _questSystem = new();
        
         public override void InstallBindings()
@@ -49,6 +50,7 @@ namespace Entities.Core
             Container.Bind<CinemachineCamera>().FromInstance(_cam).AsSingle();
             Container.Bind<FreezeVisuals>().FromInstance(_freezeVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
+            Container.Bind<ComboConfig>().FromInstance(_comboConfig).AsSingle();
             
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
@@ -66,16 +68,8 @@ namespace Entities.Core
                 .FromInstance(_playerConfig.Abilities)
                 .AsSingle();
             
-            var extendedAbilities = _playerConfig.Abilities
-                .OfType<IAbilityExtended>()
-                .ToList();
-            
-            Container.Bind<List<IAbilityExtended>>()
-                .WithId("PlayerAbilities")
-                .FromInstance(extendedAbilities)
-                .AsSingle();
-            
-            Container.BindInterfacesAndSelfTo<AbilitiesManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AbilitiesSystem>().AsSingle();
+            Container.Bind<ComboSystem>().FromNew().AsSingle();
             
             Container.Bind<SceneLoader>().FromComponentInHierarchy().AsSingle();
         }

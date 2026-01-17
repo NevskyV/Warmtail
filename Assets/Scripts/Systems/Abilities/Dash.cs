@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Data.Player;
 using Entities.PlayerScripts;
 using Interfaces;
@@ -6,13 +7,11 @@ using Systems.Environment;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
-using Cysharp.Threading.Tasks;
 
-
-namespace Systems.Abilities.Concrete
+namespace Systems.Abilities
 {
     [Serializable]
-    public class DashAbility : BaseAbility, IFixedTickable
+    public class DashAbility : WarmthAbility, IFixedTickable
     {
         [SerializeField] private int _dashCost = 15;
         [SerializeField] private float _destroyRadius = 1.5f;
@@ -33,7 +32,6 @@ namespace Systems.Abilities.Concrete
 
         private Vector2 _moveInput;
         private float _layerInput;
-        private bool IsFree => IsComboActive && _secondaryComboType == typeof(MetabolismAbility);
         [Inject]
         public void Construct(PlayerConfig playerConfig, Player player, WarmthSystem warmth, SurfacingSystem surfacing,
             PlayerInput input, DiContainer container)
@@ -114,7 +112,7 @@ namespace Systems.Abilities.Concrete
 
         private bool ShouldApplyCost()
         {
-            return !IsFree;
+            return true;
         }
 
         private void DestroyObstaclesInRadius(float radius)

@@ -1,6 +1,4 @@
-﻿using System;
-using Cysharp.Threading.Tasks;
-using Data;
+﻿using Data;
 using DG.Tweening;
 using Entities.PlayerScripts;
 using Entities.Probs;

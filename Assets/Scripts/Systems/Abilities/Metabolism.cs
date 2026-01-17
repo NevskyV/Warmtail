@@ -4,10 +4,10 @@ using Interfaces;
 using UnityEngine;
 using Zenject;
 
-namespace Systems.Abilities.Concrete
+namespace Systems.Abilities
 {
     [Serializable]
-    public class MetabolismAbility : BaseAbility
+    public class MetabolismAbility : WarmthAbility
     {
         [SerializeField] private float _cooldownDuration = 1f;
 

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Systems
+namespace Systems.Abilities
 {
     [Serializable]
     public class PlayerMovement : IAbility, IFixedTickable

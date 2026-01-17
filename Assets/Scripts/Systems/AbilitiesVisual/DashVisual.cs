@@ -11,6 +11,7 @@ namespace Systems.AbilitiesVisual
     {
         private static readonly int Opacity = Shader.PropertyToID("_Opacity");
         [field: SerializeReference] public int AbilityIndex { get; set; }
+        [field: SerializeReference] public Sprite Icon { get;  set;}
         [SerializeField] private Material _waveMaterial;
         [SerializeField] private AudioClip _sfx;
         private ObjectSfx _playerSfx;
@@ -25,7 +26,7 @@ namespace Systems.AbilitiesVisual
             _ability = ability;
             _playerSfx = player.ObjectSfx;
         }
-        
+
         public void StartAbility()
         {
             if (!_ability.Enabled) return;
