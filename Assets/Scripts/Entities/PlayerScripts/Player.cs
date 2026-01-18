@@ -43,5 +43,10 @@ namespace Entities.PlayerScripts
             _abilityController.Initialize();
             _stateController.Initialize(_sleepAwake);
         }
+        
+        public async void Die()
+        {
+            _sceneSystem.Die();
+        }
     }
 }

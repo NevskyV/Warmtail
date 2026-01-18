@@ -37,12 +37,10 @@ namespace Entities.UI
         private void Construct(GlobalData globalData)
         {
             _globalData = globalData;
-            Debug.Log("set ui data  " );
         }
 
         private void Awake()
         {
-            Debug.Log("set ui data  " + "  global data = " + _globalData );
             //Load Data
             _localData = _globalData.Get<SettingsData>();
             //Apply Data
