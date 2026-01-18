@@ -38,8 +38,22 @@ namespace Systems.Abilities
             
             _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
 
-            StartAbility += StartWarm;
             EndAbility += StopWarm;
+        }
+
+        public void StartWarming()
+        {
+            StartWarm();
+        }
+
+        public void PerformExplosion()
+        {
+            PerformExplosionInternal().Forget();
+        }
+
+        public void ActivateWarmingWithMetabolism()
+        {
+            PerformExplosionInternal().Forget();
         }
         
         private WarmableTriggerZone GetOrCreateTriggerZone(Player player, string name, float radius)
@@ -87,7 +101,7 @@ namespace Systems.Abilities
             }
         }
 
-        private async UniTask PerformExplosion()
+        private async UniTask PerformExplosionInternal()
         {
             if (!_warmthSystem.CheckWarmCost(_explosionCost))
             { 

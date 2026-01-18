@@ -23,7 +23,7 @@ namespace Systems.Abilities
         private bool _canDash = true;
         private UniTask _dashTask;
         private bool _dashLoopRunning;
-       
+        private bool _noCostMode = false;
 
         private PlayerConfig _playerConfig;
         private Rigidbody2D _playerRb;
@@ -47,6 +47,18 @@ namespace Systems.Abilities
             
             input.actions["Surfacing"].performed += ctx => _layerInput = ctx.ReadValue<float>();
             input.actions["Surfacing"].canceled += _ => _layerInput = 0;
+        }
+
+        public void ActivateDash()
+        {
+            _noCostMode = false;
+            StartAbility?.Invoke();
+        }
+
+        public void ActivateDashNoCost()
+        {
+            _noCostMode = true;
+            StartAbility?.Invoke();
         }
         
 
@@ -112,7 +124,7 @@ namespace Systems.Abilities
 
         private bool ShouldApplyCost()
         {
-            return true;
+            return !_noCostMode;
         }
 
         private void DestroyObstaclesInRadius(float radius)

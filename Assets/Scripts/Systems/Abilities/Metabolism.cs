@@ -27,8 +27,12 @@ namespace Systems.Abilities
             _playerDataProvider = playerDataProvider;
             _warmthSystem = warmthSystem;
             
-            StartAbility += OnStart;
             EndAbility += OnEnd;
+        }
+
+        public void ActivateMetabolism()
+        {
+            OnStart();
         }
 
         private void OnStart()

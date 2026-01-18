@@ -10,7 +10,6 @@ namespace Systems.Abilities
     {
         [field: SerializeReference] public IAbilityVisual Visual { get; set; }
         [SerializeField] private int _warmthCost;
-        [SerializeField, Range(0f, 2)] protected float _drainTick;
         [SerializeField, Range(0f, 5)] protected float _cooldown;
         [field: SerializeReference] public string BaseMethodName { get; private set; }
         public bool Enabled { get; set; }
@@ -20,29 +19,50 @@ namespace Systems.Abilities
         public string MethodName { get; set; }
 
         [Inject] private WarmthSystem _warmthSystem;
+        private bool _drainWarmthRunning;
 
         public void UseAbility()
         {
             MethodName ??= BaseMethodName;
-            GetType().GetMethod(MethodName)?.Invoke(this, null);
+            
+            if (!string.IsNullOrEmpty(MethodName))
+            {
+                var method = GetType().GetMethod(MethodName);
+                if (method != null)
+                {
+                    method.Invoke(this, null);
+                }
+            }
+          
+            
             Enabled = true;
             StartAbility?.Invoke();
-            DrainWarmth();
+            
+            if (_warmthCost > 0 && _cooldown > 0 && !_drainWarmthRunning)
+            {
+                DrainWarmth();
+            }
         }
         
         public void StopAbility()
         {
             Enabled = false;
+            _drainWarmthRunning = false;
             EndAbility?.Invoke();
         }
         
         public async void DrainWarmth()
         {
-            while (Enabled)
+            if (_drainWarmthRunning) return;
+            _drainWarmthRunning = true;
+            
+            while (Enabled && _drainWarmthRunning)
             {
                 _warmthSystem.DecreaseWarmth(_warmthCost);
                 await UniTask.Delay(TimeSpan.FromSeconds(_cooldown));
             }
+            
+            _drainWarmthRunning = false;
         }
     }
 }

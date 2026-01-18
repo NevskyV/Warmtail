@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd91835a303b4e709af5bd9338e135fa, type: 3}
   m_Name: Combo Config
   m_EditorClassIdentifier: Assembly-CSharp::Data.ComboConfig
-  <Data>k__BackingField: []
+  <Data>k__BackingField:
+  - <FirstAbility>k__BackingField: 4
+    <SecondAbility>k__BackingField: 5
+    <FirstMethodName>k__BackingField: ActivateMetabolism
+    <SecondMethodName>k__BackingField: ActivateDashNoCost
+  - <FirstAbility>k__BackingField: 4
+    <SecondAbility>k__BackingField: 2
+    <FirstMethodName>k__BackingField: ActivateMetabolism
+    <SecondMethodName>k__BackingField: ActivateWarmingWithMetabolism
+  - <FirstAbility>k__BackingField: 3
+    <SecondAbility>k__BackingField: 2
+    <FirstMethodName>k__BackingField: ActivateResonanceWithWarming
+    <SecondMethodName>k__BackingField: StartWarming
+  - <FirstAbility>k__BackingField: 3
+    <SecondAbility>k__BackingField: 5
+    <FirstMethodName>k__BackingField: ActivateResonanceWithDash
+    <SecondMethodName>k__BackingField: ActivateDash

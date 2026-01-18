@@ -1,3 +1,5 @@
+
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +17,7 @@ namespace Systems.Abilities
         private PlayerConfig _config;
         private ComboSystem _comboSystem;
         private List<WarmthAbility> _allAbilities;
-        private List<WarmthAbility> _activeAbilities;
+        private List<WarmthAbility> _activeAbilities = new();
         private int _selectedIndex;
         
         [Inject]
@@ -23,23 +25,42 @@ namespace Systems.Abilities
         {
             _config = config;
             _comboSystem = comboSystem;
-            _allAbilities = _config.Abilities.Where(x => x.GetType() == typeof(WarmthAbility))
-                .Cast<WarmthAbility>().ToList();
+            _allAbilities = _config.Abilities.OfType<WarmthAbility>().ToList();
             
             SetupInput(input);
         }
 
         private void SetupInput(PlayerInput input)
         {
+            
             input.actions["Scroll"].performed += ctx => CycleSelection(ctx.ReadValue<Vector2>().y);
 
-            input.actions["1"].performed += _ => SelectAbility(0);
-            input.actions["2"].performed += _ => SelectAbility(1);
-            input.actions["3"].performed += _ => SelectAbility(2);
-            input.actions["4"].performed += _ => SelectAbility(3);
+            input.actions["1"].performed += _ => 
+            {
+                SelectAbility(0);
+            };
+            input.actions["2"].performed += _ => 
+            {
+                SelectAbility(1);
+            };
+            input.actions["3"].performed += _ => 
+            {
+                SelectAbility(2);
+            };
+            input.actions["4"].performed += _ => 
+            {
+                SelectAbility(3);
+            };
 
-            input.actions["RightMouse"].started += _ => StartCasting();
-            input.actions["RightMouse"].canceled += _ => StopCasting();
+            input.actions["RightMouse"].started += _ => 
+            {
+                StartCasting();
+            };
+            input.actions["RightMouse"].canceled += _ => 
+            {
+                StopCasting();
+            };
+            
         }
 
         private void CycleSelection(float scrollValue)
@@ -50,24 +71,48 @@ namespace Systems.Abilities
 
         private void SelectAbility(int index)
         {
-            if (_activeAbilities.Contains(_allAbilities[index]))
+            if (index < 0 || index >= _allAbilities.Count)
             {
-                StopCasting();
-                if (_activeAbilities.Count > 1) _comboSystem.DisableCombo(_activeAbilities[0], _activeAbilities[1]);
+                return;
+            }
+            
+            var ability = _allAbilities[index];
+            
+            bool wasCasting = _activeAbilities.Count > 0;
+            
+            if (_activeAbilities.Contains(ability))
+            {
                 
-                _activeAbilities.Remove(_allAbilities[index]);
-                StartCasting();
+                if (wasCasting)
+                {
+                    StopCasting();
+                }
+                
+                if (_activeAbilities.Count > 1) 
+                {
+                    _comboSystem.DisableCombo(_activeAbilities[0], _activeAbilities[1]);
+                }
+                
+                _activeAbilities.Remove(ability);
+                
+                if (wasCasting && _activeAbilities.Count > 0)
+                {
+                    if (_activeAbilities.Count > 1)
+                    {
+                        _comboSystem.SetCombo(_activeAbilities[0], _activeAbilities[1]);
+                    }
+                    StartCasting();
+                }
                 return;
             }
             
             _selectedIndex = index;
-            _activeAbilities.Add(_allAbilities[index]);
+            _activeAbilities.Add(ability);
+            
             if (_activeAbilities.Count > 1)
             {
                 _comboSystem.SetCombo(_activeAbilities[0], _activeAbilities[1]);
             }
-
-            StartCasting();
         }
 
         private void StartCasting()

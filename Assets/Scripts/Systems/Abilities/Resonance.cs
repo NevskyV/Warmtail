@@ -27,6 +27,8 @@ namespace Systems.Abilities
         private PlayerInput _input;
         private SwarmController _activeSwarm;
         private Vector2 _moveInput;
+        private bool _warmingMode = false;
+        private bool _dashMode = false;
 
         private CancellationTokenSource _tickCts;
         private CancellationTokenSource _warmthCts;
@@ -52,8 +54,28 @@ namespace Systems.Abilities
                 moveAction.canceled += _ => _moveInput = Vector2.zero;
             }
 
-            StartAbility += OnStart;
             EndAbility += OnEnd;
+        }
+
+        public void ActivateResonance()
+        {
+            _warmingMode = false;
+            _dashMode = false;
+            OnStart();
+        }
+
+        public void ActivateResonanceWithWarming()
+        {
+            _warmingMode = true;
+            _dashMode = false;
+            OnStart();
+        }
+
+        public void ActivateResonanceWithDash()
+        {
+            _warmingMode = false;
+            _dashMode = true;
+            OnStart();
         }
 
         private void OnStart()
@@ -76,12 +98,10 @@ namespace Systems.Abilities
                 _vCam.LookAt = _activeSwarm.transform;
             }
 
-            // Запуск цикла обработки роя
             _tickCts?.Cancel();
             _tickCts = new CancellationTokenSource();
             ControlSwarm(_tickCts.Token).Forget();
 
-            // Запуск цикла траты тепла раз в _drainInterval
             _warmthCts?.Cancel();
             _warmthCts = new CancellationTokenSource();
             DrainWarmthPeriodically(_warmthCts.Token).Forget();
@@ -126,7 +146,7 @@ namespace Systems.Abilities
                         break;
 
                     ProcessSwarmInteraction();
-                    await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token); // маленький тик для обновления движения
+                    await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
                 }
             }
             catch (OperationCanceledException) { }
@@ -148,7 +168,22 @@ namespace Systems.Abilities
                 {
                     anyNear = true;
                     boid.InteractWithPhysicsObjects();
+                    
+                    if (_warmingMode)
+                    {
+                        boid.WarmObjects();
+                    }
+                    
+                    if (_dashMode)
+                    {
+                        boid.DestroyObstacles();
+                    }
                 }
+            }
+
+            if (_dashMode && _activeSwarm != null)
+            {
+                _activeSwarm.SetSpeedMultiplier(1.5f);
             }
 
             _activeSwarm.SetControlInput(anyNear ? _moveInput : Vector2.zero);
@@ -177,9 +212,12 @@ namespace Systems.Abilities
 
             _moveInput = Vector2.zero;
             _activeSwarm = null;
+            _warmingMode = false;
+            _dashMode = false;
 
             if (swarmToReturn != null)
             {
+                swarmToReturn.SetSpeedMultiplier(1f);
                 ReturnSwarmToPosition(swarmToReturn, returnPos, 0.5f).Forget();
             }
         }

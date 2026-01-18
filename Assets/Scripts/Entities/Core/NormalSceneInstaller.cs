@@ -68,8 +68,8 @@ namespace Entities.Core
                 .FromInstance(_playerConfig.Abilities)
                 .AsSingle();
             
-            Container.BindInterfacesAndSelfTo<AbilitiesSystem>().AsSingle();
-            Container.Bind<ComboSystem>().FromNew().AsSingle();
+            Container.BindInterfacesAndSelfTo<AbilitiesSystem>().AsSingle().NonLazy();
+            Container.Bind<ComboSystem>().FromNew().AsSingle().NonLazy();
             
             Container.Bind<SceneLoader>().FromComponentInHierarchy().AsSingle();
         }

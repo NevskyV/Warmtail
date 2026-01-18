@@ -1,4 +1,5 @@
 
+using Interfaces;
 using UnityEngine;
 
 namespace Systems.Swarm
@@ -90,6 +91,30 @@ namespace Systems.Swarm
                 if (hit.attachedRigidbody != null && !hit.CompareTag("Player"))
                 {
                     hit.attachedRigidbody.AddForce(Vector2.up * 2f, ForceMode2D.Impulse);
+                }
+            }
+        }
+
+        public void WarmObjects()
+        {
+            var hits = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+            foreach (var hit in hits)
+            {
+                if (hit.TryGetComponent<Warmable>(out var warmable))
+                {
+                    warmable.Warm();
+                }
+            }
+        }
+
+        public void DestroyObstacles()
+        {
+            var hits = Physics2D.OverlapCircleAll(transform.position, 0.5f);
+            foreach (var hit in hits)
+            {
+                if (hit.TryGetComponent<IDestroyable>(out var destroyable))
+                {
+                    destroyable.DestroyObject();
                 }
             }
         }
