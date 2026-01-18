@@ -38,7 +38,7 @@ namespace Systems
         {
             if ((SceneManager.GetActiveScene().name == "Home" || SceneManager.GetActiveScene().name == "HomeIra" ) 
                 && !_globalData.Get<SavablePlayerData>().IsHomeOpened)
-                    _globalData.Edit<SavablePlayerData>(data => data.IsHomeOpened = true);
+                _globalData.Edit<SavablePlayerData>(data => data.IsHomeOpened = true);
 
             _atHome = (SceneManager.GetActiveScene().name == "Home" || SceneManager.GetActiveScene().name == "HomeIra");
             bool isHomeOpened = _globalData.Get<SavablePlayerData>().IsHomeOpened;

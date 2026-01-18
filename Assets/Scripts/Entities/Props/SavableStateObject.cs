@@ -12,6 +12,7 @@ namespace Entities.Probs
         [SerializeField, ReadOnly]
         private UniqueID _id;
         [Inject] protected GlobalData _globalData;
+        public Action<bool> OnStateChanged;
         
         public string Id => _id.Value;
 
@@ -56,6 +57,7 @@ namespace Entities.Probs
             _globalData.Edit<WorldData>(worldData => {
                 worldData.SavableObjects[_id.Value] = active; });
             gameObject.SetActive(active);
+            OnStateChanged?.Invoke(active);
         }
 
         public void ChangeStateOnLoad(bool active)

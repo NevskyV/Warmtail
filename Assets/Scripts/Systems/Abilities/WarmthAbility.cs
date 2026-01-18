@@ -9,7 +9,7 @@ namespace Systems.Abilities
     public abstract class WarmthAbility : IAbility
     {
         [field: SerializeReference] public IAbilityVisual Visual { get; set; }
-        [SerializeField] protected int WarmthCost;
+        [SerializeField] protected int MaxWarmthCost;
         [SerializeField, Range(0f, 2)] protected float Tick;
         [SerializeField, Range(0f, 5)] protected float Cooldown;
         [field: SerializeReference] public string BaseMethodName { get; private set; }
@@ -19,19 +19,27 @@ namespace Systems.Abilities
         public Action EndAbility { get; set; }
         public string MethodName { get; set; }
 
-        [Inject] private WarmthSystem _warmthSystem;
+        private WarmthSystem _warmthSystem;
         private bool _drainWarmthRunning;
+        protected int WarmthCost;
+
+        [Inject]
+        private void Construct(WarmthSystem warmthSystem)
+        {
+            _warmthSystem = warmthSystem;
+            WarmthCost = MaxWarmthCost;
+        }
 
         public void UseAbility()
         {
-            MethodName ??= BaseMethodName;
-            Enabled = true;
-            StartAbility?.Invoke();
-            if (!string.IsNullOrEmpty(MethodName))
-                GetType().GetMethod(MethodName)?.Invoke(this, null);
-            
-            if (WarmthCost > 0 && Cooldown > 0 && !_drainWarmthRunning)
+            if (_warmthSystem.CheckWarmCost(WarmthCost)  && !_drainWarmthRunning)
             {
+                Enabled = true;
+                StartAbility?.Invoke();
+                
+                if (string.IsNullOrEmpty(MethodName))
+                    MethodName = BaseMethodName;
+                GetType().GetMethod(MethodName)?.Invoke(this, null);
                 DrainWarmth();
             }
         }

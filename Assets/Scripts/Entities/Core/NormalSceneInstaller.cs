@@ -50,11 +50,11 @@ namespace Entities.Core
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             Container.Bind<ComboConfig>().FromInstance(_comboConfig).AsSingle();
             
+            Container.Bind<QuestSystem>().FromNew().AsSingle().NonLazy();
             Container.Bind<SceneSystem>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
-            Container.Bind<QuestSystem>().FromNew().AsSingle();
             Container.Bind<PlayerDataProvider>().FromNew().AsSingle();
             
             Container.BindInterfacesAndSelfTo<DashAbility>().FromInstance(_playerConfig.Abilities

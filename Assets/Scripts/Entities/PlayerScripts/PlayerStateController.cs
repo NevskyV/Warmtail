@@ -2,8 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Data;
-using Data.Player;
-using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 using Systems;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,16 +15,16 @@ namespace Entities.PlayerScripts
         
         private Player _player;
         private PlayerAbilityController _abilityController;
-        private GlobalData _globalData;
         private PlayerInput _input;
         private List<Rigidbody2D> _rbs = new();
+        private SceneSystem _sceneSystem;
         
         [Inject]
-        private void Construct(GlobalData globalData, PlayerInput input, Player player, PlayerAbilityController abilityController)
+        private void Construct(PlayerInput input, Player player, PlayerAbilityController abilityController, SceneSystem sceneSystem)
         {
-            _globalData = globalData;
             _input = input;
             _player = player;
+            _sceneSystem = sceneSystem;
             _abilityController = abilityController;
         }
 
@@ -37,7 +35,7 @@ namespace Entities.PlayerScripts
                 Debug.LogError("PlayerStateController: Player is not injected!");
                 return;
             }
-            
+            _sceneSystem.Spawn();
             _rbs = _player.GetComponentsInChildren<Rigidbody2D>().ToList();
             if (sleepAwake) Sleep();
             else WakeUp();
@@ -69,14 +67,7 @@ namespace Entities.PlayerScripts
 
         public void Die()
         {
-            var pos = new List<Vector3>();
-            var systemPos = _globalData.Get<SavablePlayerData>().RespawnPositions;
-
-            foreach (var p in systemPos)
-                pos.Add(p.ToUnity());
-
-            var rbParent = _player.Rigidbody.transform.parent;
-            rbParent.position = pos.GetRandom() - _player.Rigidbody.transform.position + _player.Rigidbody.transform.parent.position;
+            _sceneSystem.Die();
         }
     }
 }

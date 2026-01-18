@@ -1,6 +1,7 @@
 using Entities.Sound;
 using UnityEngine;
 using Zenject;
+using Systems;
 
 namespace Entities.PlayerScripts
 {
@@ -44,9 +45,6 @@ namespace Entities.PlayerScripts
             _stateController.Initialize(_sleepAwake);
         }
         
-        public async void Die()
-        {
-            _sceneSystem.Die();
-        }
+        
     }
 }
