@@ -2,7 +2,6 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Entities.PlayerScripts;
-using Interfaces;
 using Systems.Swarm;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -20,15 +19,14 @@ namespace Systems.Abilities
         [SerializeField] private float _drainInterval = 0.5f;
        
         [SerializeField] private Vector2 _returnPosition;
-        private IWarmthSystem _warmthSystem;
         private Transform _playerTransform;
         private Player _player;
         private CinemachineCamera _vCam;
         private PlayerInput _input;
         private SwarmController _activeSwarm;
         private Vector2 _moveInput;
-        private bool _warmingMode = false;
-        private bool _dashMode = false;
+        private bool _warmingMode;
+        private bool _dashMode;
 
         private CancellationTokenSource _tickCts;
         private CancellationTokenSource _warmthCts;
@@ -37,13 +35,12 @@ namespace Systems.Abilities
         private Rigidbody2D _currentPlayerRb;
 
         [Inject]
-        public void Construct(Player player, IWarmthSystem warmth, PlayerInput input, CinemachineCamera cam)
+        public void Construct(Player player, PlayerInput input, CinemachineCamera cam)
         {
             _player = player;
             _playerTransform = player.Rigidbody.transform;
             _originalPlayerRb = player.Rigidbody;
             _currentPlayerRb = player.Rigidbody;
-            _warmthSystem = warmth;
             _input = input;
             _vCam = cam;
 
@@ -113,28 +110,12 @@ namespace Systems.Abilities
             {
                 while (!token.IsCancellationRequested)
                 {
-                    ApplyWarmthDrain();
                     await UniTask.Delay(TimeSpan.FromSeconds(_drainInterval), cancellationToken: token);
                 }
             }
             catch (OperationCanceledException) { }
         }
-
-        private void ApplyWarmthDrain()
-        {
-            int cost = Mathf.FloorToInt(_warmthDrain);
-
-            if (cost <= 0)
-                return;
-
-            if (!_warmthSystem.CheckWarmCost(cost))
-            {
-                EndAbility?.Invoke();
-                return;
-            }
-
-            _warmthSystem.DecreaseWarmth(cost);
-        }
+        
 
         private async UniTaskVoid ControlSwarm(CancellationToken token)
         {

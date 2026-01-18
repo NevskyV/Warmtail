@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -9,33 +8,21 @@ namespace Systems.Abilities
     [Serializable]
     public class MetabolismAbility : WarmthAbility
     {
-        [SerializeField] private float _cooldownDuration = 1f;
-
         private bool _canActivate = true;
         private bool _isRunning;
-        
-        [SerializeField] private int _heatDrainPerSecond = 8;
         [SerializeField] private float _speedMultiplier = 2f;
 
-        private IPlayerDataProvider _playerDataProvider;
-        private IWarmthSystem _warmthSystem;
+        private PlayerDataProvider _playerDataProvider;
         private int _baseSpeed;
 
         [Inject]
-        public void Construct(IPlayerDataProvider playerDataProvider, IWarmthSystem warmthSystem)
+        public void Construct(PlayerDataProvider playerDataProvider)
         {
             _playerDataProvider = playerDataProvider;
-            _warmthSystem = warmthSystem;
-            
             EndAbility += OnEnd;
         }
 
-        public void ActivateMetabolism()
-        {
-            OnStart();
-        }
-
-        private void OnStart()
+        private void ApplyNewSpeed()
         { 
             if (!_canActivate) return;
 
@@ -43,36 +30,14 @@ namespace Systems.Abilities
             _isRunning = true;
             
             Debug.Log("MetabolismAbility.OnStart()");
-            _baseSpeed = _playerDataProvider.GetSpeed();
-            ApplySpeedModifier();
-            DrainRoutine().Forget();
-        }
-
-        private void ApplySpeedModifier()
-        {
+            _baseSpeed = int.Parse(_playerDataProvider.GetProperty("Speed"));
             int newSpeed = Mathf.RoundToInt(_baseSpeed * _speedMultiplier);
-            _playerDataProvider.SetSpeed(newSpeed);
+            _playerDataProvider.SetProperty("Speed",newSpeed.ToString());
         }
 
         private void RestoreSpeed()
         {
-            _playerDataProvider.SetSpeed(_baseSpeed);
-        }
-
-        private async UniTaskVoid DrainRoutine()
-        {
-            Debug.Log("MetabolismAbility.DrainRoutine()");
-            while (Enabled && _isRunning)
-            {
-                Debug.Log("MetabolismAbility.DrainRoutine(DDDD)");
-                DrainWarmth();
-                await UniTask.Delay(1000);
-            }
-        }
-
-        private void DrainWarmth()
-        {
-            _warmthSystem.DecreaseWarmth(_heatDrainPerSecond);
+            _playerDataProvider.SetProperty("Speed",_baseSpeed.ToString());
         }
 
         private async void OnEnd()
@@ -80,7 +45,7 @@ namespace Systems.Abilities
             _isRunning = false;
             RestoreSpeed();
 
-            await UniTask.Delay(TimeSpan.FromSeconds(_cooldownDuration));
+            await UniTask.Delay(TimeSpan.FromSeconds(Cooldown));
             _canActivate = true;
         }
     }

@@ -9,8 +9,8 @@ namespace Systems.Abilities
     public abstract class WarmthAbility : IAbility
     {
         [field: SerializeReference] public IAbilityVisual Visual { get; set; }
-        [SerializeField] private int _warmthCost;
-        [SerializeField, Range(0f, 5)] protected float _cooldown;
+        [SerializeField] protected int WarmthCost;
+        [SerializeField, Range(0f, 5)] protected float Cooldown;
         [field: SerializeReference] public string BaseMethodName { get; private set; }
         public bool Enabled { get; set; }
         public Action StartAbility { get; set; }
@@ -26,19 +26,12 @@ namespace Systems.Abilities
             MethodName ??= BaseMethodName;
             
             if (!string.IsNullOrEmpty(MethodName))
-            {
-                var method = GetType().GetMethod(MethodName);
-                if (method != null)
-                {
-                    method.Invoke(this, null);
-                }
-            }
-          
+                GetType().GetMethod(MethodName)?.Invoke(this, null);
             
             Enabled = true;
             StartAbility?.Invoke();
             
-            if (_warmthCost > 0 && _cooldown > 0 && !_drainWarmthRunning)
+            if (WarmthCost > 0 && Cooldown > 0 && !_drainWarmthRunning)
             {
                 DrainWarmth();
             }
@@ -56,13 +49,14 @@ namespace Systems.Abilities
             if (_drainWarmthRunning) return;
             _drainWarmthRunning = true;
             
-            while (Enabled && _drainWarmthRunning)
+            while (Enabled && _drainWarmthRunning && _warmthSystem.CheckWarmCost(WarmthCost))
             {
-                _warmthSystem.DecreaseWarmth(_warmthCost);
-                await UniTask.Delay(TimeSpan.FromSeconds(_cooldown));
+                _warmthSystem.DecreaseWarmth(WarmthCost);
+                await UniTask.Delay(TimeSpan.FromSeconds(Cooldown));
             }
             
             _drainWarmthRunning = false;
+            StopAbility();
         }
     }
 }

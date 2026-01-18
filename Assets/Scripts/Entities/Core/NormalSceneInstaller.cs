@@ -31,11 +31,9 @@ namespace Entities.Core
         [SerializeField] private FreezeVisuals _freezeVisuals;
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private ComboConfig _comboConfig;
-        private QuestSystem _questSystem = new();
        
         public override void InstallBindings()
         {
-            Debug.Log("set ui installer NORMAL");
             Container.Bind<SwarmController>().FromInstance(_swarmController).AsSingle();
             Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.Bind<PlayerConfig>().FromInstance(_playerConfig).AsSingle();
@@ -54,10 +52,8 @@ namespace Entities.Core
             
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
-            Container.Bind<IPlayerDataProvider>().To<PlayerDataProvider>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
-            Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
-            Container.Inject(_questSystem);
+            Container.Bind<QuestSystem>().FromNew().AsSingle();
             
             Container.BindInterfacesAndSelfTo<DashAbility>().FromInstance(_playerConfig.Abilities
                 .OfType<DashAbility>().First()).AsSingle();
