@@ -47,6 +47,7 @@ namespace Entities.Core
             Container.Bind<FreezeVisuals>().FromInstance(_freezeVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             
+            Container.Bind<SceneSystem>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
             Container.Bind<Interfaces.IPlayerDataProvider>().To<Systems.Abilities.PlayerDataProvider>().FromNew().AsSingle();

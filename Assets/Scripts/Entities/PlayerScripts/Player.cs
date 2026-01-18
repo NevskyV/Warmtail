@@ -26,6 +26,7 @@ namespace Entities.PlayerScripts
         private GlobalData _globalData;
         private PlayerConfig _config;
         private DiContainer _container;
+        private SceneSystem _sceneSystem;
 
         private DashAbility _dashAbility;
         private PlayerMovement _movement;
@@ -39,12 +40,13 @@ namespace Entities.PlayerScripts
         private PlayerInput _input;
 
         [Inject]
-        private void Construct(GlobalData globalData, PlayerConfig config, DiContainer container, PlayerInput input)
+        private void Construct(GlobalData globalData, PlayerConfig config, DiContainer container, PlayerInput input, SceneSystem sceneSystem)
         {
             _globalData = globalData;
             _config = config;
             _container = container;
             _input = input;
+            _sceneSystem = sceneSystem;
         }
 
         private void Start()
@@ -68,6 +70,7 @@ namespace Entities.PlayerScripts
             if (_config.Abilities.Count > 4)
                 _dashAbility = (DashAbility)_config.Abilities[5];
 
+            _sceneSystem.Spawn();
             _rbs = GetComponentsInChildren<Rigidbody2D>().ToList();
             if (_sleepAwake) Sleep();
             else WakeUp();
@@ -151,17 +154,10 @@ namespace Entities.PlayerScripts
             _rbs.ForEach(x => x.simulated = false);
             DisableAllAbilities();
         }
-
+        
         public async void Die()
         {
-            var pos = new List<Vector3>();
-            var systemPos = _globalData.Get<SavablePlayerData>().RespawnPositions;
-
-            foreach (var p in systemPos)
-                pos.Add(p.ToUnity());
-
-            var rbParent = Rigidbody.transform.parent;
-            rbParent.position = pos.GetRandom() - Rigidbody.transform.position + Rigidbody.transform.parent.position;
+            _sceneSystem.Die();
         }
     }
 }

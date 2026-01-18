@@ -33,7 +33,6 @@ namespace Systems
         {
             _diContainer = container;
             _input = input;
-            Debug.Log("Ira 0 " + input);
         }
         
         public void StartDialogue(RuntimeDialogueGraph graph, ITextVisual visual, string id, IEventInvoker character = null)
@@ -49,7 +48,6 @@ namespace Systems
             Character = character;
             _prevActionMap = "Player";
             _input.SwitchCurrentActionMap("Dialogue");
-            Debug.Log("Ira 1 " + _input);
             
             ActivateNewNode();
         }
@@ -66,7 +64,6 @@ namespace Systems
 
         public void ActivateNewNode()
         {
-            Debug.Log("Ira 2");
             if (_dialogueGraph == null || _currentNode == null)
             {
                 EndDialogue();
@@ -78,9 +75,7 @@ namespace Systems
         
         private void EndDialogue()
         {
-            Debug.Log("Ira 3");
             if (_visuals == null || _input == null) return;
-            Debug.Log("Ira 4");
             OnEndedDialogue?.Invoke(_id);
             _nodeLookup.Clear();
             Character = null;

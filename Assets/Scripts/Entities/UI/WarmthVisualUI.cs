@@ -31,6 +31,7 @@ namespace Entities.UI
 
             if (data.Stars == 0)
             {
+                if (_heatFillBar == null) return;
                 _heatFillBar.gameObject.SetActive(false);
                 _heatFillBar.fillAmount = 0;
             }
