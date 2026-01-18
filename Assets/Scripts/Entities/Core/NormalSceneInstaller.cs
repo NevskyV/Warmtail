@@ -54,6 +54,7 @@ namespace Entities.Core
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<QuestSystem>().FromNew().AsSingle();
+            Container.Bind<PlayerDataProvider>().FromNew().AsSingle();
             
             Container.BindInterfacesAndSelfTo<DashAbility>().FromInstance(_playerConfig.Abilities
                 .OfType<DashAbility>().First()).AsSingle();

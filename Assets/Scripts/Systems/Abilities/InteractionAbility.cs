@@ -21,7 +21,7 @@ namespace Systems.Abilities
     
         private Player _player;
         private PlayerInput _playerInput;
-        private InteractableTriggerZone _triggerZone;
+        private AbilityTriggerZone<IInteractable> _triggerZone;
         private CompositeDisposable _disposables = new();
     
         [Inject]
@@ -32,14 +32,14 @@ namespace Systems.Abilities
             _playerInput = playerInput;
         
             _triggerZone = GetOrCreateTriggerZone(player, "InteractionTrigger", _interactionRadius);
-            _triggerZone.SetActive(true);
+            _triggerZone.Wake();
         
             _playerInput.actions["LeftMouse"].started += _ => StartAbility?.Invoke();
             _playerInput.actions["LeftMouse"].performed += Interact;
             _playerInput.actions["LeftMouse"].canceled += _ => EndAbility?.Invoke();
         }
     
-        private InteractableTriggerZone GetOrCreateTriggerZone(Player player, string name, float radius)
+        private AbilityTriggerZone<IInteractable> GetOrCreateTriggerZone(Player player, string name, float radius)
         {
             var triggerObj = player.Rigidbody.transform.Find(name)?.gameObject;
             if (triggerObj == null)
@@ -47,15 +47,9 @@ namespace Systems.Abilities
                 triggerObj = new GameObject(name);
                 triggerObj.transform.SetParent(player.Rigidbody.transform);
                 triggerObj.transform.localPosition = Vector3.zero;
-                triggerObj.AddComponent<CircleCollider2D>();
             }
-        
-            var zone = triggerObj.GetComponent<InteractableTriggerZone>();
-            if (zone == null)
-                zone = triggerObj.AddComponent<InteractableTriggerZone>();
-        
-            zone.SetRadius(radius);
-            return zone;
+            
+            return new AbilityTriggerZone<IInteractable>(triggerObj, radius);
         }
     
         public void Interact(InputAction.CallbackContext context)

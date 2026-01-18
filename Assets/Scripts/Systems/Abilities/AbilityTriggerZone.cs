@@ -7,141 +7,81 @@ using UnityEngine;
 
 namespace Systems.Abilities
 {
-    public abstract class AbilityTriggerZoneBase : MonoBehaviour
+    public sealed class AbilityTriggerZone<T> where T : class
     {
-        protected CircleCollider2D Collider;
-        protected CompositeDisposable Disposables = new();
+        private CircleCollider2D Collider;
+        private CompositeDisposable Disposables = new();
+        private HashSet<T> _objectsInRange = new();
+        private Subject<T> _onEnter = new();
+        private Subject<T> _onExit = new();
         
-        protected virtual void Awake()
+        public IObservable<T> OnObjectEnter => _onEnter;
+        public IObservable<T> OnObjectExit => _onExit;
+        public IReadOnlyCollection<T> ObjectsInRange => _objectsInRange;
+        
+        private GameObject _triggerObject;
+        private float _radius;
+        
+        public AbilityTriggerZone(GameObject triggerObj, float radius)
         {
-            Collider = GetComponent<CircleCollider2D>();
+            _triggerObject = triggerObj;
+            _radius = radius;
+        }
+
+        public void Wake()
+        {
+            Collider = _triggerObject.GetComponent<CircleCollider2D>();
             if (Collider == null)
             {
-                Collider = gameObject.AddComponent<CircleCollider2D>();
+                Collider = _triggerObject.AddComponent<CircleCollider2D>();
             }
             Collider.isTrigger = true;
-            
-            this.OnTriggerEnter2DAsObservable()
+            Collider.radius = _radius;
+            _triggerObject.OnTriggerEnter2DAsObservable()
                 .Subscribe(OnTriggerEnterInternal)
                 .AddTo(Disposables);
                 
-            this.OnTriggerExit2DAsObservable()
+            _triggerObject.OnTriggerExit2DAsObservable()
                 .Subscribe(OnTriggerExitInternal)
                 .AddTo(Disposables);
         }
-        
-        protected abstract void OnTriggerEnterInternal(Collider2D col);
-        protected abstract void OnTriggerExitInternal(Collider2D col);
-        
-        public void SetRadius(float radius)
+
+        private void OnTriggerEnterInternal(Collider2D col)
         {
-            if (Collider != null)
+            var obj = col.GetComponent<T>();
+            if (obj != null && _objectsInRange.Add(obj))
             {
-                Collider.radius = radius;
+                _onEnter.OnNext(obj);
+            }
+        }
+
+        private void OnTriggerExitInternal(Collider2D col)
+        {
+            var obj = col.GetComponent<T>();
+            if (obj != null && _objectsInRange.Remove(obj))
+            {
+                _onExit.OnNext(obj);
             }
         }
         
-        public virtual void SetActive(bool active)
+        public void SetActive(bool active)
         {
             if (Collider != null)
             {
                 Collider.enabled = active;
             }
+            if (!active)
+            {
+                _objectsInRange.Clear();
+            }
         }
-        
-        protected virtual void OnDestroy()
+
+        private void OnDestroy()
         {
             Disposables?.Dispose();
-        }
-    }
-    
-    public class WarmableTriggerZone : AbilityTriggerZoneBase
-    {
-        private HashSet<Warmable> _objectsInRange = new();
-        private Subject<Warmable> _onEnter = new();
-        private Subject<Warmable> _onExit = new();
-        
-        public IObservable<Warmable> OnObjectEnter => _onEnter;
-        public IObservable<Warmable> OnObjectExit => _onExit;
-        public IReadOnlyCollection<Warmable> ObjectsInRange => _objectsInRange;
-        
-        protected override void OnTriggerEnterInternal(Collider2D col)
-        {
-            var obj = col.GetComponent<Warmable>();
-            if (obj != null && _objectsInRange.Add(obj))
-            {
-                _onEnter.OnNext(obj);
-            }
-        }
-        
-        protected override void OnTriggerExitInternal(Collider2D col)
-        {
-            var obj = col.GetComponent<Warmable>();
-            if (obj != null && _objectsInRange.Remove(obj))
-            {
-                _onExit.OnNext(obj);
-            }
-        }
-        
-        public override void SetActive(bool active)
-        {
-            base.SetActive(active);
-            if (!active)
-            {
-                _objectsInRange.Clear();
-            }
-        }
-        
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
             _onEnter?.Dispose();
             _onExit?.Dispose();
         }
-    }
-    
-    public class InteractableTriggerZone : AbilityTriggerZoneBase
-    {
-        private HashSet<IInteractable> _objectsInRange = new();
-        private Subject<IInteractable> _onEnter = new();
-        private Subject<IInteractable> _onExit = new();
         
-        public IObservable<IInteractable> OnObjectEnter => _onEnter;
-        public IObservable<IInteractable> OnObjectExit => _onExit;
-        public IReadOnlyCollection<IInteractable> ObjectsInRange => _objectsInRange;
-        
-        protected override void OnTriggerEnterInternal(Collider2D col)
-        {
-            var obj = col.GetComponent<IInteractable>();
-            if (obj != null && _objectsInRange.Add(obj))
-            {
-                _onEnter.OnNext(obj);
-            }
-        }
-        
-        protected override void OnTriggerExitInternal(Collider2D col)
-        {
-            var obj = col.GetComponent<IInteractable>();
-            if (obj != null && _objectsInRange.Remove(obj))
-            {
-                _onExit.OnNext(obj);
-            }
-        }
-        
-        public override void SetActive(bool active)
-        {
-            base.SetActive(active);
-            if (!active)
-            {
-                _objectsInRange.Clear();
-            }
-        }
-        
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            _onEnter?.Dispose();
-            _onExit?.Dispose();
-        }
     }
 }

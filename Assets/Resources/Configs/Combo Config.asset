@@ -15,16 +15,16 @@ MonoBehaviour:
   <Data>k__BackingField:
   - <FirstAbility>k__BackingField: 4
     <SecondAbility>k__BackingField: 5
-    <FirstMethodName>k__BackingField: ActivateMetabolism
+    <FirstMethodName>k__BackingField: ApplyNewSpeed
     <SecondMethodName>k__BackingField: ActivateDashNoCost
   - <FirstAbility>k__BackingField: 4
     <SecondAbility>k__BackingField: 2
-    <FirstMethodName>k__BackingField: ActivateMetabolism
-    <SecondMethodName>k__BackingField: ActivateWarmingWithMetabolism
+    <FirstMethodName>k__BackingField: ApplyNewSpeed
+    <SecondMethodName>k__BackingField: PerformExplosion
   - <FirstAbility>k__BackingField: 3
     <SecondAbility>k__BackingField: 2
     <FirstMethodName>k__BackingField: ActivateResonanceWithWarming
-    <SecondMethodName>k__BackingField: StartWarming
+    <SecondMethodName>k__BackingField: StartWarm
   - <FirstAbility>k__BackingField: 3
     <SecondAbility>k__BackingField: 5
     <FirstMethodName>k__BackingField: ActivateResonanceWithDash

@@ -1,8 +1,6 @@
 using System;
-using System.Linq;
 using Data;
 using Data.Player;
-using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 using UnityEngine;
 using Zenject;
 
@@ -30,8 +28,8 @@ namespace Systems.Abilities
             {
                 _globalData.Edit<RuntimePlayerData>(data =>
                 {
-                    var field = data.GetType().GetField(name);
-                    var t = field.GetType();
+                    var field = typeof(RuntimePlayerData).GetField(name);
+                    var t = field.GetValue(data).GetType();
                     field.SetValue(data, Convert.ChangeType(value,t));
                 });
             }

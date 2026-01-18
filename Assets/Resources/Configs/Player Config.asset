@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Data.Player.PlayerConfig
   <Abilities>k__BackingField:
   - rid: 676710221457391732
-  - rid: 676710221457391727
-  - rid: 676710221457391728
-  - rid: 676710221457391729
   - rid: 676710221457391731
+  - rid: 676710221457391729
+  - rid: 676710221457391727
   - rid: 676710221457391730
+  - rid: 676710221457391728
   references:
     version: 2
     RefIds:
@@ -30,6 +30,7 @@ MonoBehaviour:
         <Visual>k__BackingField:
           rid: 676710221457391733
         WarmthCost: 1
+        Tick: 0.5
         Cooldown: 1
         <BaseMethodName>k__BackingField: ActivateDash
         _dashCost: 2
@@ -43,18 +44,20 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: 676710221457391734
-        WarmthCost: 2
+        WarmthCost: 3
+        Tick: 0.5
         Cooldown: 1
-        <BaseMethodName>k__BackingField: ActivateMetabolism
+        <BaseMethodName>k__BackingField: ApplyNewSpeed
         _speedMultiplier: 2
     - rid: 676710221457391729
       type: {class: WarmingAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 676710221457391735
-        WarmthCost: 1
+        WarmthCost: 2
+        Tick: 0.5
         Cooldown: 1
-        <BaseMethodName>k__BackingField: StartWarming
+        <BaseMethodName>k__BackingField: StartWarm
         _radius: 3
         _explosionDuration: 0.5
         _explosionCost: 50
@@ -63,20 +66,21 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: -2
-        WarmthCost: 1
+        WarmthCost: 2
+        Tick: 0.5
         Cooldown: 1
         <BaseMethodName>k__BackingField: ActivateResonance
         _searchRadius: 12
         _interactRadius: 5
         _warmthDrain: 2
         _drainInterval: 0.5
-        _returnPosition: {x: 0, y: 0}
+        _returnPosition: {x: -20.184103, y: -12.798991}
     - rid: 676710221457391731
       type: {class: InteractionAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: -2
-        _interactionRadius: 2
+        _interactionRadius: 2.5
         _interactionOffset: {x: 0, y: 0, z: 0}
     - rid: 676710221457391732
       type: {class: PlayerMovement, ns: Systems.Abilities, asm: Assembly-CSharp}
@@ -84,29 +88,29 @@ MonoBehaviour:
         <Visual>k__BackingField:
           rid: 676710221457391736
         MoveForce: 60
-        _moreForge: 100
-        _drag: 5
+        _moreForge: 60
+        _drag: 4.5
     - rid: 676710221457391733
       type: {class: DashVisual, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
       data:
-        <AbilityIndex>k__BackingField: 1
+        <AbilityIndex>k__BackingField: 3
         <Icon>k__BackingField: {fileID: 2412526298520525984, guid: 90ede23b5da17ce41b470366bfe5a90c, type: 3}
-        _waveMaterial: {fileID: 2100000, guid: abd305f4e01bc4dcc9fa1e3503253116, type: 2}
+        _waveMaterial: {fileID: 2100000, guid: cba006a2009921647a613084f6f30f08, type: 2}
         _sfx: {fileID: 8300000, guid: 4e7ca93b4e09b1f4096834ec21f8b1ff, type: 3}
     - rid: 676710221457391734
       type: {class: MetabolismVisual, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
       data:
-        <AbilityIndex>k__BackingField: 2
+        <AbilityIndex>k__BackingField: 5
         <Icon>k__BackingField: {fileID: 4748470198486955293, guid: 9d0865af10ee9534b93e7fa26cda1260, type: 3}
         _sfx: {fileID: 8300000, guid: 4b4dd7245f6104c8c8eb07ccf6b386ed, type: 3}
     - rid: 676710221457391735
       type: {class: WarmingVisual, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
       data:
-        <AbilityIndex>k__BackingField: 3
+        <AbilityIndex>k__BackingField: 2
         <Icon>k__BackingField: {fileID: 1117785621467319695, guid: 9d0865af10ee9534b93e7fa26cda1260, type: 3}
-        _warmthMaterial: {fileID: 2100000, guid: f38ea4ccb37704b428c74f4736a967e0, type: 2}
-        _opacityNotUsing: 0
-        _opacityUsing: 0
+        _warmthMaterial: {fileID: 2100000, guid: 7788a4d30335c3c4da08933d83361488, type: 2}
+        _opacityNotUsing: 0.2
+        _opacityUsing: 0.5
         _sfx: {fileID: 8300000, guid: 5bb31393f86483e4ebaaca08dfc4d9b2, type: 3}
     - rid: 676710221457391736
       type: {class: MovementVisuals, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}

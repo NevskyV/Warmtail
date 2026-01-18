@@ -35,32 +35,13 @@ namespace Systems.Abilities
             
             input.actions["Scroll"].performed += ctx => CycleSelection(ctx.ReadValue<Vector2>().y);
 
-            input.actions["1"].performed += _ => 
-            {
-                SelectAbility(0);
-            };
-            input.actions["2"].performed += _ => 
-            {
-                SelectAbility(1);
-            };
-            input.actions["3"].performed += _ => 
-            {
-                SelectAbility(2);
-            };
-            input.actions["4"].performed += _ => 
-            {
-                SelectAbility(3);
-            };
+            input.actions["1"].performed += _ => SelectAbility(0);
+            input.actions["2"].performed += _ => SelectAbility(1);
+            input.actions["3"].performed += _ => SelectAbility(2);
+            input.actions["4"].performed += _ => SelectAbility(3);
 
-            input.actions["RightMouse"].started += _ => 
-            {
-                StartCasting();
-            };
-            input.actions["RightMouse"].canceled += _ => 
-            {
-                StopCasting();
-            };
-            
+            input.actions["RightMouse"].started += _ => StartCasting();
+            input.actions["RightMouse"].canceled += _ => StopCasting();
         }
 
         private void CycleSelection(float scrollValue)
@@ -77,17 +58,12 @@ namespace Systems.Abilities
             }
             
             var ability = _allAbilities[index];
-            
-            bool wasCasting = _activeAbilities.Count > 0;
+            Debug.Log("ability: " + ability);
             
             if (_activeAbilities.Contains(ability))
             {
-                
-                if (wasCasting)
-                {
-                    StopCasting();
-                }
-                
+                StopCasting();
+                Debug.Log("wasCasting: true");
                 if (_activeAbilities.Count > 1) 
                 {
                     _comboSystem.DisableCombo(_activeAbilities[0], _activeAbilities[1]);
@@ -95,34 +71,30 @@ namespace Systems.Abilities
                 
                 _activeAbilities.Remove(ability);
                 
-                if (wasCasting && _activeAbilities.Count > 0)
+                if (_activeAbilities.Count > 0)
                 {
-                    if (_activeAbilities.Count > 1)
-                    {
-                        _comboSystem.SetCombo(_activeAbilities[0], _activeAbilities[1]);
-                    }
                     StartCasting();
                 }
                 return;
             }
             
             _selectedIndex = index;
-            _activeAbilities.Add(ability);
-            
-            if (_activeAbilities.Count > 1)
-            {
-                _comboSystem.SetCombo(_activeAbilities[0], _activeAbilities[1]);
-            }
         }
 
         private void StartCasting()
         {
+            _activeAbilities.Add(_allAbilities[_selectedIndex]);
+            if (_activeAbilities.Count > 1)
+            {
+                _comboSystem.SetCombo(_activeAbilities[0], _activeAbilities[1]);
+            }
             _activeAbilities.ForEach(x => x.UseAbility());
         }
         
         private void StopCasting()
         {
             _activeAbilities.ForEach(x => x.StopAbility());
+            _activeAbilities.Clear();
         }
     }
 }

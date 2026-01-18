@@ -1,6 +1,7 @@
 using System;
 using Cysharp.Threading.Tasks;
 using Entities.PlayerScripts;
+using Interfaces;
 using UnityEngine;
 using Zenject;
 
@@ -19,7 +20,7 @@ namespace Systems.Abilities
         private WarmthSystem _warmthSystem;
         private bool _isRunning;
         private int _maxWarmthCost;
-        private WarmableTriggerZone _triggerZone;
+        private AbilityTriggerZone<Warmable> _triggerZone;
         
         [Inject]
         public void Construct(Player player,  WarmthSystem warmthSystem)
@@ -27,11 +28,11 @@ namespace Systems.Abilities
             _warmthSystem = warmthSystem;
             _maxWarmthCost = WarmthCost;
             _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
-
+            _triggerZone.Wake();
             EndAbility += StopWarm;
         }
         
-        private WarmableTriggerZone GetOrCreateTriggerZone(Player player, string name, float radius)
+        private AbilityTriggerZone<Warmable> GetOrCreateTriggerZone(Player player, string name, float radius)
         {
             var triggerObj = player.Rigidbody.transform.Find(name)?.gameObject;
             if (triggerObj == null)
@@ -39,23 +40,14 @@ namespace Systems.Abilities
                 triggerObj = new GameObject(name);
                 triggerObj.transform.SetParent(player.Rigidbody.transform);
                 triggerObj.transform.localPosition = Vector3.zero;
-                triggerObj.AddComponent<CircleCollider2D>();
             }
             
-            var zone = triggerObj.GetComponent<WarmableTriggerZone>();
-            if (zone == null)
-                zone = triggerObj.AddComponent<WarmableTriggerZone>();
-            
-            zone.SetRadius(radius);
-            zone.SetActive(false);
-            return zone;
+            return new AbilityTriggerZone<Warmable>(triggerObj, radius);
         }
         
         public void StartWarm()
         {
             if (_isRunning) return;
-            
-            _triggerZone.SetActive(true);
             _isRunning = true;
             ActiveRoutine().Forget();
         }
@@ -67,17 +59,15 @@ namespace Systems.Abilities
         
         private void StopWarm()
         {
-            _triggerZone.SetActive(false);
             _isRunning = false;
         }
         
         private async UniTaskVoid ActiveRoutine()
         {
-            Debug.Log("warm");
             while (Enabled && _isRunning)
             {
                 PerformTick();
-                await UniTask.Delay(500);
+                await UniTask.Delay(TimeSpan.FromSeconds(Tick));
             }
         }
 

@@ -10,6 +10,7 @@ namespace Systems.Abilities
     {
         [field: SerializeReference] public IAbilityVisual Visual { get; set; }
         [SerializeField] protected int WarmthCost;
+        [SerializeField, Range(0f, 2)] protected float Tick;
         [SerializeField, Range(0f, 5)] protected float Cooldown;
         [field: SerializeReference] public string BaseMethodName { get; private set; }
         public bool Enabled { get; set; }
@@ -24,12 +25,10 @@ namespace Systems.Abilities
         public void UseAbility()
         {
             MethodName ??= BaseMethodName;
-            
-            if (!string.IsNullOrEmpty(MethodName))
-                GetType().GetMethod(MethodName)?.Invoke(this, null);
-            
             Enabled = true;
             StartAbility?.Invoke();
+            if (!string.IsNullOrEmpty(MethodName))
+                GetType().GetMethod(MethodName)?.Invoke(this, null);
             
             if (WarmthCost > 0 && Cooldown > 0 && !_drainWarmthRunning)
             {
@@ -52,7 +51,7 @@ namespace Systems.Abilities
             while (Enabled && _drainWarmthRunning && _warmthSystem.CheckWarmCost(WarmthCost))
             {
                 _warmthSystem.DecreaseWarmth(WarmthCost);
-                await UniTask.Delay(TimeSpan.FromSeconds(Cooldown));
+                await UniTask.Delay(TimeSpan.FromSeconds(Tick));
             }
             
             _drainWarmthRunning = false;

@@ -664,7 +664,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 1}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -4813,7 +4813,6 @@ Transform:
   - {fileID: 278058311}
   - {fileID: 839376087}
   - {fileID: 357904110}
-  - {fileID: 616446980}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &138863050
@@ -14517,7 +14516,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 1}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -26250,7 +26249,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 0}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -32147,56 +32146,6 @@ Transform:
   - {fileID: 1785838163}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &616446979
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 616446980}
-  - component: {fileID: 616446981}
-  m_Layer: 0
-  m_Name: AbilitiesUI
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &616446980
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616446979}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 136286261}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &616446981
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 616446979}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61523528401ab1a4a930811eef1b7098, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AbilitiesUI
-  images:
-  - {fileID: 4157835090695304211}
-  - {fileID: 4157835090695304210}
-  - {fileID: 4157835090695304209}
-  - {fileID: 4157835090695304208}
-  inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1001 &618129343
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -39201,7 +39150,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 0}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -50038,7 +49987,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 1}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -53012,7 +52961,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 1}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -56303,7 +56252,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 1}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -63160,7 +63109,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 0}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -94566,7 +94515,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 0}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -100638,7 +100587,7 @@ SpriteShapeRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_Color: {r: 0.49019608, g: 0.7176471, b: 0.6745098, a: 0}
-  m_ShapeTexture: {fileID: 0}
+  m_ShapeTexture: {fileID: 2800000, guid: 6030821a6c98ea8439cca59f83d858f7, type: 3}
   m_Sprites:
   - {fileID: -7674375570173515558, guid: 6bbc1c50cd8246549adf4100273ac441, type: 3}
   - {fileID: 6497415083699284523, guid: 59444af078c20fb42ba38194451f83f4, type: 3}
@@ -108975,50 +108924,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4253318843041039975, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
   m_PrefabInstance: {fileID: 4157835090695304206}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4157835090695304208 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6745564414925296009, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
-  m_PrefabInstance: {fileID: 4157835090695304206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!114 &4157835090695304209 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6544446751240859253, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
-  m_PrefabInstance: {fileID: 4157835090695304206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!114 &4157835090695304210 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6247219873642986079, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
-  m_PrefabInstance: {fileID: 4157835090695304206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
---- !u!114 &4157835090695304211 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 565023391206365652, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
-  m_PrefabInstance: {fileID: 4157835090695304206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!224 &4157835090695304212 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7901887455616614930, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
