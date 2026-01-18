@@ -11,14 +11,15 @@ namespace Data.Player
         public int Shells;
         public int ActiveLayers;
         public List<int> SeenReplicas;
-        public List<Vector2> RespawnPositions = new(){new Vector2(-26.1f,4)};
+        public List<Vector2> RespawnPositions = new(){new Vector2(24,-10)};
         public SerializedDictionary<int, int> Inventory;
         public string TimeLastGame;
         public int TutorState;
         public bool HasBeatenGame;
-        public bool IsHomeOpened;
         public string LastScene;
         public SerializedDictionary<int, int> QuestIds;
+        public List<int> FearIds = new();
+        public bool IsHomeOpened;
     }
     
     [Serializable]
