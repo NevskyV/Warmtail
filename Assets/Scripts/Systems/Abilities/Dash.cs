@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using Data.Player;
 using Entities.PlayerScripts;
 using Interfaces;
@@ -6,13 +7,11 @@ using Systems.Environment;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
-using Cysharp.Threading.Tasks;
 
-
-namespace Systems.Abilities.Concrete
+namespace Systems.Abilities
 {
     [Serializable]
-    public class DashAbility : BaseAbility, ITickable
+    public class DashAbility : WarmthAbility, IFixedTickable
     {
         [SerializeField] private int _dashCost = 15;
         [SerializeField] private float _destroyRadius = 1.5f;
@@ -24,7 +23,7 @@ namespace Systems.Abilities.Concrete
         private bool _canDash = true;
         private UniTask _dashTask;
         private bool _dashLoopRunning;
-       
+        private bool _noCostMode = false;
 
         private PlayerConfig _playerConfig;
         private Rigidbody2D _playerRb;
@@ -33,7 +32,6 @@ namespace Systems.Abilities.Concrete
 
         private Vector2 _moveInput;
         private float _layerInput;
-        private bool IsFree => IsComboActive && _secondaryComboType == typeof(MetabolismAbility);
         [Inject]
         public void Construct(PlayerConfig playerConfig, Player player, WarmthSystem warmth, SurfacingSystem surfacing,
             PlayerInput input, DiContainer container)
@@ -49,15 +47,25 @@ namespace Systems.Abilities.Concrete
             
             input.actions["Surfacing"].performed += ctx => _layerInput = ctx.ReadValue<float>();
             input.actions["Surfacing"].canceled += _ => _layerInput = 0;
+        }
 
-            UsingAbility += Tick;
+        public void ActivateDash()
+        {
+            _noCostMode = false;
+            StartAbility?.Invoke();
+        }
+
+        public void ActivateDashNoCost()
+        {
+            _noCostMode = true;
+            StartAbility?.Invoke();
         }
         
 
-        public void Tick()
+        public void FixedTick()
         {
             if (!Enabled) return;
-
+            Debug.Log("Dash Ability");
             if (Mathf.Abs(_layerInput) > 0.1f)
             {
                 int dir = (int)Mathf.Sign(_layerInput);
@@ -116,7 +124,7 @@ namespace Systems.Abilities.Concrete
 
         private bool ShouldApplyCost()
         {
-            return !IsFree;
+            return !_noCostMode;
         }
 
         private void DestroyObstaclesInRadius(float radius)

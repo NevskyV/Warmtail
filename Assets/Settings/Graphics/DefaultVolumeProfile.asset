@@ -84,6 +84,7 @@ MonoBehaviour:
   - {fileID: 1602846030446195131}
   - {fileID: -8534868653042402734}
   - {fileID: 8355487472682574247}
+  - {fileID: 1146117846956697213}
 --- !u!114 &976725296959159074
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -99,10 +100,10 @@ MonoBehaviour:
   active: 1
   postExposure:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 0.5
   contrast:
     m_OverrideState: 1
-    m_Value: 16
+    m_Value: 12
   colorFilter:
     m_OverrideState: 0
     m_Value: {r: 1, g: 1, b: 1, a: 1}
@@ -111,7 +112,29 @@ MonoBehaviour:
     m_Value: 0
   saturation:
     m_OverrideState: 1
-    m_Value: 2.8
+    m_Value: 10
+--- !u!114 &1146117846956697213
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.LiftGammaGain
+  active: 1
+  lift:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 0.9026657, y: 0.9269996, z: 1, w: 0}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 1, z: 1, w: 0.035153527}
 --- !u!114 &1602846030446195131
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -127,13 +150,13 @@ MonoBehaviour:
   active: 1
   color:
     m_OverrideState: 1
-    m_Value: {r: 0, g: 0.046749115, b: 1, a: 1}
+    m_Value: {r: 0.054696664, g: 0, b: 0.5018867, a: 1}
   center:
     m_OverrideState: 1
     m_Value: {x: 0.5, y: 0.5}
   intensity:
     m_OverrideState: 1
-    m_Value: 0.369
+    m_Value: 0.375
   smoothness:
     m_OverrideState: 0
     m_Value: 0.2
@@ -155,9 +178,9 @@ MonoBehaviour:
   active: 1
   intensity:
     m_OverrideState: 1
-    m_Value: 0.5
+    m_Value: 0.3
   tintColor:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {r: 1, g: 1, b: 1, a: 1}
   bloomMip:
     m_OverrideState: 0
@@ -176,7 +199,7 @@ MonoBehaviour:
     m_Value: {x: 1, y: 1}
   samples:
     m_OverrideState: 0
-    m_Value: 1
+    m_Value: 2
   sampleDimmer:
     m_OverrideState: 0
     m_Value: 0.5
@@ -184,11 +207,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   startingPosition:
-    m_OverrideState: 0
-    m_Value: 1.25
+    m_OverrideState: 1
+    m_Value: 1
   scale:
-    m_OverrideState: 0
-    m_Value: 1.5
+    m_OverrideState: 1
+    m_Value: 1
   streaksIntensity:
     m_OverrideState: 1
     m_Value: 1
@@ -205,5 +228,5 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 4
   chromaticAbberationIntensity:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.5

@@ -985,6 +985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5742808236542623801}
+  - component: {fileID: 2911037699358737249}
   m_Layer: 5
   m_Name: Abilities
   m_TagString: Untagged
@@ -1012,6 +1013,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -0.000015258789, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2911037699358737249
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4022413816949838295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61523528401ab1a4a930811eef1b7098, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilitiesUI
+  _images:
+  - {fileID: 7097390722203250965}
+  - {fileID: 8461168794972312740}
+  - {fileID: 3583828163588351616}
+  - {fileID: 4458769760319457024}
+  _inputActions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
 --- !u!1 &4348714939501672135
 GameObject:
   m_ObjectHideFlags: 0

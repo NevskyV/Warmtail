@@ -76,5 +76,6 @@ namespace Entities.UI.SDF
         public Vector2 Size;
         public Vector4 ParamsA;
         public Vector4 ParamsB;
+        public int GroupIndex;
     }
 }

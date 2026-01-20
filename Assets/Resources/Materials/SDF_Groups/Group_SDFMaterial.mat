@@ -12,7 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - _INTERSECTION_UNION
+  - _INTERSECTION_DIFFERENCE
   - _NOISETYPE_NONE
   m_InvalidKeywords:
   - _INTERSECTION_A
@@ -23,7 +23,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: _InlineColor _OutlineColor
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -52,13 +52,13 @@ Material:
     - _Alpha: 1
     - _ColorMask: 15
     - _CornerRounding: 0.15
-    - _INTERSECTION: 0
+    - _INTERSECTION: 2
     - _InOutlineThickness: 1.5
     - _InlineThickness: 0.01
     - _NOISETYPE: 0
-    - _NoiseScale: 1
+    - _NoiseScale: 10
     - _NoiseSpeed: 0.1
-    - _OutlineThickness: 0.008
+    - _OutlineThickness: 0.01
     - _Radius: 0.35
     - _SHAPE: 0
     - _Smoothness: 0.05
@@ -69,15 +69,16 @@ Material:
     - _StencilWriteMask: 255
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
-    - _WaveAmplitude: 0.002
-    - _WaveFrequency: 30
-    - _WaveSpeed: 10
+    - _WaveAmplitude: 0.01
+    - _WaveFrequency: 3
+    - _WaveSpeed: 6.32
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
-    - _Color: {r: 0.6625828, g: 0.58679235, b: 1, a: 1}
+    - _Color: {r: 1, g: 0.4547168, b: 0.4547168, a: 1}
     - _Corners: {r: 0, g: 0, b: 0, a: 0}
-    - _InlineColor: {r: 0.42536515, g: 0.17647062, b: 0.49411765, a: 1}
-    - _OutlineColor: {r: 0.53721875, g: 0.23921567, b: 1, a: 1}
+    - _FillColor: {r: 1, g: 0.57169807, b: 0.57169807, a: 1}
+    - _InlineColor: {r: 0, g: 0.2396226, b: 0.2396226, a: 1}
+    - _OutlineColor: {r: 1, g: 0.2396226, b: 0.2396226, a: 1}
     - _Size: {r: 0.2, g: 0.25, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

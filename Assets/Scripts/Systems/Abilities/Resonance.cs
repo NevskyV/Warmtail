@@ -2,18 +2,16 @@ using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Entities.PlayerScripts;
-using Interfaces;
 using Systems.Swarm;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-
-namespace Systems.Abilities.Concrete
+namespace Systems.Abilities
 {
     [Serializable]
-    public class ResonanceAbility : BaseAbility
+    public class ResonanceAbility : WarmthAbility
     {
         [SerializeField] private float _searchRadius = 12f;
         [SerializeField] private float _interactRadius = 5f;
@@ -21,23 +19,28 @@ namespace Systems.Abilities.Concrete
         [SerializeField] private float _drainInterval = 0.5f;
        
         [SerializeField] private Vector2 _returnPosition;
-        private IWarmthSystem _warmthSystem;
         private Transform _playerTransform;
         private Player _player;
         private CinemachineCamera _vCam;
         private PlayerInput _input;
         private SwarmController _activeSwarm;
         private Vector2 _moveInput;
+        private bool _warmingMode;
+        private bool _dashMode;
 
         private CancellationTokenSource _tickCts;
         private CancellationTokenSource _warmthCts;
+        
+        private Rigidbody2D _originalPlayerRb;
+        private Rigidbody2D _currentPlayerRb;
 
         [Inject]
-        public void Construct(Player player, IWarmthSystem warmth, PlayerInput input, CinemachineCamera cam)
+        public void Construct(Player player, PlayerInput input, CinemachineCamera cam)
         {
             _player = player;
             _playerTransform = player.Rigidbody.transform;
-            _warmthSystem = warmth;
+            _originalPlayerRb = player.Rigidbody;
+            _currentPlayerRb = player.Rigidbody;
             _input = input;
             _vCam = cam;
 
@@ -48,8 +51,28 @@ namespace Systems.Abilities.Concrete
                 moveAction.canceled += _ => _moveInput = Vector2.zero;
             }
 
-            StartAbility += OnStart;
             EndAbility += OnEnd;
+        }
+
+        public void ActivateResonance()
+        {
+            _warmingMode = false;
+            _dashMode = false;
+            OnStart();
+        }
+
+        public void ActivateResonanceWithWarming()
+        {
+            _warmingMode = true;
+            _dashMode = false;
+            OnStart();
+        }
+
+        public void ActivateResonanceWithDash()
+        {
+            _warmingMode = false;
+            _dashMode = true;
+            OnStart();
         }
 
         private void OnStart()
@@ -63,7 +86,7 @@ namespace Systems.Abilities.Concrete
             if (_activeSwarm == null)
                 return;
 
-            _player?.StartResonance(_activeSwarm.GetComponent<Rigidbody2D>());
+            StartResonanceInternal(_activeSwarm.GetComponent<Rigidbody2D>());
             _activeSwarm.SetControlled(true);
 
             if (_vCam != null)
@@ -72,12 +95,10 @@ namespace Systems.Abilities.Concrete
                 _vCam.LookAt = _activeSwarm.transform;
             }
 
-            // Запуск цикла обработки роя
             _tickCts?.Cancel();
             _tickCts = new CancellationTokenSource();
             ControlSwarm(_tickCts.Token).Forget();
 
-            // Запуск цикла траты тепла раз в _drainInterval
             _warmthCts?.Cancel();
             _warmthCts = new CancellationTokenSource();
             DrainWarmthPeriodically(_warmthCts.Token).Forget();
@@ -89,28 +110,12 @@ namespace Systems.Abilities.Concrete
             {
                 while (!token.IsCancellationRequested)
                 {
-                    ApplyWarmthDrain();
                     await UniTask.Delay(TimeSpan.FromSeconds(_drainInterval), cancellationToken: token);
                 }
             }
             catch (OperationCanceledException) { }
         }
-
-        private void ApplyWarmthDrain()
-        {
-            int cost = Mathf.FloorToInt(_warmthDrain);
-
-            if (cost <= 0)
-                return;
-
-            if (!_warmthSystem.CheckWarmCost(cost))
-            {
-                EndAbility?.Invoke();
-                return;
-            }
-
-            _warmthSystem.DecreaseWarmth(cost);
-        }
+        
 
         private async UniTaskVoid ControlSwarm(CancellationToken token)
         {
@@ -122,7 +127,7 @@ namespace Systems.Abilities.Concrete
                         break;
 
                     ProcessSwarmInteraction();
-                    await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token); // маленький тик для обновления движения
+                    await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: token);
                 }
             }
             catch (OperationCanceledException) { }
@@ -144,7 +149,22 @@ namespace Systems.Abilities.Concrete
                 {
                     anyNear = true;
                     boid.InteractWithPhysicsObjects();
+                    
+                    if (_warmingMode)
+                    {
+                        boid.WarmObjects();
+                    }
+                    
+                    if (_dashMode)
+                    {
+                        boid.DestroyObstacles();
+                    }
                 }
+            }
+
+            if (_dashMode && _activeSwarm != null)
+            {
+                _activeSwarm.SetSpeedMultiplier(1.5f);
             }
 
             _activeSwarm.SetControlInput(anyNear ? _moveInput : Vector2.zero);
@@ -163,7 +183,7 @@ namespace Systems.Abilities.Concrete
                 _activeSwarm.SetControlled(false);
             }
 
-            _player?.StopResonance();
+            StopResonanceInternal();
 
             if (_vCam != null && _playerTransform != null)
             {
@@ -173,16 +193,19 @@ namespace Systems.Abilities.Concrete
 
             _moveInput = Vector2.zero;
             _activeSwarm = null;
+            _warmingMode = false;
+            _dashMode = false;
 
             if (swarmToReturn != null)
             {
+                swarmToReturn.SetSpeedMultiplier(1f);
                 ReturnSwarmToPosition(swarmToReturn, returnPos, 0.5f).Forget();
             }
         }
 
         private SwarmController FindNearestSwarm()
         {
-            var swarms = GameObject.FindObjectsOfType<SwarmController>();
+            var swarms = UnityEngine.Object.FindObjectsByType<SwarmController>(FindObjectsSortMode.None);
             SwarmController nearest = null;
 
             float bestDist = float.MaxValue;
@@ -216,6 +239,24 @@ namespace Systems.Abilities.Concrete
             }
 
             swarm.transform.position = target;
+        }
+        
+        private void StartResonanceInternal(Rigidbody2D swarmRb)
+        {
+            if (swarmRb == null)
+                return;
+            
+            _currentPlayerRb = swarmRb;
+            _player.Rigidbody = _currentPlayerRb;
+        }
+        
+        private void StopResonanceInternal()
+        {
+            if (_originalPlayerRb != null)
+            {
+                _currentPlayerRb = _originalPlayerRb;
+                _player.Rigidbody = _originalPlayerRb;
+            }
         }
     }
 }

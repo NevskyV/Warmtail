@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Data;
-using Data.Player;
 using UnityEngine;
 
 namespace Systems

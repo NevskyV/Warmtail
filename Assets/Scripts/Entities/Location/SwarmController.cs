@@ -26,12 +26,15 @@ namespace Systems.Swarm
         private readonly List<BoidAgent> _agents = new();
         private bool _isControlled = false;
         private Vector2 _controlInput = Vector2.zero;
+        private float _baseSpeed;
+        private float _speedMultiplier = 1f;
 
         public bool IsControlled => _isControlled;
 
         private void Awake()
         {
             if (_rb == null) _rb = GetComponent<Rigidbody2D>();
+            _baseSpeed = _speed;
             Initialize();
         }
 
@@ -66,7 +69,7 @@ namespace Systems.Swarm
 
             if (_controlInput.sqrMagnitude > 0.01f)
             {
-                var targetVelocity = _controlInput.normalized * _speed;
+                var targetVelocity = _controlInput.normalized * (_speed * _speedMultiplier);
                 _rb.linearVelocity = Vector2.Lerp(_rb.linearVelocity, targetVelocity, Time.fixedDeltaTime * 5f);
 
                 float angle = Mathf.Atan2(_controlInput.y, _controlInput.x) * Mathf.Rad2Deg;
@@ -81,6 +84,11 @@ namespace Systems.Swarm
         public List<BoidAgent> GetNeighbors(BoidAgent agent)
         {
             return _agents;
+        }
+        
+        public void SetSpeedMultiplier(float multiplier)
+        {
+            _speedMultiplier = multiplier;
         }
     }
 }

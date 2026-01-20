@@ -3,73 +3,75 @@ using Cysharp.Threading.Tasks;
 using Entities.PlayerScripts;
 using Interfaces;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Systems.Abilities.Concrete
+namespace Systems.Abilities
 {
     [Serializable]
-    public class WarmingAbility : BaseAbility
+    public class WarmingAbility : WarmthAbility
     {
         [Header("Normal Warm")]
         [SerializeField] private float _radius = 3f;
-        [SerializeField] private int _cost = 5;
         
         [Header("Explosion")]
-        [SerializeField] private float _explosionMaxRadius = 10f;
         [SerializeField] private float _explosionDuration = 0.5f;
         [SerializeField] private int _explosionCost = 50;
-
-        private Transform _playerTransform;
-        private IWarmthSystem _warmthSystem;
-        private PlayerInput _playerInput;
+        
+        private WarmthSystem _warmthSystem;
         private bool _isRunning;
-        private bool _canActivate;
-
+        private int _maxWarmthCost;
+        private AbilityTriggerZone<Warmable> _triggerZone;
+        
         [Inject]
-        public void Construct(Player player, PlayerInput playerInput, IWarmthSystem warmth)
+        public void Construct(Player player,  WarmthSystem warmthSystem)
         {
-            _playerTransform = player.Rigidbody.transform;
-            _warmthSystem = warmth;
-            _playerInput = playerInput;
-
-            StartAbility += StartWarm;
+            _warmthSystem = warmthSystem;
+            _maxWarmthCost = WarmthCost;
+            _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
+            _triggerZone.Wake();
             EndAbility += StopWarm;
         }
-
-        private void StartWarm()
+        
+        private AbilityTriggerZone<Warmable> GetOrCreateTriggerZone(Player player, string name, float radius)
         {
-            ActiveRoutine().Forget();
-            _canActivate = false;
+            var triggerObj = player.Rigidbody.transform.Find(name)?.gameObject;
+            if (triggerObj == null)
+            {
+                triggerObj = new GameObject(name);
+                triggerObj.transform.SetParent(player.Rigidbody.transform);
+                triggerObj.transform.localPosition = Vector3.zero;
+            }
+            
+            return new AbilityTriggerZone<Warmable>(triggerObj, radius);
         }
         
-        private async void StopWarm()
+        public void StartWarm()
+        {
+            if (_isRunning) return;
+            _isRunning = true;
+            ActiveRoutine().Forget();
+        }
+        
+        public void PerformExplosion()
+        {
+            PerformExplosionInternal().Forget();
+        }
+        
+        private void StopWarm()
         {
             _isRunning = false;
-            await UniTask.Delay(1000);
-            _canActivate = true;
         }
         
         private async UniTaskVoid ActiveRoutine()
         {
-            if (!_canActivate) return;
-            _isRunning = true;
-            if (IsComboActive && _secondaryComboType == typeof(MetabolismAbility))
+            while (Enabled && _isRunning)
             {
-                await PerformExplosion();
-            }
-            else
-            {
-                Debug.Log("warm");
-                while (Enabled && _isRunning)
-                {
-                    PerformTick();
-                    await UniTask.Delay(500);
-                }
+                PerformTick();
+                await UniTask.Delay(TimeSpan.FromSeconds(Tick));
             }
         }
 
-        private async UniTask PerformExplosion()
+        private async UniTask PerformExplosionInternal()
         {
             if (!_warmthSystem.CheckWarmCost(_explosionCost))
             { 
@@ -82,13 +84,8 @@ namespace Systems.Abilities.Concrete
             while (timer < _explosionDuration)
             {
                 timer += Time.deltaTime;
-                float currentRadius = Mathf.Lerp(0, _explosionMaxRadius, timer / _explosionDuration);
-                
-                var warmableObjects = FindWarmableObjects(_playerTransform.position, currentRadius);
-                foreach (var warmable in warmableObjects)
-                {
-                    warmable.WarmComplete();
-                }
+
+                WarmObjectsInRadius(true);
                 await UniTask.Yield();
             }
 
@@ -97,42 +94,28 @@ namespace Systems.Abilities.Concrete
 
         private void PerformTick()
         {
-            if (!_warmthSystem.CheckWarmCost(_cost))
-            {
-                StopWarm();
-                return;
-            }
-
             if (WarmObjectsInRadius())
             {
-                _warmthSystem.DecreaseWarmth(_cost);
+                WarmthCost = _maxWarmthCost;
                 UsingAbility?.Invoke();
             }
-        }
-
-        private System.Collections.Generic.List<Warmable> FindWarmableObjects(Vector2 position, float radius)
-        {
-            var hits = Physics2D.OverlapCircleAll(position, radius);
-            var warmableObjects = new System.Collections.Generic.List<Warmable>();
-            
-            foreach (var hit in hits)
+            else
             {
-                if (hit.TryGetComponent<Warmable>(out var warmable))
-                {
-                    warmableObjects.Add(warmable);
-                }
+                WarmthCost = 0;
             }
-            
-            return warmableObjects;
         }
+        
 
-        private bool WarmObjectsInRadius()
+        private bool WarmObjectsInRadius(bool complete = false)
         {
-            var warmableObjects = FindWarmableObjects(_playerTransform.position, _radius);
+            var warmableObjects = _triggerZone.ObjectsInRange;
             
             foreach (var warmable in warmableObjects)
             {
-                warmable.Warm();
+                if(complete)
+                    warmable.WarmComplete();
+                else
+                    warmable.Warm();
             }
             
             return warmableObjects.Count > 0;

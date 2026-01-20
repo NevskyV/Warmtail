@@ -13,35 +13,36 @@ MonoBehaviour:
   m_Name: HomePlayerConfig
   m_EditorClassIdentifier: Assembly-CSharp::Data.Player.PlayerConfig
   <Abilities>k__BackingField:
-  - rid: 1601399544975982592
-  - rid: 7345390921796026557
+  - rid: 4061568888548098190
+  - rid: 4061568888548098191
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 1601399544975982592
-      type: {class: PlayerMovement, ns: Systems, asm: Assembly-CSharp}
+    - rid: 4061568888548098190
+      type: {class: PlayerMovement, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
-          rid: 4204128976498851933
+          rid: 4061568888548098192
         MoveForce: 60
         _moreForge: 60
-        _drag: 5
-    - rid: 4204128976498851933
-      type: {class: MovementVisuals, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
-      data:
-        <AbilityIndex>k__BackingField: 0
-        <Water>k__BackingField: {fileID: 2100000, guid: dfa7fedbfa71d044da8f7372a0eef6f9, type: 2}
-        _startVfx: {fileID: 2481209622800388774, guid: da27ccfedea99c249985faf86c9fd17c, type: 3}
-        _loopVfx: {fileID: 4594389035895401464, guid: 5a4b004cf2a7ddf439e15f1f06d759cf, type: 3}
-        _startSfx: {fileID: 8300000, guid: 540bc4c2f9bad6e4283b045dda24cee6, type: 3}
-        _loopSfx: {fileID: 8300000, guid: 0f057e302baea5c47b0ad7980f779296, type: 3}
-        _vfxOffset: {x: 18, y: 0, z: 0}
-    - rid: 7345390921796026557
-      type: {class: InteractionAbility, ns: , asm: Assembly-CSharp}
+        _drag: 4.5
+    - rid: 4061568888548098191
+      type: {class: InteractionAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: -2
-        _interactionRadius: 2
+        _interactionRadius: 2.5
         _interactionOffset: {x: 0, y: 0, z: 0}
+    - rid: 4061568888548098192
+      type: {class: MovementVisuals, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
+      data:
+        <AbilityIndex>k__BackingField: 0
+        <Icon>k__BackingField: {fileID: -2892819179972619951, guid: 9d0865af10ee9534b93e7fa26cda1260, type: 3}
+        <Water>k__BackingField: {fileID: 2100000, guid: 4ebcbe981d2a90345a23c26843a1dcbb, type: 2}
+        _startVfx: {fileID: 2481209622800388774, guid: da27ccfedea99c249985faf86c9fd17c, type: 3}
+        _loopVfx: {fileID: 4594389035895401464, guid: 5a4b004cf2a7ddf439e15f1f06d759cf, type: 3}
+        _startSfx: {fileID: 8300000, guid: ef8b251d5336856448d5c1b453469495, type: 3}
+        _loopSfx: {fileID: 8300000, guid: b4c4814241c043a41806ce49d27c1b36, type: 3}
+        _vfxOffset: {x: 0, y: 0, z: 0}

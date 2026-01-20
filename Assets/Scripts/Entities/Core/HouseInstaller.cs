@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Data.Player;
 using Entities.PlayerScripts;
 using Entities.UI;
@@ -9,6 +10,7 @@ using Zenject;
 using Systems;
 using Entities.House;
 using Entities.NPC;
+using Systems.Abilities;
 using Systems.Environment;
 using Unity.Cinemachine;
 
@@ -33,6 +35,8 @@ namespace Entities.Core
             Debug.Log("set ui installer HOUSE");
             Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.Bind<Player>().FromInstance(_player).AsSingle();
+            Container.Bind<PlayerStateController>().FromNewComponentOn(_player.gameObject).AsSingle().NonLazy();
+            Container.Bind<PlayerAbilityController>().FromNewComponentOn(_player.gameObject).AsSingle().NonLazy();
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();
             Container.Bind<HouseManager>().FromInstance(_houseManager).AsSingle();
             Container.Bind<PlayerConfig>().FromInstance(_playerConfig).AsSingle();
@@ -49,6 +53,9 @@ namespace Entities.Core
             Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
             Container.Inject(_questSystem);
             Container.Bind<DailySystem>().FromNew().AsSingle();
+            
+            Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(_playerConfig.Abilities
+                .OfType<PlayerMovement>().First()).AsSingle();
             
             Container.Bind<List<IAbility>>()
                 .FromInstance(_playerConfig.Abilities)

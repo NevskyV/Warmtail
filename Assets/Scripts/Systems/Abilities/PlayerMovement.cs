@@ -6,10 +6,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Systems
+namespace Systems.Abilities
 {
     [Serializable]
-    public class PlayerMovement : IAbility
+    public class PlayerMovement : IAbility, IFixedTickable
     {
         public bool Enabled { get; set; } = true ;
         public Action StartAbility { get; set; }

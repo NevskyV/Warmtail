@@ -37,8 +37,27 @@ namespace Systems
         
         public void StartDialogue(RuntimeDialogueGraph graph, ITextVisual visual, string id, IEventInvoker character = null)
         {
-            if(graph.EntryNodeId == null) return;
-            graph.AllNodes.ForEach(x => _nodeLookup.Add(x.NodeId, x));
+            if (graph == null || graph.EntryNodeId == null || graph.AllNodes == null)
+            {
+                Debug.LogWarning($"DialogueSystem: Invalid dialogue graph for id '{id}'");
+                return;
+            }
+            
+            _nodeLookup.Clear();
+            graph.AllNodes.ForEach(x =>
+            {
+                if (x != null && x.NodeId != null && !_nodeLookup.ContainsKey(x.NodeId))
+                {
+                    _nodeLookup.Add(x.NodeId, x);
+                }
+            });
+            
+            if (!_nodeLookup.ContainsKey(graph.EntryNodeId))
+            {
+                Debug.LogWarning($"DialogueSystem: Entry node '{graph.EntryNodeId}' not found in graph");
+                return;
+            }
+            
             _dialogueGraph = graph;
             _currentNode = _nodeLookup[_dialogueGraph.EntryNodeId];
             

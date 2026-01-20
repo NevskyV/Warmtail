@@ -17,7 +17,14 @@ namespace Systems.Tasks
         public void Activate()
         {
             _button = SavableObjectsResolver.FindObjectById<Button>(_buttonId);
-            _button.onClick.AddListener(MarkComplete);
+            if (_button != null)
+            {
+                _button.onClick.AddListener(MarkComplete);
+            }
+            else
+            {
+                Debug.LogWarning($"ButtonTask: Button with id '{_buttonId}' not found");
+            }
         }
 
         private void MarkComplete()

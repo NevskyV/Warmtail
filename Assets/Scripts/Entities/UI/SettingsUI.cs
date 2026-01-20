@@ -1,7 +1,6 @@
 using Cysharp.Threading.Tasks;
 using Data;
 using Entities.Localization;
-using Entities.Probs;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.Audio;

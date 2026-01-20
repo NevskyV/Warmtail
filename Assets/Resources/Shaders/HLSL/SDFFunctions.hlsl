@@ -1,14 +1,36 @@
-﻿struct Shape {
+﻿#define MAX_GROUPS 64
+
+struct GroupProperty {
+    int type;
+    float4 fillColor;
+    float alpha;
+    float4 outlineColor;
+    float outlineThickness;
+    float4 inlineColor;
+    float inlineThickness;
+    float inOutlineThickness;
+    float waveFreq;
+    float waveAmp;
+    float waveSpeed;
+};
+
+struct Shape {
     int type;
     float2 position;
     float rotation;
     float2 size;
     float4 paramsA;
     float4 paramsB;
+    int groupIndex;
 };
- 
-StructuredBuffer<Shape> _Shapes;
+
+StructuredBuffer<Shape> _AllShapes;
 int _ShapeCount;
+
+StructuredBuffer<GroupProperty> _GroupProps;
+int _GroupCount;
+
+float _GroupSmoothness;
 
 
 void OutlineSDF_float(float Distance, float Thickness, out float Dist)
@@ -318,74 +340,126 @@ float GetLocalWavePerturbation(float2 localUV, float GlobalTime, float WaveFreq,
     return sin(angle * WaveFreq + GlobalTime * WaveSpeed) * WaveAmp;
 }
 
+int _MyGroupIndex;
+int _IsBaseGroup;
+float _InterGroupType;
+
 void SceneSDF_float(
     float2 UV,
     float Smoothness,
-    float InterType,
     float GlobalTime,
-    float OutlineThickness,
-    float InOutlineThickness,
-    float WaveFreq,
-    float WaveAmp,
-    float WaveSpeed,
     out float fillMask,
-    out float outlineMask)
+    out float outlineMask,
+    out float4 fillColor,
+    out float alpha,
+    out float4 outlineColor,
+    out float outlineThickness,
+    out float4 inlineColor,
+    out float inlineThickness)
 {
-    float combinedBaseSDF = (InterType == 1) ? -1e10 : 1e10;
-    float combinedWavySDF = (InterType == 1) ? -1e10 : 1e10;
-    outlineMask = 0.0;
-    
-    if (_ShapeCount == 0)
-    {
-        fillMask = 0.0;
-        return;
-    }
+    float groupFill[MAX_GROUPS];
+    float groupWavy[MAX_GROUPS];
+    GroupProperty groupProp[MAX_GROUPS];
 
+    for (int g = 0; g < _GroupCount; g++)
+    {
+        groupProp[g] = _GroupProps[g];
+        groupFill[g] = (_GroupProps[g].type == 1) ? -1e10 : 1e10;
+        groupWavy[g] = (_GroupProps[g].type == 1) ? -1e10 : 1e10;
+    }
+    int lastIndex = -1;
     [loop]
     for (int i = 0; i < _ShapeCount; i++)
     {
-        Shape s = _Shapes[i];
+        Shape s = _AllShapes[i];
+        int g = s.groupIndex;
+        if (g < 0 || g >= _GroupCount) continue;
         
         float2 offset = float2(0.5, 0.5);
         float2 localUV = UV - offset - s.position;
         localUV = RotateUV(localUV, -s.rotation);
-        
+
         float baseDist = GetShapeSDF(UV, s);
-        
-        float wavePerturbation = GetLocalWavePerturbation(localUV, GlobalTime, WaveFreq, WaveAmp, WaveSpeed);
+
+        GroupProperty currentGroupProp = _GroupProps[g];
+        float currentWaveFreq = currentGroupProp.waveFreq;
+        float currentWaveAmp = currentGroupProp.waveAmp;
+        float currentWaveSpeed = currentGroupProp.waveSpeed;
+
+        float wavePerturbation = GetLocalWavePerturbation(localUV, GlobalTime, currentWaveFreq, currentWaveAmp, currentWaveSpeed);
         float wavyDist = baseDist - wavePerturbation;
-        
+
         float tempBase;
-        if (InterType == 0)
-            SmoothUnion_float(combinedBaseSDF, baseDist, Smoothness, tempBase);
-        else if (InterType == 1)
-            SmoothIntersection_float(combinedBaseSDF, baseDist, Smoothness, tempBase);
-        else if (InterType == 2 && i > 0)
-            SmoothDifference_float(baseDist, combinedBaseSDF, Smoothness, tempBase);
+        if (currentGroupProp.type == 0)
+            SmoothUnion_float(groupFill[g], baseDist, Smoothness, tempBase);
+        else if (currentGroupProp.type == 1)
+            SmoothIntersection_float(groupFill[g], baseDist, Smoothness, tempBase);
+        else if (currentGroupProp.type == 2 && lastIndex == g)
+            SmoothDifference_float(baseDist, groupFill[g], Smoothness, tempBase);
         else
             tempBase = baseDist;
-        
-        combinedBaseSDF = tempBase;
-        
+        groupFill[g] = tempBase;
+
         float tempWavy;
-        if (InterType == 0)
-            SmoothUnion_float(combinedWavySDF, wavyDist, Smoothness, tempWavy);
-        else if (InterType == 1)
-            SmoothIntersection_float(combinedWavySDF, wavyDist, Smoothness, tempWavy);
-        else if (InterType == 2 && i > 0)
-            SmoothDifference_float(wavyDist, combinedWavySDF, Smoothness, tempWavy);
+        if (currentGroupProp.type == 0)
+            SmoothUnion_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
+        else if (currentGroupProp.type == 1)
+            SmoothIntersection_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
+        else if (currentGroupProp.type == 2 && lastIndex == g)
+            SmoothDifference_float(wavyDist,groupWavy[g], Smoothness, tempWavy);
         else
             tempWavy = wavyDist;
-        
-        combinedWavySDF = tempWavy;
+        lastIndex = g;
+        groupWavy[g] = tempWavy;
     }
-    
-    float bias = WaveAmp * InOutlineThickness;
-    
-    float outlineDist = abs(combinedWavySDF + bias) - (OutlineThickness + bias);
-    
-    outlineMask = smoothstep(OutlineThickness * 0.5, 0.0, outlineDist);
-    outlineMask *= step(0.0, combinedWavySDF + bias);
-    
-    fillMask = combinedBaseSDF;
+
+    float combinedFill = groupFill[0];
+    float combinedWavy = groupWavy[0];
+    GroupProperty combinedProp = groupProp[0];
+
+    for (int g = 1; g < _GroupCount; g++)
+    {
+        float h = clamp(0.5 + 0.5 * (groupFill[g] - combinedFill) / _GroupSmoothness, 0.0, 1.0);
+
+        float tempFill;
+        float tempWavy;
+        if (_InterGroupType == 2.0 && g == 1)
+        {
+            SmoothDifference_float(combinedFill, groupFill[g], _GroupSmoothness, tempFill);
+            SmoothDifference_float(combinedWavy, groupWavy[g], _GroupSmoothness, tempWavy);
+        }
+        else
+        {
+            SmoothUnion_float(combinedFill, groupFill[g], _GroupSmoothness, tempFill);
+            SmoothUnion_float(combinedWavy, groupWavy[g], _GroupSmoothness, tempWavy);
+        }
+
+        combinedFill = tempFill;
+        combinedWavy = tempWavy;
+
+        combinedProp.fillColor = lerp(groupProp[g].fillColor, combinedProp.fillColor, h);
+        combinedProp.alpha = lerp(groupProp[g].alpha, combinedProp.alpha, h);
+        combinedProp.outlineColor = lerp(groupProp[g].outlineColor, combinedProp.outlineColor, h);
+        combinedProp.outlineThickness = lerp(groupProp[g].outlineThickness, combinedProp.outlineThickness, h);
+        combinedProp.inlineColor = lerp(groupProp[g].inlineColor, combinedProp.inlineColor, h);
+        combinedProp.inlineThickness = lerp(groupProp[g].inlineThickness, combinedProp.inlineThickness, h);
+        combinedProp.waveFreq = lerp(groupProp[g].waveFreq, combinedProp.waveFreq, h);
+        combinedProp.waveAmp = lerp(groupProp[g].waveAmp, combinedProp.waveAmp, h);
+        combinedProp.waveSpeed = lerp(groupProp[g].waveSpeed, combinedProp.waveSpeed, h);
+    }
+
+    float bias = combinedProp.waveAmp * combinedProp.inOutlineThickness;
+
+    float outlineDist = abs(combinedWavy + bias) - (combinedProp.outlineThickness + bias);
+
+    outlineMask = smoothstep(combinedProp.outlineThickness * 0.5, 0.0, outlineDist);
+    outlineMask *= step(0.0, combinedWavy + bias);
+
+    fillMask = combinedFill;
+    fillColor = combinedProp.fillColor;
+    alpha = combinedProp.alpha;
+    outlineColor = combinedProp.outlineColor;
+    outlineThickness = combinedProp.outlineThickness;
+    inlineColor = combinedProp.inlineColor;
+    inlineThickness = combinedProp.inlineThickness;
 }

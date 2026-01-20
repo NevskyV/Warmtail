@@ -1,6 +1,7 @@
 using System;
 using AYellowpaper.SerializedCollections;
 using Entities.PlayerScripts;
+using Systems;
 using Systems.Effects;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -17,23 +18,34 @@ namespace Entities.UI
 
         [SerializeField] private Player _player;
         [SerializeField] private PlayerInput _playerInput;
+        private PlayerAbilityController _abilityController;
+        private ScreenshotSystem _screenshotSystem;
         public UIState CurrentState { get; private set; }
 
         [Inject]
-        private void Construct(PlayerInput input)
+        private void Construct(PlayerInput input, ScreenshotSystem screenshotSystem, [InjectOptional] PlayerAbilityController abilityController)
         {
             _playerInput = input;
+            _abilityController = abilityController;
+            _screenshotSystem = screenshotSystem;
+        }
+
+        private void ChangeObjectState(bool state)
+        {
+            gameObject.SetActive(state);
         }
 
         private void OnEnable()
         {
             if(_playerInput)
                 _playerInput.actions["Escape"].performed += EscapeTransition;
+            _screenshotSystem.ScreenShotState += ChangeObjectState;
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
             if(_playerInput)
                 _playerInput.actions["Escape"].performed -= EscapeTransition;
+            _screenshotSystem.ScreenShotState -= ChangeObjectState;
         }
 
         private void EscapeTransition(InputAction.CallbackContext ctx)
@@ -46,15 +58,15 @@ namespace Entities.UI
         
         public async void SwitchCurrentStateAsync(UIState state)
         {
-            if (SceneManager.GetActiveScene().name != "Start")
+            if (SceneManager.GetActiveScene().name != "Start" && _abilityController != null)
             {
                 switch (state)
                 {
                     case UIState.Normal:
-                        _player.EnableLastAbilities();
+                        _abilityController.EnableLastAbilities();
                         break;
                     case UIState.Pause:
-                        _player.DisableAllAbilities();
+                        _abilityController.DisableAllAbilities();
                         break;
                 }
             }

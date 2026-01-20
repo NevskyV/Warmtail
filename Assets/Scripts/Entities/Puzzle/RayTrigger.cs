@@ -1,7 +1,6 @@
 using UnityEngine;
 using Interfaces;
 using Systems;
-using UnityEngine.Events;
 
 namespace Entities.Puzzle
 {

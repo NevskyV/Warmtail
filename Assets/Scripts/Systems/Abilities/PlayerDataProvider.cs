@@ -1,11 +1,12 @@
+using System;
 using Data;
 using Data.Player;
-using Interfaces;
+using UnityEngine;
 using Zenject;
 
 namespace Systems.Abilities
 {
-    public class PlayerDataProvider : IPlayerDataProvider
+    public class PlayerDataProvider
     {
         private GlobalData _globalData;
 
@@ -15,14 +16,27 @@ namespace Systems.Abilities
             _globalData = globalData;
         }
 
-        public int GetSpeed()
+        public string GetProperty(string name)
         {
-            return _globalData.Get<RuntimePlayerData>().Speed;
+            var obj = _globalData.Get<RuntimePlayerData>();
+            return obj.GetType().GetField(name).GetValue(obj).ToString();
         }
 
-        public void SetSpeed(int speed)
+        public void SetProperty(string name, string value)
         {
-            _globalData.Edit<RuntimePlayerData>(data => data.Speed = speed);
+            try
+            {
+                _globalData.Edit<RuntimePlayerData>(data =>
+                {
+                    var field = typeof(RuntimePlayerData).GetField(name);
+                    var t = field.GetValue(data).GetType();
+                    field.SetValue(data, Convert.ChangeType(value,t));
+                });
+            }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
         }
     }
 }

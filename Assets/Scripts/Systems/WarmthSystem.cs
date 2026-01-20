@@ -3,18 +3,17 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
-using Interfaces;
 using UnityEngine;
 using Zenject;
 
 namespace Systems
 {
 
-    public class WarmthSystem : IWarmthSystem
+    public class WarmthSystem
     {
-        private const int WarmthIncreaseRate = 1;
-        private const float IncreaseIntervalSeconds = 1f;
-        private const float CooldownSeconds = 3f;
+        private const int _warmthIncreaseRate = 1;
+        private const float _increaseIntervalSeconds = 1f;
+        private const float _cooldownSeconds = 3f;
 
         private GlobalData _globalData;
 
@@ -45,7 +44,7 @@ namespace Systems
             _increaseCts = null;
             _isIncreasing = false;
             Debug.Log("decrease");
-            _cooldownTimer ??= new ResettableTimer(CooldownSeconds, StartIncreaseIfNotRunning);
+            _cooldownTimer ??= new ResettableTimer(_cooldownSeconds, StartIncreaseIfNotRunning);
             _cooldownTimer.Start();
         }
 
@@ -73,11 +72,11 @@ namespace Systems
 
                     _globalData.Edit<RuntimePlayerData>(data =>
                     {
-                        var newVal = Mathf.Min(data.CurrentWarmth + WarmthIncreaseRate, max);
+                        var newVal = Mathf.Min(data.CurrentWarmth + _warmthIncreaseRate, max);
                         data.CurrentWarmth = newVal;
                     });
                     Debug.Log("increase");
-                    await UniTask.Delay(TimeSpan.FromSeconds(IncreaseIntervalSeconds), cancellationToken: token);
+                    await UniTask.Delay(TimeSpan.FromSeconds(_increaseIntervalSeconds), cancellationToken: token);
                 }
             }
             catch (OperationCanceledException) { }

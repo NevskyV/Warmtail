@@ -1,11 +1,8 @@
-﻿using Data;
-using Interfaces;
+﻿using Interfaces;
 using UnityEngine;
 using Entities.Core;
 using Entities.Probs;
-using Entities.UI;
 using Cysharp.Threading.Tasks;
-using TMPro;
 
 namespace Systems.SequenceActions
 {

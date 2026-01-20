@@ -32,12 +32,18 @@ namespace Systems.Environment
             _globalData = globalData;
             _player = player;
             _config = config;
-            UpdateLevelVisibility();
+            // UpdateLevelVisibility() перенесен в Start() чтобы вызваться после инициализации abilities
             input.actions["Surfacing"].started += ctx =>
             {
                 var direction = (int)ctx.ReadValue<float>();
                 TryChangeLayer(direction);
             };
+        }
+
+        private void Start()
+        {
+            // Вызывается после того как PlayerAbilityController.Initialize() проинжектировал все abilities
+            UpdateLevelVisibility();
         }
 
         public void SetNewLevel(int level)

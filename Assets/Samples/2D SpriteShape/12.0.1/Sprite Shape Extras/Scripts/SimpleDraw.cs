@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.U2D;
 
 // Dynamic modification of spline to follow the path of mouse movement.

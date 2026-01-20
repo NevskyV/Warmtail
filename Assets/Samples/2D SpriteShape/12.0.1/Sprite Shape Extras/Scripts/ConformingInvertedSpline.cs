@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
 #if UNITY_EDITOR
-using UnityEditor;
 #endif
 
 // Demo Script Usage:

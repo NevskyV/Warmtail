@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Data;
 using Data.Nodes;
 using EasyTextEffects;
@@ -61,8 +60,7 @@ namespace Entities.UI
             _globalData = globalData;
             _localizationManager = localization;
             _uiStateSystem = uiStateSystem;
-
-            _input.actions.FindAction("Space").performed += RequestNewNode;
+            
             _boxNameEffect = _boxName.GetComponent<TextEffect>();
             _boxTextEffect = _boxText.GetComponent<TextEffect>();
             _boxTextEffect.globalEffects[0].onEffectCompleted.AddListener(() => IsComplete = true);
@@ -81,12 +79,14 @@ namespace Entities.UI
         public void ShowVisuals()
         {
             _uiStateSystem.SwitchCurrentStateAsync(UIState.Dialogue);
+            _input.actions.FindAction("Space").performed += RequestNewNode;
         }
         
         public void HideVisuals()
         {
             if (_uiStateSystem.CurrentState != UIState.Shop)
                 _uiStateSystem.SwitchCurrentStateAsync(UIState.Normal);
+            _input.actions.FindAction("Space").performed -= RequestNewNode;
         }
         
         public void RequestNewLine(TextNode node)
