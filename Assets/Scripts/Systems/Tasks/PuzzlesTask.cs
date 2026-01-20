@@ -9,7 +9,7 @@ namespace Systems.Tasks
     {
         public bool Completed { get; set; }
         public Action OnComplete { get; set; }
-        [SerializeField] private string _puzzleId;
+        [SerializeField] private string[] _puzzleId;
         [TextArea] [SerializeField] private string description;
 
         public void Activate()
@@ -21,7 +21,11 @@ namespace Systems.Tasks
 
         private void MarkComplete(string id)
         {
-            if (_puzzleId != id) return;
+            bool b = false;
+            foreach (string s in _puzzleId)
+                if (s == id) b = true;
+            if (!b) return;
+            
             Completed = true;
             OnComplete?.Invoke();
             LeversPuzzle.OnPuzzleSolved -= MarkComplete;
