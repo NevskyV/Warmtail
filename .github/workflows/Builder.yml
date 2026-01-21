@@ -107,13 +107,17 @@ jobs:
         with:
           name: game-build
           path: build.zip
-
-  release:
+  approval:
     name: Release & publish 🚀
     needs: build
     runs-on: ubuntu-latest
     environment: 
         name: Production
+
+  release:
+    name: Release & publish 🚀
+    needs: [build, approval]
+    runs-on: ubuntu-latest
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4
@@ -128,6 +132,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create GitHub release
+        id: create-release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
