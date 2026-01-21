@@ -128,11 +128,12 @@ jobs:
           name: game-build
 
       - name: Create GitHub tag
-        run: |
-          git tag v${{ needs.build.outputs.buildVersion }}
-          git push origin v${{ needs.build.outputs.buildVersion }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: rickstaa/action-create-tag@v1
+        id: "tag_create"
+        with:
+          tag: ${{ needs.build.outputs.buildVersion }}
+          tag_exists_error: false
+          message: ${{ needs.build.outputs.buildVersion }}
 
       - name: Create GitHub release
         id: create-release
@@ -140,7 +141,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ needs.build.outputs.buildVersion }}
+          tag_name: ${{ needs.build.outputs.buildVersion }}
           release_name: Release v${{ needs.build.outputs.buildVersion }}
           draft: false
           prerelease: false
