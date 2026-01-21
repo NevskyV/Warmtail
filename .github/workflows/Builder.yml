@@ -111,6 +111,7 @@ jobs:
   release:
     name: Release & publish 🚀
     needs: build
+    permissions: write-all
     environment: 
         name: Production
     runs-on: ubuntu-latest
