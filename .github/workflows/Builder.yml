@@ -108,11 +108,14 @@ jobs:
           name: game-build
           path: build.zip
   approval:
-    name: Release & publish 🚀
+    name: Waiting for approval 🙏
     needs: build
     runs-on: ubuntu-latest
     environment: 
         name: Production
+    steps:
+      - name: Done
+        run: echo "Approval Done"
 
   release:
     name: Release & publish 🚀
