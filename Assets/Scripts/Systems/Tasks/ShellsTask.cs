@@ -9,7 +9,6 @@ namespace Systems.Tasks
     {
         public bool Completed { get; set; }
         public Action OnComplete { get; set; }
-        [SerializeField] private int _id;
 
         public void Activate()
         {

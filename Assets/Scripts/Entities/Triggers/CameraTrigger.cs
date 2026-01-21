@@ -43,7 +43,7 @@ namespace Entities.Triggers
                 DOTween.To(() => _camera.Lens.OrthographicSize, value => _camera.Lens.OrthographicSize = value, _zoom,
                     _stunTime * 0.5f);
 
-                await _target.DOMove(_targetPos, _stunTime * 0.5f, true).AsyncWaitForCompletion();
+                await _target.DOMove(_targetPos, _stunTime * 0.5f).AsyncWaitForCompletion();
                 Disable();
             }
         }
