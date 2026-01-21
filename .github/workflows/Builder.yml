@@ -107,19 +107,12 @@ jobs:
         with:
           name: game-build
           path: build.zip
-  approval:
-    name: Waiting for approval 🙏
-    needs: build
-    runs-on: ubuntu-latest
-    environment: 
-        name: Production
-    steps:
-      - name: Done
-        run: echo "Approval Done"
 
   release:
     name: Release & publish 🚀
-    needs: [build, approval]
+    needs: build
+    environment: 
+        name: Production
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifact
@@ -129,7 +122,8 @@ jobs:
 
       - name: Create GitHub tag
         uses: rickstaa/action-create-tag@v1
-        id: "tag_create"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag: ${{ needs.build.outputs.buildVersion }}
           tag_exists_error: false
