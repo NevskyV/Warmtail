@@ -17,15 +17,22 @@ namespace Systems.Abilities
         private PlayerConfig _config;
         private ComboSystem _comboSystem;
         private List<WarmthAbility> _allAbilities;
-        private List<WarmthAbility> _activeAbilities = new();
+        private List<int> _activeAbilities = new();
+        private List<int> _confirmedAbilities = new();
         private int _selectedIndex;
+
+        public Action<int> OnSelect;
+        public Action<int> OnConfirm;
+        public Action<List<int>> OnCast;
+        public Action<List<int>> OnStopCast;
+        public Action<int> OnAddAbility;
         
         [Inject]
         public void Construct(PlayerConfig config, GlobalData globalData, PlayerInput input, ComboSystem comboSystem)
         {
             _config = config;
             _comboSystem = comboSystem;
-            _allAbilities = _config.Abilities.OfType<WarmthAbility>().ToList();
+            _allAbilities = _config.Abilities.OfType<WarmthAbility>().Where(x => x.Enabled).ToList();
             
             SetupInput(input);
         }
@@ -60,41 +67,57 @@ namespace Systems.Abilities
             var ability = _allAbilities[index];
             Debug.Log("ability: " + ability);
             
-            if (_activeAbilities.Contains(ability))
+            _selectedIndex = index;
+            OnSelect?.Invoke(index);
+        }
+
+        private void StartCasting()
+        {
+            _activeAbilities.Add(_selectedIndex);
+            if (_activeAbilities.Count > 1)
+            {
+                _comboSystem.SetCombo(_allAbilities[_activeAbilities[0]], _allAbilities[_activeAbilities[1]]);
+            }
+            _activeAbilities.ForEach(x => _allAbilities[x].UseAbility());
+            OnCast?.Invoke(_activeAbilities);
+        }
+        
+        private void StopCasting()
+        {
+            OnStopCast?.Invoke(_activeAbilities);
+            _activeAbilities.ForEach(x => _allAbilities[x].StopAbility());
+            _activeAbilities.Clear();
+        }
+
+        public void AddAbility(WarmthAbility ability)
+        {
+            _allAbilities.Add(ability);
+            OnAddAbility?.Invoke(_allAbilities.Count-1);
+        }
+
+        private void ConfirmAbility(int index)
+        {
+            if (_confirmedAbilities.Contains(index))
             {
                 StopCasting();
-                Debug.Log("wasCasting: true");
                 if (_activeAbilities.Count > 1) 
                 {
-                    _comboSystem.DisableCombo(_activeAbilities[0], _activeAbilities[1]);
+                    _comboSystem.DisableCombo(_allAbilities[_activeAbilities[0]], _allAbilities[_activeAbilities[1]]);
                 }
                 
-                _activeAbilities.Remove(ability);
+                _confirmedAbilities.Remove(index);
+                _activeAbilities.Remove(index);
                 
                 if (_activeAbilities.Count > 0)
                 {
                     StartCasting();
                 }
-                return;
             }
-            
-            _selectedIndex = index;
-        }
-
-        private void StartCasting()
-        {
-            _activeAbilities.Add(_allAbilities[_selectedIndex]);
-            if (_activeAbilities.Count > 1)
+            else
             {
-                _comboSystem.SetCombo(_activeAbilities[0], _activeAbilities[1]);
+                _confirmedAbilities.Add(index);
             }
-            _activeAbilities.ForEach(x => x.UseAbility());
-        }
-        
-        private void StopCasting()
-        {
-            _activeAbilities.ForEach(x => x.StopAbility());
-            _activeAbilities.Clear();
+            OnConfirm?.Invoke(index);
         }
     }
 }

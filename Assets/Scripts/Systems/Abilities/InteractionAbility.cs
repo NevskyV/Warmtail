@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using DG.Tweening;
 using Entities.PlayerScripts;
 using Interfaces;
 using UniRx;
@@ -33,6 +35,8 @@ namespace Systems.Abilities
         
             _triggerZone = GetOrCreateTriggerZone(player, "InteractionTrigger", _interactionRadius);
             _triggerZone.Wake();
+            _triggerZone.OnObjectEnter.Subscribe(ObjectEnter);
+            _triggerZone.OnObjectExit.Subscribe(ObjectExit);
         
             _playerInput.actions["LeftMouse"].started += _ => StartAbility?.Invoke();
             _playerInput.actions["LeftMouse"].performed += Interact;
@@ -87,6 +91,44 @@ namespace Systems.Abilities
         {
             _playerInput.actions["LeftMouse"].performed -= Interact;
             _disposables?.Dispose();
+        }
+
+        private void ObjectEnter(IInteractable interactable)
+        {
+            var propertyBlock = new MaterialPropertyBlock();
+            propertyBlock.SetInt("_Enable", 1);
+            var renderer = (interactable as MonoBehaviour)?.GetComponent<Renderer>();
+            var outlineWidth = 0f;
+            var inOutlineWidth = 0f;
+            DOTween.To(() => outlineWidth, x =>{
+                outlineWidth = x;
+                propertyBlock.SetFloat("_OutlineThickness",x);
+                renderer?.SetPropertyBlock(propertyBlock);
+            }, 0.005f, 0.5f);
+            DOTween.To(() => inOutlineWidth, x =>{
+                inOutlineWidth = x;
+                propertyBlock.SetFloat("_InnerOutlineThickness",x);
+                renderer?.SetPropertyBlock(propertyBlock);
+            }, 1.5f, 0.5f);
+        }
+        
+        private void ObjectExit(IInteractable interactable)
+        {
+            var propertyBlock = new MaterialPropertyBlock();
+            propertyBlock.SetInt("_Enable", 0);
+            var renderer = (interactable as MonoBehaviour)?.GetComponent<Renderer>();
+            var outlineWidth = 0.005f;
+            var inOutlineWidth = 1.5f;
+            DOTween.To(() => outlineWidth, x =>{
+                outlineWidth = x;
+                propertyBlock.SetFloat("_OutlineThickness",x);
+                renderer?.SetPropertyBlock(propertyBlock);
+            }, 0f, 0.5f);
+            DOTween.To(() => inOutlineWidth, x =>{
+                inOutlineWidth = x;
+                propertyBlock.SetFloat("_InnerOutlineThickness",x);
+                renderer?.SetPropertyBlock(propertyBlock);
+            }, 0f, 0.5f);
         }
     }
 }
