@@ -3,7 +3,7 @@ using Entities.UI;
 using Interfaces;
 using Zenject;
 
-namespace Entities.Probs
+namespace Entities.Props
 {
     public class StarTutorial : SavableStateObject, IInteractable
     {

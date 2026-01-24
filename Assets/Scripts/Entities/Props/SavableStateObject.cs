@@ -5,7 +5,7 @@ using TriInspector;
 using UnityEngine;
 using Zenject;
 
-namespace Entities.Probs
+namespace Entities.Props
 {
     public class SavableStateObject : MonoBehaviour
     {

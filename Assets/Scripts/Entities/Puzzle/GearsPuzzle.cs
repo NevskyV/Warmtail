@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using Entities.Probs;
 using Rng = UnityEngine.Random;
 using UnityEngine.Events;
 using UnityEngine;
 using Interfaces;
 using System;
+using Entities.Props;
 
 namespace Entities.Puzzle
 {

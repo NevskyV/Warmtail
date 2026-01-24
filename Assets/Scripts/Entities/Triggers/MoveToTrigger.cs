@@ -1,4 +1,4 @@
-﻿using Entities.Probs;
+﻿using Entities.Props;
 using UnityEngine;
 
 namespace Entities.Triggers

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Systems;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Interfaces
@@ -9,6 +10,7 @@ namespace Interfaces
         protected float _warmthAmount = 1;
         protected float _maxWarmthAmount = 1;
         [SerializeField] protected UnityEvent _warmEvent;
+        protected ResettableTimer _timer;
 
         public virtual void Warm()
         {
@@ -16,6 +18,13 @@ namespace Interfaces
             _warmthAmount -= _warmFactor;
             if (_warmthAmount <= 0)
                 WarmComplete();
+            if(_warmthAmount > 0)
+            {
+                if (_timer != null)
+                    _timer.Start();
+                else
+                    _timer = new ResettableTimer(5, Reset);
+            }
         }
 
         public virtual void WarmComplete()

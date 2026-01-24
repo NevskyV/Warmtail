@@ -8,7 +8,7 @@ using Systems;
 using UnityEngine;
 using Zenject;
 
-namespace Entities.Probs
+namespace Entities.Props
 {
     public class Star : SavableStateObject, IInteractable
     {

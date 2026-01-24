@@ -3,21 +3,24 @@ using Data.Player;
 using UnityEngine;
 using Zenject;
 
-public class ShellReward : MonoBehaviour
+namespace Entities.Props
 {
-    private GlobalData _globalData;
-
-    [Inject]
-    public void Construct(GlobalData globalData)
+    public class ShellReward : MonoBehaviour
     {
-        _globalData = globalData;
-    }
+        private GlobalData _globalData;
 
-    public void Reward()
-    {
-        _globalData.Edit<SavablePlayerData>(player =>
+        [Inject]
+        public void Construct(GlobalData globalData)
         {
-            player.Shells += 50;
-        });
+            _globalData = globalData;
+        }
+
+        public void Reward()
+        {
+            _globalData.Edit<SavablePlayerData>(player =>
+            {
+                player.Shells += 50;
+            });
+        }
     }
 }

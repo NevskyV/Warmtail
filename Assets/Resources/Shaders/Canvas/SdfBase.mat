@@ -7,15 +7,16 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Test
+  m_Name: SdfBase
   m_Shader: {fileID: -6465566751694194690, guid: f13d0a5ad390d7343a6c0703f8b1c049, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _INTERSECTION_UNION
-  - _SHAPE_CIRCLE
+  - _NOISETYPE_NONE
   m_InvalidKeywords:
   - _INTERSECTION_A
+  - _SHAPE_CIRCLE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -27,6 +28,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -44,10 +49,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Alpha: 1
     - _ColorMask: 15
     - _CornerRounding: 0.15
     - _INTERSECTION: 0
+    - _InOutlineThickness: 1.5
     - _InlineThickness: 0.075
+    - _NOISETYPE: 0
     - _NoiseScale: 10
     - _NoiseSpeed: 0.1
     - _OutlineThickness: 0.075
@@ -61,10 +69,14 @@ Material:
     - _StencilWriteMask: 255
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
+    - _WaveAmplitude: 0.01
+    - _WaveFrequency: 22.9
+    - _WaveSpeed: 3.3
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.4547168, b: 0.4547168, a: 1}
     - _Corners: {r: 0, g: 0, b: 0, a: 0}
+    - _FillColor: {r: 1, g: 0.4547168, b: 0.4547168, a: 1}
     - _InlineColor: {r: 0, g: 0.2396226, b: 0.2396226, a: 1}
     - _OutlineColor: {r: 1, g: 0.2396226, b: 0.2396226, a: 1}
     - _Size: {r: 0.2, g: 0.25, b: 0, a: 0}

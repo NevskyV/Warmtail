@@ -1,7 +1,7 @@
 ﻿using Data;
 using DG.Tweening;
 using Entities.PlayerScripts;
-using Entities.Probs;
+using Entities.Props;
 using Unity.Cinemachine;
 using UnityEngine;
 using Zenject;

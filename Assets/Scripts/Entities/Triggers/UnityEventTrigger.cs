@@ -1,5 +1,5 @@
 ﻿using Data;
-using Entities.Probs;
+using Entities.Props;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Entities.Core;
-using Entities.Probs;
+using Entities.Props;
 using Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;

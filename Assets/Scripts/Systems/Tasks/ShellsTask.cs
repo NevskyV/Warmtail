@@ -1,7 +1,7 @@
 ﻿using System;
+using Entities.Props;
 using Interfaces;
 using UnityEngine;
-using Entities.Probs;
 
 namespace Systems.Tasks
 {

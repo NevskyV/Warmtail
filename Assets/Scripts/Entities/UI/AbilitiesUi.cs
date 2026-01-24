@@ -1,4 +1,5 @@
 using Data.Player;
+using TriInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -8,9 +9,18 @@ namespace Entities.UI
 {
     public class AbilitiesUI : MonoBehaviour
     {
+        [Title("Images to fill")]
         [SerializeField] private Image[] _images;
-        [SerializeField] private InputActionAsset _inputActions;
 
+        [Title("Shader Settings")] 
+        [SerializeField] private float _defaultOutWidth;
+        [SerializeField] private float _selectedOutWidth;
+        [SerializeField] private float _defaultInWidth;
+        [SerializeField] private float _selectedInWidth;
+        [SerializeField] private float _defaultRhombusSize;
+        [SerializeField] private float _selectedRhombusSize;
+        
+        private InputActionAsset _inputActions;
         private InputAction[] _keys;
         private InputAction _rightClick;
 
@@ -23,9 +33,10 @@ namespace Entities.UI
         private PlayerConfig _playerConfig;
 
         [Inject]
-        private void Construct(PlayerConfig playerConfig)
+        private void Construct(PlayerConfig playerConfig, PlayerInput playerInput)
         {
             _playerConfig = playerConfig;
+            _inputActions = playerInput.actions;
         }
 
         void Awake()
@@ -135,7 +146,7 @@ namespace Entities.UI
         {
             for (int i = 0; i < 4; i++) _selected[i] = false;
             _selected[index] = true;
-
+            
             _selectedIndex = index;
         }
     }

@@ -49,7 +49,6 @@ namespace Systems.Abilities
 
         private void OnMove(InputAction.CallbackContext context)
         {
-            Debug.Log((Enabled));
             if (Enabled)
             {
                 _moveInput = context.ReadValue<Vector2>();
@@ -65,7 +64,7 @@ namespace Systems.Abilities
         public void FixedTick()
         {
             var rb = _player.Rigidbody;
-            if (rb == null || !Enabled) return;
+            if (!rb || !Enabled) return;
 
             if (_moveInput.magnitude > 0.1f)
             {

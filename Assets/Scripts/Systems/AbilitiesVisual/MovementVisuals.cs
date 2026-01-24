@@ -22,7 +22,7 @@ namespace Systems.AbilitiesVisual
         [field: SerializeReference] public Sprite Icon { get;  set;}
         [field: SerializeReference] public Material Water {get; set;}
         [SerializeField] private ParticleSystem _startVfx;
-        [SerializeField] private ParticleSystem _loopVfx;
+        [SerializeField] private ParticleSystem[] _loopVfx;
         [SerializeField] private AudioClip _startSfx;
         [SerializeField] private AudioClip _loopSfx;
         [SerializeField] private Vector3 _vfxOffset;
@@ -59,18 +59,21 @@ namespace Systems.AbilitiesVisual
             UpdatePlayerStats();
 
             DOTween.To(() => _camera.Lens.OrthographicSize, x => _camera.Lens.OrthographicSize = x, 11,1);
-            var loopVfxObj = (await ObjectSpawnSystem.Spawn(_loopVfx, _player.Rigidbody.position, _player.Rigidbody.transform,200)).gameObject;
-            loopVfxObj.transform.localRotation = Quaternion.Euler(new Vector3(0,0,160));
-            loopVfxObj.transform.localPosition += _vfxOffset;
-            _loopVfxObjs.Add(loopVfxObj);
+            foreach (var vfx in _loopVfx)
+            {
+                var loopVfxObj = Object.Instantiate(vfx, _player.Rigidbody.position, Quaternion.identity,_player.Rigidbody.transform).gameObject;
+                loopVfxObj.transform.localRotation = Quaternion.Euler(new Vector3(0,0,160));
+                loopVfxObj.transform.localPosition += _vfxOffset;
+                _loopVfxObjs.Add(loopVfxObj);
+            }
         }
         
         public void UsingAbility()
         {
-            UpdatePlayerStats();
+            //UpdatePlayerStats();
         }
         
-        public async void EndAbility()
+        public void EndAbility()
         {
             UpdatePlayerStats();
             _player.ObjectSfx.StopLoopSfx();
@@ -78,10 +81,17 @@ namespace Systems.AbilitiesVisual
             {
                 if(_ability.Enabled)_camera.Lens.OrthographicSize = x;
             }, 9,1);
-            await UniTask.Delay(200);
-            foreach (var obj in _loopVfxObjs)
+            for (int i = _loopVfxObjs.Count - 1; i >= 0; i--)
             {
-                Object.Destroy(obj);
+                var obj =  _loopVfxObjs[i];
+                if (obj == null)
+                {
+                    _loopVfxObjs.RemoveAt(i);
+                    continue;
+                }
+                var main = obj.GetComponent<ParticleSystem>().main;
+                main.loop = false;
+                _loopVfxObjs.Remove(obj);
             }
         }
 
