@@ -18,7 +18,6 @@ namespace Systems.Abilities
         [SerializeField] private int _normalSpeed = 60;
         [SerializeField] private int _dashSpeed = 100;
         private float _lastDashTime = -Mathf.Infinity;
-        private bool _canDash = true;
         private UniTask _dashTask;
         private bool _dashLoopRunning;
 
@@ -60,12 +59,11 @@ namespace Systems.Abilities
             WarmthCost = 0;
             StartAbility?.Invoke();
         }
-        
 
         public void FixedTick()
         {
             if (!Enabled) return;
-            Debug.Log("Dash Ability");
+            
             if (Mathf.Abs(_layerInput) > 0.1f)
             {
                 _rumble.ShortRumble();
@@ -81,9 +79,8 @@ namespace Systems.Abilities
 
             if (_moveInput.magnitude > 0.1f)
             {
-                if (!_dashLoopRunning && _canDash)
+                if (!_dashLoopRunning)
                 {
-                    _canDash = false;  
                     _dashLoopRunning = true;
                     _dashTask = DashLoop();
                 }
@@ -97,9 +94,8 @@ namespace Systems.Abilities
             {
                 while (Enabled && _dashLoopRunning && _moveInput.magnitude > 0.1f)
                 {
-                    Dash();
                     WarmthCost = _applyCost? MaxWarmthCost : 0;
-
+                    Dash();
                     await UniTask.Delay(500);
                 }
             }
@@ -109,7 +105,6 @@ namespace Systems.Abilities
                 _rumble.DisableRumble();
                 ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
                 await UniTask.Delay(TimeSpan.FromSeconds(_dashCooldownDuration));
-                _canDash = true;
             }
         }
 

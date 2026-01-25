@@ -63,7 +63,7 @@ namespace Systems.Abilities
         
         private void StopWarm()
         {
-            Gamepad.current.ResetHaptics();
+            _rumble.DisableRumble();
             _isRunning = false;
         }
         

@@ -94,6 +94,7 @@ namespace Systems.Abilities
             OnStopCast?.Invoke(_activeAbilities);
             _activeAbilities.ForEach(x => _allAbilities[x].StopAbility());
             _activeAbilities.Clear();
+            SelectAbility(_selectedIndex);
         }
 
         public void AddAbility(WarmthAbility ability)

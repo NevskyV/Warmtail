@@ -51,7 +51,7 @@ namespace Systems.Abilities
             Enabled = false;
             _drainWarmthRunning = false;
             EndAbility?.Invoke();
-            CooldownTimer();
+            //CooldownTimer();
         }
         
         private async void DrainWarmth()

@@ -10,6 +10,7 @@ namespace Systems
         [Inject] private GlobalData _globalData;
         public async void ShortRumble()
         {
+            if (Gamepad.current == null) return;
             Gamepad.current.SetMotorSpeeds(_globalData.Get<SettingsData>().ShortLowRumble, _globalData.Get<SettingsData>().ShortHighRumble);
             await UniTask.Delay(100);
             Gamepad.current.ResetHaptics();
@@ -17,11 +18,13 @@ namespace Systems
         
         public void EnableRumble()
         {
+            if (Gamepad.current == null) return;
             Gamepad.current.SetMotorSpeeds(_globalData.Get<SettingsData>().LongLowRumble, _globalData.Get<SettingsData>().LongHighRumble);
         }
 
         public void DisableRumble()
         {
+            if (Gamepad.current == null) return;
             Gamepad.current.ResetHaptics();
         }
     }
