@@ -4,6 +4,7 @@ using Data.Player;
 using Systems.Abilities;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Entities.UI
@@ -11,7 +12,7 @@ namespace Entities.UI
     public class AbilitiesUI : MonoBehaviour
     {
         [Title("Images to fill")]
-        [SerializeField] private GameObject[] _images;
+        [SerializeField] private Image[] _images;
 
         [Title("Selection")] 
         [SerializeField] private float _defaultOutWidth;
@@ -60,18 +61,25 @@ namespace Entities.UI
 
         private void ShowAbilities(bool show = true)
         {
-            foreach (var ability in _warmthAbilities.Where(x => x.Enabled))
+            foreach (var ability in _warmthAbilities)
             {
-                _images[_warmthAbilities.IndexOf(ability)].SetActive(show);
+                _images[_warmthAbilities.IndexOf(ability)].transform.parent.gameObject.SetActive(show && ability.InUse);
+                _images[_warmthAbilities.IndexOf(ability)].sprite = ability.Visual.Icon;
             }
         }
         
         private void SelectAbility(int index)
         {
+            for(int i = 0;  i < _images.Length; i++)
+            {
+                _images[i].transform.parent.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1);
+            }
+            _images[index].transform.parent.GetComponent<RectTransform>().localScale = new Vector3(1.3f, 1.3f, 1);
         }
 
         private void ConfirmAbility(int index)
         {
+            _images[index].transform.localScale = _images[index].transform.localScale == new Vector3(1.3f, 1.3f, 1)?  new Vector3(1, 1, 1) : new Vector3(1.3f, 1.3f, 1);
         }
 
         private void Cast(List<int> warmthAbilities)
@@ -84,6 +92,7 @@ namespace Entities.UI
         
         private void AddAbility(int index)
         {
+            ShowAbilities();
         }
     }
 }

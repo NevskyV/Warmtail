@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000911d778ae72eaef4
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -2891,11 +2891,13 @@ PrefabInstance:
       propertyPath: m_FillAmount
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedComponents:
+    - {fileID: 2911037699358737249, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
+    m_RemovedGameObjects:
+    - {fileID: 4022413816949838295, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 3347595861233721655, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
-      insertIndex: 5
+      insertIndex: 4
       addedObject: {fileID: 1715233448}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
@@ -3439,6 +3441,8 @@ MonoBehaviour:
   _holder: {fileID: 11400000, guid: 8b9ecf24c1771bd429d80c16b58068a4, type: 2}
   _audioSource: {fileID: 1785838162}
   _effect: {fileID: 11400000, guid: 89fa0e849cb2be249950253f6a019dec, type: 2}
+  _defaultZoom: 9
+  _dialogueZoom: 6
   _boxObject: {fileID: 1663149693}
   _boxText: {fileID: 1538742123}
   _boxName: {fileID: 2014624315}

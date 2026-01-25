@@ -1,5 +1,3 @@
-
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +30,10 @@ namespace Systems.Abilities
         {
             _config = config;
             _comboSystem = comboSystem;
-            _allAbilities = _config.Abilities.OfType<WarmthAbility>().Where(x => x.Enabled).ToList();
-            
+            _allAbilities = _config.Abilities.OfType<WarmthAbility>().Where(x => x.InUse).ToList();
+            _allAbilities.ForEach(x => Debug.Log(x));
+            AddAbility(_config.Abilities.OfType<WarmingAbility>().First());
+            AddAbility(_config.Abilities.OfType<DashAbility>().First());
             SetupInput(input);
         }
 
@@ -49,6 +49,7 @@ namespace Systems.Abilities
 
             input.actions["RightMouse"].started += _ => StartCasting();
             input.actions["RightMouse"].canceled += _ => StopCasting();
+            input.actions["MiddleMouse"].canceled += _ => ConfirmAbility(_selectedIndex);
         }
 
         private void CycleSelection(float scrollValue)
@@ -59,9 +60,13 @@ namespace Systems.Abilities
 
         private void SelectAbility(int index)
         {
-            if (index < 0 || index >= _allAbilities.Count)
+            if (index < 0)
             {
-                return;
+                index = _allAbilities.Count-1;
+            } 
+            else if(index >= _allAbilities.Count)
+            {
+                index = 0;
             }
             
             var ability = _allAbilities[index];
@@ -73,7 +78,9 @@ namespace Systems.Abilities
 
         private void StartCasting()
         {
-            _activeAbilities.Add(_selectedIndex);
+            if (_confirmedAbilities.Count <= 0) return;
+            
+            _activeAbilities.AddRange(_confirmedAbilities);
             if (_activeAbilities.Count > 1)
             {
                 _comboSystem.SetCombo(_allAbilities[_activeAbilities[0]], _allAbilities[_activeAbilities[1]]);
@@ -91,7 +98,9 @@ namespace Systems.Abilities
 
         public void AddAbility(WarmthAbility ability)
         {
+            if (_allAbilities.Contains(ability)) return;
             _allAbilities.Add(ability);
+            ability.InUse = true;
             OnAddAbility?.Invoke(_allAbilities.Count-1);
         }
 

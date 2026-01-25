@@ -69,7 +69,7 @@ namespace Systems.Abilities
             if (_moveInput.magnitude > 0.1f)
             {
                 UsingAbility?.Invoke();
-                Vector2 force = _moveInput.normalized * MoveForce;
+                Vector2 force = _moveInput * MoveForce;
                 rb.AddForce(force * _moreForge, ForceMode2D.Force);
 
                 float targetAngle = Mathf.Atan2(_moveInput.y, _moveInput.x) * Mathf.Rad2Deg;

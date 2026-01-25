@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Entities.PlayerScripts;
 using Interfaces;
@@ -12,6 +13,9 @@ namespace Systems.Abilities
 {
     public class InteractionAbility : IAbility, IDisposable
     {
+        private static readonly int Enable = Shader.PropertyToID("_Enable");
+        private static readonly int OutlineThickness = Shader.PropertyToID("_OutlineThickness");
+        private static readonly int InnerOutlineThickness = Shader.PropertyToID("_InnerOutlineThickness");
         public bool Enabled { get; set; } = true;
         public Action StartAbility { get; set; }
         public Action UsingAbility { get; set; }
@@ -23,16 +27,18 @@ namespace Systems.Abilities
     
         private Player _player;
         private PlayerInput _playerInput;
+        private GamepadRumble  _rumble;
         private AbilityTriggerZone<IInteractable> _triggerZone;
         private CompositeDisposable _disposables = new();
     
         [Inject]
-        public void Construct(Player player, PlayerInput playerInput)
+        public void Construct(Player player, PlayerInput playerInput, GamepadRumble gamepadRumble)
         {
             Enabled = true;
             _player = player;
             _playerInput = playerInput;
-        
+            _rumble = gamepadRumble;
+            
             _triggerZone = GetOrCreateTriggerZone(player, "InteractionTrigger", _interactionRadius);
             _triggerZone.Wake();
             _triggerZone.OnObjectEnter.Subscribe(ObjectEnter);
@@ -59,10 +65,10 @@ namespace Systems.Abilities
         public void Interact(InputAction.CallbackContext context)
         {
             if (!Enabled) return;
-        
+            
             var objectsInRange = _triggerZone.ObjectsInRange;
             if (objectsInRange.Count == 0) return;
-        
+            _rumble.ShortRumble();
             IInteractable closest = null;
             float minDist = float.MaxValue;
             Vector2 playerPos = _player.Rigidbody.transform.position + _interactionOffset;
@@ -96,18 +102,21 @@ namespace Systems.Abilities
         private void ObjectEnter(IInteractable interactable)
         {
             var propertyBlock = new MaterialPropertyBlock();
-            propertyBlock.SetInt("_Enable", 1);
+            propertyBlock.SetInt(Enable, 1);
             var renderer = (interactable as MonoBehaviour)?.GetComponent<Renderer>();
+            
             var outlineWidth = 0f;
             var inOutlineWidth = 0f;
+            
             DOTween.To(() => outlineWidth, x =>{
                 outlineWidth = x;
-                propertyBlock.SetFloat("_OutlineThickness",x);
+                propertyBlock.SetFloat(OutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 0.005f, 0.5f);
+            
             DOTween.To(() => inOutlineWidth, x =>{
                 inOutlineWidth = x;
-                propertyBlock.SetFloat("_InnerOutlineThickness",x);
+                propertyBlock.SetFloat(InnerOutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 1.5f, 0.5f);
         }
@@ -115,18 +124,21 @@ namespace Systems.Abilities
         private void ObjectExit(IInteractable interactable)
         {
             var propertyBlock = new MaterialPropertyBlock();
-            propertyBlock.SetInt("_Enable", 0);
+            propertyBlock.SetInt(Enable, 0);
             var renderer = (interactable as MonoBehaviour)?.GetComponent<Renderer>();
+            
             var outlineWidth = 0.005f;
             var inOutlineWidth = 1.5f;
+            
             DOTween.To(() => outlineWidth, x =>{
                 outlineWidth = x;
-                propertyBlock.SetFloat("_OutlineThickness",x);
+                propertyBlock.SetFloat(OutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 0f, 0.5f);
+            
             DOTween.To(() => inOutlineWidth, x =>{
                 inOutlineWidth = x;
-                propertyBlock.SetFloat("_InnerOutlineThickness",x);
+                propertyBlock.SetFloat(InnerOutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 0f, 0.5f);
         }
