@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Collections.Generic;
 using Data;
 using Data.Player;
 using Entities.UI;
@@ -24,7 +25,7 @@ namespace Systems
             _questVisuals = visuals;
         }
         
-        public static void StartQuest(QuestData data, int questState = 0)
+        public static void StartQuest(QuestData data, List<int> questState = new(){0})
         {
             if (data.Scene != SceneManager.GetActiveScene().path) return;
 
@@ -34,16 +35,35 @@ namespace Systems
             OnQuestStarted.Invoke(data, true);
             _questVisuals.SpawnQuest(data);
 
-            for (int i = 0; i < questState; i++)
+            if (data.QuestType == QuestType.Serial)
             {
-                data.Sequence[i].Actions.ForEach(x => x.Invoke());
+                foreach (var task in data.Sequence[questState[0]].Tasks)
+                {
+                    task.Activate();
+                    task.OnComplete += () => TryIterateSequence(data, -1);
+                }
+
+                for (int i = 0; i < questState[0]; i ++)
+                {
+                    data.Sequence[i].Actions.ForEach(x => x.Invoke());
+                }
+            }
+            else if (data.QuestType == QuestType.Parallel)
+            {
+                for (int i = 0; i < data.Sequence.Count; i ++)
+                {
+                    if (data.Sequence.Task.Contains(i)) continue;
+                    var task = data.Sequence.Task[i];
+                    task.Activate();
+                    task.OnComplete += () => TryIterateSequence(data);
+                }
+
+                foreach (int i in questState)
+                {
+                    data.Sequence[i].Actions.ForEach(x => x.Invoke());
+                }
             }
 
-            foreach (var task in data.Sequence[questState].Tasks)
-            {
-                task.Activate();
-                task.OnComplete += () => TryIterateSequence(data);
-            }
         }
 
         public static void TryIterateSequence(QuestData data)
@@ -51,13 +71,15 @@ namespace Systems
             var questIds = _globalData.Get<SavablePlayerData>().QuestIds;
             if (!questIds.Keys.Contains(data.Id)) return;
             var questState = questIds[data.Id];
-            if (questState >= data.Sequence.Count) EndQuest(data);
+            if (questState.Count >= data.Sequence.Count) EndQuest(data);
             else
             {
-                SequenceIterationSystem.TryIterateSequence(data.Sequence, questState,
+                SequenceIterationSystem.TryIterateSequence(data.Sequence, questState, data.QuestType,
                 x =>
                 {
-                    if (x == data.Sequence.Count) EndQuest(data);
+                    if ((data.QuestType == QuestType.Parallel && x.Count == data.Sequence.Count) || 
+                        (data.QuestType == QuestType.Serial && x[0] == data.Sequence.Count) )
+                            EndQuest(data);
                     else
                     {
                         _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds[data.Id] = x);

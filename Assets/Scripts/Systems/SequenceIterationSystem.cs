@@ -7,7 +7,7 @@ namespace Systems
 {
     public class SequenceIterationSystem
     {
-        public static void TryIterateSequence(List<SequenceElement> data, int currentState, Action<int> onStateChangedAction)
+        public static void TryIterateSequence(List<SequenceElement> data, List<int> currentState, QuestType type, Action<int> onStateChangedAction)
         {
             if (currentState >= data.Count) return;
             var element = data[currentState];
@@ -19,7 +19,9 @@ namespace Systems
                 x.Invoke();
             }
             
-            currentState++;
+            if (type == QuestType.Parallel) currentState.Add();
+            else if (type == QuestType.Serial) currentState[0] ++;
+
             onStateChangedAction.Invoke(currentState);
             Debug.Log($"currentState {currentState}");
             if (currentState == data.Count) return;
