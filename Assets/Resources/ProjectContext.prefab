@@ -133,8 +133,12 @@ MonoBehaviour:
         MusicVolume: 1
         SfxVolume: 1
         QualityLevel: 1
-        FullscreenMode: 0
+        FullscreenMode: 1
         Language: 0
+        LongLowRumble: 0.15
+        LongHighRumble: 0.45
+        ShortLowRumble: 0.15
+        ShortHighRumble: 0.75
     - rid: 4204128997775507583
       type: {class: SavablePlayerData, ns: Data.Player, asm: Assembly-CSharp}
       data:
@@ -147,12 +151,11 @@ MonoBehaviour:
         TimeLastGame: 
         TutorState: 0
         HasBeatenGame: 0
-        IsHomeOpened: 0
-        LastScene: NevskyTest
+        LastScene: GameplayIra
         QuestIds:
-          _serializedList:
-          - Key: 0
-            Value: 0
+          _serializedList: []
+        FearIds: 
+        IsHomeOpened: 0
     - rid: 4204128997775507584
       type: {class: DialogueVarData, ns: Data, asm: Assembly-CSharp}
       data:

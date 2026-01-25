@@ -42,7 +42,7 @@ namespace Entities.UI
                 //TODO animation
                 _tween?.Pause();
                 var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);
-                _tween = _heatFillBar.DOFillAmount(newAmount, 1f);
+                _tween = _heatFillBar.DOFillAmount(newAmount, 0.5f);
             }
         }
     }

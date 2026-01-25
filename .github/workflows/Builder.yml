@@ -111,28 +111,36 @@ jobs:
   release:
     name: Release & publish 🚀
     needs: build
-    runs-on: ubuntu-latest
+    permissions: write-all
     environment: 
         name: Production
+    runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: game-build
 
       - name: Create GitHub tag
-        run: |
-          git tag v${{ needs.build.outputs.buildVersion }}
-          git push origin v${{ needs.build.outputs.buildVersion }}
+        uses: rickstaa/action-create-tag@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: ${{ needs.build.outputs.buildVersion }}
+          tag_exists_error: false
+          message: ${{ needs.build.outputs.buildVersion }}
 
       - name: Create GitHub release
+        id: create-release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ needs.build.outputs.buildVersion }}
+          tag_name: ${{ needs.build.outputs.buildVersion }}
           release_name: Release v${{ needs.build.outputs.buildVersion }}
           draft: false
           prerelease: false

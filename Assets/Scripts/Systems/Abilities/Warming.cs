@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using Cysharp.Threading.Tasks;
 using Entities.PlayerScripts;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Systems.Abilities
@@ -18,14 +20,16 @@ namespace Systems.Abilities
         [SerializeField] private int _explosionCost = 50;
         
         private WarmthSystem _warmthSystem;
+        private GamepadRumble _rumble;
         private bool _isRunning;
         private int _maxWarmthCost;
         private AbilityTriggerZone<Warmable> _triggerZone;
         
         [Inject]
-        public void Construct(Player player,  WarmthSystem warmthSystem)
+        public void Construct(Player player,  WarmthSystem warmthSystem, GamepadRumble gamepadRumble)
         {
             _warmthSystem = warmthSystem;
+            _rumble = gamepadRumble;
             _maxWarmthCost = WarmthCost;
             _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
             _triggerZone.Wake();
@@ -59,6 +63,7 @@ namespace Systems.Abilities
         
         private void StopWarm()
         {
+            Gamepad.current.ResetHaptics();
             _isRunning = false;
         }
         
@@ -78,6 +83,7 @@ namespace Systems.Abilities
                 StopWarm();
                 return;
             }
+            _rumble.EnableRumble();
             _warmthSystem.DecreaseWarmth(_explosionCost);
             float timer = 0;
             
@@ -88,7 +94,7 @@ namespace Systems.Abilities
                 WarmObjectsInRadius(true);
                 await UniTask.Yield();
             }
-
+            _rumble.DisableRumble();
             StopWarm();
         }
 
@@ -96,11 +102,13 @@ namespace Systems.Abilities
         {
             if (WarmObjectsInRadius())
             {
+                _rumble.EnableRumble();
                 WarmthCost = _maxWarmthCost;
                 UsingAbility?.Invoke();
             }
             else
             {
+                _rumble.DisableRumble();;
                 WarmthCost = 0;
             }
         }
@@ -108,14 +116,15 @@ namespace Systems.Abilities
 
         private bool WarmObjectsInRadius(bool complete = false)
         {
-            var warmableObjects = _triggerZone.ObjectsInRange;
+            var warmableObjects = _triggerZone.ObjectsInRange.ToList();
             
-            foreach (var warmable in warmableObjects)
+            for (int i = 0; i < warmableObjects.Count; i++)
             {
+                if (warmableObjects[i] == null) continue;
                 if(complete)
-                    warmable.WarmComplete();
+                    warmableObjects[i].WarmComplete();
                 else
-                    warmable.Warm();
+                    warmableObjects[i].Warm();
             }
             
             return warmableObjects.Count > 0;

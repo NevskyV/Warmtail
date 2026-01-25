@@ -1,11 +1,11 @@
 using System.Collections.Generic;
 using System.Globalization;
-using Entities.Probs;
 using Entities.UI;
 using Interfaces;
 using Systems;
 using System;
 using Data;
+using Entities.Props;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;

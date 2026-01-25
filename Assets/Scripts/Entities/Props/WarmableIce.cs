@@ -4,14 +4,13 @@ using Systems;
 using UnityEngine;
 using UnityEngine.U2D;
 
-namespace Entities.Probs
+namespace Entities.Props
 {
     public class WarmableIce : Warmable
     {
         private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
         [SerializeField] private SpriteShapeRenderer _renderer;
         
-        private ResettableTimer _timer;
         private Tween _tween;
         private MaterialPropertyBlock _propertyBlock;
 
@@ -24,15 +23,8 @@ namespace Entities.Probs
         public override void Warm()
         {
             UpdateRenderer((_maxWarmthAmount - _warmthAmount) * 1.0f / _maxWarmthAmount,
-                (_maxWarmthAmount - _warmthAmount - _warmFactor) * 1.0f / _maxWarmthAmount);
+                (_maxWarmthAmount - _warmthAmount + _warmFactor) * 1.0f / _maxWarmthAmount);
             base.Warm();
-            if(_warmthAmount > 0)
-            {
-                if (_timer != null)
-                    _timer.Start();
-                else
-                    _timer = new ResettableTimer(3, Reset);
-            }
         }
 
         public override void WarmComplete()
@@ -51,6 +43,8 @@ namespace Entities.Probs
         {
             if (!_renderer) return;
             _tween?.Pause();
+            _propertyBlock.SetFloat(DissolveAmount, newAmount);
+            _renderer.SetPropertyBlock(_propertyBlock);
             _tween = DOTween.To(() => lastAmount, x =>{
                 if (!_renderer)
                 {

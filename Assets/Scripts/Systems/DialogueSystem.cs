@@ -101,6 +101,7 @@ namespace Systems
             _dialogueGraph = null;
             _visuals.HideVisuals();
             _input.SwitchCurrentActionMap(_prevActionMap);
+            Debug.Log(_input.currentActionMap);
         }
     }
 }

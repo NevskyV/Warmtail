@@ -14,14 +14,16 @@ namespace Entities.PlayerScripts
         
         private PlayerStateController _stateController;
         private PlayerAbilityController _abilityController;
+        private SceneSystem _sceneSystem;
         
         private bool _isInitialized;
 
         [Inject]
-        private void Construct(PlayerStateController stateController, PlayerAbilityController abilityController)
+        private void Construct(PlayerStateController stateController, PlayerAbilityController abilityController, SceneSystem sceneSystem)
         {
             _stateController = stateController;
             _abilityController = abilityController;
+            _sceneSystem = sceneSystem;
         }
 
         private void Start()

@@ -15,11 +15,13 @@ namespace Systems.Tasks
 
         public void Activate()
         {
+            Completed = false;
             _asset[_action].started += MarkComplete;
         }
 
         private void MarkComplete(InputAction.CallbackContext _)
         {
+            Debug.Log(_action);
             Completed = true;
             OnComplete?.Invoke();
             _asset[_action].started -= MarkComplete;

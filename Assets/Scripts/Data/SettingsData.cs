@@ -12,5 +12,10 @@ namespace Data
         public int QualityLevel;
         public bool FullscreenMode;
         public int Language;
+
+        [Range(0f, 1)] public float LongLowRumble;
+        [Range(0f, 1)] public float LongHighRumble;
+        [Range(0f, 1)] public float ShortLowRumble;
+        [Range(0f, 1)] public float ShortHighRumble;
     }
 }

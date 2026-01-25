@@ -13,34 +13,32 @@ namespace Systems.Abilities
     [Serializable]
     public class DashAbility : WarmthAbility, IFixedTickable
     {
-        [SerializeField] private int _dashCost = 15;
         [SerializeField] private float _destroyRadius = 1.5f;
         [SerializeField] private float _dashCooldownDuration = 1f;
         [SerializeField] private int _normalSpeed = 60;
         [SerializeField] private int _dashSpeed = 100;
-        [SerializeField] private int _surfacingCost = 15;
         private float _lastDashTime = -Mathf.Infinity;
         private bool _canDash = true;
         private UniTask _dashTask;
         private bool _dashLoopRunning;
-        private bool _noCostMode = false;
 
         private PlayerConfig _playerConfig;
         private Rigidbody2D _playerRb;
         private SurfacingSystem _surfacingSystem;
-        private WarmthSystem _warmthSystem;
+        private GamepadRumble _rumble;
 
         private Vector2 _moveInput;
         private float _layerInput;
+        private bool _applyCost;
         [Inject]
-        public void Construct(PlayerConfig playerConfig, Player player, WarmthSystem warmth, SurfacingSystem surfacing,
-            PlayerInput input, DiContainer container)
+        public void Construct(PlayerConfig playerConfig, Player player, SurfacingSystem surfacing,
+            PlayerInput input, DiContainer container, GamepadRumble gamepadRumble)
         {
 
             _playerRb = player.Rigidbody;
             _surfacingSystem = surfacing;
-            _warmthSystem = warmth;
             _playerConfig = playerConfig;
+            _rumble = gamepadRumble;
 
             input.actions["Move"].performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
             input.actions["Move"].canceled += _ => _moveInput = Vector2.zero;
@@ -51,13 +49,15 @@ namespace Systems.Abilities
 
         public void ActivateDash()
         {
-            _noCostMode = false;
+            _applyCost = true;
+            WarmthCost = 0;
             StartAbility?.Invoke();
         }
 
         public void ActivateDashNoCost()
         {
-            _noCostMode = true;
+            _applyCost =  false;
+            WarmthCost = 0;
             StartAbility?.Invoke();
         }
         
@@ -68,12 +68,12 @@ namespace Systems.Abilities
             Debug.Log("Dash Ability");
             if (Mathf.Abs(_layerInput) > 0.1f)
             {
+                _rumble.ShortRumble();
                 int dir = (int)Mathf.Sign(_layerInput);
 
                 if (_surfacingSystem.TryChangeLayer(dir))
                 {
-                    if (ShouldApplyCost())
-                        _warmthSystem.DecreaseWarmth(_surfacingCost);
+                    WarmthCost = MaxWarmthCost;
 
                     _layerInput = 0;
                 }
@@ -98,33 +98,26 @@ namespace Systems.Abilities
                 while (Enabled && _dashLoopRunning && _moveInput.magnitude > 0.1f)
                 {
                     Dash();
-
-                    if (ShouldApplyCost())
-                        _warmthSystem.DecreaseWarmth(_dashCost);
+                    WarmthCost = _applyCost? MaxWarmthCost : 0;
 
                     await UniTask.Delay(500);
                 }
             }
             finally
             {
+                _dashLoopRunning = false;
+                _rumble.DisableRumble();
+                ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
                 await UniTask.Delay(TimeSpan.FromSeconds(_dashCooldownDuration));
                 _canDash = true;
-                _dashLoopRunning = false;
-                ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
             }
         }
 
-
-
         private void Dash()
         {
+            _rumble.EnableRumble();
             DestroyObstaclesInRadius(_destroyRadius);
             ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _dashSpeed;
-        }
-
-        private bool ShouldApplyCost()
-        {
-            return !_noCostMode;
         }
 
         private void DestroyObstaclesInRadius(float radius)

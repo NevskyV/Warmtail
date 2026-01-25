@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Data;
 using Entities.NPC;
-using Entities.Probs;
+using Entities.Props;
 using UnityEngine;
 using Zenject;
 

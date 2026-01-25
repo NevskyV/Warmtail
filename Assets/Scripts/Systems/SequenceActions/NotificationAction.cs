@@ -1,8 +1,8 @@
 ﻿using Interfaces;
 using UnityEngine;
 using Entities.Core;
-using Entities.Probs;
 using Cysharp.Threading.Tasks;
+using Entities.Props;
 
 namespace Systems.SequenceActions
 {
