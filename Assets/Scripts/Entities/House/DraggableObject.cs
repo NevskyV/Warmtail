@@ -21,6 +21,7 @@ namespace Entities.House
         private UIStateSystem _uiStateSystem;
         private Vector2 _posObjectOnPointerDown;
         private Vector2 _posMouseOnPointerDown;
+        private Vector2 _posObjectOnLastInside;
         private Vector2 _posObjectOnConfirmedState;
         private bool _isClickedNow;
         private bool _isPlacementing;
@@ -74,6 +75,20 @@ namespace Entities.House
             if (_isPlacementing)
             {
                 Vector2 v2 = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+                if (v2.x > 35.06f && v2.y > -20.48f) 
+                {
+                    if (_posObjectOnLastInside.x > 35.06f) v2.y = -20.48f;
+                    else v2.x = 35.06f;
+                }
+
+                if (v2.x < 9.54f) v2.x = 9.54f;
+                if (v2.y < -31.14f) v2.y = -31.14f;
+                if (v2.y > 4.86f) v2.y = 4.86f;
+                if (v2.x > 45.26f) v2.x = 45.26f;
+
+                _posObjectOnLastInside = v2;
+
                 transform.position = _posObjectOnPointerDown + (v2 - _posMouseOnPointerDown);
                 StartBuild();
             }
