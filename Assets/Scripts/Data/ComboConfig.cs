@@ -65,8 +65,7 @@ namespace Data
             });
             return list;
         }
-
-        public enum AbilityType
-        {Movement, Interaction, Warming, Resonance, Metabolism, Dash}
     }
+    public enum AbilityType
+    {Movement, Interaction, Warming, Resonance, Metabolism, Dash}
 }

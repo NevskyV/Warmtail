@@ -27,6 +27,7 @@ MonoBehaviour:
     - rid: 4204129410323054674
   - Actions:
     - rid: 4061568888548098233
+    - rid: 4061569070873968771
     Tasks:
     - rid: 4061568888548098232
   - Actions:
@@ -134,7 +135,9 @@ MonoBehaviour:
         _objId: ee3a06b9-1cfb-43dc-9171-0b2930291130
         _needToBe: 0
         description: "\u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430 \u043D\u0430
-          \u0441\u0431\u043E\u0440 \u0437\u0432\u0435\u0437\u0434\u044B"
+          \u0441\u0431\u043E\u0440 \u0437\u0432\u0435\u0437\u0434\u044B + \u0430\u043A\u0442\u0438\u0432\u0430\u0446\u0438\u044F
+          \u043A\u043E\u043B\u043B\u0430\u0439\u0434\u0435\u0440\u0430 \u0434\u043B\u044F
+          \u0430\u0431\u0438\u043B\u043A\u0438\n"
     - rid: 4061568888548098233
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -167,6 +170,12 @@ MonoBehaviour:
         _position: {x: 88, y: 34.85}
         description: "\u043A\u043E\u043B\u043B\u0430\u0439\u0434\u0435\u0440 \u0434\u043B\u044F
           \u043F\u043E\u043A\u0430\u0437\u0430 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0438"
+    - rid: 4061569070873968771
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _objectIds:
+        - 5a5eae0b-5cdd-4b95-a9de-3007e5a142b3
     - rid: 4204129410323054672
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

@@ -4,6 +4,7 @@ using Data.Player;
 using Entities.PlayerScripts;
 using Interfaces;
 using Systems.Environment;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -25,12 +26,13 @@ namespace Systems.Abilities
         private Rigidbody2D _playerRb;
         private SurfacingSystem _surfacingSystem;
         private GamepadRumble _rumble;
+        private CinemachineBasicMultiChannelPerlin _camNoise;
 
         private Vector2 _moveInput;
         private float _layerInput;
         private bool _applyCost;
         [Inject]
-        public void Construct(PlayerConfig playerConfig, Player player, SurfacingSystem surfacing,
+        public void Construct(PlayerConfig playerConfig, Player player, CinemachineCamera cam, SurfacingSystem surfacing,
             PlayerInput input, DiContainer container, GamepadRumble gamepadRumble)
         {
 
@@ -38,6 +40,7 @@ namespace Systems.Abilities
             _surfacingSystem = surfacing;
             _playerConfig = playerConfig;
             _rumble = gamepadRumble;
+            _camNoise = cam.GetComponent<CinemachineBasicMultiChannelPerlin>();
 
             input.actions["Move"].performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
             input.actions["Move"].canceled += _ => _moveInput = Vector2.zero;
@@ -94,6 +97,7 @@ namespace Systems.Abilities
             {
                 while (Enabled && _dashLoopRunning && _moveInput.magnitude > 0.1f)
                 {
+                    _camNoise.enabled = true;
                     WarmthCost = _applyCost? MaxWarmthCost : 0;
                     Dash();
                     await UniTask.Delay(500);
@@ -101,6 +105,7 @@ namespace Systems.Abilities
             }
             finally
             {
+                _camNoise.enabled = false;
                 _dashLoopRunning = false;
                 _rumble.DisableRumble();
                 ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;

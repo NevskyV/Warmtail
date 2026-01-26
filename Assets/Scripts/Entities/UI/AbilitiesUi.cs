@@ -72,11 +72,12 @@ namespace Entities.UI
 
             foreach (var image in _images)
             {
-                image.material.SetFloat("_OutlineThickness",0);
-                image.material.SetFloat("_InOutlineThickness",0);
-                image.material.SetFloat("_InlineThickness",0);
-                image.material.SetFloat("_WaveAmplitude",0);
-                image.material.SetFloat("_Alpha",1);
+                var parent = image.transform.parent.GetComponent<Image>();
+                parent.material.SetFloat("_OutlineThickness",0);
+                parent.material.SetFloat("_InOutlineThickness",0);
+                parent.material.SetFloat("_InlineThickness",0);
+                parent.material.SetFloat("_WaveAmplitude",0);
+                parent.material.SetFloat("_Alpha",1);
             }
         }
 
@@ -124,10 +125,10 @@ namespace Entities.UI
             
             var confirmedParent = _images[index].transform.parent.GetComponent<Image>();
             
-            var confirmedInlineWidth = confirmedParent.materialForRendering.GetFloat("_InlineThickness");
+            var confirmedInlineWidth = confirmedParent.material.GetFloat("_InlineThickness");
             DOTween.To(() => confirmedInlineWidth, x =>{
                 confirmedInlineWidth = x;
-                confirmedParent.materialForRendering.SetFloat("_InlineThickness", x);
+                confirmedParent.material.SetFloat("_InlineThickness", x);
             }, notConfirmed? _confirmedInWidth : _defaultInWidth, 0.5f);
         }
 
@@ -138,20 +139,20 @@ namespace Entities.UI
                 if (!warmthAbilities.Contains(i))
                 {
                     var parent = _images[i].transform.parent.GetComponent<Image>();
-                    var opacity = parent.materialForRendering.GetFloat("_Alpha");
+                    var opacity = parent.material.GetFloat("_Alpha");
                     DOTween.To(() => opacity, x =>{
                         opacity = x;
-                        parent.materialForRendering.SetFloat("_Alpha", x);
+                        parent.material.SetFloat("_Alpha", x);
                     }, _activeOpacity, 0.5f);
                     CreateOutline(i, false);
                 }
                 else
                 {
                     var parent = _images[i].transform.parent.GetComponent<Image>();
-                    var amplitude = parent.materialForRendering.GetFloat("_WaveAmplitude");
+                    var amplitude = parent.material.GetFloat("_WaveAmplitude");
                     DOTween.To(() => amplitude, x =>{
                         amplitude = x;
-                        parent.materialForRendering.SetFloat("_WaveAmplitude", x);
+                        parent.material.SetFloat("_WaveAmplitude", x);
                     }, _activeAmplitude, 0.5f);
                     CreateOutline(i, true);
                 }
@@ -163,10 +164,10 @@ namespace Entities.UI
             foreach (var i in warmthAbilities)
             {
                 var parent = _images[i].transform.parent.GetComponent<Image>();
-                var amplitude = parent.materialForRendering.GetFloat("_WaveAmplitude");
+                var amplitude = parent.material.GetFloat("_WaveAmplitude");
                 DOTween.To(() => amplitude, x =>{
                     amplitude = x;
-                    parent.materialForRendering.SetFloat("_WaveAmplitude", x);
+                    parent.material.SetFloat("_WaveAmplitude", x);
                 }, _defaultAmplitude, 0.5f);
             }
 
@@ -175,10 +176,10 @@ namespace Entities.UI
                 if (!warmthAbilities.Contains(i))
                 {
                     var parent = _images[i].transform.parent.GetComponent<Image>();
-                    var opacity = parent.materialForRendering.GetFloat("_Alpha");
+                    var opacity = parent.material.GetFloat("_Alpha");
                     DOTween.To(() => opacity, x =>{
                         opacity = x;
-                        parent.materialForRendering.SetFloat("_Alpha", x);
+                        parent.material.SetFloat("_Alpha", x);
                     }, _defaultOpacity, 0.5f);
                 }
             }
@@ -188,12 +189,12 @@ namespace Entities.UI
         {
             var selectedParent = _images[index].transform.parent.GetComponent<Image>();
             
-            DOTween.To(() => selectedParent.materialForRendering.GetFloat("_OutlineThickness"), x =>{
-                selectedParent.materialForRendering.SetFloat("_OutlineThickness", x);
+            DOTween.To(() => selectedParent.material.GetFloat("_OutlineThickness"), x =>{
+                selectedParent.material.SetFloat("_OutlineThickness", x);
             }, selected? _selectedOutWidth : _defaultOutWidth, 0.5f);
             
             DOTween.To(() => selectedParent.material.GetFloat("_InOutlineThickness"), x =>{
-                selectedParent.materialForRendering.SetFloat("_InOutlineThickness", x);
+                selectedParent.material.SetFloat("_InOutlineThickness", x);
             }, selected? _selectedInOutWidth : _defaultInOutWidth, 0.5f);
             selectedParent.SetMaterialDirty();
         }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
 using UnityEngine;
@@ -31,15 +32,11 @@ namespace Systems.Abilities
             _config = config;
             _comboSystem = comboSystem;
             _allAbilities = _config.Abilities.OfType<WarmthAbility>().Where(x => x.InUse).ToList();
-            _allAbilities.ForEach(x => Debug.Log(x));
-            AddAbility(_config.Abilities.OfType<WarmingAbility>().First());
-            AddAbility(_config.Abilities.OfType<DashAbility>().First());
             SetupInput(input);
         }
 
-        private void SetupInput(PlayerInput input)
+        private async void SetupInput(PlayerInput input)
         {
-            
             input.actions["Scroll"].performed += ctx => CycleSelection(ctx.ReadValue<Vector2>().y);
 
             input.actions["1"].performed += _ => SelectAbility(0);
@@ -50,6 +47,8 @@ namespace Systems.Abilities
             input.actions["RightMouse"].started += _ => StartCasting();
             input.actions["RightMouse"].canceled += _ => StopCasting();
             input.actions["MiddleMouse"].canceled += _ => ConfirmAbility(_selectedIndex);
+            await UniTask.Delay(100);
+            SelectAbility(0);
         }
 
         private void CycleSelection(float scrollValue)
@@ -60,6 +59,7 @@ namespace Systems.Abilities
 
         private void SelectAbility(int index)
         {
+            if(_allAbilities.Count <= 0) return;
             if (index < 0)
             {
                 index = _allAbilities.Count-1;
@@ -103,6 +103,17 @@ namespace Systems.Abilities
             _allAbilities.Add(ability);
             ability.InUse = true;
             OnAddAbility?.Invoke(_allAbilities.Count-1);
+        }
+        
+        public void AddAbility(AbilityType type)
+        {
+            switch (type)
+            {
+                case AbilityType.Warming: AddAbility(_config.Abilities.OfType<WarmingAbility>().First()); break;
+                case AbilityType.Resonance: AddAbility(_config.Abilities.OfType<ResonanceAbility>().First()); break;
+                case AbilityType.Metabolism: AddAbility(_config.Abilities.OfType<MetabolismAbility>().First()); break;
+                case AbilityType.Dash: AddAbility(_config.Abilities.OfType<DashAbility>().First()); break;
+            }
         }
 
         private void ConfirmAbility(int index)
