@@ -4,6 +4,7 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
+using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -15,7 +16,8 @@ namespace Systems.Abilities
     {
         private PlayerConfig _config;
         private ComboSystem _comboSystem;
-        private List<WarmthAbility> _allAbilities;
+        private GlobalData _globalData;
+        private List<WarmthAbility> _allAbilities = new();
         private List<int> _activeAbilities = new();
         private List<int> _confirmedAbilities = new();
         private int _selectedIndex;
@@ -31,7 +33,20 @@ namespace Systems.Abilities
         {
             _config = config;
             _comboSystem = comboSystem;
-            _allAbilities = _config.Abilities.OfType<WarmthAbility>().Where(x => x.InUse).ToList();
+            _globalData = globalData;
+
+            var openedCount = globalData.Get<SavablePlayerData>().OpenedAbilitiesCount;
+            var warmthAbilities = _config.Abilities.OfType<WarmthAbility>().ToList();
+            for (int i = 0; i < openedCount; i++)
+            {
+                warmthAbilities[i].InUse = true;
+                _allAbilities.Add(warmthAbilities[i]);
+            }
+            for (int i = openedCount; i < warmthAbilities.Count; i++)
+            {
+                warmthAbilities[i].InUse = false;
+            }
+
             SetupInput(input);
         }
 
@@ -78,7 +93,7 @@ namespace Systems.Abilities
 
         private void StartCasting()
         {
-            if (_confirmedAbilities.Count <= 0) return;
+            if (_confirmedAbilities.Count <= 0 || _allAbilities.Count <= 0) return;
             
             _activeAbilities.AddRange(_confirmedAbilities);
             if (_activeAbilities.Count > 1)
@@ -91,6 +106,7 @@ namespace Systems.Abilities
         
         private void StopCasting()
         {
+            if (_activeAbilities.Count <= 0 || _allAbilities.Count <= 0) return;
             OnStopCast?.Invoke(_activeAbilities);
             _activeAbilities.ForEach(x => _allAbilities[x].StopAbility());
             _activeAbilities.Clear();
@@ -102,7 +118,9 @@ namespace Systems.Abilities
             if (_allAbilities.Contains(ability)) return;
             _allAbilities.Add(ability);
             ability.InUse = true;
+            SelectAbility(_allAbilities.Count - 1);
             OnAddAbility?.Invoke(_allAbilities.Count-1);
+            _globalData.Edit<SavablePlayerData>(x => x.OpenedAbilitiesCount++);
         }
         
         public void AddAbility(AbilityType type)

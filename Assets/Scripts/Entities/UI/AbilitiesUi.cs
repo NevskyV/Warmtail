@@ -43,7 +43,6 @@ namespace Entities.UI
         [SerializeField] private float _activeOpacity;
         
         private List<WarmthAbility> _warmthAbilities;
-        private int _selectedIndex;
         private PlayerConfig _playerConfig;
         private AbilitiesSystem _abilitiesSystem;
 
@@ -53,7 +52,6 @@ namespace Entities.UI
             _playerConfig = playerConfig;
             _abilitiesSystem =  abilitiesSystem;
             _warmthAbilities = _playerConfig.Abilities.OfType<WarmthAbility>().ToList();
-            ShowAbilities();
             
             _abilitiesSystem.OnSelect += SelectAbility;
             _abilitiesSystem.OnConfirm += ConfirmAbility;
@@ -61,7 +59,12 @@ namespace Entities.UI
             _abilitiesSystem.OnStopCast += StopCast;
             _abilitiesSystem.OnAddAbility += AddAbility;
         }
-        
+
+        private void Start()
+        {
+            ShowAbilities();
+        }
+
         private void OnDisable()
         {
             _abilitiesSystem.OnSelect -= SelectAbility;
@@ -86,6 +89,7 @@ namespace Entities.UI
             int index = 0;
             var size = _images[0].GetComponent<RectTransform>().sizeDelta.x;
             var inUse = _warmthAbilities.Where(x => x.InUse).ToList();
+            print(inUse.Count);
             _warmthAbilities.Where(x => !x.InUse).ForEach( x =>
                 _images[_warmthAbilities.IndexOf(x)].transform.parent.gameObject.SetActive(!show));
             var maxDist = inUse.Count * size + _distance * (inUse.Count - 1);
