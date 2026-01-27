@@ -95,8 +95,10 @@ namespace Entities.UI
             }
             if(_surfacingSystem.CurrentLayerIndex == data.Layer){
                 var allQuestCount = data.Sequence.Count;
-                var questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id][0];
+                var questState = 0;
+                if (data.QuestType == QuestType.Serial) questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id][0];
                 if (data.QuestType == QuestType.Parallel) questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id].Count;
+                
                 questObj.GetChild(2).GetComponent<LocalizedText>().SetNewKey(_correctLayerState);
                 questObj.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text = $"{questState}/{allQuestCount}";
             }

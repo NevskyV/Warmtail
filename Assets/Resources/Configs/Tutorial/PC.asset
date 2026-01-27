@@ -67,6 +67,8 @@ MonoBehaviour:
     - rid: 7345390921796026623
   - Actions:
     - rid: 7345390956647809379
+    - rid: 7345391402401923162
+    - rid: 7345391402401923163
     - rid: 7345390956647809381
     - rid: 7345391249406034039
     Tasks:
@@ -74,6 +76,8 @@ MonoBehaviour:
   - Actions:
     - rid: 7345391011349135590
     - rid: 7345391042134016167
+    - rid: 7345391402401923287
+    - rid: 7345391402401923286
     - rid: 7345391113196798192
     Tasks:
     - rid: 7345391011349135589
@@ -82,6 +86,7 @@ MonoBehaviour:
     Tasks:
     - rid: 7345391138140585984
   - Actions:
+    - rid: 7345391402401923283
     - rid: 7345391011349135600
     - rid: 7345391011349135601
     - rid: 7345391011349135611
@@ -94,12 +99,17 @@ MonoBehaviour:
     Tasks:
     - rid: 7345391042134016112
   - Actions:
+    - rid: 7345391410517114991
+    Tasks:
+    - rid: 7345391410517114990
+  - Actions:
     - rid: 7345391011349135636
     - rid: 7345391011349135644
     - rid: 7345391113196798194
     - rid: 7345391113196798195
     - rid: 7345391113196798196
     - rid: 7345391113196798197
+    - rid: 7345391402401923289
     - rid: 7345391249406034041
     Tasks:
     - rid: 7345391011349135653
@@ -242,7 +252,7 @@ MonoBehaviour:
         _active: 0
         _objectIds:
         - c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-        _anotherScene: 0
+        _homeScene: 0
     - rid: 7345390883105669845
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -268,7 +278,7 @@ MonoBehaviour:
       data:
         _questData: {fileID: 11400000, guid: 37bd43537256fbb4e9d2c07105777df8, type: 2}
         _start: 0
-        _home: 0
+        _home: 1
         description: "\u043A\u043E\u0433\u0434\u0430 \u0440\u0430\u0441\u0441\u0442\u0430\u0432\u0438\u043B\u0438
           \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F
           \u0444\u0438\u043D\u0438\u043A\u0441 \u0438 \u0442\u0440\u0438\u0433\u0433\u0435\u0440
@@ -296,7 +306,7 @@ MonoBehaviour:
         _objectIds:
         - bac3d9a6-fb45-4fab-960f-75aaa41727df
         - 1b50dfa3-4caa-4bb1-9ded-800067fb4ec0
-        _anotherScene: 1
+        _homeScene: 0
     - rid: 7345390956647809377
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -304,9 +314,8 @@ MonoBehaviour:
         _start: 1
         _home: 0
         description: "\u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043C
-          \u043F\u0435\u0440\u0432\u044B\u0439 \u043A\u0440\u0438\u0441\u0442\u0430\u043B
-          \u0438 \u0443\u043A\u0437\u0430\u0442\u0430\u0435\u043B\u044C \u043D\u0430
-          \u043D\u0435\u0433\u043E"
+          \u043A\u0440\u0438\u0441\u0442\u0430\u043B\u043B\u044B \u0438 \u0443\u043A\u0437\u0430\u0442\u0430\u0435\u043B\u0438
+          \u043D\u0430 \u043D\u0438\u0445"
     - rid: 7345390956647809379
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -320,7 +329,9 @@ MonoBehaviour:
         _active: 1
         _objectIds:
         - cd292478-7dcb-4814-a8cf-4e1f75a44741
-        _anotherScene: 0
+        - 673e2422-01c7-450d-a91b-506298261c32
+        - 1ace8e4c-eba5-4b8f-bb3d-e45ae11e0296
+        _homeScene: 0
     - rid: 7345391011349135589
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -330,8 +341,7 @@ MonoBehaviour:
         description: "\u043C\u0435\u043D\u044F\u0435\u043C \u0434\u0438\u0430\u043B\u043E\u0433
           \u043F\u043E\u0441\u043B\u0435 \u043A\u0432\u0435\u0441\u0442\u0430 \u0441
           \u043A\u0440\u0438\u0441\u0442\u0430\u043B\u043B\u0430\u043C\u0438, \u0443\u0431\u0438\u0440\u0430\u0435\u043C
-          \u043F\u0435\u0440\u0432\u044B\u0439 \u0443\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u044C
-          \u0438 \u043F\u0430\u0437\u043B"
+          \u0443\u043A\u0430\u0437\u0430\u0442\u0435\u043B\u0438 \u043D\u0430 \u043F\u0430\u0437\u043B\u044B"
     - rid: 7345391011349135590
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -348,12 +358,12 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: 808a613be07c6734f8f1ec6234beb68d, type: 2}
         _start: 1
         _home: 0
-        description: "\u0444\u0438\u043D\u0438\u043A\u0441 \u0443\u0441\u043B\u044B\u0448\u0430\u043B\u0430
-          \u043A\u0440\u0438\u043A, \u0438\u0434\u0451\u043C \u043A \u043F\u043E\u0440\u0442\u0430\u043B\u0443,
+        description: "\u043A\u043E\u0433\u0434\u0430 \u0444\u0438\u043D\u0438\u043A\u0441
+          \u0443\u0441\u043B\u044B\u0448\u0430\u043B\u0430 \u043A\u0440\u0438\u043A,
           \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u043C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435
           \u043F\u043E\u0440\u0442\u0430\u043B\u0430, \u043C\u0435\u043D\u044F\u0435\u043C
-          \u0442\u0435\u0440\u0442\u0438\u043B\u0443\u0441\u0443 \u0441\u043F\u043B\u0430\u0439\u043D
-          \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0438"
+          \u0444\u0438\u043D\u0438\u043A\u0441\u0443 \u0441\u043F\u043B\u0430\u0439\u043D
+          \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0438 \u0438 \u0434\u0438\u0430\u043B\u043E\u0433"
     - rid: 7345391011349135600
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -370,23 +380,25 @@ MonoBehaviour:
       data:
         _active: 1
         _objectIds:
-        - 15dc0a4f-7c39-48e1-86a6-f733a92cb656
+        - 1170db84-64a6-4dff-980d-6a8c4a4c99d3
+        - f5c0b7f4-cfc4-42ac-b061-6fa46ead0076
         - 35fae2a6-038a-42a1-91b3-38e37033f3c3
-        _anotherScene: 0
+        _homeScene: 0
     - rid: 7345391011349135611
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
         _objectIds:
         - 0032e980-097c-4e32-872b-f26fe50cbce0
-        _anotherScene: 0
+        _homeScene: 0
     - rid: 7345391011349135636
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
-        - 15dc0a4f-7c39-48e1-86a6-f733a92cb656
-        _anotherScene: 0
+        - 1170db84-64a6-4dff-980d-6a8c4a4c99d3
+        - f5c0b7f4-cfc4-42ac-b061-6fa46ead0076
+        _homeScene: 0
     - rid: 7345391011349135644
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -395,7 +407,7 @@ MonoBehaviour:
         - bac3d9a6-fb45-4fab-960f-75aaa41727df
         - c0a4e396-bc2b-4d82-8d44-a5455874d1a0
         - a44ada89-02ae-410f-884b-d8a67d49cd51
-        _anotherScene: 0
+        _homeScene: 0
     - rid: 7345391011349135653
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -403,11 +415,10 @@ MonoBehaviour:
         - 30f1ff6f-1cc8-4a32-b07f-707f71e7c73d
         description: "\u043A\u043E\u0433\u0434\u0430 \u0440\u0435\u0448\u0438\u043B\u0438
           \u0433\u043E\u043B\u043E\u0432\u043E\u043B\u043E\u043C\u043A\u0443, \u0443\u0431\u0438\u0440\u0430\u0435\u043C
-          \u0431\u0430\u0440\u044C\u0435\u0440, \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043C
+          \u0431\u0430\u0440\u044C\u0435\u0440\u044B, \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043C
           \u0442\u0440\u0438\u0433\u0433\u0435\u0440 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430,
-          \u0432\u043E\u0437\u0440\u0430\u0449\u0430\u0435\u043C\u0441\u044F \u0432
-          \u043D\u0430\u0448 \u043C\u0438\u0440, \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u043C
-          \u043A \u043D\u0430\u043C \u043D\u043F\u0441, \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u043C
+          \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u043C \u043A \u043D\u0430\u043C
+          \u043D\u043F\u0441, \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u043C
           \u0441\u043F\u043B\u0430\u0439\u043D\u044B"
     - rid: 7345391011349135658
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
@@ -424,8 +435,8 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: 808a613be07c6734f8f1ec6234beb68d, type: 2}
         _start: 0
         _home: 0
-        description: "\u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u0442\u0441\u044F
-          \u0431\u0430\u0440\u044C\u0435\u0440, \u043D\u0435\u0434\u0430\u044E\u0449\u0438\u0439
+        description: "\u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u044E\u0442\u0441\u044F
+          \u0431\u0430\u0440\u044C\u0435\u0440\u044B, \u043D\u0435\u0434\u0430\u044E\u0449\u0438\u0439
           \u043D\u0430\u043C \u0443\u0439\u0442\u0438 \u0438 \u0442\u0440\u0438\u0433\u0433\u0435\u0440
           \u043F\u043E\u0440\u0442\u0430\u043B\u0430"
     - rid: 7345391042134016147
@@ -436,7 +447,7 @@ MonoBehaviour:
         - a44ada89-02ae-410f-884b-d8a67d49cd51
         - bac3d9a6-fb45-4fab-960f-75aaa41727df
         - c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-        _anotherScene: 0
+        _homeScene: 0
     - rid: 7345391042134016153
       type: {class: NotificationAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -454,9 +465,9 @@ MonoBehaviour:
       data:
         _active: 1
         _objectIds:
-        - 6ac22ed2-b786-45dc-847b-aa6a7faaea6b
-        - cf899f03-2a93-4a36-9cec-dd40289e9c9d
-        _anotherScene: 0
+        - dc880a46-479a-423e-966a-6877c7892696
+        - 1962f2e3-3571-46f8-8d84-0d0b76e945a6
+        _homeScene: 0
     - rid: 7345391113196798186
       type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -473,7 +484,7 @@ MonoBehaviour:
         _active: 0
         _objectIds:
         - cd292478-7dcb-4814-a8cf-4e1f75a44741
-        _anotherScene: 0
+        _homeScene: 0
     - rid: 7345391113196798194
       type: {class: SetPositionAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -511,8 +522,62 @@ MonoBehaviour:
         _active: 0
         _objectIds:
         - 1b50dfa3-4caa-4bb1-9ded-800067fb4ec0
-        _anotherScene: 0
+        _homeScene: 0
     - rid: 7345391249406034041
       type: {class: EndQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _quest: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
+    - rid: 7345391402401923162
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
+        _position: {x: -44.4, y: 185.7}
+        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+    - rid: 7345391402401923163
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
+        _position: {x: 185.6, y: 280.4}
+        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+    - rid: 7345391402401923283
+      type: {class: EndQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _quest: {fileID: 11400000, guid: 771a9b84d572de847a2a483e0f685425, type: 2}
+    - rid: 7345391402401923286
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 0
+        _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
+        _position: {x: 185.6, y: 280.4}
+        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+    - rid: 7345391402401923287
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 0
+        _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
+        _position: {x: -44.4, y: 185.7}
+        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+    - rid: 7345391402401923289
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 0
+        _questData: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
+        _position: {x: -39.7, y: 273.25}
+        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+    - rid: 7345391410517114990
+      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _prefab: {fileID: 3459850837378005844, guid: 4b5c61f41edd0b54aae236ec9d6ba332, type: 3}
+        _position: {x: -9.2699995, y: 323.12}
+        description: "\u0437\u0430\u0448\u043B\u0438 \u0432 \u043F\u043E\u0440\u0442\u0430\u043B
+          => \u0441\u0442\u0430\u0432\u0438\u043C \u043C\u0430\u0440\u043A\u0443
+          \u043D\u0430 \u043F\u0430\u0437\u043B"
+    - rid: 7345391410517114991
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
+        _position: {x: -39.7, y: 273.25}
+        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f

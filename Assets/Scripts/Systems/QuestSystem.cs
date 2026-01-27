@@ -29,7 +29,8 @@ namespace Systems
         {
             if (data.Scene != SceneManager.GetActiveScene().path) return;
 
-            if (questState == null || questState.Count == 0) questState = new(){0};
+            if (data.QuestType == QuestType.Serial && (questState == null || questState.Count == 0)) questState = new(){0};
+            if (data.QuestType == QuestType.Parallel && questState == null) questState = new();
 
             if(!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
@@ -56,11 +57,12 @@ namespace Systems
                 {
                     if (questState.Contains(i)) continue;
                     var tasks = data.Sequence[i].Tasks;
+                    int stepIndex = i; 
 
                     foreach (var task in tasks)
                     {
                         task.Activate();
-                        task.OnComplete += () => TryIterateSequence(data, i);
+                        task.OnComplete += () => TryIterateSequence(data, stepIndex);
                     }
                 }
 

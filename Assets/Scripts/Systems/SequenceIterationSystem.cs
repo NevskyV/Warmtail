@@ -16,8 +16,7 @@ namespace Systems
             if ((type == QuestType.Serial && currentState[0] >= data.Count) ||
                 (type == QuestType.Parallel && currentState.Count >= data.Count)) return;
 
-            var element = data[currentState[0]];
-            if (type == QuestType.Parallel) element = data[taskNum];
+            var element = (type == QuestType.Parallel ? data[taskNum] : data[currentState[0]]);
 
             if (element.Tasks.Count != 0 && !element.Tasks.TrueForAll(x => x.Completed)) 
                 return;
@@ -32,10 +31,8 @@ namespace Systems
 
             onStateChangedAction.Invoke(currentState);
 
-            Debug.Log($"currentState {currentState[taskNum]}");
             if ((type == QuestType.Serial && currentState[0] >= data.Count) ||
                 (type == QuestType.Parallel && currentState.Count >= data.Count)) return;
-            Debug.Log($"Tasks.Count {data[currentState[taskNum]].Tasks.Count}");
 
             if (type == QuestType.Serial)
             {
@@ -43,7 +40,7 @@ namespace Systems
                 {
                     foreach (var task in data[currentState[0]].Tasks)
                     {
-                        Debug.Log($"Activated task {task}");
+                        Debug.Log($"Activated task {task} for state {currentState[0]}");
                         task.Activate();
                         task.OnComplete += () => TryIterateSequence(data, currentState, 0, type, onStateChangedAction);
                     }
