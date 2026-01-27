@@ -7,6 +7,7 @@ namespace Data.Player
 {
     [Serializable]
     public class SavablePlayerData : ISavableData {
+        public int OpenedAbilitiesCount;
         public int Stars;
         public int Shells;
         public int ActiveLayers;

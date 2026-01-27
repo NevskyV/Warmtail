@@ -45,23 +45,40 @@ namespace Entities.PlayerScripts
         {
             _input.SwitchCurrentActionMap("UI");
             _abilityController.DisableAllAbilities();
+            _rbs.ForEach(x =>
+            {
+                x.bodyType = RigidbodyType2D.Static;
+                x.simulated = false;
+            });
+            
             _player.Animator.enabled = true;
             _player.Animator.SetBool(IsSleeping, false);
-            _rbs.ForEach(x => x.simulated = false);
+            
             await UniTask.Delay(3000);
             
             _input.SwitchCurrentActionMap("Player");
             
             _player.Animator.enabled = false;
             _abilityController.EnableLastAbilities();
-            _rbs.ForEach(x => x.simulated = true);
+            _rbs.ForEach(x =>
+            {
+                x.bodyType = RigidbodyType2D.Dynamic;
+                x.simulated = true;
+            });
         }
         
         public void Sleep()
         {
+            if(_rbs.Count == 0) _rbs = _player.GetComponentsInChildren<Rigidbody2D>().ToList();
+            _rbs.ForEach(x =>
+            {
+                x.bodyType = RigidbodyType2D.Static;
+                x.simulated = false;
+            });
+            
             _player.Animator.enabled = true;
             _player.Animator.SetBool(IsSleeping, true);
-            _rbs.ForEach(x => x.simulated = false);
+            
             _abilityController.DisableAllAbilities();
         }
 

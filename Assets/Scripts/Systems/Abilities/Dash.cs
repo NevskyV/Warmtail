@@ -4,6 +4,7 @@ using Data.Player;
 using Entities.PlayerScripts;
 using Interfaces;
 using Systems.Environment;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -18,7 +19,6 @@ namespace Systems.Abilities
         [SerializeField] private int _normalSpeed = 60;
         [SerializeField] private int _dashSpeed = 100;
         private float _lastDashTime = -Mathf.Infinity;
-        private bool _canDash = true;
         private UniTask _dashTask;
         private bool _dashLoopRunning;
 
@@ -26,12 +26,13 @@ namespace Systems.Abilities
         private Rigidbody2D _playerRb;
         private SurfacingSystem _surfacingSystem;
         private GamepadRumble _rumble;
+        private CinemachineBasicMultiChannelPerlin _camNoise;
 
         private Vector2 _moveInput;
         private float _layerInput;
         private bool _applyCost;
         [Inject]
-        public void Construct(PlayerConfig playerConfig, Player player, SurfacingSystem surfacing,
+        public void Construct(PlayerConfig playerConfig, Player player, CinemachineCamera cam, SurfacingSystem surfacing,
             PlayerInput input, DiContainer container, GamepadRumble gamepadRumble)
         {
 
@@ -39,6 +40,7 @@ namespace Systems.Abilities
             _surfacingSystem = surfacing;
             _playerConfig = playerConfig;
             _rumble = gamepadRumble;
+            _camNoise = cam.GetComponent<CinemachineBasicMultiChannelPerlin>();
 
             input.actions["Move"].performed += ctx => _moveInput = ctx.ReadValue<Vector2>();
             input.actions["Move"].canceled += _ => _moveInput = Vector2.zero;
@@ -60,12 +62,11 @@ namespace Systems.Abilities
             WarmthCost = 0;
             StartAbility?.Invoke();
         }
-        
 
         public void FixedTick()
         {
             if (!Enabled) return;
-            Debug.Log("Dash Ability");
+            
             if (Mathf.Abs(_layerInput) > 0.1f)
             {
                 _rumble.ShortRumble();
@@ -81,9 +82,8 @@ namespace Systems.Abilities
 
             if (_moveInput.magnitude > 0.1f)
             {
-                if (!_dashLoopRunning && _canDash)
+                if (!_dashLoopRunning)
                 {
-                    _canDash = false;  
                     _dashLoopRunning = true;
                     _dashTask = DashLoop();
                 }
@@ -97,19 +97,19 @@ namespace Systems.Abilities
             {
                 while (Enabled && _dashLoopRunning && _moveInput.magnitude > 0.1f)
                 {
-                    Dash();
+                    _camNoise.enabled = true;
                     WarmthCost = _applyCost? MaxWarmthCost : 0;
-
+                    Dash();
                     await UniTask.Delay(500);
                 }
             }
             finally
             {
+                _camNoise.enabled = false;
                 _dashLoopRunning = false;
                 _rumble.DisableRumble();
                 ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
                 await UniTask.Delay(TimeSpan.FromSeconds(_dashCooldownDuration));
-                _canDash = true;
             }
         }
 
