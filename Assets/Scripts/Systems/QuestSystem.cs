@@ -25,9 +25,11 @@ namespace Systems
             _questVisuals = visuals;
         }
         
-        public static void StartQuest(QuestData data, List<int> questState = new(){0})
+        public static void StartQuest(QuestData data, List<int> questState = null)
         {
             if (data.Scene != SceneManager.GetActiveScene().path) return;
+
+            if (questState == null || questState.Count == 0) questState = new(){0};
 
             if(!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
@@ -40,7 +42,7 @@ namespace Systems
                 foreach (var task in data.Sequence[questState[0]].Tasks)
                 {
                     task.Activate();
-                    task.OnComplete += () => TryIterateSequence(data, -1);
+                    task.OnComplete += () => TryIterateSequence(data, questState[0]);
                 }
 
                 for (int i = 0; i < questState[0]; i ++)
@@ -52,10 +54,14 @@ namespace Systems
             {
                 for (int i = 0; i < data.Sequence.Count; i ++)
                 {
-                    if (data.Sequence.Task.Contains(i)) continue;
-                    var task = data.Sequence.Task[i];
-                    task.Activate();
-                    task.OnComplete += () => TryIterateSequence(data);
+                    if (questState.Contains(i)) continue;
+                    var tasks = data.Sequence[i].Tasks;
+
+                    foreach (var task in tasks)
+                    {
+                        task.Activate();
+                        task.OnComplete += () => TryIterateSequence(data, i);
+                    }
                 }
 
                 foreach (int i in questState)
@@ -66,7 +72,7 @@ namespace Systems
 
         }
 
-        public static void TryIterateSequence(QuestData data)
+        public static void TryIterateSequence(QuestData data, int task)
         {
             var questIds = _globalData.Get<SavablePlayerData>().QuestIds;
             if (!questIds.Keys.Contains(data.Id)) return;
@@ -74,7 +80,7 @@ namespace Systems
             if (questState.Count >= data.Sequence.Count) EndQuest(data);
             else
             {
-                SequenceIterationSystem.TryIterateSequence(data.Sequence, questState, data.QuestType,
+                SequenceIterationSystem.TryIterateSequence(data.Sequence, questState, task, data.QuestType,
                 x =>
                 {
                     if ((data.QuestType == QuestType.Parallel && x.Count == data.Sequence.Count) || 

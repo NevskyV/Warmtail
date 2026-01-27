@@ -52,10 +52,10 @@ namespace Systems.Tutorial
         public void TryIterateSequence()
         {
             var state = _globalData.Get<SavablePlayerData>().TutorState;
-            SequenceIterationSystem.TryIterateSequence(_currentTutor.Sequence, state,
+            SequenceIterationSystem.TryIterateSequence(_currentTutor.Sequence, state, QuestType.Serial,
                 x =>
                 {
-                    _globalData.Edit<SavablePlayerData>(playerData => playerData.TutorState = x);
+                    _globalData.Edit<SavablePlayerData>(playerData => playerData.TutorState = x[0]);
                 });
         }
     }
