@@ -389,26 +389,26 @@ void SceneSDF_float(
         float wavePerturbation = GetLocalWavePerturbation(localUV, GlobalTime, currentWaveFreq, currentWaveAmp, currentWaveSpeed);
         float wavyDist = baseDist - wavePerturbation;
 
-        float tempBase;
+        float tempBase = baseDist;
+
         if (currentGroupProp.type == 0)
             SmoothUnion_float(groupFill[g], baseDist, Smoothness, tempBase);
         else if (currentGroupProp.type == 1)
             SmoothIntersection_float(groupFill[g], baseDist, Smoothness, tempBase);
         else if (currentGroupProp.type == 2 && lastIndex == g)
             SmoothDifference_float(baseDist, groupFill[g], Smoothness, tempBase);
-        else
-            tempBase = baseDist;
+    
         groupFill[g] = tempBase;
 
-        float tempWavy;
+        float tempWavy = wavyDist;
+        
         if (currentGroupProp.type == 0)
             SmoothUnion_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
         else if (currentGroupProp.type == 1)
             SmoothIntersection_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
         else if (currentGroupProp.type == 2 && lastIndex == g)
             SmoothDifference_float(wavyDist,groupWavy[g], Smoothness, tempWavy);
-        else
-            tempWavy = wavyDist;
+    
         lastIndex = g;
         groupWavy[g] = tempWavy;
     }
@@ -446,6 +446,7 @@ void SceneSDF_float(
         combinedProp.waveFreq = lerp(groupProp[g].waveFreq, combinedProp.waveFreq, h);
         combinedProp.waveAmp = lerp(groupProp[g].waveAmp, combinedProp.waveAmp, h);
         combinedProp.waveSpeed = lerp(groupProp[g].waveSpeed, combinedProp.waveSpeed, h);
+        combinedProp.inOutlineThickness = lerp(groupProp[g].inOutlineThickness, combinedProp.inOutlineThickness, h);
     }
 
     float bias = combinedProp.waveAmp * combinedProp.inOutlineThickness;

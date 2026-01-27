@@ -36,7 +36,7 @@ namespace Entities.UI.SDF
             int groupIndex = 0;
             foreach (SdfGroup group in _groups)
             {
-                if (!group || !group.gameObject.activeInHierarchy || group.InstanceMaterial == null) 
+                if (!group || !group.gameObject.activeSelf || group.InstanceMaterial == null) 
                 {
                     groupIndex++;
                     continue;
@@ -88,7 +88,7 @@ namespace Entities.UI.SDF
             UpdateShapeBuffer(allShapes);
             UpdatePropBuffer(allProps);
 
-            groupIndex = 0;
+            groupIndex = 1;
             foreach (SdfGroup group in _groups)
             {
                 if (!group || !group.InstanceMaterial) 
