@@ -15,13 +15,15 @@ namespace Entities.UI
 {
     public class MonologueVisuals : MonoBehaviour, ITextVisual
     {
-        [SerializeField] private float _textFadeSpeed;
+        [SerializeField] private float _perCharFadeTime;
+        [SerializeField] private float _delayTime;
         [SerializeField] private TMP_Text _textPrefab;
         [SerializeField] private RectTransform _textBounds;
         private RectTransform _currentText;
         private LocalizationManager _localizationManager;
         private DialogueSystem _dialogueSystem;
         private bool _isEnded;
+        private float _currentLineDuration;
 
         [Inject]
         private void Construct(LocalizationManager localizationManager, DialogueSystem dialogueSystem, GlobalData data)
@@ -39,9 +41,10 @@ namespace Entities.UI
         public async void ProcessDialogue()
         {
             while(true){
-                await UniTask.Delay(TimeSpan.FromSeconds(_textFadeSpeed));
                 if(_isEnded) break;
                 _dialogueSystem.ActivateNewNode();
+                await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
+                print("waited");
             }
         }
             
@@ -62,8 +65,11 @@ namespace Entities.UI
         public void RequestNewLine(TextNode node)
         {
             _currentText.localPosition = ChooseRandomPosition();
-            _currentText.GetComponent<TMP_Text>().text = 
-                LocalizationManager.GetStringFromKey("Star_"+ _dialogueSystem.DialogueGraph.DialogueId+ "_" + node.NodeId);
+            var line = LocalizationManager.GetStringFromKey("Star_"+ _dialogueSystem.DialogueGraph.DialogueId+ "_" + node.NodeId);
+            
+            _currentLineDuration = line.Length * _perCharFadeTime + _delayTime;
+            print(_currentLineDuration);
+            _currentText.GetComponent<TMP_Text>().text = line;
             _currentText.GetComponent<TextEffect>().Refresh();
         }
         
@@ -74,7 +80,7 @@ namespace Entities.UI
             _currentText.GetComponent<TMP_Text>().text = 
                 LocalizationManager.GetStringFromKey("fragment_" + id);
             _currentText.GetComponent<TextEffect>().Refresh();
-            await UniTask.Delay(TimeSpan.FromSeconds(_textFadeSpeed));
+            await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
             Destroy(_currentText.gameObject);
         }
 

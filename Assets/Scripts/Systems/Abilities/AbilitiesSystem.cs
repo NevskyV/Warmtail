@@ -136,6 +136,7 @@ namespace Systems.Abilities
 
         private void ConfirmAbility(int index)
         {
+            Debug.Log(_confirmedAbilities.Contains(index));
             if (_confirmedAbilities.Contains(index))
             {
                 StopCasting();

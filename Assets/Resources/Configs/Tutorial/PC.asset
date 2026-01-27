@@ -103,16 +103,20 @@ MonoBehaviour:
     Tasks:
     - rid: 7345391410517114990
   - Actions:
-    - rid: 7345391011349135636
     - rid: 7345391011349135644
     - rid: 7345391113196798194
     - rid: 7345391113196798195
     - rid: 7345391113196798196
     - rid: 7345391113196798197
     - rid: 7345391402401923289
-    - rid: 7345391249406034041
+    - rid: 4061569095894564981
     Tasks:
     - rid: 7345391011349135653
+  - Actions:
+    - rid: 4061569095894564980
+    - rid: 4061569095894564979
+    Tasks:
+    - rid: 4061569095894564982
   - Actions:
     - rid: 7345391042134016147
     - rid: 7345391042134016188
@@ -186,6 +190,31 @@ MonoBehaviour:
         _active: 1
         _objectIds:
         - 5a5eae0b-5cdd-4b95-a9de-3007e5a142b3
+    - rid: 4061569095894564979
+      type: {class: EndQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _quest: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
+    - rid: 4061569095894564980
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 0
+        _objectIds:
+        - 1170db84-64a6-4dff-980d-6a8c4a4c99d3
+        - f5c0b7f4-cfc4-42ac-b061-6fa46ead0076
+    - rid: 4061569095894564981
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
+        _position: {x: -5, y: 310}
+        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+    - rid: 4061569095894564982
+      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
+        _position: {x: -4.4, y: 300}
+        description: "\u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430 \u0434\u043E\u0448\u0435\u043B
+          \u043B\u0438 \u0438\u0433\u0440\u043E\u043A"
     - rid: 4204129410323054672
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -391,14 +420,6 @@ MonoBehaviour:
         _objectIds:
         - 0032e980-097c-4e32-872b-f26fe50cbce0
         _homeScene: 0
-    - rid: 7345391011349135636
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - 1170db84-64a6-4dff-980d-6a8c4a4c99d3
-        - f5c0b7f4-cfc4-42ac-b061-6fa46ead0076
-        _homeScene: 0
     - rid: 7345391011349135644
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -489,7 +510,7 @@ MonoBehaviour:
       type: {class: SetPositionAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-        _newPosition: {x: -8.8, y: 299}
+        _newPosition: {x: -8.8, y: 310}
     - rid: 7345391113196798195
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -506,7 +527,7 @@ MonoBehaviour:
       type: {class: SetPositionAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _id: bac3d9a6-fb45-4fab-960f-75aaa41727df
-        _newPosition: {x: -1.4, y: 299.9}
+        _newPosition: {x: -1.4, y: 310}
     - rid: 7345391138140585984
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
@@ -523,10 +544,6 @@ MonoBehaviour:
         _objectIds:
         - 1b50dfa3-4caa-4bb1-9ded-800067fb4ec0
         _homeScene: 0
-    - rid: 7345391249406034041
-      type: {class: EndQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _quest: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
     - rid: 7345391402401923162
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

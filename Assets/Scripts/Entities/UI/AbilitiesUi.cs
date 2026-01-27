@@ -166,7 +166,7 @@ namespace Entities.UI
         private void ConfirmAbility(int index)
         {
             var rect = _rhombuses[index].GetComponent<RectTransform>();
-            bool notConfirmed = rect.sizeDelta == new Vector2(_defaultRhombusSize, _defaultRhombusSize);
+            bool notConfirmed = !_rhombuses[index].gameObject.activeSelf;
             var targetSize = notConfirmed ? _confirmedRhombusSize : _defaultRhombusSize;
             var confirmedRhombusSize = rect.sizeDelta.x;
             
