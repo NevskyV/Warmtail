@@ -1,5 +1,6 @@
 using Data;
 using Data.Nodes;
+using DG.Tweening;
 using EasyTextEffects;
 using EasyTextEffects.Effects;
 using Entities.Localization;
@@ -7,6 +8,7 @@ using Interfaces;
 using Systems;
 using TMPro;
 using TriInspector;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -23,6 +25,8 @@ namespace Entities.UI
         [SerializeReference] private CharacterHolder _holder;
         [SerializeReference] private AudioSource _audioSource;
         [SerializeReference] private Effect_Composite _effect;
+        [SerializeReference] private float _defaultZoom = 9;
+        [SerializeReference] private float _dialogueZoom = 6;
         
         [GroupNext("BoxFrame")]
         [SerializeField, LabelText("Object")] 
@@ -46,21 +50,20 @@ namespace Entities.UI
         
         private TextEffect _boxNameEffect;
         private TextEffect _boxTextEffect;
-        
-        private LocalizationManager _localizationManager;
+
+        private CinemachineCamera _cam;
         public bool IsComplete { get; set; }
 
         [Inject]
-        private void Construct(DiContainer container, PlayerInput input, LocalizationManager localization,
-            DialogueSystem dialogueSystem, GlobalData globalData, UIStateSystem uiStateSystem)
+        private void Construct(DiContainer container, PlayerInput input, DialogueSystem dialogueSystem, 
+            GlobalData globalData, UIStateSystem uiStateSystem, CinemachineCamera cam)
         {
             _diContainer = container;
             _input = input;
             _system = dialogueSystem;
             _globalData = globalData;
-            _localizationManager = localization;
             _uiStateSystem = uiStateSystem;
-            
+            _cam = cam;
             _boxNameEffect = _boxName.GetComponent<TextEffect>();
             _boxTextEffect = _boxText.GetComponent<TextEffect>();
             _boxTextEffect.globalEffects[0].onEffectCompleted.AddListener(() => IsComplete = true);
@@ -80,6 +83,7 @@ namespace Entities.UI
         {
             _uiStateSystem.SwitchCurrentStateAsync(UIState.Dialogue);
             _input.actions.FindAction("Space").performed += RequestNewNode;
+            DOTween.To(() => _cam.Lens.OrthographicSize, value => _cam.Lens.OrthographicSize = value, _dialogueZoom, 1);
         }
         
         public void HideVisuals()
@@ -87,13 +91,14 @@ namespace Entities.UI
             if (_uiStateSystem.CurrentState != UIState.Shop)
                 _uiStateSystem.SwitchCurrentStateAsync(UIState.Normal);
             _input.actions.FindAction("Space").performed -= RequestNewNode;
+            DOTween.To(() => _cam.Lens.OrthographicSize, value => _cam.Lens.OrthographicSize = value, _defaultZoom, 1);
         }
         
         public void RequestNewLine(TextNode node)
         {
             IsComplete = false;
             var character = _holder.Characters.Find(x => x.Character == node.Character);
-            print(character.Character);
+            
             string text = LocalizationManager.GetStringFromKey(node.Character + "_" + _system.DialogueGraph.DialogueId + "_" + node.NodeId);
             
             if (_audioSource != null)

@@ -1,13 +1,13 @@
-﻿using Data;
-using System;
+﻿using System;
+using Data;
 using Data.Player;
-using Interfaces;
 using DG.Tweening;
+using Interfaces;
 using Systems;
 using UnityEngine;
 using Zenject;
 
-namespace Entities.Probs
+namespace Entities.Props
 {
     public class Shell : Warmable
     {
@@ -15,7 +15,6 @@ namespace Entities.Probs
         public static Action OnShellsChanged = delegate {};
         [SerializeField] private int _shellsAmount;
         private GlobalData _globalData;
-        private ResettableTimer _timer;
         private MaterialPropertyBlock _propertyBlock;
         private SpriteRenderer _renderer;
         private Tween _tween;
@@ -43,15 +42,8 @@ namespace Entities.Probs
         public override void Warm()
         {
             UpdateRenderer((_maxWarmthAmount - _warmthAmount) * 1.0f / _maxWarmthAmount,
-                (_maxWarmthAmount - _warmthAmount - _warmFactor) * 1.0f / _maxWarmthAmount);
+                (_maxWarmthAmount - _warmthAmount + _warmFactor) * 1.0f / _maxWarmthAmount);
             base.Warm();
-            if(_warmthAmount > 0)
-            {
-                if (_timer != null)
-                    _timer.Start();
-                else
-                    _timer = new ResettableTimer(3, Reset);
-            }
         }
 
         public override void WarmComplete()

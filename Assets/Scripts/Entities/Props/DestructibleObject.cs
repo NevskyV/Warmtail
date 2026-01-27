@@ -1,7 +1,7 @@
-using UnityEngine;
 using Interfaces;
+using UnityEngine;
 
-namespace Systems.Destructible
+namespace Entities.Props
 {
     public class DestructibleObject : MonoBehaviour, IDestroyable
     {

@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6827927590659053491}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 1
   simulationSpeed: 0.5
   stopAction: 2
   cullingMode: 0
@@ -169,7 +169,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 5
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 40
+      scalar: 20
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -1496,7 +1496,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: -6592425180748583881, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}
+    - sprite: {fileID: -5712959122012955994, guid: 3de57320fc498774a9d841ef2e09c9ec, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4767,7 +4767,7 @@ ParticleSystem:
     vectorLabel1_3: W
 --- !u!199 &7849065087780675036
 ParticleSystemRenderer:
-  serializedVersion: 6
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -4813,6 +4813,7 @@ ParticleSystemRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -4844,4 +4845,3 @@ ParticleSystemRenderer:
   m_MeshWeighting1: 1
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
-  m_MaskInteraction: 0

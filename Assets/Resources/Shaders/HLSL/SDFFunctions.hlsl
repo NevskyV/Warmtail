@@ -454,7 +454,7 @@ void SceneSDF_float(
 
     outlineMask = smoothstep(combinedProp.outlineThickness * 0.5, 0.0, outlineDist);
     outlineMask *= step(0.0, combinedWavy + bias);
-
+    if (combinedProp.outlineThickness == 0) outlineMask = 0;
     fillMask = combinedFill;
     fillColor = combinedProp.fillColor;
     alpha = combinedProp.alpha;

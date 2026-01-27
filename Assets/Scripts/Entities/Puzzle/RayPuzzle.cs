@@ -1,8 +1,8 @@
-using Entities.Probs;
 using Interfaces;
 using UnityEngine.Events;
 using UnityEngine;
 using System;
+using Entities.Props;
 
 namespace Entities.Puzzle
 {

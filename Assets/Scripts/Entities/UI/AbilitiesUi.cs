@@ -1,6 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Data.Player;
+using DG.Tweening;
+using EasyTextEffects.Editor.MyBoxCopy.Extensions;
+using Systems.Abilities;
+using TriInspector;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 
@@ -8,135 +14,198 @@ namespace Entities.UI
 {
     public class AbilitiesUI : MonoBehaviour
     {
+        [Serializable]
+        public struct AbilityImages
+        {
+            public List<RectTransform> Images;
+        }
+
+        [Title("Images to fill")] 
+        [SerializeField] private AbilityImages[] _imagesArray;
         [SerializeField] private Image[] _images;
-        [SerializeField] private InputActionAsset _inputActions;
-
-        private InputAction[] _keys;
-        private InputAction _rightClick;
-
-        private bool[] _selected = new bool[4];
-        private int _pendingSecond = -1;
-        private float _pendingTime;
-        private float _comboTime = 0.2f;
-
-        private int _selectedIndex;
+        [SerializeField] private Transform[] _rhombuses;
+        [SerializeField] private float _distance;
+        
+        [Title("Selection")] 
+        [SerializeField] private float _defaultOutWidth;
+        [SerializeField] private float _selectedOutWidth;
+        [SerializeField] private float _defaultInOutWidth;
+        [SerializeField] private float _selectedInOutWidth;
+        [Title("Confirmation")]
+        [SerializeField] private float _defaultInWidth;
+        [SerializeField] private float _confirmedInWidth;
+        [SerializeField] private float _defaultRhombusSize;
+        [SerializeField] private float _confirmedRhombusSize;
+        [Title("Casting")]
+        [SerializeField] private float _defaultAmplitude;
+        [SerializeField] private float _activeAmplitude;
+        [SerializeField] private float _defaultOpacity;
+        [SerializeField] private float _activeOpacity;
+        
+        private List<WarmthAbility> _warmthAbilities;
         private PlayerConfig _playerConfig;
+        private AbilitiesSystem _abilitiesSystem;
 
         [Inject]
-        private void Construct(PlayerConfig playerConfig)
+        private void Construct(PlayerConfig playerConfig, AbilitiesSystem abilitiesSystem)
         {
             _playerConfig = playerConfig;
-        }
-
-        void Awake()
-        {
-            InitializeAbilityIcons();
-
-            _keys = new []
-            {
-                _inputActions.FindAction("1"),
-                _inputActions.FindAction("2"),
-                _inputActions.FindAction("3"),
-                _inputActions.FindAction("4")
-            };
-
-            foreach (var k in _keys) k.Enable();
-
-            _inputActions["Scroll"].performed += ctx => CycleSelection(ctx.ReadValue<Vector2>().y);
-
-            _rightClick = _inputActions.FindAction("RightMouse");
-            _rightClick.Enable();
-        }
-
-        private void InitializeAbilityIcons()
-        {
-            if (_playerConfig == null || _playerConfig.Abilities == null)
-                return;
+            _abilitiesSystem =  abilitiesSystem;
+            _warmthAbilities = _playerConfig.Abilities.OfType<WarmthAbility>().ToList();
             
-            for (int i = 0; i < _images.Length && i < _playerConfig.Abilities.Count; i++)
+            _abilitiesSystem.OnSelect += SelectAbility;
+            _abilitiesSystem.OnConfirm += ConfirmAbility;
+            _abilitiesSystem.OnCast += Cast;
+            _abilitiesSystem.OnStopCast += StopCast;
+            _abilitiesSystem.OnAddAbility += AddAbility;
+        }
+
+        private void Start()
+        {
+            ShowAbilities();
+        }
+
+        private void OnDisable()
+        {
+            _abilitiesSystem.OnSelect -= SelectAbility;
+            _abilitiesSystem.OnConfirm -= ConfirmAbility;
+            _abilitiesSystem.OnCast -= Cast;
+            _abilitiesSystem.OnStopCast -= StopCast;
+            _abilitiesSystem.OnAddAbility -= AddAbility;
+
+            foreach (var image in _images)
             {
-                var ability = _playerConfig.Abilities[i];
-                if (ability != null && ability.Visual != null && ability.Visual.Icon != null && _images[i] != null)
-                {
-                    _images[i].sprite = ability.Visual.Icon;
-                }
+                var parent = image.transform.parent.GetComponent<Image>();
+                parent.material.SetFloat("_OutlineThickness",0);
+                parent.material.SetFloat("_InOutlineThickness",0);
+                parent.material.SetFloat("_InlineThickness",0);
+                parent.material.SetFloat("_WaveAmplitude",0);
+                parent.material.SetFloat("_Alpha",1);
             }
         }
 
-        void Update()
+        private void ShowAbilities(bool show = true)
         {
-            if (_rightClick.IsPressed())
-                return;
-
-            int pressedThisFrame = -1;
-
-            for (int i = 0; i < 4; i++)
+            int index = 0;
+            var size = _images[0].GetComponent<RectTransform>().sizeDelta.x;
+            var inUse = _warmthAbilities.Where(x => x.InUse).ToList();
+            print(inUse.Count);
+            _warmthAbilities.Where(x => !x.InUse).ForEach( x =>
+                _images[_warmthAbilities.IndexOf(x)].transform.parent.gameObject.SetActive(!show));
+            var maxDist = inUse.Count * size + _distance * (inUse.Count - 1);
+            
+            foreach (var ability in inUse)
             {
-                if (_keys[i].WasPressedThisFrame())
+                var imges = _imagesArray[_warmthAbilities.IndexOf(ability)].Images;
+                imges[2].GetComponent<Image>().sprite = ability.Visual.Icon;
+                imges[2].transform.parent.gameObject.SetActive(show);
+                foreach (var img in imges)
                 {
-                    pressedThisFrame = i;
-                    break;
+                    img.DOLocalMoveX(-(maxDist - size) / 2 + (_distance + size) * index, 0.5f);
                 }
+                index++;
             }
-
-            if (pressedThisFrame != -1)
+        }
+        
+        private void SelectAbility(int index)
+        {
+            for(int i = 0;  i < _images.Length; i++)
             {
-                if (_pendingSecond != -1 && Time.time - _pendingTime <= _comboTime)
+                if(i != index)CreateOutline(i, false);
+            }
+            CreateOutline(index, true);
+        }
+
+        private void ConfirmAbility(int index)
+        {
+            var rect = _rhombuses[index].GetComponent<RectTransform>();
+            bool notConfirmed = rect.sizeDelta == new Vector2(_defaultRhombusSize, _defaultRhombusSize);
+            var confirmedRhombusSize = rect.sizeDelta.x;
+            DOTween.To(() => confirmedRhombusSize, x =>
+            {
+                rect.sizeDelta = new Vector2(x, x);
+                confirmedRhombusSize = x;
+            }, notConfirmed? _confirmedRhombusSize : _defaultRhombusSize, 0.5f);
+            
+            var confirmedParent = _images[index].transform.parent.GetComponent<Image>();
+            
+            var confirmedInlineWidth = confirmedParent.material.GetFloat("_InlineThickness");
+            DOTween.To(() => confirmedInlineWidth, x =>{
+                confirmedInlineWidth = x;
+                confirmedParent.material.SetFloat("_InlineThickness", x);
+            }, notConfirmed? _confirmedInWidth : _defaultInWidth, 0.5f);
+        }
+
+        private void Cast(List<int> warmthAbilities)
+        {
+            for (int i = 0; i < _images.Length; i++)
+            {
+                if (!warmthAbilities.Contains(i))
                 {
-                    _selected[pressedThisFrame] = true;
-                    _selected[_pendingSecond] = true;
-                    _pendingSecond = -1;
+                    var parent = _images[i].transform.parent.GetComponent<Image>();
+                    var opacity = parent.material.GetFloat("_Alpha");
+                    DOTween.To(() => opacity, x =>{
+                        opacity = x;
+                        parent.material.SetFloat("_Alpha", x);
+                    }, _activeOpacity, 0.5f);
+                    CreateOutline(i, false);
                 }
                 else
                 {
-                    for (int i = 0; i < 4; i++) _selected[i] = false;
-
-                    _selected[pressedThisFrame] = true;
-                    _pendingSecond = pressedThisFrame;
-                    _pendingTime = Time.time;
+                    var parent = _images[i].transform.parent.GetComponent<Image>();
+                    var amplitude = parent.material.GetFloat("_WaveAmplitude");
+                    DOTween.To(() => amplitude, x =>{
+                        amplitude = x;
+                        parent.material.SetFloat("_WaveAmplitude", x);
+                    }, _activeAmplitude, 0.5f);
+                    CreateOutline(i, true);
                 }
-
-                _selectedIndex = pressedThisFrame;
             }
-
-            int count = 0;
-            for (int i = 0; i < 4; i++) if (_selected[i]) count++;
-            float scale = count == 1 ? 1.30f : count == 2 ? 1.20f : 1f;
-
-            for (int i = 0; i < 4; i++)
-                _images[i].rectTransform.localScale = _selected[i] ? Vector3.one * scale : Vector3.one;
-
-            for (int i = 0; i < 4; i++)
+        }
+        
+        private void StopCast(List<int> warmthAbilities)
+        {
+            foreach (var i in warmthAbilities)
             {
-                if (_selected[i])
+                var parent = _images[i].transform.parent.GetComponent<Image>();
+                var amplitude = parent.material.GetFloat("_WaveAmplitude");
+                DOTween.To(() => amplitude, x =>{
+                    amplitude = x;
+                    parent.material.SetFloat("_WaveAmplitude", x);
+                }, _defaultAmplitude, 0.5f);
+            }
+
+            for (int i = 0; i < _images.Length; i++)
+            {
+                if (!warmthAbilities.Contains(i))
                 {
-                    _selectedIndex = i;
-                    break;
+                    var parent = _images[i].transform.parent.GetComponent<Image>();
+                    var opacity = parent.material.GetFloat("_Alpha");
+                    DOTween.To(() => opacity, x =>{
+                        opacity = x;
+                        parent.material.SetFloat("_Alpha", x);
+                    }, _defaultOpacity, 0.5f);
                 }
             }
         }
 
-
-        private void CycleSelection(float scrollValue)
+        private void CreateOutline(int index, bool selected)
         {
-            if (_rightClick.IsPressed())
-                return;
-
-            if (scrollValue == 0) return;
-
-            int newIndex = _selectedIndex + (scrollValue > 0 ? 1 : -1);
-            if (newIndex > 3) newIndex = 0;
-            if (newIndex < 0) newIndex = 3;
-
-            SelectAbility(newIndex);
+            var selectedParent = _images[index].transform.parent.GetComponent<Image>();
+            
+            DOTween.To(() => selectedParent.material.GetFloat("_OutlineThickness"), x =>{
+                selectedParent.material.SetFloat("_OutlineThickness", x);
+            }, selected? _selectedOutWidth : _defaultOutWidth, 0.5f);
+            
+            DOTween.To(() => selectedParent.material.GetFloat("_InOutlineThickness"), x =>{
+                selectedParent.material.SetFloat("_InOutlineThickness", x);
+            }, selected? _selectedInOutWidth : _defaultInOutWidth, 0.5f);
+            selectedParent.SetMaterialDirty();
         }
-
-        private void SelectAbility(int index)
+        
+        private void AddAbility(int index)
         {
-            for (int i = 0; i < 4; i++) _selected[i] = false;
-            _selected[index] = true;
-
-            _selectedIndex = index;
+            ShowAbilities();
         }
     }
 }

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee8b226c62794d4a93151665258e3c41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Probs.WarmableIce
-  _warmFactor: 0.34
+  _warmFactor: 0.2
   _warmEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -78,8 +78,8 @@ SpriteShapeRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9081826681af728439cf7740f4a24f9b, type: 2}
+  - {fileID: 2100000, guid: 9081826681af728439cf7740f4a24f9b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +102,7 @@ SpriteShapeRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_MaskInteraction: 0
-  m_Color: {r: 0.9502237, g: 0.7688679, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9486524, b: 0.81960785, a: 1}
   m_ShapeTexture: {fileID: 0}
   m_Sprites:
   - {fileID: -2664096631168847452, guid: b8dd576d16ec9ed4f8dcc6e48884b2cc, type: 3}

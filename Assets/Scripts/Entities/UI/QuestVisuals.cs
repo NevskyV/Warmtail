@@ -1,6 +1,7 @@
 ﻿using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using System.IO;
+using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
 using Entities.Localization;
@@ -61,18 +62,18 @@ namespace Entities.UI
             }
         }
 
-        public void SpawnQuest(QuestData data)
+        public async void SpawnQuest(QuestData data)
         {
             if (data == null) return;
             if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
             var newQuest = _diContainer.InstantiatePrefab(_questPrefab, _questHud).transform;
             if (!newQuest) return;
+            await UniTask.Delay(200);
             newQuest.GetChild(0).GetComponent<LocalizedText>().SetNewKey("quest_header_" + data.Id);
             newQuest.GetChild(1).GetComponent<LocalizedText>().SetNewKey("quest_desc_" + data.Id);
             _createdQuests.Add(data,newQuest.gameObject);
             if (!_createdMarks.ContainsKey(data)) _createdMarks[data] = new();
             UpdateProgress(data, newQuest);
-            newQuest.parent.GetComponent<VerticalLayoutGroup>().CalculateLayoutInputVertical();
         }
 
         public void StartQuest(QuestData data)

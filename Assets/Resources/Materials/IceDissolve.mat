@@ -90,22 +90,25 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DissolveAmount: 0
+    - _DissolveAmount: 1
     - _EnableExternalAlpha: 0
     - _FoamScale: 5
-    - _OutlineThickness: 0.027
+    - _MaxDissolve: 0.81
+    - _MinDissolve: 0.333
+    - _OutlineThickness: 0.018
     - _Rotation: 38.21
-    - _Scale: 34.52
+    - _Scale: 9
     - _SpeedFactor: 0.01
     - _SpiralStrength: 2.2
-    - _VerticalDissolve: 0
+    - _VerticalDissolve: 0.044
     - _ZWrite: 0
     m_Colors:
+    - White: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DepthColor: {r: 0.26312736, g: 0.29214498, b: 0.6886792, a: 1}
     - _FoamColor: {r: 1, g: 1, b: 1, a: 1}
     - _LightColor: {r: 0.35377356, g: 0.9875981, b: 1, a: 1}
-    - _OutlineColor: {r: 2, g: 2, b: 2, a: 1}
+    - _OutlineColor: {r: 2.6701574, g: 1.5824928, b: 1.1044106, a: 1}
     - _PlayerScale: {r: 0.5, g: 1, b: 0, a: 0}
     - _Position: {r: 24, g: -10, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

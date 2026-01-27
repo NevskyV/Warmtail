@@ -14,6 +14,7 @@ namespace Systems.Abilities
         [SerializeField, Range(0f, 5)] protected float Cooldown;
         [field: SerializeReference] public string BaseMethodName { get; private set; }
         public bool Enabled { get; set; }
+        public bool InUse { get; set; }
         public Action StartAbility { get; set; }
         public Action UsingAbility { get; set; }
         public Action EndAbility { get; set; }
@@ -21,6 +22,7 @@ namespace Systems.Abilities
 
         private WarmthSystem _warmthSystem;
         private bool _drainWarmthRunning;
+        private bool _cooldownRunning;
         protected int WarmthCost;
 
         [Inject]
@@ -32,7 +34,7 @@ namespace Systems.Abilities
 
         public void UseAbility()
         {
-            if (_warmthSystem.CheckWarmCost(WarmthCost)  && !_drainWarmthRunning)
+            if (_warmthSystem.CheckWarmCost(WarmthCost)  && !_drainWarmthRunning && !_cooldownRunning)
             {
                 Enabled = true;
                 StartAbility?.Invoke();
@@ -49,9 +51,10 @@ namespace Systems.Abilities
             Enabled = false;
             _drainWarmthRunning = false;
             EndAbility?.Invoke();
+            //CooldownTimer();
         }
         
-        public async void DrainWarmth()
+        private async void DrainWarmth()
         {
             if (_drainWarmthRunning) return;
             _drainWarmthRunning = true;
@@ -64,6 +67,13 @@ namespace Systems.Abilities
             
             _drainWarmthRunning = false;
             StopAbility();
+        }
+
+        private async void CooldownTimer()
+        {
+            _cooldownRunning = true;
+            await UniTask.Delay(TimeSpan.FromSeconds(Cooldown));
+            _cooldownRunning = false;
         }
     }
 }

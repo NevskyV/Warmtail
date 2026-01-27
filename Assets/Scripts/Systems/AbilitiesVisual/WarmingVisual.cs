@@ -3,6 +3,7 @@ using Entities.PlayerScripts;
 using Entities.Sound;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Systems.AbilitiesVisual

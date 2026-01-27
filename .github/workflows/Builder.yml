@@ -24,23 +24,36 @@ jobs:
         id: calc
         run: |
           set -e
-
           echo "🔍 Fetching tags..."
           git fetch --tags
 
           LAST_TAG=$(git tag --list '[0-9]*.[0-9]*' --sort=-v:refname | head -n 1)
 
           if [ -z "$LAST_TAG" ]; then
-            echo "ℹ️ No tags found, using base 0.0"
-            BASE_VERSION="0.0"
-            PATCH=$(git rev-list HEAD --count)
+           echo "ℹ️ No tags found, using base 0.0.0"
+           MAJOR=0
+           MINOR=0
+           LAST_PATCH=0
+           COMMITS=$(git rev-list HEAD --count)
           else
-            echo "ℹ️ Last tag: $LAST_TAG"
-            BASE_VERSION=$(echo "$LAST_TAG" | sed -E 's/^v?([0-9]+\.[0-9]+).*/\1/')
-            PATCH=$(git rev-list "$LAST_TAG"..HEAD --count)
+           echo "ℹ️ Last tag: $LAST_TAG"
+
+          # Парсим версию
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$LAST_TAG"
+
+          # Если patch отсутствует — считаем 0
+          if [ -z "$PATCH" ]; then
+           PATCH=0
           fi
 
-          VERSION="${BASE_VERSION}.${PATCH}"
+          LAST_PATCH=$PATCH
+
+          # Количество коммитов после тега
+          COMMITS=$(git rev-list "$LAST_TAG"..HEAD --count)
+          fi
+
+          NEW_PATCH=$((LAST_PATCH + COMMITS))
+          VERSION="${MAJOR}.${MINOR}.${NEW_PATCH}"
 
           echo "✅ Computed version: $VERSION"
           echo "version=$VERSION" >> $GITHUB_OUTPUT
@@ -111,28 +124,36 @@ jobs:
   release:
     name: Release & publish 🚀
     needs: build
-    runs-on: ubuntu-latest
+    permissions: write-all
     environment: 
         name: Production
+    runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Download build artifact
         uses: actions/download-artifact@v4
         with:
           name: game-build
 
       - name: Create GitHub tag
-        run: |
-          git tag v${{ needs.build.outputs.buildVersion }}
-          git push origin v${{ needs.build.outputs.buildVersion }}
+        uses: rickstaa/action-create-tag@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: ${{ needs.build.outputs.buildVersion }}
+          tag_exists_error: false
+          message: ${{ needs.build.outputs.buildVersion }}
 
       - name: Create GitHub release
+        id: create-release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: v${{ needs.build.outputs.buildVersion }}
+          tag_name: ${{ needs.build.outputs.buildVersion }}
           release_name: Release v${{ needs.build.outputs.buildVersion }}
           draft: false
           prerelease: false
