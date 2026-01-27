@@ -1,6 +1,7 @@
 ﻿using System;
 using Interfaces;
 using Data;
+using Systems.Tutorial;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -17,8 +18,7 @@ namespace Systems.Tasks
 
         public void Activate()
         {
-            if (!_home && SceneManager.GetActiveScene().name != "Gameplay" && SceneManager.GetActiveScene().name != "GameplayIra") return;
-            if (_home && SceneManager.GetActiveScene().name != "Home" && SceneManager.GetActiveScene().name != "HomeIra") return;
+            TutorialSystem.TaskActivated.Add(this);
 
             if (_start) QuestSystem.OnQuestStarted.AddListener(MarkComplete);
             else QuestSystem.OnQuestEnded.AddListener(MarkComplete);
@@ -27,6 +27,9 @@ namespace Systems.Tasks
         private void MarkComplete(QuestData data, bool start)
         {
             if (data != _questData || start != _start) return;
+            if (!_home && SceneManager.GetActiveScene().name != "Gameplay" && SceneManager.GetActiveScene().name != "GameplayIra") return;
+            if (_home && SceneManager.GetActiveScene().name != "Home" && SceneManager.GetActiveScene().name != "HomeIra") return;
+
             Completed = true;
             OnComplete?.Invoke();
             if (_start) QuestSystem.OnQuestStarted.RemoveListener(MarkComplete);
