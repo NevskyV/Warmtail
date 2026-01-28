@@ -72,7 +72,7 @@ namespace Systems.Abilities
                 Vector2 force = _moveInput * MoveForce;
                 rb.AddForce(force * _moreForge, ForceMode2D.Force);
 
-                float targetAngle = Mathf.Atan2(_moveInput.y * 10, _moveInput.x * 10) * Mathf.Rad2Deg;
+                float targetAngle = Mathf.Atan2(_moveInput.y, _moveInput.x) * Mathf.Rad2Deg;
                 float newAngle = Mathf.LerpAngle(rb.rotation, targetAngle, 1.5f * Time.fixedDeltaTime);
                 rb.MoveRotation(newAngle);
             }

@@ -159,9 +159,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 4
-  m_LinearDamping: 2
-  m_AngularDamping: 0.05
+  m_Mass: 10
+  m_LinearDamping: 10
+  m_AngularDamping: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -190,7 +190,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.28235137, y: -0.00000040168348}
+  m_ConnectedAnchor: {x: 0.28235152, y: -0.0000003733388}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -337,8 +337,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDamping: 0.05
-  m_AngularDamping: 0.05
+  m_LinearDamping: 5
+  m_AngularDamping: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -367,7 +367,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.08053415, y: 0.094102696}
+  m_ConnectedAnchor: {x: 0.08053426, y: 0.094102696}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -375,8 +375,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -15
-    m_UpperAngle: 5
+    m_LowerAngle: -5
+    m_UpperAngle: 39
 --- !u!1 &3022280798342054754
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,8 +541,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDamping: 0.05
-  m_AngularDamping: 0.05
+  m_LinearDamping: 5
+  m_AngularDamping: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -579,8 +579,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -15
-    m_UpperAngle: 5
+    m_LowerAngle: 5
+    m_UpperAngle: -40
 --- !u!1 &3428015526038045399
 GameObject:
   m_ObjectHideFlags: 0
@@ -724,7 +724,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3858657521189487131}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 24.3, y: -9.94, z: 0}
   m_LocalScale: {x: 2.3, y: 2.3, z: 2.3}
   m_ConstrainProportionsScale: 1
@@ -1017,8 +1017,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4136618706733116839}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.6980652, w: 0.7160342}
-  m_LocalPosition: {x: 0.0026014447, y: 0.4700582, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0.6980653, w: 0.7160342}
+  m_LocalPosition: {x: 0.0026014575, y: 0.47005817, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1041,9 +1041,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDamping: 5
-  m_AngularDamping: 0.05
+  m_Mass: 10
+  m_LinearDamping: 10
+  m_AngularDamping: 10
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1164,9 +1164,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
-  m_LinearDamping: 2
-  m_AngularDamping: 0.05
+  m_Mass: 5
+  m_LinearDamping: 5
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1195,7 +1195,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.16200107, y: 0.00000020408112}
+  m_ConnectedAnchor: {x: 0.16200106, y: 0.0000002040811}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -1251,8 +1251,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDamping: 0.05
-  m_AngularDamping: 0.05
+  m_LinearDamping: 5
+  m_AngularDamping: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1281,7 +1281,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.0764266, y: -0.09131844}
+  m_ConnectedAnchor: {x: 0.076426804, y: -0.09131844}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -1289,8 +1289,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -5
-    m_UpperAngle: 10
+    m_LowerAngle: 5
+    m_UpperAngle: -30
 --- !u!1 &5267914453320811441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1453,7 +1453,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.7
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 0.9
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
   m_ApplyToSortingLayers: 00000000911d778ae72eaef4
@@ -1534,9 +1534,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
-  m_LinearDamping: 2
-  m_AngularDamping: 0.05
+  m_Mass: 5
+  m_LinearDamping: 5
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1565,7 +1565,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.16192922, y: 0.00000036665773}
+  m_ConnectedAnchor: {x: 0.16192907, y: -0.00000044116345}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -1765,7 +1765,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.06983472, y: -0.17192273}
+  m_ConnectedAnchor: {x: -0.06983467, y: -0.1719227}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -1851,7 +1851,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.25297362, y: 0.24532168}
+  m_ConnectedAnchor: {x: 0.25297335, y: 0.24532166}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -2050,7 +2050,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.0464983, y: 0.17685734}
+  m_ConnectedAnchor: {x: -0.0464982, y: 0.1768573}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -2105,9 +2105,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 2
-  m_AngularDamping: 0.05
+  m_Mass: 2
+  m_LinearDamping: 5
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2136,7 +2136,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.17236981, y: -0.00000047963107}
+  m_ConnectedAnchor: {x: 0.17237017, y: 0.00000037779293}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -2193,9 +2193,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 3
-  m_LinearDamping: 2
-  m_AngularDamping: 0.05
+  m_Mass: 7
+  m_LinearDamping: 5
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2224,7 +2224,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.24637629, y: 0.00000028901366}
+  m_ConnectedAnchor: {x: 0.24637596, y: 0.000000319889}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -2316,8 +2316,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 5
-  m_LinearDamping: 0.05
-  m_AngularDamping: 0.05
+  m_LinearDamping: 5
+  m_AngularDamping: 5
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2355,7 +2355,7 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: -5
-    m_UpperAngle: 15
+    m_UpperAngle: 40
 --- !u!1 &8224670007611713365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2403,9 +2403,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 2
-  m_LinearDamping: 2
-  m_AngularDamping: 0.05
+  m_Mass: 4
+  m_LinearDamping: 5
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -2434,7 +2434,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.1650053, y: 0.00000013099255}
+  m_ConnectedAnchor: {x: 0.16500533, y: 0.00000015144111}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -2676,7 +2676,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: -0.019004233, y: -0.0002967252}
+  m_ConnectedAnchor: {x: -0.01900423, y: -0.0002967274}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:
@@ -2874,7 +2874,7 @@ HingeJoint2D:
   m_BreakAction: 3
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 0.2355622, y: -0.2623666}
+  m_ConnectedAnchor: {x: 0.23556218, y: -0.26236647}
   m_UseConnectedAnchor: 1
   m_UseMotor: 0
   m_Motor:

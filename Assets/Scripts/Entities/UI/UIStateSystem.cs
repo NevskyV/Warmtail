@@ -1,10 +1,11 @@
 using System;
-using AYellowpaper.SerializedCollections;
+using DG.Tweening;
 using Entities.PlayerScripts;
 using Systems;
 using Systems.Effects;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -13,11 +14,11 @@ namespace Entities.UI
     public class UIStateSystem : MonoBehaviour
     {
         [SerializeReference, Range(0.5f, 5f)] private float _crossFadeTime;
-        [SerializeField] private SerializedDictionary<UIState, CanvasGroup> _canvasGroups = new();
-        [SerializeField] private SerializedDictionary<UIState, UIState> _escapeTransitions = new();
-
-        [SerializeField] private Player _player;
-        [SerializeField] private PlayerInput _playerInput;
+        [SerializeField] private Volume _pauseVolume;
+        [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, CanvasGroup> _canvasGroups = new();
+        [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, UIState> _escapeTransitions = new();
+        
+        private PlayerInput _playerInput;
         private PlayerAbilityController _abilityController;
         private ScreenshotSystem _screenshotSystem;
         public UIState CurrentState { get; private set; }
@@ -63,9 +64,11 @@ namespace Entities.UI
                 switch (state)
                 {
                     case UIState.Normal:
+                        DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 0, _crossFadeTime);
                         _abilityController.EnableLastAbilities();
                         break;
                     case UIState.Pause:
+                        DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 1, _crossFadeTime);
                         _abilityController.DisableAllAbilities();
                         break;
                 }
