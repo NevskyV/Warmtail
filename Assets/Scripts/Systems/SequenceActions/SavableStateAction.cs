@@ -11,14 +11,16 @@ namespace Systems.SequenceActions
     {
         [SerializeField] private bool _active;
         [SerializeField] private List<string> _objectIds;
-        [SerializeField] private bool _anotherScene;
+        [SerializeField] private bool _homeScene;
         
         public void Invoke()
         {
-            if (!_anotherScene || SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "GameplayIra"){
-                Debug.Log("Ira invoke");
-                 _objectIds.ForEach(x => 
-                    SavableObjectsResolver.FindObjectById<SavableStateObject>(x).ChangeState(_active));}
+            if ((_homeScene && (SceneManager.GetActiveScene().name == "HomeIra" || SceneManager.GetActiveScene().name == "Home")) ||
+                ( !_homeScene && (SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "GameplayIra") ) )
+                {
+                    _objectIds.ForEach(x => 
+                        SavableObjectsResolver.FindObjectById<SavableStateObject>(x).ChangeState(_active));
+                }
         }
     }
 }

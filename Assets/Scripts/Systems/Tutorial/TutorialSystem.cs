@@ -1,10 +1,13 @@
 using AYellowpaper.SerializedCollections;
+using System.Collections.Generic;
+using Systems.SequenceActions;
+using UnityEngine.InputSystem;
+using UnityEngine;
+using Interfaces;
+using Zenject;
 using Data;
 using Data.Player;
-using Systems.SequenceActions;
-using UnityEngine;
-using UnityEngine.InputSystem;
-using Zenject;
+using Interfaces;
 
 namespace Systems.Tutorial
 {
@@ -16,6 +19,8 @@ namespace Systems.Tutorial
         private TutorData _currentTutor;
         private GlobalData _globalData;
         private PlayerInput _input;
+
+        public static List<ITask> TaskActivated = new();
         
         [Inject]
         private void Construct(GlobalData globalData, PlayerInput input)
@@ -37,10 +42,16 @@ namespace Systems.Tutorial
                 });
             }
             if (_currentIndex >= _currentTutor.Sequence.Count) return;
-            if (_currentTutor.Sequence[_currentIndex].Tasks.Count > 0)
-            {
-                foreach (var task in _currentTutor.Sequence[_currentIndex].Tasks)
+
+            SequenceElement element = _currentTutor.Sequence[_currentIndex];
+
+            if (element.Tasks.Count > 0)
+            {                
+                foreach (var task in element.Tasks)
                 {
+                    if (TaskActivated.Contains(task)) return;
+                    TaskActivated.Add(task);
+                    
                     task.Activate();
                     task.OnComplete += TryIterateSequence;
                 }
@@ -52,10 +63,10 @@ namespace Systems.Tutorial
         public void TryIterateSequence()
         {
             var state = _globalData.Get<SavablePlayerData>().TutorState;
-            SequenceIterationSystem.TryIterateSequence(_currentTutor.Sequence, state,
+            SequenceIterationSystem.TryIterateSequence(_currentTutor.Sequence, state, QuestType.Serial,
                 x =>
                 {
-                    _globalData.Edit<SavablePlayerData>(playerData => playerData.TutorState = x);
+                    _globalData.Edit<SavablePlayerData>(playerData => playerData.TutorState = x[0]);
                 });
         }
     }

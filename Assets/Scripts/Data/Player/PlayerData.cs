@@ -18,7 +18,7 @@ namespace Data.Player
         public int TutorState;
         public bool HasBeatenGame;
         public string LastScene;
-        public SerializedDictionary<int, int> QuestIds;
+        public SerializedDictionary<int, List<int>> QuestIds;
         public List<int> FearIds = new();
         public bool IsHomeOpened;
     }
