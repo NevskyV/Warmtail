@@ -10,6 +10,7 @@ using TMPro;
 using TriInspector;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
@@ -130,9 +131,10 @@ namespace Entities.UI
             {
                 var text = LocalizationManager.GetStringFromKey(
                     $"Player_{_system.DialogueGraph.DialogueId}_{node.NodeId}_{i}");
-                var boxObj = await InstantiateAsync(_boxOptionsPrefab, _boxOptionsGroup);
-                boxObj[0].GetComponentInChildren<TMP_Text>().text = text;
-                _diContainer.Inject(boxObj[0]);
+                var boxObj = _diContainer.InstantiatePrefab(_boxOptionsPrefab, _boxOptionsGroup).gameObject;
+                if (i == 0) EventSystem.current.SetSelectedGameObject(boxObj);
+                boxObj.GetComponentInChildren<TMP_Text>().text = text;
+                _diContainer.Inject(boxObj);
             }
             _boxText.gameObject.SetActive(false);
             _boxName.gameObject.SetActive(false);

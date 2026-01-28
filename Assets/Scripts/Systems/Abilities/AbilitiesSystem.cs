@@ -83,10 +83,6 @@ namespace Systems.Abilities
             {
                 index = 0;
             }
-            
-            var ability = _allAbilities[index];
-            Debug.Log("ability: " + ability);
-            
             _selectedIndex = index;
             OnSelect?.Invoke(index);
         }
@@ -136,7 +132,6 @@ namespace Systems.Abilities
 
         private void ConfirmAbility(int index)
         {
-            Debug.Log(_confirmedAbilities.Contains(index));
             if (_confirmedAbilities.Contains(index))
             {
                 StopCasting();

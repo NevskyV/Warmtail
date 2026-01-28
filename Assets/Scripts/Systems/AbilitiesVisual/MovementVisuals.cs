@@ -19,7 +19,6 @@ namespace Systems.AbilitiesVisual
         private static readonly int Position = Shader.PropertyToID("_Position");
         
         [field: SerializeReference] public int AbilityIndex {get; set;}
-        [field: SerializeReference] public Sprite Icon { get;  set;}
         [field: SerializeReference] public Material Water {get; set;}
         [SerializeField] private ParticleSystem _startVfx;
         [SerializeField] private ParticleSystem[] _loopVfx;

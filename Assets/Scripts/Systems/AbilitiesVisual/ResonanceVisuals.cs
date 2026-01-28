@@ -6,7 +6,7 @@ namespace Systems.AbilitiesVisual
     public class ResonanceVisuals : IAbilityVisual
     {
         [field: SerializeReference] public int AbilityIndex { get; set; }
-        [field: SerializeReference] public Sprite Icon { get; set; }
+        
         public void StartAbility()
         {
             throw new System.NotImplementedException();

@@ -43,7 +43,7 @@ namespace Systems
             _increaseCts?.Dispose();
             _increaseCts = null;
             _isIncreasing = false;
-            Debug.Log("decrease");
+            //Debug.Log("decrease");
             _cooldownTimer ??= new ResettableTimer(_cooldownSeconds, StartIncreaseIfNotRunning);
             _cooldownTimer.Start();
         }
@@ -75,7 +75,7 @@ namespace Systems
                         var newVal = Mathf.Min(data.CurrentWarmth + _warmthIncreaseRate, max);
                         data.CurrentWarmth = newVal;
                     });
-                    Debug.Log("increase");
+                    //Debug.Log("increase");
                     await UniTask.Delay(TimeSpan.FromSeconds(_increaseIntervalSeconds), cancellationToken: token);
                 }
             }

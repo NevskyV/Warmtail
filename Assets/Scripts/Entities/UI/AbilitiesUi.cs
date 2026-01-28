@@ -10,6 +10,7 @@ using Systems.Abilities;
 using TMPro;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
@@ -267,6 +268,7 @@ namespace Entities.UI
             _mainObject.DOLocalMoveY(240, 2f);
             _confirmButton.transform.parent.DOLocalMoveY(560, 1.5f);
             _confirmButton.interactable = true;
+            EventSystem.current.SetSelectedGameObject(_confirmButton.gameObject);
             HideAbilities();
         }
 

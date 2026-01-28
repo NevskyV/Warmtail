@@ -43,10 +43,8 @@ namespace Systems.Abilities
             _triggerZone.Wake();
             _triggerZone.OnObjectEnter.Subscribe(ObjectEnter);
             _triggerZone.OnObjectExit.Subscribe(ObjectExit);
-        
-            _playerInput.actions["LeftMouse"].started += _ => StartAbility?.Invoke();
+            
             _playerInput.actions["LeftMouse"].performed += Interact;
-            _playerInput.actions["LeftMouse"].canceled += _ => EndAbility?.Invoke();
         }
     
         private AbilityTriggerZone<IInteractable> GetOrCreateTriggerZone(Player player, string name, float radius)
@@ -119,6 +117,8 @@ namespace Systems.Abilities
                 propertyBlock.SetFloat(InnerOutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 1.5f, 0.5f);
+
+            StartAbility?.Invoke();
         }
         
         private void ObjectExit(IInteractable interactable)
@@ -141,6 +141,11 @@ namespace Systems.Abilities
                 propertyBlock.SetFloat(InnerOutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 0f, 0.5f);
+
+            if (_triggerZone.ObjectsInRange.Count == 0)
+            {
+                EndAbility?.Invoke();
+            }
         }
     }
 }

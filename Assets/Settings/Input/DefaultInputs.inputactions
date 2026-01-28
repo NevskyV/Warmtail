@@ -43,15 +43,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "E",
-                    "type": "Button",
-                    "id": "945536ba-a6de-49db-9235-cb0bd8c7a32d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "1",
                     "type": "Button",
                     "id": "16fe66e7-d3ab-4230-99a9-7d0da48c1f84",
@@ -140,6 +131,17 @@
                 },
                 {
                     "name": "",
+                    "id": "5a89d00d-ba50-4e8e-b117-3b53c54f99f6",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "LeftMouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "4a818cf7-5815-44dc-840b-5a682d00cb04",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -168,17 +170,6 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Escape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7c1435bf-0105-4293-852c-0bda92099cf9",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "E",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -416,7 +407,7 @@
                 {
                     "name": "",
                     "id": "ac26fd04-3e61-4496-a848-4f574e5e3e9e",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
