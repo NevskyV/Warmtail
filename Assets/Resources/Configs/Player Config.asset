@@ -29,12 +29,12 @@ MonoBehaviour:
           rid: 676710221457391733
         MaxWarmthCost: 2
         Tick: 0.5
-        Cooldown: 1
+        Cooldown: 0.6
         <BaseMethodName>k__BackingField: ActivateDash
         _destroyRadius: 1.5
         _dashCooldownDuration: 1
-        _normalSpeed: 60
-        _dashSpeed: 100
+        _normalSpeed: 80
+        _dashSpeed: 150
     - rid: 676710221457391728
       type: {class: MetabolismAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
@@ -42,7 +42,7 @@ MonoBehaviour:
           rid: 676710221457391734
         MaxWarmthCost: 1
         Tick: 0.5
-        Cooldown: 1
+        Cooldown: 0.6
         <BaseMethodName>k__BackingField: ApplyNewSpeed
         _speedMultiplier: 2
     - rid: 676710221457391729
@@ -52,7 +52,7 @@ MonoBehaviour:
           rid: 676710221457391735
         MaxWarmthCost: 1
         Tick: 0.5
-        Cooldown: 1
+        Cooldown: 0.6
         <BaseMethodName>k__BackingField: StartWarm
         _radius: 3
         _explosionDuration: 0.5
@@ -64,7 +64,7 @@ MonoBehaviour:
           rid: 4061569042658361469
         MaxWarmthCost: 1
         Tick: 0.5
-        Cooldown: 1
+        Cooldown: 0.6
         <BaseMethodName>k__BackingField: ActivateResonance
         _searchRadius: 12
         _interactRadius: 5
