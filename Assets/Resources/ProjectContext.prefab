@@ -132,7 +132,7 @@ MonoBehaviour:
         MainSoundVolume: 0.5
         MusicVolume: 1
         SfxVolume: 1
-        QualityLevel: 1
+        QualityLevel: 2
         FullscreenMode: 1
         Language: 0
         LongLowRumble: 0.1
@@ -151,12 +151,13 @@ MonoBehaviour:
           _serializedList: []
         TimeLastGame: 
         TutorState: 0
-        HasBeatenGame: 0
         LastScene: GameplayIra
         QuestIds:
           _serializedList: []
         FearIds: 
         IsHomeOpened: 0
+        HasBeatenGame: 0
+        HasInteracted: 0
     - rid: 4204128997775507584
       type: {class: DialogueVarData, ns: Data, asm: Assembly-CSharp}
       data:

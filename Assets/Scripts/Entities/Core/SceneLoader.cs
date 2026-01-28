@@ -54,7 +54,7 @@ namespace Entities.Core
             if (sceneInd != "Start")
             {
                 _globalData.Edit<SavablePlayerData>(data => data.LastScene = sceneInd);
-                _screenshotSystem.EnableAutoScreenshot();
+                _screenshotSystem.EnableAutoScreenshot().Forget();
             }
         }
     }

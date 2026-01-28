@@ -13,16 +13,6 @@ namespace Entities.UI.SDF
         private ComputeBuffer _shapeBuffer;
         private ComputeBuffer _propBuffer;
 
-        private void OnEnable()
-        {
-            UpdateAll();
-        }
-
-        private void OnValidate()
-        {
-            UpdateAll();
-        }
-
         private void Update()
         {
             UpdateAll();
@@ -36,7 +26,7 @@ namespace Entities.UI.SDF
             int groupIndex = 0;
             foreach (SdfGroup group in _groups)
             {
-                if (!group || !group.gameObject.activeSelf || group.InstanceMaterial == null) 
+                if (!group || !group.gameObject.activeInHierarchy || group.InstanceMaterial == null) 
                 {
                     groupIndex++;
                     continue;
@@ -91,7 +81,7 @@ namespace Entities.UI.SDF
             groupIndex = 1;
             foreach (SdfGroup group in _groups)
             {
-                if (!group || !group.InstanceMaterial) 
+                if (!group || !group.gameObject.activeInHierarchy || !group.InstanceMaterial) 
                 {
                     groupIndex++;
                     continue;

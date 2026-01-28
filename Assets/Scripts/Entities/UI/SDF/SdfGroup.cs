@@ -18,16 +18,15 @@ namespace Entities.UI.SDF
         public List<SdfFigure> Figures => _figures;
         public Material InstanceMaterial => _instanceMaterial;
 
-        private void OnEnable()
+        private void Start()
         {
             _rectTransform = GetComponent<RectTransform>();
-
+            
             if (!TryGetComponent(out _image))
             {
                 _image = gameObject.AddComponent<Image>();
             }
-
-            CreateMaterial();
+            _instanceMaterial = _image.material;
             UpdateFigures();
         }
 
@@ -42,6 +41,7 @@ namespace Entities.UI.SDF
             _figures.AddRange(GetComponentsInChildren<SdfFigure>());
         }
 
+        [TriInspector.Button]
         private void CreateMaterial()
         {
             if (_baseMaterial == null) return;
@@ -64,10 +64,9 @@ namespace Entities.UI.SDF
                     UnityEditor.AssetDatabase.CreateAsset(_instanceMaterial, assetPath);
                     UnityEditor.AssetDatabase.SaveAssets();
                 }
+                _image.material = _instanceMaterial;
 #endif
             }
-
-            _image.material = _instanceMaterial;
         }
     }
 }

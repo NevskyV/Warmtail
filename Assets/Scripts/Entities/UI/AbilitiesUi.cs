@@ -85,7 +85,7 @@ namespace Entities.UI
             _confirmButton.onClick.AddListener(() => ShowAbilities());
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _abilitiesSystem.OnSelect -= SelectAbility;
             _abilitiesSystem.OnConfirm -= ConfirmAbility;
