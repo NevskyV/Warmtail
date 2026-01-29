@@ -4,6 +4,7 @@ using System.IO;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
+using EasyTextEffects;
 using Entities.Localization;
 using Systems.SequenceActions;
 using Systems.Environment;
@@ -69,8 +70,12 @@ namespace Entities.UI
             var newQuest = _diContainer.InstantiatePrefab(_questPrefab, _questHud).transform;
             if (!newQuest) return;
             await UniTask.Delay(200);
+            
             newQuest.GetChild(0).GetComponent<LocalizedText>().SetNewKey("quest_header_" + data.Id);
             newQuest.GetChild(1).GetComponent<LocalizedText>().SetNewKey("quest_desc_" + data.Id);
+            
+            newQuest.GetChild(0).GetComponent<TextEffect>().Refresh();
+            
             _createdQuests.Add(data,newQuest.gameObject);
             if (!_createdMarks.ContainsKey(data)) _createdMarks[data] = new();
             UpdateProgress(data, newQuest);
