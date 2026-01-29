@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
 using EasyTextEffects.Editor.MyBoxCopy.Extensions;
+using Entities.Core;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -29,7 +30,7 @@ namespace Systems.Abilities
         public Action<int> OnAddAbility;
         
         [Inject]
-        public void Construct(PlayerConfig config, GlobalData globalData, PlayerInput input, ComboSystem comboSystem)
+        public void Construct(PlayerConfig config, GlobalData globalData, PlayerInput input, ComboSystem comboSystem, SceneLoader loader)
         {
             _config = config;
             _comboSystem = comboSystem;
@@ -46,8 +47,16 @@ namespace Systems.Abilities
             {
                 warmthAbilities[i].InUse = false;
             }
-
+            
             SetupInput(input);
+
+            loader.SceneLoaded += ResetAbilities;
+        }
+
+        private void ResetAbilities(string sceneName)
+        {
+            _activeAbilities = new();
+            _confirmedAbilities = new();
         }
 
         private async void SetupInput(PlayerInput input)

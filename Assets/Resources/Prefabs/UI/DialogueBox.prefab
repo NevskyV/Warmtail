@@ -68,8 +68,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u041C\u0435\u043D\u044F \u0437\u043E\u0432\u0443\u0442 <link=H+M>\u0422\u0435\u0440\u0442\u0438\u043B\u0443\u0441!</link>"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
-  m_sharedMaterial: {fileID: 1168332384871489589, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e1a7bd1eff54d747b7ef0dcf0c31b8e, type: 2}
+  m_sharedMaterial: {fileID: -6705519285257965014, guid: 2e1a7bd1eff54d747b7ef0dcf0c31b8e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -93,8 +93,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 40
+  m_fontSizeBase: 40
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -104,6 +104,7 @@ MonoBehaviour:
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -154,7 +155,7 @@ MonoBehaviour:
   preset: {fileID: 11400000, guid: 0929c1ea6890bae408d5107ee1c09546, type: 2}
   tagEffects: []
   globalEffects:
-  - triggerWhen: 0
+  - triggerWhen: 1
     effect: {fileID: 11400000, guid: 89fa0e849cb2be249950253f6a019dec, type: 2}
     onEffectCompleted:
       m_PersistentCalls:
@@ -660,8 +661,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Vasya Slashyavy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 5f9487d5b14d6d449852048222e98725, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ec6d7c9ef0bf886469c2d030e2f37755, type: 2}
+  m_sharedMaterial: {fileID: 5199850514967792039, guid: ec6d7c9ef0bf886469c2d030e2f37755, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -691,11 +692,12 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
+  m_characterHorizontalScale: 1
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -723,7 +725,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 0, w: 15.879036}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

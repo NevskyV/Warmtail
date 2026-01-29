@@ -49,10 +49,10 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 0.9960785, g: 0.9960785, b: 0.8431373, a: 1}
-  m_Intensity: 0.1
+  m_Intensity: 0.7
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000911d778ae72eaef4
+  m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 15
+  m_PointLightOuterRadius: 7
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -357,9 +357,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.ShadowCaster2D
   m_ShadowGroup: 0
-  m_Priority: 0
+  m_Priority: -1
   m_ComponentVersion: 5
-  m_HasRenderer: 0
+  m_HasRenderer: 1
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
@@ -387,10 +387,10 @@ MonoBehaviour:
     m_FlipY: 0
     m_InitialTrim: 0.1
   m_CastingOption: 1
-  m_PreviousTrimEdge: 0
-  m_PreviousEdgeProcessing: -1
-  m_PreviousShadowCastingSource: -1
-  m_PreviousShadowShape2DSource: {fileID: 0}
+  m_PreviousTrimEdge: 0.1
+  m_PreviousEdgeProcessing: 1
+  m_PreviousShadowCastingSource: 2
+  m_PreviousShadowShape2DSource: {fileID: 5801004670100212976}
   references:
     version: 2
     RefIds:

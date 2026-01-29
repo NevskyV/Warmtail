@@ -89,6 +89,7 @@ namespace Entities.UI
 
         public void UpdateProgress(QuestData data, Transform questObj = null)
         {
+            if (!_createdQuests.ContainsKey(data)) return;
             if (questObj == null)
             {
                 questObj = _createdQuests[data].transform;

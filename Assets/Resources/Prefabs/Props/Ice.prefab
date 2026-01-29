@@ -38,6 +38,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1971053207 &4893845983615761778
 SpriteShapeRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -84,8 +85,8 @@ SpriteShapeRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_ShapeTexture: {fileID: 2800000, guid: 6741a77cdc234f340ad9c00865a6caed, type: 3}
   m_Sprites:
   - {fileID: 645488225178675933, guid: 6741a77cdc234f340ad9c00865a6caed, type: 3}
@@ -290,7 +291,7 @@ EdgeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 0.93
+  m_EdgeRadius: 1
   m_Points:
   - {x: 67.29401, y: 88.52385}
   - {x: 68.37296, y: 88.255005}
@@ -483,3 +484,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d3f4338ef3544afa65056b08a028a6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Probs.Ice
+  _id:
+    Value: 

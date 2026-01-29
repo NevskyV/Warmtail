@@ -70,7 +70,9 @@ namespace Entities.UI
             _currentLineDuration = line.Length * _perCharFadeTime + _delayTime;
             print(_currentLineDuration);
             _currentText.GetComponent<TMP_Text>().text = line;
-            _currentText.GetComponent<TextEffect>().Refresh();
+            var effect = _currentText.GetComponent<TextEffect>();
+            effect.Refresh();
+            effect.StartManualEffects();
         }
         
         public async void RequestSingleLine(int id)

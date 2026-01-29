@@ -804,8 +804,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
-  m_sharedMaterial: {fileID: 1168332384871489589, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e1a7bd1eff54d747b7ef0dcf0c31b8e, type: 2}
+  m_sharedMaterial: {fileID: -6705519285257965014, guid: 2e1a7bd1eff54d747b7ef0dcf0c31b8e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1393,8 +1393,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Description
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
-  m_sharedMaterial: {fileID: 1168332384871489589, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e1a7bd1eff54d747b7ef0dcf0c31b8e, type: 2}
+  m_sharedMaterial: {fileID: -6705519285257965014, guid: 2e1a7bd1eff54d747b7ef0dcf0c31b8e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2407,6 +2407,7 @@ GameObject:
   - component: {fileID: 2569420890552816084}
   - component: {fileID: 4993839623545531082}
   - component: {fileID: 8853234806723487603}
+  - component: {fileID: 8924637536087333036}
   m_Layer: 5
   m_Name: AbilityName
   m_TagString: Untagged
@@ -2465,15 +2466,15 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
-  m_sharedMaterial: {fileID: 1168332384871489589, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ec6d7c9ef0bf886469c2d030e2f37755, type: 2}
+  m_sharedMaterial: {fileID: 5199850514967792039, guid: ec6d7c9ef0bf886469c2d030e2f37755, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2548,6 +2549,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Localization.LocalizedText
   _key: warming
+--- !u!114 &8924637536087333036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7260765353219686711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9840f87219df84505803024c796e739d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: EasyTextEffects::EasyTextEffects.TextEffect
+  text: {fileID: 4993839623545531082}
+  usePreset: 0
+  preset: {fileID: 0}
+  tagEffects: []
+  globalEffects:
+  - triggerWhen: 0
+    effect: {fileID: 11400000, guid: 108e394886dd7ee47b63882890bd29e3, type: 2}
+    onEffectCompleted:
+      m_PersistentCalls:
+        m_Calls: []
+    overrideTagEffects: 0
+  updatesPerSecond: 30
 --- !u!1 &7319913712551517920
 GameObject:
   m_ObjectHideFlags: 0
@@ -2672,8 +2697,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
-  m_sharedMaterial: {fileID: 1168332384871489589, guid: 68d9785f6dbea7e49ae81997e80883ae, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2e1a7bd1eff54d747b7ef0dcf0c31b8e, type: 2}
+  m_sharedMaterial: {fileID: -6705519285257965014, guid: 2e1a7bd1eff54d747b7ef0dcf0c31b8e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -114,14 +114,14 @@ namespace Entities.UI
             {
                 displayName = _globalData.Get<DialogueVarData>().Variables.Find(var => var.Name == "playerName").Value;
             }
-            _boxName!.text = displayName;
+            _boxName.text = displayName;
             _boxNameEffect.Refresh();
             if(character.EmotionSprites.ContainsKey(node.Emotion))
                 _boxImage.sprite = character.EmotionSprites[node.Emotion];
             _boxText.text = text;
             _boxTextEffect.globalEffects[0].effect = _effect;
             _boxTextEffect.Refresh();
-            _boxTextEffect.StartOnStartEffects();
+            _boxTextEffect.StartManualEffects();
         }
         
         public async void ShowOptions(RuntimeNode node, int choiceCount)
@@ -161,7 +161,7 @@ namespace Entities.UI
 
         public void ChangeEffectSpeed()
         {
-            _boxTextEffect.StopOnStartEffects();
+            _boxTextEffect.StopManualEffects();
             IsComplete = true;
         }
 
