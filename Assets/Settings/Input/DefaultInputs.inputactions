@@ -34,6 +34,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Building",
+                    "type": "Button",
+                    "id": "59475187-3e98-4ca8-af8b-9a9dea7c20fb",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Escape",
                     "type": "Value",
                     "id": "28f003f7-9bc3-4244-ba92-08f4dbe0c8af",
@@ -412,6 +421,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "ConfirmAbility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c8c7678-e9e6-403f-ae9d-38e84f7edcd4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Building",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12df9958-feeb-4282-8a48-ab3eccd2b7a2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Building",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
