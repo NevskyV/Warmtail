@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Threading;
-using System.Threading.Tasks;
 using DG.Tweening;
 using Entities.PlayerScripts;
 using UnityEngine;
@@ -12,8 +10,7 @@ namespace Entities.UI
     {
         private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
         [SerializeField] private Material _freezeMaterial;
-        [SerializeField] private float _freezeRate = 0.2f;
-        private float _currentFreeze;
+        [SerializeField] private float _freezeTime = 10f;
         private CancellationTokenSource _token;
         private bool _isFreezing;
         private string _lastObjId;
@@ -29,7 +26,7 @@ namespace Entities.UI
             
             _isFreezing = true;
 
-            var task =  _freezeMaterial.DOFloat(0, DissolveAmount, 10).AsyncWaitForCompletion();
+            var task =  _freezeMaterial.DOFloat(0, DissolveAmount, _freezeTime).AsyncWaitForCompletion();
             await task;
             if (_freezeMaterial.GetFloat(DissolveAmount) > 0) return;
             _stateController.Die();
@@ -43,12 +40,11 @@ namespace Entities.UI
             _token = new CancellationTokenSource();
             _lastObjId = null;
             _isFreezing = false;
-            _freezeMaterial.DOFloat(1, DissolveAmount, 13);
+            _freezeMaterial.DOFloat(1, DissolveAmount, _freezeTime + 3);
         }
         
         private void OnDisable()
         {
-            _currentFreeze = 0;
             _freezeMaterial.SetFloat(DissolveAmount, 1);
         }
     }

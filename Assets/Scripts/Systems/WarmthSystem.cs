@@ -34,6 +34,7 @@ namespace Systems
 
         public void DecreaseWarmth(int value)
         {
+            if (value <= 0) return;
             _globalData.Edit<RuntimePlayerData>(data =>
             {
                 data.CurrentWarmth = Mathf.Max(data.CurrentWarmth - value, 0);
