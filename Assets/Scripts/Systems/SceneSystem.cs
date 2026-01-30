@@ -17,9 +17,9 @@ namespace Systems
         private Transform _playerBody;
         private GlobalData _globalData;
         private bool _atHome;
-        public static bool _firstSpawn = true;
+        public static bool FirstSpawn = true;
 
-        private Dictionary<string, Vector2> spawnPoints = new(){
+        private Dictionary<string, Vector2> _spawnPoints = new(){
             {"GameplayStart" , new Vector2(-25.5f, 1)},
             {"GameplayNearHome" , new Vector2(124.2f, 259f)},
             {"HomeAtCarpet" , new Vector2(18.15f, -24.82f)},
@@ -44,12 +44,12 @@ namespace Systems
             bool isHomeOpened = _globalData.Get<SavablePlayerData>().IsHomeOpened;
             
             Vector2 pos = new();
-            if (!isHomeOpened && !_atHome) pos = spawnPoints["GameplayStart"];
-            if (isHomeOpened && !_atHome) pos = spawnPoints["GameplayNearHome"];
-            if (_atHome && _firstSpawn) pos = spawnPoints["HomeAtCarpet"];
-            if (_atHome && !_firstSpawn) pos = spawnPoints["HomeNearDoor"];
+            if (!isHomeOpened && !_atHome) pos = _spawnPoints["GameplayStart"];
+            if (isHomeOpened && !_atHome) pos = _spawnPoints["GameplayNearHome"];
+            if (_atHome && FirstSpawn) pos = _spawnPoints["HomeAtCarpet"];
+            if (_atHome && !FirstSpawn) pos = _spawnPoints["HomeNearDoor"];
 
-            _firstSpawn = false;
+            FirstSpawn = false;
 
             SetPosition(pos);
         }
@@ -58,8 +58,8 @@ namespace Systems
         {
             var pos = new List<Vector2>();
             var systemPos = _globalData.Get<SavablePlayerData>().RespawnPositions;
-
             foreach (var p in systemPos) {
+                Debug.Log(p);
                 pos.Add(p.ToUnity());
             }
 

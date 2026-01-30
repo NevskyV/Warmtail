@@ -28,9 +28,12 @@ MonoBehaviour:
   - Actions:
     - rid: 4061568888548098233
     - rid: 4061569070873968771
-    - rid: 4061569151058051163
     Tasks:
     - rid: 4061568888548098232
+  - Actions:
+    - rid: 4061569158116278364
+    Tasks:
+    - rid: 4061569158116278363
   - Actions:
     - rid: 7345390844638658707
     Tasks:
@@ -186,7 +189,13 @@ MonoBehaviour:
       type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _type: 5
-    - rid: 4061569151058051163
+    - rid: 4061569158116278363
+      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
+        _position: {x: 84, y: 35}
+        description: 
+    - rid: 4061569158116278364
       type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _type: 2
