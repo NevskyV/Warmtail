@@ -44,7 +44,7 @@ namespace Systems.Abilities
             _triggerZone.OnObjectEnter.Subscribe(ObjectEnter);
             _triggerZone.OnObjectExit.Subscribe(ObjectExit);
             
-            _playerInput.actions["LeftMouse"].performed += Interact;
+            _playerInput.actions["Interact"].performed += Interact;
         }
     
         private AbilityTriggerZone<IInteractable> GetOrCreateTriggerZone(Player player, string name, float radius)
@@ -93,7 +93,7 @@ namespace Systems.Abilities
     
         public void Dispose()
         {
-            _playerInput.actions["LeftMouse"].performed -= Interact;
+            _playerInput.actions["Interact"].performed -= Interact;
             _disposables?.Dispose();
         }
 

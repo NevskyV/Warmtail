@@ -1,7 +1,7 @@
 name: Builder
 
 on:
-  workflow_dispatch:
+  push: 'main'
 
 concurrency:
   group: release

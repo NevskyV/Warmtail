@@ -15,13 +15,14 @@ namespace Systems.Abilities
     [Serializable]
     public class AbilitiesSystem
     {
+        public static AbilitiesSystem Instance;
         private PlayerConfig _config;
         private ComboSystem _comboSystem;
         private GlobalData _globalData;
         private List<WarmthAbility> _allAbilities = new();
         private List<int> _activeAbilities = new();
         private List<int> _confirmedAbilities = new();
-        private int _selectedIndex;
+        private int _selectedIndex = -1;
 
         public Action<int> OnSelect;
         public Action<int> OnConfirm;
@@ -32,6 +33,7 @@ namespace Systems.Abilities
         [Inject]
         public void Construct(PlayerConfig config, GlobalData globalData, PlayerInput input, ComboSystem comboSystem, SceneLoader loader)
         {
+            Instance = this;
             _config = config;
             _comboSystem = comboSystem;
             _globalData = globalData;
@@ -68,9 +70,9 @@ namespace Systems.Abilities
             input.actions["3"].performed += _ => SelectAbility(2);
             input.actions["4"].performed += _ => SelectAbility(3);
 
-            input.actions["RightMouse"].started += _ => StartCasting();
-            input.actions["RightMouse"].canceled += _ => StopCasting();
-            input.actions["MiddleMouse"].canceled += _ => ConfirmAbility(_selectedIndex);
+            input.actions["ActivateAbilities"].started += _ => StartCasting();
+            input.actions["ActivateAbilities"].canceled += _ => StopCasting();
+            input.actions["ConfirmAbility"].canceled += _ => ConfirmAbility(_selectedIndex);
             await UniTask.Delay(100);
             SelectAbility(0);
         }
@@ -84,6 +86,12 @@ namespace Systems.Abilities
         private void SelectAbility(int index)
         {
             if(_allAbilities.Count <= 0) return;
+            if (_selectedIndex == index)
+            {
+                ConfirmAbility(index);
+                return;
+            }
+            
             if (index < 0)
             {
                 index = _allAbilities.Count-1;
@@ -115,7 +123,7 @@ namespace Systems.Abilities
             OnStopCast?.Invoke(_activeAbilities);
             _activeAbilities.ForEach(x => _allAbilities[x].StopAbility());
             _activeAbilities.Clear();
-            SelectAbility(_selectedIndex);
+            OnSelect?.Invoke(_selectedIndex);
         }
 
         public void AddAbility(WarmthAbility ability)
