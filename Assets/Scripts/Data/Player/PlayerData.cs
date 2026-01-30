@@ -12,7 +12,7 @@ namespace Data.Player
         public int Shells;
         public int ActiveLayers;
         public List<int> SeenReplicas;
-        public List<Vector2> RespawnPositions = new(){new Vector2(24,-10)};
+        public List<Vector2> RespawnPositions = new(){new Vector2(-26.1f, 4)};
         public SerializedDictionary<int, int> Inventory;
         public string TimeLastGame;
         public int TutorState;
