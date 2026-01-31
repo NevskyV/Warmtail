@@ -12,8 +12,8 @@ namespace Systems
     public class WarmthSystem
     {
         private const int _warmthIncreaseRate = 1;
-        private const float _increaseIntervalSeconds = 1f;
-        private const float _cooldownSeconds = 3f;
+        private const float _increaseIntervalSeconds = 0.6f;
+        private const float _cooldownSeconds = 1.5f;
 
         private GlobalData _globalData;
 

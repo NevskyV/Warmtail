@@ -1,8 +1,10 @@
 using System;
 using DG.Tweening;
 using Entities.PlayerScripts;
+using Entities.UI.SDF;
 using Systems;
 using Systems.Effects;
+using TriInspector;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -14,9 +16,12 @@ namespace Entities.UI
     public class UIStateSystem : MonoBehaviour
     {
         [SerializeReference, Range(0.5f, 5f)] private float _crossFadeTime;
-        [SerializeField] private Volume _pauseVolume;
+        
         [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, CanvasGroup> _canvasGroups = new();
         [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, UIState> _escapeTransitions = new();
+        
+        [Title("Pause"), SerializeField] private Animator _pauseAnimator;
+        [SerializeField] private Volume _pauseVolume;
         
         private PlayerInput _playerInput;
         private PlayerAbilityController _abilityController;
@@ -66,10 +71,14 @@ namespace Entities.UI
                     case UIState.Normal:
                         DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 0, _crossFadeTime);
                         _abilityController.EnableLastAbilities();
+                        if(_pauseAnimator)
+                            _pauseAnimator.SetBool("InPause", false);
                         break;
                     case UIState.Pause:
                         DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 1, _crossFadeTime);
                         _abilityController.DisableAllAbilities();
+                        if(_pauseAnimator)
+                            _pauseAnimator.SetBool("InPause", true);
                         break;
                 }
             }
