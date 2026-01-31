@@ -56,7 +56,6 @@ namespace Entities.Triggers
 
         private async void Disable()
         {
-            _abilityController.EnableLastAbilities();
             _positionComposer.Lookahead.Enabled = true;
             _positionComposer.Composition.DeadZone.Enabled = true;
             
@@ -64,7 +63,7 @@ namespace Entities.Triggers
                 _stunTime * 0.5f);
             await _target.DOMove(_player.Rigidbody.transform.position, _stunTime * 0.5f).AsyncWaitForCompletion();
             _camera.Target.TrackingTarget = _player.Rigidbody.transform;
-            
+            _abilityController.EnableLastAbilities();
             if (_destroyAfter)
             {
                 ChangeState(false);

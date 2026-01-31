@@ -19,13 +19,14 @@ namespace Systems.AbilitiesVisual
         private static readonly int Position = Shader.PropertyToID("_Position");
         
         [field: SerializeReference] public int AbilityIndex {get; set;}
-        [field: SerializeReference] public Sprite Icon { get;  set;}
         [field: SerializeReference] public Material Water {get; set;}
         [SerializeField] private ParticleSystem _startVfx;
         [SerializeField] private ParticleSystem[] _loopVfx;
         [SerializeField] private AudioClip _startSfx;
         [SerializeField] private AudioClip _loopSfx;
         [SerializeField] private Vector3 _vfxOffset;
+        [SerializeField] private float _normalCamZoom = 3;
+        [SerializeField] private float _activeCamZoom = 4;
         
         private Player _player;
         private IAbility _ability;
@@ -49,7 +50,7 @@ namespace Systems.AbilitiesVisual
 
         public async void StartAbility()
         {
-            if (!_ability.Enabled) return;
+            if (!_ability.Enabled || _loopVfxObjs.Count > 0) return;
             var startObj = (await ObjectSpawnSystem.Spawn(_startVfx, _player.Rigidbody.position, _player.Rigidbody.transform)).transform;
             startObj.localRotation = Quaternion.Euler(new Vector3(0, 0, 160));
             startObj.localPosition += _vfxOffset;
@@ -57,30 +58,31 @@ namespace Systems.AbilitiesVisual
             _player.ObjectSfx.PlayLoopSfx(_loopSfx, 500);
             
             UpdatePlayerStats();
-
-            DOTween.To(() => _camera.Lens.OrthographicSize, x => _camera.Lens.OrthographicSize = x, 11,1);
-            foreach (var vfx in _loopVfx)
-            {
-                var loopVfxObj = Object.Instantiate(vfx, _player.Rigidbody.position, Quaternion.identity,_player.Rigidbody.transform).gameObject;
-                loopVfxObj.transform.localRotation = Quaternion.Euler(new Vector3(0,0,160));
-                loopVfxObj.transform.localPosition += _vfxOffset;
-                _loopVfxObjs.Add(loopVfxObj);
-            }
         }
         
         public void UsingAbility()
         {
-            //UpdatePlayerStats();
+            if (_loopVfxObjs.Count == 0)
+            {
+                DOTween.To(() => _camera.Lens.OrthographicSize, x => _camera.Lens.OrthographicSize = x, _activeCamZoom,1);
+                foreach (var vfx in _loopVfx)
+                {
+                    var loopVfxObj = Object.Instantiate(vfx, _player.Rigidbody.position, Quaternion.identity,_player.Rigidbody.transform).gameObject;
+                    loopVfxObj.transform.localRotation = Quaternion.Euler(new Vector3(0,0,160));
+                    loopVfxObj.transform.localPosition += _vfxOffset;
+                    _loopVfxObjs.Add(loopVfxObj);
+                }
+            }
         }
         
-        public void EndAbility()
+        public async void EndAbility()
         {
             UpdatePlayerStats();
             _player.ObjectSfx.StopLoopSfx();
             DOTween.To(() => _camera.Lens.OrthographicSize, x =>
             {
                 if(_ability.Enabled)_camera.Lens.OrthographicSize = x;
-            }, 9,1);
+            }, _normalCamZoom,1);
             for (int i = _loopVfxObjs.Count - 1; i >= 0; i--)
             {
                 var obj =  _loopVfxObjs[i];
@@ -91,6 +93,7 @@ namespace Systems.AbilitiesVisual
                 }
                 var main = obj.GetComponent<ParticleSystem>().main;
                 main.loop = false;
+                await UniTask.Delay(TimeSpan.FromSeconds(main.duration - obj.GetComponent<ParticleSystem>().time));
                 _loopVfxObjs.Remove(obj);
             }
         }

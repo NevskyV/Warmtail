@@ -53,15 +53,15 @@ Material:
     - _ColorMask: 15
     - _CornerRounding: 0.15
     - _INTERSECTION: 0
-    - _InOutlineThickness: 1.5
-    - _InlineThickness: 0.075
+    - _InOutlineThickness: 3
+    - _InlineThickness: 0
     - _NOISETYPE: 0
     - _NoiseScale: 10
     - _NoiseSpeed: 0.1
-    - _OutlineThickness: 0.075
+    - _OutlineThickness: 0
     - _Radius: 0.35
     - _SHAPE: 0
-    - _Smoothness: 0.2
+    - _Smoothness: 0.01
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -69,16 +69,16 @@ Material:
     - _StencilWriteMask: 255
     - _UIMaskSoftnessX: 1
     - _UIMaskSoftnessY: 1
-    - _WaveAmplitude: 0.01
-    - _WaveFrequency: 22.9
-    - _WaveSpeed: 3.3
+    - _WaveAmplitude: 0.004
+    - _WaveFrequency: 5
+    - _WaveSpeed: 1
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.4547168, b: 0.4547168, a: 1}
     - _Corners: {r: 0, g: 0, b: 0, a: 0}
-    - _FillColor: {r: 1, g: 0.4547168, b: 0.4547168, a: 1}
-    - _InlineColor: {r: 0, g: 0.2396226, b: 0.2396226, a: 1}
-    - _OutlineColor: {r: 1, g: 0.2396226, b: 0.2396226, a: 1}
+    - _FillColor: {r: 0.77453184, g: 0.89433956, b: 0.88274527, a: 1}
+    - _InlineColor: {r: 0.19607843, g: 0.5028534, b: 0.50980395, a: 1}
+    - _OutlineColor: {r: 0.05906012, g: 0.26382837, b: 0.3962264, a: 1}
     - _Size: {r: 0.2, g: 0.25, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

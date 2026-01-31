@@ -23,7 +23,7 @@ namespace Entities.House
         private Vector2 _posMouseOnPointerDown;
         private Vector2 _posObjectOnLastInside;
         private Vector2 _posObjectOnConfirmedState;
-        private bool _isClickedNow;
+        private bool _isClickedNow = true;
         private bool _isPlacementing;
         private bool _isMenuEnabled;
         private bool _isConfirmed = true;
@@ -45,7 +45,7 @@ namespace Entities.House
         [Inject]
         private void Construct(PlacementSystem placementSystem, PlayerInput input, UIStateSystem uiStateSystem)
         {
-            _leftClickAction = input.actions.FindAction("LeftMouse");
+            _leftClickAction = input.actions.FindAction("Building");
             _placementSystem = placementSystem;
             _uiStateSystem = uiStateSystem;
         }
@@ -53,6 +53,7 @@ namespace Entities.House
         {
             _posObjectOnConfirmedState = (isConfirmed ? transform.position : Vector2.positiveInfinity);
             _isConfirmed = isConfirmed;
+            _isPlacementing = !_isConfirmed;
         }
         
         private void StartBuild()
@@ -70,12 +71,14 @@ namespace Entities.House
             if (_leftClickAction.WasReleasedThisFrame())
             {
                 if (!_isClickedNow) DisableMenu();
+                else OnPointerUp();
                 _isClickedNow = false;
             }
-            if (_isPlacementing)
-            {
-                Vector2 v2 = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
+            Vector2 v2 = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
+
+            if (_isPlacementing && Vector2.Distance(_posMouseOnPointerDown, v2) > 0.3f)
+            {
                 if (v2.x > 35.06f && v2.y > -20.48f) 
                 {
                     if (_posObjectOnLastInside.x > 35.06f) v2.y = -20.48f;
@@ -100,9 +103,13 @@ namespace Entities.House
             _posMouseOnPointerDown = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             _posObjectOnPointerDown = transform.position;
             _isClickedNow = true;
-            EnableMenu();
+            DisableMenu();
         }
         public void OnPointerUp(PointerEventData pointerEventData)
+        {
+            OnPointerUp();
+        }
+        private void OnPointerUp()
         {
             Vector2 pos = transform.position;
             if (_posObjectOnConfirmedState != pos) {
@@ -135,7 +142,7 @@ namespace Entities.House
             if (_isConfirmed) return;
             if (!_isVisible) 
             {
-                ApplyInventory(1);
+                ApplyInventory(+1);
                 _placementSystem.RemoveEditingItem(_houseItemData.Id, _posObjectOnConfirmedState);
                 Destroy(gameObject);
             }
@@ -170,12 +177,23 @@ namespace Entities.House
         }
         public void RemoveObject()
         {
-            _isConfirmed = false;
-            _child.SetActive(false);
-            _boxCollider.enabled = false;
-            _isVisible = false;
-            StartBuild();
-            RemoveFromInventory();
+            if (_placementSystem.InventoryCurrent[_houseItemData.Id] <= 0)
+            {
+                StartBuild();
+                _placementSystem.RemoveEditingItem(_houseItemData.Id, _posObjectOnConfirmedState);
+                RemoveFromInventory();
+                ApplyInventory(+1);
+                Destroy(gameObject);
+            }
+            else
+            {
+                _isConfirmed = false;
+                _child.SetActive(false);
+                _boxCollider.enabled = false;
+                _isVisible = false;
+                StartBuild();
+                RemoveFromInventory();
+            }
         }
 
         private void ApplyInventory(int how) => _placementSystem.ApplyItemInventory(_houseItemData.Id, how);

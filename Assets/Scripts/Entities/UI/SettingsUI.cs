@@ -105,6 +105,7 @@ namespace Entities.UI
         
         public void ChangeSfxVolume(float value)
         {
+            print("changedSfxVolume" + value);
             ChangeVolume("SfxVolume", value);
             _localData.SfxVolume = value;
             SaveData();

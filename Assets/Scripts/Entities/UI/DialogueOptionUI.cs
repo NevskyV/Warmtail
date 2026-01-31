@@ -1,10 +1,13 @@
+using System;
 using UnityEngine;
 using Zenject;
 
 namespace Entities.UI
 {
+    [ExecuteAlways]
     public class DialogueOptionUI : MonoBehaviour
     {
+        [SerializeField] private RectTransform _sdfGroup;
         [Inject] private DialogueVisuals _dialogueVisuals;
         
         public void ChooseOption()
@@ -17,6 +20,11 @@ namespace Entities.UI
                     break;
                 }
             }
+        }
+        
+        public void Update()
+        {
+            _sdfGroup.sizeDelta = new Vector2(_sdfGroup.sizeDelta.x, _sdfGroup.rect.size.x);
         }
     }
 }

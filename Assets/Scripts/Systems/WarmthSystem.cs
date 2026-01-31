@@ -16,7 +16,6 @@ namespace Systems
         private const float _cooldownSeconds = 1.5f;
 
         private GlobalData _globalData;
-        private float _warmthConsumptionMultiplier = 1f;
 
         private ResettableTimer _cooldownTimer;
         private CancellationTokenSource _increaseCts;
@@ -35,17 +34,17 @@ namespace Systems
 
         public void DecreaseWarmth(int value)
         {
-            var adjustedValue = GetAdjustedWarmthCost(value);
+            if (value <= 0) return;
             _globalData.Edit<RuntimePlayerData>(data =>
             {
-                data.CurrentWarmth = Mathf.Max(data.CurrentWarmth - adjustedValue, 0);
+                data.CurrentWarmth = Mathf.Max(data.CurrentWarmth - value, 0);
             });
             
             _increaseCts?.Cancel();
             _increaseCts?.Dispose();
             _increaseCts = null;
             _isIncreasing = false;
-            Debug.Log("decrease");
+            //Debug.Log("decrease");
             _cooldownTimer ??= new ResettableTimer(_cooldownSeconds, StartIncreaseIfNotRunning);
             _cooldownTimer.Start();
         }
@@ -77,7 +76,7 @@ namespace Systems
                         var newVal = Mathf.Min(data.CurrentWarmth + _warmthIncreaseRate, max);
                         data.CurrentWarmth = newVal;
                     });
-                    Debug.Log("increase");
+                    //Debug.Log("increase");
                     await UniTask.Delay(TimeSpan.FromSeconds(_increaseIntervalSeconds), cancellationToken: token);
                 }
             }
@@ -96,19 +95,7 @@ namespace Systems
         public bool CheckWarmCost(int cost)
         {
             var current = _globalData.Get<RuntimePlayerData>().CurrentWarmth;
-            return current >= GetAdjustedWarmthCost(cost);
-        }
-
-        public void SetWarmthConsumptionMultiplier(float multiplier)
-        {
-            _warmthConsumptionMultiplier = Mathf.Max(0f, multiplier);
-        }
-
-        private int GetAdjustedWarmthCost(int baseCost)
-        {
-            if (baseCost <= 0) return baseCost;
-            var adjusted = Mathf.RoundToInt(baseCost * _warmthConsumptionMultiplier);
-            return Mathf.Max(1, adjusted);
+            return current >= cost;
         }
     }
 }

@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Data.Player;
 using EasyTextEffects.Editor.MyBoxCopy.Extensions;
+using Entities.PlayerScripts;
+using Entities.Sound;
 using Entities.UI;
 using Interfaces;
 using Systems;
@@ -12,6 +14,7 @@ namespace Entities.Props
 {
     public class Star : SavableStateObject, IInteractable
     {
+        [SerializeField] private AudioClip _sfx;
         private MonologueVisuals _monologueVisuals;
         private List<int> _ids = new();
         
@@ -23,13 +26,14 @@ namespace Entities.Props
             {
                 _ids.Add(i);
             }
+            
         }
     
         public void Interact()
         {
             if (_globalData == null) return;
             var newId = _ids.Except(_globalData.Get<SavablePlayerData>().SeenReplicas).GetRandom();
-            _monologueVisuals.RequestSingleLine(newId);
+            _monologueVisuals.RequestSingleLine(newId.ToString());
             _globalData.Edit<SavablePlayerData>((playerData) =>
             {
                 playerData.Stars += 1;
@@ -37,6 +41,7 @@ namespace Entities.Props
                 var v = new Vector2(transform.position.x, transform.position.y);
                 playerData.RespawnPositions.Add(v.ToNumerics());
             });
+            GetComponent<ObjectSfx>().PlaySfx(_sfx);
             ChangeState(false);
         }
     }

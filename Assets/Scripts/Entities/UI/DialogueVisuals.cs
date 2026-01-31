@@ -10,6 +10,7 @@ using TMPro;
 using TriInspector;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
@@ -113,14 +114,14 @@ namespace Entities.UI
             {
                 displayName = _globalData.Get<DialogueVarData>().Variables.Find(var => var.Name == "playerName").Value;
             }
-            _boxName!.text = displayName;
+            _boxName.text = displayName;
             _boxNameEffect.Refresh();
             if(character.EmotionSprites.ContainsKey(node.Emotion))
                 _boxImage.sprite = character.EmotionSprites[node.Emotion];
             _boxText.text = text;
             _boxTextEffect.globalEffects[0].effect = _effect;
             _boxTextEffect.Refresh();
-            _boxTextEffect.StartOnStartEffects();
+            _boxTextEffect.StartManualEffects();
         }
         
         public async void ShowOptions(RuntimeNode node, int choiceCount)
@@ -130,9 +131,10 @@ namespace Entities.UI
             {
                 var text = LocalizationManager.GetStringFromKey(
                     $"Player_{_system.DialogueGraph.DialogueId}_{node.NodeId}_{i}");
-                var boxObj = await InstantiateAsync(_boxOptionsPrefab, _boxOptionsGroup);
-                boxObj[0].GetComponentInChildren<TMP_Text>().text = text;
-                _diContainer.Inject(boxObj[0]);
+                var boxObj = _diContainer.InstantiatePrefab(_boxOptionsPrefab, _boxOptionsGroup).gameObject;
+                if (i == 0) EventSystem.current.SetSelectedGameObject(boxObj);
+                boxObj.GetComponentInChildren<TMP_Text>().text = text;
+                _diContainer.Inject(boxObj);
             }
             _boxText.gameObject.SetActive(false);
             _boxName.gameObject.SetActive(false);
@@ -159,7 +161,7 @@ namespace Entities.UI
 
         public void ChangeEffectSpeed()
         {
-            _boxTextEffect.StopOnStartEffects();
+            _boxTextEffect.StopManualEffects();
             IsComplete = true;
         }
 

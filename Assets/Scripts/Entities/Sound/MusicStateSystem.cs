@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using AYellowpaper.SerializedCollections;
+using Cysharp.Threading.Tasks;
 using Entities.Core;
 using Systems.Effects;
 using TriInspector;
@@ -22,6 +24,7 @@ namespace Entities.Sound
 
         [Inject] private SceneLoader _sceneLoader;
         private MusicState _currentState;
+        private CancellationTokenSource _tokenSource;
 
         private void Start()
         {
@@ -30,7 +33,8 @@ namespace Entities.Sound
              
              _source1.clip = clip;
              _source1.Play();
-             StartCoroutine(LoopNext(_source1));
+             _tokenSource =  new CancellationTokenSource();
+             LoopNext(_source1).Forget();
              _sceneLoader.SceneStartLoading += () => ChangeMusicStateAsync(MusicState.None);
              _sceneLoader.SceneLoaded += id =>
              {
@@ -54,19 +58,20 @@ namespace Entities.Sound
         
         public async void ChangeMusicStateAsync(MusicState state)
         {
-            StopAllCoroutines();
+            _tokenSource?.Cancel();
+            _tokenSource =  new CancellationTokenSource();
             var sourceFromCross = _source1.clip ? _source1 : _source2;
             var sourceToCross = _source1.clip ? _source2 : _source1;
             try
             {
                 var rand = Random.Range(0, _clips[state].Count);
-                if (sourceFromCross.clip == _clips[state][rand] && _clips.Count > 1)
+                
+                if (sourceFromCross.clip == _clips[state][rand] && _clips[state].Count > 1)
                 {
                     if (rand == 0) rand += 1;
-                    else rand -= 1;
+                    else rand -= 1; 
                 }
                 var clip = _clips[state][rand];
-            
                 _currentState = state;
             
                 sourceToCross.clip = clip;
@@ -79,19 +84,19 @@ namespace Entities.Sound
                 }
                 sourceFromCross.Stop();
                 sourceFromCross.clip = null;
-                StartCoroutine(LoopNext(sourceToCross));
+                LoopNext(sourceToCross).Forget();
             }
             catch (Exception e)
             {
-                sourceFromCross.volume = 1;
-                sourceToCross.volume = 1;
+                Debug.LogError(e.Message);
             }
         }
 
-        private IEnumerator LoopNext(AudioSource source)
+        private async UniTaskVoid LoopNext(AudioSource source)
         {
-            if (!source.clip) yield break;
-            yield return new WaitForSeconds(source.clip.length - source.time - _crossFadeTime);
+            if (!source.clip) return;
+            var time = source.clip.length - _crossFadeTime;
+            await UniTask.Delay(TimeSpan.FromSeconds(time), cancellationToken: _tokenSource.Token);
             ChangeMusicStateAsync(_currentState);
         }
         
