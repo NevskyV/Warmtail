@@ -9,7 +9,7 @@ namespace Entities.Props
     public class FearCore : MonoBehaviour, IInteractable
     {
         [SerializeField] private FearPortal _portalPrefab;
-        [SerializeField] private FearConfig _fearConfig;
+            [SerializeField] private FearConfig _fearConfig;
         [SerializeField] private Transform _spawnPoint;
         
         [Inject] private GlobalData _globalData;
