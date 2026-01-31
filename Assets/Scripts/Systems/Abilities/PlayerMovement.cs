@@ -22,6 +22,7 @@ namespace Systems.Abilities
 
         [SerializeField] private float _moreForge = 100f;
         [SerializeField] private float _drag = 5f;
+        private float _speedMultiplier = 1f;
 
         private Vector2 _moveInput;
         private GlobalData _globalData;
@@ -69,13 +70,19 @@ namespace Systems.Abilities
             if (_moveInput.magnitude > 0.1f)
             {
                 UsingAbility?.Invoke();
-                Vector2 force = _moveInput * MoveForce;
+                var moveForce = MoveForce * _speedMultiplier;
+                Vector2 force = _moveInput * moveForce;
                 rb.AddForce(force * _moreForge, ForceMode2D.Force);
 
                 float targetAngle = Mathf.Atan2(_moveInput.y, _moveInput.x) * Mathf.Rad2Deg;
                 float newAngle = Mathf.LerpAngle(rb.rotation, targetAngle, 1.5f * Time.fixedDeltaTime);
                 rb.MoveRotation(newAngle);
             }
+        }
+
+        public void SetSpeedMultiplier(float multiplier)
+        {
+            _speedMultiplier = Mathf.Max(0f, multiplier);
         }
     }
 }

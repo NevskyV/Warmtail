@@ -16,6 +16,7 @@ namespace Systems
         private const float _cooldownSeconds = 3f;
 
         private GlobalData _globalData;
+        private float _warmthConsumptionMultiplier = 1f;
 
         private ResettableTimer _cooldownTimer;
         private CancellationTokenSource _increaseCts;
@@ -34,9 +35,10 @@ namespace Systems
 
         public void DecreaseWarmth(int value)
         {
+            var adjustedValue = GetAdjustedWarmthCost(value);
             _globalData.Edit<RuntimePlayerData>(data =>
             {
-                data.CurrentWarmth = Mathf.Max(data.CurrentWarmth - value, 0);
+                data.CurrentWarmth = Mathf.Max(data.CurrentWarmth - adjustedValue, 0);
             });
             
             _increaseCts?.Cancel();
@@ -94,7 +96,19 @@ namespace Systems
         public bool CheckWarmCost(int cost)
         {
             var current = _globalData.Get<RuntimePlayerData>().CurrentWarmth;
-            return current >= cost;
+            return current >= GetAdjustedWarmthCost(cost);
+        }
+
+        public void SetWarmthConsumptionMultiplier(float multiplier)
+        {
+            _warmthConsumptionMultiplier = Mathf.Max(0f, multiplier);
+        }
+
+        private int GetAdjustedWarmthCost(int baseCost)
+        {
+            if (baseCost <= 0) return baseCost;
+            var adjusted = Mathf.RoundToInt(baseCost * _warmthConsumptionMultiplier);
+            return Mathf.Max(1, adjusted);
         }
     }
 }
