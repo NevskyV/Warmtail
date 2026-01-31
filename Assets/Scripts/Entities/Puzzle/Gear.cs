@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine.Events;
 using UnityEngine;
 using Interfaces;
@@ -8,8 +9,7 @@ namespace Entities.Puzzle
     public class Gear : Warmable
     {
         [SerializeField] private SpriteRenderer _spriteRenderer;
-        [SerializeField] private Sprite _twistingSprite;
-        [SerializeField] private Sprite _untwistSprite;
+        [SerializeField] private float _twistedAngle = 90;
         
         private int _gearId;
         private ResettableTimer _timerWarm;
@@ -21,6 +21,9 @@ namespace Entities.Puzzle
             _gearId = id;
             Reset();
             GearsPuzzle.OnReseted.AddListener(Reset);
+            var color = _spriteRenderer.color;
+            color.a = 0.5f;
+            _spriteRenderer.color = color;
         }
         
         public override void Warm()
@@ -30,21 +33,27 @@ namespace Entities.Puzzle
             else if(_warmthAmount > 0) _timerWarm = new ResettableTimer(_maxWarmthAmount, WarmLost);
         }
 
-        public override void WarmComplete() // twisting
+        public override void WarmComplete()
         {
-            _spriteRenderer.sprite = _twistingSprite;
+            _spriteRenderer.transform.DOLocalRotate(new Vector3(0,0,_twistedAngle), 1f);
+            var color = _spriteRenderer.color;
+            color.a = 1f;
+            _spriteRenderer.color = color;
             OnTwisted.Invoke(_gearId);
         }
 
-        private void WarmLost() // untwist
+        private void WarmLost()
         {
             if (_warmthAmount > 0) Reset();
         }
 
-        public override void Reset() // untwist
+        public override void Reset()
         {
             base.Reset();
-            _spriteRenderer.sprite = _untwistSprite;
+            var color = _spriteRenderer.color;
+            color.a = 0.5f;
+            _spriteRenderer.color = color;
+            _spriteRenderer.transform.DOLocalRotate(new Vector3(0,0,0), 1f);
         }
     }
 }

@@ -61,6 +61,9 @@ namespace Entities.UI
                 var quest = AllQuests.Find(x => x.Id == id.Key);
                 if(quest) QuestSystem.StartQuest(quest, id.Value);
             }
+            QuestSystem.OnQuestStarted.AddListener((data, b) => SpawnQuest(data));
+            QuestSystem.OnQuestUpdated.AddListener((data, b) => UpdateProgress(data));
+            QuestSystem.OnQuestEnded.AddListener((data, b) => EndQuest(data));
         }
 
         public async void SpawnQuest(QuestData data)

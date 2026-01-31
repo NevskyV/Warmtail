@@ -13,16 +13,15 @@ namespace Systems
     public class QuestSystem
     {
         private static GlobalData _globalData;
-        private static QuestVisuals _questVisuals;
         
         public static UnityEvent<QuestData, bool> OnQuestStarted = new();
+        public static UnityEvent<QuestData, bool> OnQuestUpdated = new();
         public static UnityEvent<QuestData, bool> OnQuestEnded = new();
 
         [Inject]
-        private void Construct(GlobalData globalData, QuestVisuals visuals)
+        private void Construct(GlobalData globalData)
         {
             _globalData = globalData;
-            _questVisuals = visuals;
         }
         
         public static void StartQuest(QuestData data, List<int> questState = null)
@@ -36,7 +35,6 @@ namespace Systems
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
 
             OnQuestStarted.Invoke(data, true);
-            _questVisuals.SpawnQuest(data);
 
             if (data.QuestType == QuestType.Serial)
             {
@@ -89,12 +87,14 @@ namespace Systems
                 x =>
                 {
                     if ((data.QuestType == QuestType.Parallel && x.Count == data.Sequence.Count) || 
-                        (data.QuestType == QuestType.Serial && x[0] == data.Sequence.Count) )
-                            EndQuest(data);
+                        (data.QuestType == QuestType.Serial && x[0] == data.Sequence.Count) ){
+                        EndQuest(data);
+                    }
                     else
                     {
+                        OnQuestUpdated?.Invoke(data, true);
                         _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds[data.Id] = x);
-                        _questVisuals.UpdateProgress(data);
+
                     }
                 });
             }
@@ -106,7 +106,6 @@ namespace Systems
             data.OnComplete.ForEach(x => x.Invoke());
             if(_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData=> playerData.QuestIds.Remove(data.Id));
-            _questVisuals.DestroyQuest(data);
         }
     }
 }
