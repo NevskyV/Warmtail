@@ -75,12 +75,12 @@ namespace Entities.UI
             effect.StartManualEffects();
         }
         
-        public async void RequestSingleLine(int id)
+        public async void RequestSingleLine(string id, string prefix = "fragment_")
         {
             _currentText = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
             _currentText.localPosition = ChooseRandomPosition();
             _currentText.GetComponent<TMP_Text>().text = 
-                LocalizationManager.GetStringFromKey("fragment_" + id);
+                LocalizationManager.GetStringFromKey(prefix + id);
             _currentText.GetComponent<TextEffect>().Refresh();
             await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
             Destroy(_currentText.gameObject);

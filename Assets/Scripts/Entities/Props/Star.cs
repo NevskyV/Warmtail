@@ -33,7 +33,7 @@ namespace Entities.Props
         {
             if (_globalData == null) return;
             var newId = _ids.Except(_globalData.Get<SavablePlayerData>().SeenReplicas).GetRandom();
-            _monologueVisuals.RequestSingleLine(newId);
+            _monologueVisuals.RequestSingleLine(newId.ToString());
             _globalData.Edit<SavablePlayerData>((playerData) =>
             {
                 playerData.Stars += 1;

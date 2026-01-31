@@ -1,10 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Data;
 using DG.Tweening;
+using Entities.UI;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using Zenject;
 
 namespace Entities.Props
 {
@@ -17,11 +20,15 @@ namespace Entities.Props
 
     public class GhostMemory : MonoBehaviour
     {
+        [SerializeField] private RuntimeDialogueGraph _graph;
+        [SerializeField] private string _prefix;
         [SerializeField] private List<GhostPoint> _ghostPoints = new();
         [SerializeField] private GameObject _ghostPrefab;
         [SerializeField] private GameObject _sparklePrefab;
         [SerializeField] private float _sparkleMoveDuration = 1f;
         [SerializeField] private Ease _sparkleEase = Ease.InOutQuad;
+
+        [Inject] private MonologueVisuals _monologueVisuals;
         
         private GameObject _currentGhost;
         private Collider2D _currentGhostCollider;
@@ -73,6 +80,7 @@ namespace Entities.Props
         {
             if (other.CompareTag("Player"))
             {
+                _monologueVisuals.RequestSingleLine(_graph.AllNodes[_currentPointIndex].NodeId,_prefix);
                 MoveToNextPoint();
             }
         }
