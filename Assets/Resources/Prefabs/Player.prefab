@@ -883,7 +883,7 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: -15
-    m_UpperAngle: 5
+    m_UpperAngle: 10
 --- !u!1 &2457418905837378947
 GameObject:
   m_ObjectHideFlags: 0
@@ -1534,7 +1534,7 @@ HingeJoint2D:
   m_UseLimits: 1
   m_AngleLimits:
     m_LowerAngle: -15
-    m_UpperAngle: 5
+    m_UpperAngle: 10
 --- !u!1 &3274446356929411930
 GameObject:
   m_ObjectHideFlags: 0
@@ -2373,8 +2373,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -5
-    m_UpperAngle: 5
+    m_LowerAngle: -10
+    m_UpperAngle: 10
 --- !u!58 &2749620886743174086
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2706,8 +2706,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -5
-    m_UpperAngle: 10
+    m_LowerAngle: -10
+    m_UpperAngle: 15
 --- !u!1 &4708497748546176535
 GameObject:
   m_ObjectHideFlags: 0
@@ -3865,8 +3865,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -20
-    m_UpperAngle: 5
+    m_LowerAngle: -50
+    m_UpperAngle: 10
 --- !u!1 &6703186564397454128
 GameObject:
   m_ObjectHideFlags: 0
@@ -4068,8 +4068,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -20
-    m_UpperAngle: 5
+    m_LowerAngle: -25
+    m_UpperAngle: 10
 --- !u!1 &6798101794187379041
 GameObject:
   m_ObjectHideFlags: 0
@@ -4589,8 +4589,8 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -5
-    m_UpperAngle: 20
+    m_LowerAngle: -10
+    m_UpperAngle: 50
 --- !u!1 &7727717747908724801
 GameObject:
   m_ObjectHideFlags: 0
@@ -5184,7 +5184,7 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -5
+    m_LowerAngle: -10
     m_UpperAngle: 15
 --- !u!1 &8224670007611713365
 GameObject:
@@ -6595,5 +6595,5 @@ HingeJoint2D:
     m_MaximumMotorForce: 10000
   m_UseLimits: 1
   m_AngleLimits:
-    m_LowerAngle: -5
-    m_UpperAngle: 20
+    m_LowerAngle: -10
+    m_UpperAngle: 25

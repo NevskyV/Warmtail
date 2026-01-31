@@ -12,14 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caeabc256b50eac4e8463480d9fa9d4d, type: 3}
   m_Name: TESTFEAR
   m_EditorClassIdentifier: Assembly-CSharp::Data.FearConfig
-  _id: 0
-  _name: 
-  _description: 
-  _icon: {fileID: 0}
+  _id: 1
+  _name: dddd
+  _description: dddd
+  _icon: {fileID: 8382853518990110353, guid: cb276a3e7e18b2146bd1c2f22f8e68b4, type: 3}
   _buff:
-    rid: -2
+    rid: 676710542460059731
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
+    - rid: 676710542460059731
+      type: {class: OldAgeFear, ns: Systems.Fears, asm: Assembly-CSharp}
+      data:
+        _warmthConsumptionMultiplier: 0.5
+        _speedMultiplier: 2
