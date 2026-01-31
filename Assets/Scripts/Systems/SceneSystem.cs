@@ -58,8 +58,8 @@ namespace Systems
         {
             var pos = new List<Vector2>();
             var systemPos = _globalData.Get<SavablePlayerData>().RespawnPositions;
+
             foreach (var p in systemPos) {
-                Debug.Log(p);
                 pos.Add(p.ToUnity());
             }
 
