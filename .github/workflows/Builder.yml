@@ -1,7 +1,8 @@
 name: Builder
 
 on:
-  workflow_dispatch:
+  push: 
+    branches: "main"
 
 concurrency:
   group: release

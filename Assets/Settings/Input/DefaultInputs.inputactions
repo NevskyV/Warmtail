@@ -7,7 +7,7 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
-                    "name": "LeftMouse",
+                    "name": "ActivateAbilities",
                     "type": "Button",
                     "id": "a95a3bd7-5cdd-4156-871a-b55797c40010",
                     "expectedControlType": "",
@@ -16,7 +16,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightMouse",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "89d49ba1-bd83-4d42-9795-5692bd1841d2",
                     "expectedControlType": "",
@@ -25,9 +25,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "MiddleMouse",
+                    "name": "ConfirmAbility",
                     "type": "Button",
                     "id": "cfb211fa-1819-44ce-8eea-0e2026a3ef48",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Building",
+                    "type": "Button",
+                    "id": "59475187-3e98-4ca8-af8b-9a9dea7c20fb",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -41,15 +50,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "E",
-                    "type": "Button",
-                    "id": "945536ba-a6de-49db-9235-cb0bd8c7a32d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 },
                 {
                     "name": "1",
@@ -123,7 +123,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "LeftMouse",
+                    "action": "ActivateAbilities",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -134,7 +134,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "LeftMouse",
+                    "action": "ActivateAbilities",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5a89d00d-ba50-4e8e-b117-3b53c54f99f6",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "ActivateAbilities",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -145,7 +156,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "RightMouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -156,7 +167,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "RightMouse",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -168,17 +179,6 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Escape",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7c1435bf-0105-4293-852c-0bda92099cf9",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "E",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -409,18 +409,40 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
-                    "action": "MiddleMouse",
+                    "action": "ConfirmAbility",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "ac26fd04-3e61-4496-a848-4f574e5e3e9e",
-                    "path": "<Gamepad>/buttonSouth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
-                    "action": "MiddleMouse",
+                    "action": "ConfirmAbility",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c8c7678-e9e6-403f-ae9d-38e84f7edcd4",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Building",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12df9958-feeb-4282-8a48-ab3eccd2b7a2",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Building",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

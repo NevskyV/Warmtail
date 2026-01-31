@@ -12,7 +12,6 @@ using Zenject;
 using Systems.Abilities;
 using Systems.Environment;
 using Systems.Swarm;
-using Systems.Fears;
 using Unity.Cinemachine;
 
 namespace Entities.Core
@@ -57,7 +56,6 @@ namespace Entities.Core
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<PlayerDataProvider>().FromNew().AsSingle();
-            Container.Bind<FearSystem>().FromNew().AsSingle();
             
             Container.BindInterfacesAndSelfTo<DashAbility>().FromInstance(_playerConfig.Abilities
                 .OfType<DashAbility>().First()).AsSingle();

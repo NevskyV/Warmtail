@@ -4,12 +4,15 @@ using System.Linq;
 using Data;
 using Data.Player;
 using DG.Tweening;
+using EasyTextEffects;
 using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 using Entities.Localization;
+using Entities.UI.SDF;
 using Systems.Abilities;
 using TMPro;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using Zenject;
 
@@ -59,6 +62,8 @@ namespace Entities.UI
         [SerializeField] private Transform _mainObject;
         [SerializeField] private Button _confirmButton;
         [SerializeField] private NewAbilityUI _newAbilityUI; 
+        [Title("Hints")] 
+        [SerializeField] private GameObject[] _hints;
         
         private List<WarmthAbility> _warmthAbilities;
         private PlayerConfig _playerConfig;
@@ -84,7 +89,7 @@ namespace Entities.UI
             _confirmButton.onClick.AddListener(() => ShowAbilities());
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             _abilitiesSystem.OnSelect -= SelectAbility;
             _abilitiesSystem.OnConfirm -= ConfirmAbility;
@@ -94,17 +99,19 @@ namespace Entities.UI
 
             foreach (var image in _images)
             {
-                var parent = image.transform.parent.GetComponent<Image>();
-                parent.material.SetFloat("_OutlineThickness",0);
-                parent.material.SetFloat("_InOutlineThickness",0);
-                parent.material.SetFloat("_InlineThickness",0);
-                parent.material.SetFloat("_WaveAmplitude",0);
-                parent.material.SetFloat("_Alpha",1);
+                var parent = image.transform.parent.GetComponent<SdfGroup>();
+                parent.InstanceMaterial.SetFloat("_OutlineThickness",0);
+                parent.InstanceMaterial.SetFloat("_InOutlineThickness",0);
+                parent.InstanceMaterial.SetFloat("_InlineThickness",0);
+                parent.InstanceMaterial.SetFloat("_WaveAmplitude",0);
+                parent.InstanceMaterial.SetFloat("_Alpha",1);
             }
         }
 
         private void ShowAbilities(bool show = true)
         {
+            _hints.ForEach(x => x.SetActive(false));
+            
             _confirmButton.interactable = false;
             _mainObject.DOLocalMoveY(-300, 2f);
             _confirmButton.transform.parent.DOLocalMoveY(-300, 1.5f);
@@ -166,7 +173,7 @@ namespace Entities.UI
         private void ConfirmAbility(int index)
         {
             var rect = _rhombuses[index].GetComponent<RectTransform>();
-            bool notConfirmed = rect.sizeDelta == new Vector2(_defaultRhombusSize, _defaultRhombusSize);
+            bool notConfirmed = !_rhombuses[index].gameObject.activeSelf;
             var targetSize = notConfirmed ? _confirmedRhombusSize : _defaultRhombusSize;
             var confirmedRhombusSize = rect.sizeDelta.x;
             
@@ -182,12 +189,12 @@ namespace Entities.UI
                 }
             }, targetSize, 0.5f);
             
-            var confirmedParent = _images[index].transform.parent.GetComponent<Image>();
+            var confirmedParent = _images[index].transform.parent.GetComponent<SdfGroup>();
             
-            var confirmedInlineWidth = confirmedParent.material.GetFloat("_InlineThickness");
+            var confirmedInlineWidth = confirmedParent.InstanceMaterial.GetFloat("_InlineThickness");
             DOTween.To(() => confirmedInlineWidth, x =>{
                 confirmedInlineWidth = x;
-                confirmedParent.material.SetFloat("_InlineThickness", x);
+                confirmedParent.InstanceMaterial.SetFloat("_InlineThickness", x);
             }, notConfirmed? _confirmedInWidth : _defaultInWidth, 0.5f);
         }
 
@@ -195,23 +202,22 @@ namespace Entities.UI
         {
             for (int i = 0; i < _images.Length; i++)
             {
+                var parent = _images[i].transform.parent.GetComponent<SdfGroup>();
                 if (!warmthAbilities.Contains(i))
                 {
-                    var parent = _images[i].transform.parent.GetComponent<Image>();
-                    var opacity = parent.material.GetFloat("_Alpha");
+                    var opacity = parent.InstanceMaterial.GetFloat("_Alpha");
                     DOTween.To(() => opacity, x =>{
                         opacity = x;
-                        parent.material.SetFloat("_Alpha", x);
+                        parent.InstanceMaterial.SetFloat("_Alpha", x);
                     }, _activeOpacity, 0.5f);
                     CreateOutline(i, false);
                 }
                 else
                 {
-                    var parent = _images[i].transform.parent.GetComponent<Image>();
-                    var amplitude = parent.material.GetFloat("_WaveAmplitude");
+                    var amplitude = parent.InstanceMaterial.GetFloat("_WaveAmplitude");
                     DOTween.To(() => amplitude, x =>{
                         amplitude = x;
-                        parent.material.SetFloat("_WaveAmplitude", x);
+                        parent.InstanceMaterial.SetFloat("_WaveAmplitude", x);
                     }, _activeAmplitude, 0.5f);
                     CreateOutline(i, true);
                 }
@@ -220,46 +226,46 @@ namespace Entities.UI
         
         private void StopCast(List<int> warmthAbilities)
         {
-            foreach (var i in warmthAbilities)
-            {
-                var parent = _images[i].transform.parent.GetComponent<Image>();
-                var amplitude = parent.material.GetFloat("_WaveAmplitude");
-                DOTween.To(() => amplitude, x =>{
-                    amplitude = x;
-                    parent.material.SetFloat("_WaveAmplitude", x);
-                }, _defaultAmplitude, 0.5f);
-            }
-
             for (int i = 0; i < _images.Length; i++)
             {
+                var parent = _images[i].transform.parent.GetComponent<SdfGroup>();
                 if (!warmthAbilities.Contains(i))
                 {
-                    var parent = _images[i].transform.parent.GetComponent<Image>();
-                    var opacity = parent.material.GetFloat("_Alpha");
+                    var opacity = parent.InstanceMaterial.GetFloat("_Alpha");
                     DOTween.To(() => opacity, x =>{
                         opacity = x;
-                        parent.material.SetFloat("_Alpha", x);
+                        parent.InstanceMaterial.SetFloat("_Alpha", x);
                     }, _defaultOpacity, 0.5f);
+                }
+                else
+                {
+                    var amplitude = parent.InstanceMaterial.GetFloat("_WaveAmplitude");
+                    DOTween.To(() => amplitude, x =>{
+                        amplitude = x;
+                        parent.InstanceMaterial.SetFloat("_WaveAmplitude", x);
+                    }, _defaultAmplitude, 0.5f);
                 }
             }
         }
 
         private void CreateOutline(int index, bool selected)
         {
-            var selectedParent = _images[index].transform.parent.GetComponent<Image>();
+            var selectedParent = _images[index].transform.parent.GetComponent<SdfGroup>();
             
-            DOTween.To(() => selectedParent.material.GetFloat("_OutlineThickness"), x =>{
-                selectedParent.material.SetFloat("_OutlineThickness", x);
+            DOTween.To(() => selectedParent.InstanceMaterial.GetFloat("_OutlineThickness"), x =>{
+                selectedParent.InstanceMaterial.SetFloat("_OutlineThickness", x);
             }, selected? _selectedOutWidth : _defaultOutWidth, 0.5f);
             
-            DOTween.To(() => selectedParent.material.GetFloat("_InOutlineThickness"), x =>{
-                selectedParent.material.SetFloat("_InOutlineThickness", x);
+            DOTween.To(() => selectedParent.InstanceMaterial.GetFloat("_InOutlineThickness"), x =>{
+                selectedParent.InstanceMaterial.SetFloat("_InOutlineThickness", x);
             }, selected? _selectedInOutWidth : _defaultInOutWidth, 0.5f);
-            selectedParent.SetMaterialDirty();
+            selectedParent.transform.parent.GetComponent<Image>().SetMaterialDirty();
         }
         
         private void AddAbility(int index)
         {
+            _hints[index].SetActive(true);
+            
             var config = _abilitiesConfigs.Find(x => GetAbilityType(x.Type) == _warmthAbilities[index].GetType());
             _newAbilityUI.Icon.sprite = config.Sprite;
             _newAbilityUI.Name.SetNewKey(config.Name);
@@ -267,6 +273,9 @@ namespace Entities.UI
             _mainObject.DOLocalMoveY(240, 2f);
             _confirmButton.transform.parent.DOLocalMoveY(560, 1.5f);
             _confirmButton.interactable = true;
+            EventSystem.current.SetSelectedGameObject(_confirmButton.gameObject);
+            
+            _newAbilityUI.Name.GetComponent<TextEffect>().Refresh();
             HideAbilities();
         }
 

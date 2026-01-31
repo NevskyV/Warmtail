@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6179612543917586377}
   - component: {fileID: 5687884743783684438}
   - component: {fileID: 3943332535916492101}
+  - component: {fileID: -3385618914681778999}
   m_Layer: 0
   m_Name: Physics Wall
   m_TagString: Untagged
@@ -152,3 +153,56 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 11.68, y: 5.49}
   m_EdgeRadius: 0
+--- !u!114 &-3385618914681778999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061714740885153473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.ShadowCaster2D
+  m_ShadowGroup: 0
+  m_Priority: 0
+  m_ComponentVersion: 5
+  m_HasRenderer: 0
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_AlphaCutoff: 0.1
+  m_ApplyToSortingLayers: 00000000911d778ae72eaef4
+  m_ShapePath:
+  - {x: -5.775818, y: -6.28331, z: 0}
+  - {x: -5.775818, y: 6.28331, z: 0}
+  - {x: 5.775818, y: 6.28331, z: 0}
+  - {x: 5.775818, y: -6.28331, z: 0}
+  m_ShapePathHash: 0
+  m_InstanceId: 0
+  m_ShadowShape2DComponent: {fileID: 6179612543917586377}
+  m_ShadowShape2DProvider:
+    rid: 4061569111218192472
+  m_ShadowCastingSource: 2
+  m_ShadowMesh:
+    m_Mesh: {fileID: 0}
+    m_LocalBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 5.73999, y: 2.644989, z: 0}
+    m_EdgeProcessing: 1
+    m_TrimEdge: 0.1
+    m_FlipX: 0
+    m_FlipY: 0
+    m_InitialTrim: 0.1
+  m_CastingOption: 1
+  m_PreviousTrimEdge: 0
+  m_PreviousEdgeProcessing: -1
+  m_PreviousShadowCastingSource: -1
+  m_PreviousShadowShape2DSource: {fileID: 0}
+  references:
+    version: 2
+    RefIds:
+    - rid: 4061569111218192472
+      type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data: 

@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Threading;
+using DG.Tweening;
 using Entities.PlayerScripts;
 using UnityEngine;
 using Zenject;
@@ -10,56 +10,41 @@ namespace Entities.UI
     {
         private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
         [SerializeField] private Material _freezeMaterial;
-        [SerializeField] private float _freezeRate = 0.2f;
-        private float _currentFreeze;
+        [SerializeField] private float _freezeTime = 10f;
         private CancellationTokenSource _token;
         private bool _isFreezing;
+        private string _lastObjId;
         [Inject] private PlayerStateController _stateController;
         [Inject] private UIStateSystem _uiStateSystem;
         
-        public IEnumerator StartDrain()
+        public async void StartDrain(string objId)
         {
-            if(_isFreezing || _uiStateSystem.CurrentState == UIState.Pause) yield break;
-            _isFreezing = true;
-            _freezeMaterial.SetFloat(DissolveAmount, 1 - _currentFreeze);
-            var counter = 0f;
+            if (_lastObjId == objId || _isFreezing || _uiStateSystem.CurrentState == UIState.Pause) return;
+            _token?.Cancel();
+            _token = new CancellationTokenSource();
+            _lastObjId = objId;
             
-            while (_currentFreeze < 1)
-            {
-                yield return new WaitForSeconds(0.2f);
-                if (_uiStateSystem.CurrentState != UIState.Pause)
-                {
-                    _currentFreeze = Mathf.Pow(10, counter) / 10;
-                    _freezeMaterial.SetFloat(DissolveAmount, 1 - _currentFreeze);
+            _isFreezing = true;
 
-                    counter += _freezeRate;
-                    Debug.Log("Drain");
-                }
-            }
-            _currentFreeze = 0;
-            _freezeMaterial.SetFloat(DissolveAmount, 1);
+            var task =  _freezeMaterial.DOFloat(0, DissolveAmount, _freezeTime).AsyncWaitForCompletion();
+            await task;
+            if (_freezeMaterial.GetFloat(DissolveAmount) > 0) return;
             _stateController.Die();
+            _freezeMaterial.SetFloat(DissolveAmount, 1);
         }
         
-        public IEnumerator StopDrain()
+        public async void StopDrain(string objId)
         {
+            if(_lastObjId != objId) return;
+            _token?.Cancel();
+            _token = new CancellationTokenSource();
+            _lastObjId = null;
             _isFreezing = false;
-            Debug.Log("Stop Drain");
-            while (_currentFreeze > 0)
-            {
-                yield return new WaitForSeconds(0.2f);
-                _currentFreeze -= _freezeRate;
-                _freezeMaterial.SetFloat(DissolveAmount, 1 - _currentFreeze);
-            }
-
-            _currentFreeze = 0;
-            _freezeMaterial.SetFloat(DissolveAmount, 1 - _currentFreeze);
-            Debug.Log("Freeze = 0");
+            _freezeMaterial.DOFloat(1, DissolveAmount, _freezeTime + 3);
         }
         
         private void OnDisable()
         {
-            _currentFreeze = 0;
             _freezeMaterial.SetFloat(DissolveAmount, 1);
         }
     }
