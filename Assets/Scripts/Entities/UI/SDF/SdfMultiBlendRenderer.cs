@@ -47,7 +47,7 @@ namespace Entities.UI.SDF
                 }
 
                 RectTransform parentRect = GetComponent<RectTransform>();
-                Vector2 parentSize = parentRect ? parentRect.sizeDelta : Vector2.one;
+                Vector2 parentSize = parentRect ? parentRect.rect.size : Vector2.one;
 
                 foreach (SdfFigure figure in group.Figures)
                 {
@@ -60,7 +60,7 @@ namespace Entities.UI.SDF
                         Type = (int)figure.Type,
                         Position = normalizedPos,
                         Rotation = figure.transform.localEulerAngles.z * Mathf.Deg2Rad,
-                        Size = figure.GetComponent<RectTransform>().sizeDelta / parentRect.sizeDelta / 2,
+                        Size = figure.GetComponent<RectTransform>().rect.size / parentRect.rect.size / 2,
                         ParamsA = figure.ShapeData.ParamsA,
                         ParamsB = figure.ShapeData.ParamsB,
                         GroupIndex = groupIndex

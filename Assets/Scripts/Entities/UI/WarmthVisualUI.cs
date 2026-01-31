@@ -13,7 +13,7 @@ namespace Entities.UI
     {
         [Title("UI Elements")]
         [SerializeField] private SdfFigure _arcFigure;
-        [SerializeField] private float _maxValue = 6.3f;
+        [SerializeField] private float _maxValue = 2.7f;
         [SerializeField] private float _smoothing = 0.5f;
 
         private GlobalData _globalData;

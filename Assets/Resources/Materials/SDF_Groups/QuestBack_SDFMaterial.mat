@@ -23,7 +23,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _FillColor
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -54,14 +54,14 @@ Material:
     - _CornerRounding: 0.15
     - _INTERSECTION: 0
     - _InOutlineThickness: 3
-    - _InlineThickness: 0.01
+    - _InlineThickness: 0.015
     - _NOISETYPE: 0
     - _NoiseScale: 10
     - _NoiseSpeed: 0.1
-    - _OutlineThickness: 0.005
+    - _OutlineThickness: 0.007
     - _Radius: 0.35
     - _SHAPE: 0
-    - _Smoothness: 0.01
+    - _Smoothness: 0.03
     - _Stencil: 0
     - _StencilComp: 8
     - _StencilOp: 0
@@ -76,9 +76,9 @@ Material:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.4547168, b: 0.4547168, a: 1}
     - _Corners: {r: 0, g: 0, b: 0, a: 0}
-    - _FillColor: {r: 0.64716977, g: 1, b: 0.9369946, a: 1}
-    - _InlineColor: {r: 0.19050209, g: 0.74469, b: 0.7490196, a: 1}
-    - _OutlineColor: {r: 0.007843138, g: 0.3019608, b: 0.3764706, a: 1}
+    - _FillColor: {r: 0.7764706, g: 0.80126375, b: 0.89411765, a: 1}
+    - _InlineColor: {r: 0.19607843, g: 0.3495191, b: 0.50980395, a: 1}
+    - _OutlineColor: {r: 0.058823537, g: 0.17488565, b: 0.39607844, a: 1}
     - _Size: {r: 0.2, g: 0.25, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
