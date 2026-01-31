@@ -1,29 +1,26 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.UI;
 
 namespace Entities.UI.SDF
 { 
     [ExecuteAlways]
     public class SdfGlobalBlendManager : MonoBehaviour
     {
-        private List<SdfGroup> _groups = new List<SdfGroup>();
+        [SerializeField] private List<SdfGroup> _groups = new List<SdfGroup>();
         [SerializeField] private float _groupSmoothness = 0.1f;
         [SerializeField] private int _interGroupType = 0;
 
         private ComputeBuffer _shapeBuffer;
         private ComputeBuffer _propBuffer;
-        private Image _image;
 
         private void OnEnable()
         {
-            if (!TryGetComponent(out _image))
-            {
-                _image = gameObject.AddComponent<Image>();
-            } 
-            if (!_image.material && _groups.Count >0&& _groups[0].InstanceMaterial) _image.material = _groups[0].InstanceMaterial;
+            UpdateAll();
+        }
+
+        private void OnValidate()
+        {
+            UpdateAll();
         }
 
         private void Update()
@@ -33,21 +30,20 @@ namespace Entities.UI.SDF
 
         private void UpdateAll()
         {
-            _groups = GetComponentsInChildren<SdfGroup>().ToList();
             List<ShapeData> allShapes = new List<ShapeData>();
             List<GroupProperty> allProps = new List<GroupProperty>();
 
             int groupIndex = 0;
             foreach (SdfGroup group in _groups)
             {
-                if (!group || !group.gameObject.activeInHierarchy || !group.InstanceMaterial) 
+                if (!group || !group.gameObject.activeSelf || group.InstanceMaterial == null) 
                 {
                     groupIndex++;
                     continue;
                 }
 
-                RectTransform parentRect = GetComponent<RectTransform>();
-                Vector2 parentSize = parentRect ? parentRect.rect.size : Vector2.one;
+                RectTransform parentRect = group.GetComponent<RectTransform>();
+                Vector2 parentSize = parentRect ? parentRect.sizeDelta : Vector2.one;
 
                 foreach (SdfFigure figure in group.Figures)
                 {
@@ -60,7 +56,7 @@ namespace Entities.UI.SDF
                         Type = (int)figure.Type,
                         Position = normalizedPos,
                         Rotation = figure.transform.localEulerAngles.z * Mathf.Deg2Rad,
-                        Size = figure.GetComponent<RectTransform>().rect.size / parentRect.rect.size / 2,
+                        Size = figure.GetComponent<RectTransform>().sizeDelta / parentRect.sizeDelta / 2,
                         ParamsA = figure.ShapeData.ParamsA,
                         ParamsB = figure.ShapeData.ParamsB,
                         GroupIndex = groupIndex
@@ -92,10 +88,10 @@ namespace Entities.UI.SDF
             UpdateShapeBuffer(allShapes);
             UpdatePropBuffer(allProps);
 
-            groupIndex = 0;
+            groupIndex = 1;
             foreach (SdfGroup group in _groups)
             {
-                if (!group || !group.gameObject.activeInHierarchy || !group.InstanceMaterial) 
+                if (!group || !group.InstanceMaterial) 
                 {
                     groupIndex++;
                     continue;

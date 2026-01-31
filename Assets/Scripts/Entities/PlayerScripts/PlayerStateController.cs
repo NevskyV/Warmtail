@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
@@ -55,7 +54,7 @@ namespace Entities.PlayerScripts
             _player.Animator.enabled = true;
             _player.Animator.SetBool(IsSleeping, false);
             
-            await UniTask.Delay(TimeSpan.FromSeconds(_player.Animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.1f));
+            await UniTask.Delay(3000);
             
             _input.SwitchCurrentActionMap("Player");
             

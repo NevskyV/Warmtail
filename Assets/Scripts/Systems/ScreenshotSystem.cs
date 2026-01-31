@@ -8,83 +8,60 @@ namespace Systems
 {
     public class ScreenshotSystem : IDisposable
     {
-        private readonly string _rootFolderPath;
+        private readonly string _folderPath;
         private CancellationTokenSource _cts;
         public Action<bool> ScreenShotState = null;
-
+        
         public ScreenshotSystem()
         {
             _cts = new CancellationTokenSource();
-            _rootFolderPath = Path.Combine(Application.persistentDataPath, "Screenshots");
+            _folderPath = Application.persistentDataPath + "/Screenshots";
+            if (!Directory.Exists(_folderPath))
+            {
+                Directory.CreateDirectory(_folderPath);
+                Directory.CreateDirectory(_folderPath + "/User");
+                Directory.CreateDirectory(_folderPath + "/Temp");
+            }
         }
-
+        
         public async void TakeScreenShot(ScreenshotType type)
         {
             var fileName = $"Screenshot_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.png";
-            
-            var typeFolderPath = Path.Combine(_rootFolderPath, type.ToString());
-            
-            if (!Directory.Exists(typeFolderPath))
-            {
-                Directory.CreateDirectory(typeFolderPath);
-            }
-            
-            var fullFilePath = Path.Combine(typeFolderPath, fileName);
-
             ScreenShotState?.Invoke(false);
             await UniTask.WaitForEndOfFrame();
-            
-            ScreenCapture.CaptureScreenshot(fullFilePath);
-
+            ScreenCapture.CaptureScreenshot($"{_folderPath}/{type}/{fileName}");
             await UniTask.WaitForEndOfFrame();
             ScreenShotState?.Invoke(true);
-
-            Debug.Log($"Take {type} screenshot saved to: {fullFilePath}");
+            Debug.Log($"Take {type} screenshot");
         }
 
         public void Dispose()
         {
-            var tempDir = Path.Combine(_rootFolderPath, ScreenshotType.Temp.ToString());
-
+            var tempDir = $"{_folderPath}/Temp";
             if (Directory.Exists(tempDir))
             {
-                try
+                foreach (var file in Directory.GetFiles(tempDir))
                 {
-                    foreach (var file in Directory.GetFiles(tempDir))
-                    {
-                        File.Delete(file);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.LogWarning($"Could not cleanup temp screenshots: {e.Message}");
+                    File.Delete(file);
                 }
             }
-
-            DisableAutoScreenshot();
         }
 
         public async UniTaskVoid EnableAutoScreenshot()
         {
-            if (_cts != null) _cts.Dispose();
             _cts = new CancellationTokenSource();
-
             while (_cts.IsCancellationRequested == false)
             {
-                await UniTask.WaitForSeconds(100, cancellationToken: _cts.Token);
+                await UniTask.WaitForSeconds(120, cancellationToken: _cts.Token);
                 TakeScreenShot(ScreenshotType.Temp);
             }
         }
 
         public void DisableAutoScreenshot()
         {
-            if (_cts != null)
-            {
-                _cts.Cancel();
-                _cts.Dispose();
-                _cts = null;
-            }
+            if(_cts != null) _cts.Cancel();
         }
     }
+    
     public enum ScreenshotType {User, Temp}
 }

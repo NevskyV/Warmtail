@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3011162131326482961}
   - component: {fileID: 8672401423464370930}
   - component: {fileID: 8975289944093716961}
-  - component: {fileID: -131300980783543666}
+  - component: {fileID: 581186339163968329}
   m_Layer: 0
   m_Name: Breakable
   m_TagString: Untagged
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_WorldSpaceUV: 0
   m_CornerAngleThreshold: 30
   m_ColliderDetail: 16
-  m_ColliderOffset: 0
+  m_ColliderOffset: 0.355
   m_UpdateCollider: 1
   m_EnableTangents: 0
   m_GeometryCached: 0
@@ -165,8 +165,8 @@ MonoBehaviour:
   - {x: 3.3248258, y: 0.05230069}
   - {x: 3.7721255, y: -0.1473167}
   m_ShadowSegment: []
---- !u!68 &-131300980783543666
-EdgeCollider2D:
+--- !u!60 &581186339163968329
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -200,11 +200,26 @@ EdgeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 1
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Points:
-  - {x: -3.1228347, y: -0.031342626}
-  - {x: 3.8935895, y: -0.031342626}
-  m_AdjacentStartPoint: {x: 0, y: 0}
-  m_AdjacentEndPoint: {x: 0, y: 0}
-  m_UseAdjacentStartPoint: 0
-  m_UseAdjacentEndPoint: 0
+    m_Paths:
+    - - {x: -2.9079962, y: 1.34971}
+      - {x: -0.697904, y: 1.0775871}
+      - {x: 0.12913893, y: 0.96166086}
+      - {x: 0.53702384, y: 0.8937679}
+      - {x: 0.9327663, y: 0.81773627}
+      - {x: 1.7080739, y: 0.6307236}
+      - {x: 2.0969675, y: 0.5148858}
+      - {x: 2.492786, y: 0.38123277}
+      - {x: 2.9003458, y: 0.2277194}
+      - {x: 3.3248258, y: 0.05230069}
+      - {x: 3.7721255, y: -0.1473167}
+  m_UseDelaunayMesh: 1

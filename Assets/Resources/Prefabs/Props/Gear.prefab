@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3367387905130754105}
   - component: {fileID: 4644494243135170636}
+  - component: {fileID: 8781006117168163047}
   - component: {fileID: 3717330728968803211}
-  - component: {fileID: 5115051477864116294}
   m_Layer: 0
   m_Name: Gear
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 9143868440440847147, guid: 7c5c126a462b8334096cba02be062fcd, type: 3}
+  m_Sprite: {fileID: -3422382358654288852, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,27 +93,8 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &3717330728968803211
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1208525669164743076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27dbbac399bd27948b58561ceb02c3c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Gear
-  _warmFactor: 0.5
-  _warmEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  _spriteRenderer: {fileID: 4644494243135170636}
-  _twistingSprite: {fileID: -5214183216297019944, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}
-  _untwistSprite: {fileID: -3422382358654288852, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}
---- !u!58 &5115051477864116294
-CircleCollider2D:
+--- !u!61 &8781006117168163047
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -147,4 +128,33 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 1.184
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.505, y: 0.52}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
+--- !u!114 &3717330728968803211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1208525669164743076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27dbbac399bd27948b58561ceb02c3c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Gear
+  _warmFactor: 0.5
+  _warmEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _spriteRenderer: {fileID: 4644494243135170636}
+  _twistingSprite: {fileID: -5214183216297019944, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}
+  _untwistSprite: {fileID: -3422382358654288852, guid: 10fdda4874498ff4292c99851bc4ae7d, type: 3}

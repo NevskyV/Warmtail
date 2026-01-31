@@ -3,6 +3,7 @@ using Entities.PlayerScripts;
 using Entities.Sound;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Systems.AbilitiesVisual
@@ -11,6 +12,7 @@ namespace Systems.AbilitiesVisual
     {
         private static readonly int OpacityMax = Shader.PropertyToID("_Opacity");
         [field: SerializeReference] public int AbilityIndex {get; set;}
+        [field: SerializeReference] public Sprite Icon { get;  set;}
         [SerializeField] private Material _warmthMaterial;
         [SerializeField, Range(0, 1f)] private float _opacityNotUsing;
         [SerializeField, Range(0, 1f)] private float _opacityUsing;

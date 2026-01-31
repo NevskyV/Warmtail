@@ -4,6 +4,7 @@ using System;
 using System.Globalization;
 using Data;
 using Data.Player;
+using Newtonsoft.Json.Linq;
 using UnityEngine.Networking;
 
 namespace Systems
@@ -16,51 +17,39 @@ namespace Systems
 
         public void Initialize()
         {
-            CheckTime();
+            //CheckTime();
         }
 
         public async void CheckTime()
         {
-            DateTime timeNow = DateTime.UtcNow;
-
-            if (Application.internetReachability != NetworkReachability.NotReachable)
+            Debug.Log("Send time request"); 
+            string url = "https://worldtimeapi.org/api/timezone/Etc/UTC";
+            DateTime timeNow = DateTime.UtcNow.AddHours(3);
+            using (UnityWebRequest request = UnityWebRequest.Get(url))
             {
-                using (UnityWebRequest request = UnityWebRequest.Head("https://www.google.com"))
+                await request.SendWebRequest();
+            
+                if (request.result == UnityWebRequest.Result.Success)
                 {
-                    try
-                    {
-                        await request.SendWebRequest();
-
-                        if (request.result == UnityWebRequest.Result.Success)
-                        {
-                            string dateHeader = request.GetResponseHeader("Date");
-                            if (!string.IsNullOrEmpty(dateHeader) && DateTime.TryParse(dateHeader, out DateTime netTime))
-                            {
-                                Debug.Log("Global time");
-                                timeNow = netTime.ToUniversalTime();
-                            }
-                        }
-                    }
-                    catch
-                    {
-                    }
+                    string json = request.downloadHandler.text;
+                    JObject timeData = JObject.Parse(json);
+                    long unixTime = (long)timeData["unixtime"];
+                    timeNow = DateTimeOffset.FromUnixTimeSeconds(unixTime).UtcDateTime.AddHours(3);
+                
+                    Debug.Log("Глобальное UTC время: " + timeNow); 
+                }
+                else
+                {
+                    Debug.LogError("Ошибка запроса: " + request.error);
                 }
             }
-            Debug.Log(timeNow);
+            
             string timeLastGameStr = _globalData.Get<SavablePlayerData>().TimeLastGame;
-            DateTime timeLastGame = DateTime.MinValue;
-
-            if (!string.IsNullOrEmpty(timeLastGameStr))
-            {
-                DateTime.TryParse(timeLastGameStr, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out timeLastGame);
-            }
-
+            DateTime timeLastGame = new (2000, 1, 1, 0, 0, 0, 0);
+            if (!string.IsNullOrEmpty(timeLastGameStr)) timeLastGame = DateTime.Parse(timeLastGameStr);
+            
             _globalData.Edit<SavablePlayerData>(data => data.TimeLastGame = timeNow.ToString(CultureInfo.InvariantCulture));
-
-            DateTime adjustedNow = timeNow.AddHours(-3);
-            DateTime adjustedLast = timeLastGame != DateTime.MinValue ? timeLastGame.AddHours(-3) : timeLastGame;
-
-            if (adjustedNow.Date > adjustedLast.Date)
+            if (timeLastGame.Day != timeNow.Day || timeLastGame.Month != timeNow.Month || timeLastGame.Year != timeNow.Year)
                 OnDiscardedResources?.Invoke();
             else
                 OnLoadedResources?.Invoke();

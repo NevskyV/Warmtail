@@ -3,7 +3,6 @@ using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Entities.PlayerScripts;
-using Entities.Props;
 using Interfaces;
 using UniRx;
 using UnityEngine;
@@ -30,7 +29,6 @@ namespace Systems.Abilities
         private PlayerInput _playerInput;
         private GamepadRumble  _rumble;
         private AbilityTriggerZone<IInteractable> _triggerZone;
-        private AbilityTriggerZone<Ice> _iceTriggerZone;
         private CompositeDisposable _disposables = new();
     
         [Inject]
@@ -41,21 +39,17 @@ namespace Systems.Abilities
             _playerInput = playerInput;
             _rumble = gamepadRumble;
             
-            _triggerZone = GetOrCreateTriggerZone<IInteractable>(player, "InteractionTrigger", _interactionRadius);
-            _iceTriggerZone = GetOrCreateTriggerZone<Ice>(player, "IceTrigger", _interactionRadius);
-            
+            _triggerZone = GetOrCreateTriggerZone(player, "InteractionTrigger", _interactionRadius);
             _triggerZone.Wake();
             _triggerZone.OnObjectEnter.Subscribe(ObjectEnter);
             _triggerZone.OnObjectExit.Subscribe(ObjectExit);
-            
-            _iceTriggerZone.Wake();
-            _iceTriggerZone.OnObjectEnter.Subscribe(x => x.TriggerEnter2D());
-            _iceTriggerZone.OnObjectExit.Subscribe(x => x.TriggerExit2D());
-            
-            _playerInput.actions["Interact"].performed += Interact;
+        
+            _playerInput.actions["LeftMouse"].started += _ => StartAbility?.Invoke();
+            _playerInput.actions["LeftMouse"].performed += Interact;
+            _playerInput.actions["LeftMouse"].canceled += _ => EndAbility?.Invoke();
         }
     
-        private AbilityTriggerZone<T> GetOrCreateTriggerZone<T>(Player player, string name, float radius) where T : class
+        private AbilityTriggerZone<IInteractable> GetOrCreateTriggerZone(Player player, string name, float radius)
         {
             var triggerObj = player.Rigidbody.transform.Find(name)?.gameObject;
             if (triggerObj == null)
@@ -65,7 +59,7 @@ namespace Systems.Abilities
                 triggerObj.transform.localPosition = Vector3.zero;
             }
             
-            return new AbilityTriggerZone<T>(triggerObj, radius);
+            return new AbilityTriggerZone<IInteractable>(triggerObj, radius);
         }
     
         public void Interact(InputAction.CallbackContext context)
@@ -101,7 +95,7 @@ namespace Systems.Abilities
     
         public void Dispose()
         {
-            _playerInput.actions["Interact"].performed -= Interact;
+            _playerInput.actions["LeftMouse"].performed -= Interact;
             _disposables?.Dispose();
         }
 
@@ -125,8 +119,6 @@ namespace Systems.Abilities
                 propertyBlock.SetFloat(InnerOutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 1.5f, 0.5f);
-
-            StartAbility?.Invoke();
         }
         
         private void ObjectExit(IInteractable interactable)
@@ -149,11 +141,6 @@ namespace Systems.Abilities
                 propertyBlock.SetFloat(InnerOutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 0f, 0.5f);
-
-            if (_triggerZone.ObjectsInRange.Count == 0)
-            {
-                EndAbility?.Invoke();
-            }
         }
     }
 }

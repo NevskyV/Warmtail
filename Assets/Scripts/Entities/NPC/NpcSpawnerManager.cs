@@ -11,7 +11,7 @@ namespace Entities.NPC
 {
     public class NpcSpawnerManager : MonoBehaviour
     {
-        public SerializedDictionary<Character, List<GameObject>> NpcSpawner = new();
+        public SerializedDictionary<Character, List<GameObject>> NpcSpawner;
         [Inject] private GlobalData _globalData;
         [SerializeField] private Transform[] _parentNpc;
 
@@ -31,8 +31,7 @@ namespace Entities.NPC
         {
             foreach (var auto in _globalData.Get<NpcSpawnData>().NpcSpawnerData)
             {
-                if(NpcSpawner[(Character)auto.Key] != null && NpcSpawner[(Character)auto.Key][auto.Value])
-                    NpcSpawner[(Character)auto.Key][auto.Value].SetActive(true);
+                NpcSpawner[(Character)auto.Key][auto.Value].SetActive(true);
             }
         }
         private void DiscardNpc()

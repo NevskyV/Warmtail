@@ -50,8 +50,6 @@ namespace Systems
                 {
                     data.Sequence[i].Actions.ForEach(x => x.Invoke());
                 }
-
-                TryIterateSequence(data, questState[0]);
             }
             else if (data.QuestType == QuestType.Parallel)
             {
@@ -71,7 +69,6 @@ namespace Systems
                 foreach (int i in questState)
                 {
                     data.Sequence[i].Actions.ForEach(x => x.Invoke());
-                    TryIterateSequence(data, i);
                 }
             }
 

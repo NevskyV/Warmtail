@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using TriInspector;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Entities.UI.SDF
 {
@@ -10,15 +10,24 @@ namespace Entities.UI.SDF
         [Header("Shader Settings")] [SerializeField]
         private Material _baseMaterial;
 
-        [SerializeField] private Material _instanceMaterial;
+        private Material _instanceMaterial;
         private List<SdfFigure> _figures = new();
-
+        private Image _image;
+        private RectTransform _rectTransform;
 
         public List<SdfFigure> Figures => _figures;
         public Material InstanceMaterial => _instanceMaterial;
 
-        private void Start()
+        private void OnEnable()
         {
+            _rectTransform = GetComponent<RectTransform>();
+
+            if (!TryGetComponent(out _image))
+            {
+                _image = gameObject.AddComponent<Image>();
+            }
+
+            CreateMaterial();
             UpdateFigures();
         }
 
@@ -33,7 +42,6 @@ namespace Entities.UI.SDF
             _figures.AddRange(GetComponentsInChildren<SdfFigure>());
         }
 
-        [TriInspector.Button]
         private void CreateMaterial()
         {
             if (_baseMaterial == null) return;
@@ -58,6 +66,8 @@ namespace Entities.UI.SDF
                 }
 #endif
             }
+
+            _image.material = _instanceMaterial;
         }
     }
 }

@@ -4,7 +4,6 @@ using System.IO;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
-using EasyTextEffects;
 using Entities.Localization;
 using Systems.SequenceActions;
 using Systems.Environment;
@@ -70,12 +69,8 @@ namespace Entities.UI
             var newQuest = _diContainer.InstantiatePrefab(_questPrefab, _questHud).transform;
             if (!newQuest) return;
             await UniTask.Delay(200);
-            
             newQuest.GetChild(0).GetComponent<LocalizedText>().SetNewKey("quest_header_" + data.Id);
             newQuest.GetChild(1).GetComponent<LocalizedText>().SetNewKey("quest_desc_" + data.Id);
-            
-            newQuest.GetChild(0).GetComponent<TextEffect>().Refresh();
-            
             _createdQuests.Add(data,newQuest.gameObject);
             if (!_createdMarks.ContainsKey(data)) _createdMarks[data] = new();
             UpdateProgress(data, newQuest);
@@ -94,7 +89,6 @@ namespace Entities.UI
 
         public void UpdateProgress(QuestData data, Transform questObj = null)
         {
-            if (!_createdQuests.ContainsKey(data)) return;
             if (questObj == null)
             {
                 questObj = _createdQuests[data].transform;
@@ -187,7 +181,7 @@ namespace Entities.UI
                 if (toTarget.sqrMagnitude > 0.0001f)
                 {
                     float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
-                    marks[i].Object.transform.localRotation = Quaternion.Euler(0f, 0f, angle + 180);
+                    marks[i].Object.transform.localRotation = Quaternion.Euler(0f, 0f, angle + 90);
                 }
                 marks[i].Object.transform.position = newScreenPos;
             }

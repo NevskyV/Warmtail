@@ -19,7 +19,7 @@ namespace Systems.Abilities
         public Action UsingAbility { get; set; }
         public Action EndAbility { get; set; }
         public string MethodName { get; set; }
-        public bool CooldownRunning => _cooldownRunning;
+
         private WarmthSystem _warmthSystem;
         private bool _drainWarmthRunning;
         private bool _cooldownRunning;
@@ -51,7 +51,7 @@ namespace Systems.Abilities
             Enabled = false;
             _drainWarmthRunning = false;
             EndAbility?.Invoke();
-            CooldownTimer();
+            //CooldownTimer();
         }
         
         private async void DrainWarmth()

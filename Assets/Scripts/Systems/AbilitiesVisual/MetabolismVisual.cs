@@ -15,6 +15,7 @@ namespace Systems.AbilitiesVisual
     public class MetabolismVisual : IAbilityVisual
     {
         [field: SerializeReference] public int AbilityIndex { get; set; }
+        [field: SerializeReference] public Sprite Icon { get;  set;}
         [SerializeField] private AudioClip _sfx;
         private ObjectSfx _playerSfx;
         private MetabolismVisualSt _struct;

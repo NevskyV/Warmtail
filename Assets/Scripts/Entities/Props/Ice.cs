@@ -7,16 +7,22 @@ namespace Entities.Props
     public class Ice : SavableStateObject
     {
         [Inject] private FreezeVisuals _freeze;
-        public void TriggerEnter2D()
+        public void OnTriggerEnter2D(Collider2D other)
         {
-            _freeze.StopAllCoroutines();
-            _freeze.StartDrain(Id);
+            if (other.CompareTag("Player"))
+            {
+                _freeze.StopAllCoroutines();
+                _freeze.StartCoroutine(_freeze.StartDrain());
+            }
         }
         
-        public void TriggerExit2D()
+        public void OnTriggerExit2D(Collider2D other)
         {
-            _freeze.StopAllCoroutines();
-            _freeze.StopDrain(Id);
+            if (other.CompareTag("Player"))
+            {
+                _freeze.StopAllCoroutines();
+                _freeze.StartCoroutine(_freeze.StopDrain());
+            }
         }
     }
 }

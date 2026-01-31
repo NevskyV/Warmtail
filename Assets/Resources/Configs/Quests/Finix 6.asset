@@ -13,14 +13,10 @@ MonoBehaviour:
   m_Name: Finix 6
   m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
   <Id>k__BackingField: 6
-  QuestType: 0
   <IsPermanent>k__BackingField: 1
   <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
   <Layer>k__BackingField: 0
   <Sequence>k__BackingField:
-  - Actions:
-    - rid: 4061569095894564978
-    Tasks: []
   - Actions: []
     Tasks:
     - rid: 7345391011349135620
@@ -29,13 +25,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4061569095894564978
-      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _spawn: 1
-        _questData: {fileID: 11400000}
-        _position: {x: -300, y: 155}
-        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
     - rid: 7345391011349135620
       type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:

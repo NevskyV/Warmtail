@@ -12,6 +12,7 @@ namespace Systems.SequenceActions
 
         public void Invoke()
         {
+            Debug.Log(_id + " = " + SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_id) );
             SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_id).transform.position = _newPosition;
         }
     }
