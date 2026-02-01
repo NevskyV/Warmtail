@@ -1,0 +1,46 @@
+﻿name: Sync main → fixes & new
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+
+      - name: Sync to fixes
+        run: |
+          git checkout fixes || git checkout -b fixes origin/fixes
+          git fetch origin
+          git pull origin fixes --rebase=false
+          
+          # Пытаемся merge main → fixes
+          git merge origin/main --no-ff -m "Auto-sync: main → fixes"
+          
+          # Если merge прошёл без конфликтов — пушим
+          git push origin fixes
+
+      - name: Sync to new
+        run: |
+          git checkout new || git checkout -b new origin/new
+          git fetch origin
+          git pull origin new --rebase=false
+          
+          git merge origin/main --no-ff -m "Auto-sync: main → new"
+          
+          git push origin new
