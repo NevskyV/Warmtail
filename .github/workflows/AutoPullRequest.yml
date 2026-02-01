@@ -9,22 +9,66 @@ on:
 jobs:
   create-pr:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    permissions:
+      contents: read
+      pull-requests: write
 
-      - name: Create or Update Pull Request
-        uses: peter-evans/create-pull-request@v6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: "Auto update from ${{ github.ref_name }}"
-          title: "Auto: ${{ github.ref_name }} → ${{ startsWith(github.ref_name, 'fixes-') && 'fixes' || 'new' }}"
-          body: |
-            Автоматически созданный/обновлённый PR из ветки **${{ github.ref_name }}**.
-            
-            Последний коммит: ${{ github.event.head_commit.message }}
-          branch: ${{ github.ref_name }}
-          base: ${{ startsWith(github.ref_name, 'fixes-') && 'fixes' || 'new' }}
-          labels: automerge,auto-pr
-          draft: false
-          delete-branch: false
+          fetch-depth: 0
+
+      - name: Determine base branch
+        id: vars
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          if [[ $BRANCH == fixes-* ]]; then
+            echo "base=fixes" >> $GITHUB_OUTPUT
+          else
+            echo "base=new" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request if not exists
+        uses: actions/github-script@v7
+        env:
+          BASE: ${{ steps.vars.outputs.base }}
+        with:
+          script: |
+            const branch = context.payload.ref.replace('refs/heads/', '');
+            const base = '${{ env.BASE }}';
+
+          
+            const { data: pulls } = await github.rest.pulls.list({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              head: `${context.repo.owner}:${branch}`,
+              base: base,
+              state: 'open'
+            });
+
+            if (pulls.length > 0) {
+              console.log(`PR уже существует: ${pulls[0].html_url} — ничего не делаем`);
+              return;
+            }
+
+          
+            const { data: pr } = await github.rest.pulls.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Auto: ${branch} → ${base}`,
+              head: branch,
+              base: base,
+              body: `Автоматически созданный PR из ветки **${branch}** после push.\n\nПоследний коммит: ${context.payload.head_commit.message || '—'}`,
+              draft: false,  // или true, если хочешь черновик
+            });
+
+            console.log(`Создан PR: ${pr.html_url}`);
+
+            // Опционально: сразу добавить лейбл automerge
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr.number,
+              labels: ['automerge', 'auto-pr']
+            });
