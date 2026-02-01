@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: write
+      pull-requests: write-all
 
     steps:
-      - name: Checkout (для получения метаданных, но без лишних манипуляций)
+      - name: Checkout
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -38,7 +38,7 @@ jobs:
             const branch = context.payload.ref.replace('refs/heads/', '');
             const base = '${{ env.BASE }}';
 
-            // Ищем существующий открытый PR из этой ветки в base
+          
             const { data: pulls } = await github.rest.pulls.list({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -52,7 +52,7 @@ jobs:
               return;
             }
 
-            // Создаём новый PR
+          
             const { data: pr } = await github.rest.pulls.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
