@@ -56,14 +56,15 @@ namespace Entities.UI
 
         private void Start()
         {
-            foreach (var id in _globalData.Get<SavablePlayerData>().QuestIds)
+            QuestSystem.OnQuestStarted.AddListener((data, b) => SpawnQuest(data));
+            QuestSystem.OnQuestUpdated.AddListener((data, b) => UpdateProgress(data));
+            QuestSystem.OnQuestEnded.AddListener((data, b) => DestroyQuest(data));
+            var ids = _globalData.Get<SavablePlayerData>().QuestIds;
+            foreach (var id in ids)
             {
                 var quest = AllQuests.Find(x => x.Id == id.Key);
                 if(quest) QuestSystem.StartQuest(quest, id.Value);
             }
-            QuestSystem.OnQuestStarted.AddListener((data, b) => SpawnQuest(data));
-            QuestSystem.OnQuestUpdated.AddListener((data, b) => UpdateProgress(data));
-            QuestSystem.OnQuestEnded.AddListener((data, b) => EndQuest(data));
         }
 
         public async void SpawnQuest(QuestData data)

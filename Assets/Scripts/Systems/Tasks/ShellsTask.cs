@@ -12,6 +12,7 @@ namespace Systems.Tasks
 
         public void Activate()
         {
+            Completed = false;
             Shell.OnShellsChanged += MarkComplete;
         }
 

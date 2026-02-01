@@ -92,9 +92,9 @@ namespace Systems
                     }
                     else
                     {
-                        OnQuestUpdated?.Invoke(data, true);
+                        Debug.Log(x[0]+" "+ data.Sequence.Count);
                         _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds[data.Id] = x);
-
+                        OnQuestUpdated?.Invoke(data, true);
                     }
                 });
             }
