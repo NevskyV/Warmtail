@@ -2,6 +2,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine.UI;
 
 namespace Entities.UI.SDF
@@ -120,7 +121,7 @@ namespace Entities.UI.SDF
 
             if (data.Count > 0)
             {
-                _shapeBuffer = new ComputeBuffer(data.Count, sizeof(float) * 13 + sizeof(int) * 2);
+                _shapeBuffer = new ComputeBuffer(data.Count, Marshal.SizeOf(typeof(ShapeData)));
                 _shapeBuffer.SetData(data.ToArray());
             }
         }
@@ -131,7 +132,7 @@ namespace Entities.UI.SDF
 
             if (data.Count > 0)
             {
-                _propBuffer = new ComputeBuffer(data.Count, sizeof(float) * 19 + sizeof(int));
+                _propBuffer = new ComputeBuffer(data.Count,  Marshal.SizeOf(typeof(GroupProperty)));
                 _propBuffer.SetData(data.ToArray());
             }
         }
