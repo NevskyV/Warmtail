@@ -23,7 +23,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
+  m_LockedProperties: _OutlineColor
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -54,11 +54,11 @@ Material:
     - _CornerRounding: 0.15
     - _INTERSECTION: 0
     - _InOutlineThickness: 3
-    - _InlineThickness: 0.01
+    - _InlineThickness: 0.025
     - _NOISETYPE: 0
     - _NoiseScale: 10
     - _NoiseSpeed: 0.1
-    - _OutlineThickness: 0.007
+    - _OutlineThickness: 0.009
     - _Radius: 0.35
     - _SHAPE: 0
     - _Smoothness: 0.01
@@ -71,14 +71,14 @@ Material:
     - _UIMaskSoftnessY: 1
     - _WaveAmplitude: 0.004
     - _WaveFrequency: 10
-    - _WaveSpeed: 2
+    - _WaveSpeed: 3
     m_Colors:
     - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.4547168, b: 0.4547168, a: 1}
     - _Corners: {r: 0, g: 0, b: 0, a: 0}
-    - _FillColor: {r: 0.9044428, g: 0.9160093, b: 0.9924528, a: 1}
-    - _InlineColor: {r: 0.18717691, g: 0.30330753, b: 0.75686276, a: 1}
-    - _OutlineColor: {r: 0.058823537, g: 0.124534264, b: 0.39607844, a: 1}
+    - _FillColor: {r: 0.60809535, g: 0.6533037, b: 0.93962264, a: 1}
+    - _InlineColor: {r: 0.37435383, g: 0.60661507, b: 1.5137255, a: 1}
+    - _OutlineColor: {r: 0.117647074, g: 0.24906853, b: 0.7921569, a: 1}
     - _Size: {r: 0.2, g: 0.25, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

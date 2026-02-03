@@ -25,6 +25,8 @@ namespace Systems.DataSystems
         private readonly JsonSerializerSettings _settings = new JsonSerializerSettings
         {
             TypeNameHandling = TypeNameHandling.Auto,
+            MissingMemberHandling = MissingMemberHandling.Ignore,
+            ObjectCreationHandling = ObjectCreationHandling.Replace,
             Formatting = Formatting.Indented,
             NullValueHandling = NullValueHandling.Ignore
         };
@@ -112,6 +114,7 @@ namespace Systems.DataSystems
             if (!_settingsContainer.Blocks.TryGetValue(key, out var stored)) return data;
             var intermediateJson = JsonConvert.SerializeObject(stored, _settings);
             var loaded = (T)JsonConvert.DeserializeObject(intermediateJson, typeof(T), _settings);
+            _settingsContainer.Blocks[key] = loaded;
             return loaded ?? data;
         }
 

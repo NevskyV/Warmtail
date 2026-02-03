@@ -13,14 +13,13 @@ namespace Entities.UI.SDF
         [SerializeField] private RectTransform _fillRect;
         [SerializeField] private RectTransform _handleRect;
         [SerializeField] private Image _sdfImage;
-        
 
         private void Update()
         {
             _fillRect.anchorMax = new Vector2(Mathf.Lerp(_fillRect.anchorMax.x, _value *
                 _backRect.anchorMax.x, Time.deltaTime * _speed), _fillRect.anchorMax.y);
             _handleRect.localPosition = new Vector2(Mathf.Lerp(_handleRect.localPosition.x, _value *
-                _backRect.rect.width - _backRect.rect.width / 2 - _handleRect.rect.width/4, Time.deltaTime * _speed),_handleRect.localPosition.y);
+                _backRect.rect.width - _backRect.rect.width / 2 - _handleRect.rect.width/8, Time.deltaTime * _speed),_handleRect.localPosition.y);
         }
     }
 }
