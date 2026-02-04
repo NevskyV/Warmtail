@@ -13,6 +13,7 @@ using Systems.Abilities;
 using Systems.Environment;
 using Systems.Swarm;
 using Unity.Cinemachine;
+using UnityEngine.InputSystem.UI;
 
 namespace Entities.Core
 {
@@ -22,6 +23,7 @@ namespace Entities.Core
         [SerializeField] private MonologueVisuals _monologueVisuals;
         [SerializeField] private Player _player; 
         [SerializeField] private PlayerInput _playerInput;
+        [SerializeField] private InputSystemUIInputModule _uiInput;
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private PopupVisuals _popupVisuals;
         [SerializeField] private UIStateSystem _uiStateSystem;
@@ -49,6 +51,7 @@ namespace Entities.Core
             Container.Bind<FreezeVisuals>().FromInstance(_freezeVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             Container.Bind<ComboConfig>().FromInstance(_comboConfig).AsSingle();
+            Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
             
             Container.Bind<QuestSystem>().FromNew().AsSingle().NonLazy();
             Container.Bind<SceneSystem>().FromNew().AsSingle();

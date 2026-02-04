@@ -33,32 +33,34 @@ namespace Entities.UI.SDF
             _figures.AddRange(GetComponentsInChildren<SdfFigure>());
         }
 
-        [TriInspector.Button]
+        [Button]
         public void CreateMaterial(string suffix = "")
         {
             if (BaseMaterial == null) return;
 
-            if (InstanceMaterial == null)
-            {
-#if UNITY_EDITOR
-                string folder = "Assets/Resources/Materials/SDF_Groups/" + suffix;
-                if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
-                {
-                    UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials", "SDF_Groups");
-                    UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials/SDF_Groups",suffix);
-                }
 
-                
-                string assetPath = $"{folder}/{gameObject.name}_SDFMaterial.mat";
-                InstanceMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(assetPath);
-                if (!InstanceMaterial)
-                {
-                    InstanceMaterial = new Material(BaseMaterial);
-                    UnityEditor.AssetDatabase.CreateAsset(InstanceMaterial, assetPath);
-                    UnityEditor.AssetDatabase.SaveAssets();
-                }
-#endif
+#if UNITY_EDITOR
+            string folder = "Assets/Resources/Materials/SDF_Groups/";
+            if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
+            {
+                UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials", "SDF_Groups");
             }
+            folder += suffix;
+            if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
+            {
+                UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials/SDF_Groups", suffix);
+            }
+            
+            string assetPath = $"{folder}/{gameObject.name}_SDFMaterial.mat";
+            InstanceMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(assetPath);
+            if (!InstanceMaterial)
+            {
+                InstanceMaterial = new Material(BaseMaterial);
+                UnityEditor.AssetDatabase.CreateAsset(InstanceMaterial, assetPath);
+                UnityEditor.AssetDatabase.SaveAssets();
+            }
+#endif
+            
         }
     }
 }
