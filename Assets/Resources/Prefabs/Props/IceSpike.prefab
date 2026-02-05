@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -719,7 +719,7 @@ MonoBehaviour:
   m_UseRendererSilhouette: 1
   m_CastsShadows: 1
   m_SelfShadows: 0
-  m_AlphaCutoff: 0.505
+  m_AlphaCutoff: 0
   m_ApplyToSortingLayers: 00000000911d778ae72eaef4
   m_ShapePath:
   - {x: -3.2, y: -3.95, z: 0}
@@ -738,7 +738,7 @@ MonoBehaviour:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 2.899994, y: 3.649994, z: 0}
     m_EdgeProcessing: 1
-    m_TrimEdge: 0.2
+    m_TrimEdge: 0
     m_FlipX: 0
     m_FlipY: 0
     m_InitialTrim: 0.3

@@ -51,8 +51,8 @@ namespace Entities.UI.SDF
         {
             if (_isSelected && _uiInputModule.leftClick.action.IsPressed())
             {
-                _slider.Value  = (_uiInputModule.point.action.ReadValue<Vector2>().x - _sliderRect.position.x) /
-                                 _sliderRect.sizeDelta.x;
+                _slider.Value  = (_uiInputModule.point.action.ReadValue<Vector2>().x - _sliderRect.position.x
+                                     ) / _sliderRect.sizeDelta.x * 2;
             }
         }
 

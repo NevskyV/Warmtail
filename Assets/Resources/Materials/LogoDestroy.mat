@@ -72,12 +72,16 @@ Material:
     m_Floats:
     - _DissolveAmount: 0
     - _EnableExternalAlpha: 0
+    - _MaxDissolve: 1
+    - _MinDissolve: 0
     - _OutlineThickness: 0.033
     - _Scale: 72.64
     - _SpiralStrength: 4.5
+    - _UseRadialDissolve: 0
     - _VerticalDissolve: 0
     - _ZWrite: 0
     m_Colors:
+    - White: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _OutlineColor: {r: 0.7504135, g: 0, b: 6.8517227, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

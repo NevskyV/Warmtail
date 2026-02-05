@@ -5,6 +5,7 @@ using System.Linq;
 using Systems.DataSystems;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -18,6 +19,7 @@ namespace Data
         [SerializeReference] private List<ISavableData> _savableData = new();
         [SerializeReference] private List<IRuntimeData> _runtimeData = new();
         [SerializeReference] private SettingsData _settingsData;
+        [SerializeField] private InputActionAsset _actionAsset;
         private readonly Dictionary<IData, List<DataEventFunc>> _subs = new();
         public List<ISavableData> SavableData => _savableData;
         
@@ -53,6 +55,13 @@ namespace Data
             {
                 _subs.Add(data, new List<DataEventFunc>());
             }
+            
+            _actionAsset["R"].performed += _ =>
+            {
+                if (_actionAsset["Control"].IsPressed())
+                    DeleteSaveData();
+            };
+            
 #if UNITY_EDITOR
             if (SceneManager.GetActiveScene().name != "Start")
             {
