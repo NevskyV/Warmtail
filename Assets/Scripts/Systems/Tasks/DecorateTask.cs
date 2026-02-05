@@ -10,6 +10,7 @@ namespace Systems.Tasks
 
         public void Activate()
         {
+            Completed = false;
             PlacementSystem.OnApplyed += MarkComplete;
         }
 

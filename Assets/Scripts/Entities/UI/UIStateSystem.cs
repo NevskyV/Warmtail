@@ -19,6 +19,7 @@ namespace Entities.UI
         
         [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, CanvasGroup> _canvasGroups = new();
         [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, UIState> _escapeTransitions = new();
+        [SerializeField] private CanvasGroup _warmthGroup;
         
         [Title("Pause"), SerializeField] private Animator _pauseAnimator;
         [SerializeField] private Volume _pauseVolume;
@@ -75,10 +76,14 @@ namespace Entities.UI
                             _pauseAnimator.SetBool("InPause", false);
                         break;
                     case UIState.Pause:
+                        _warmthGroup.DOFade(1, _crossFadeTime);
                         DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 1, _crossFadeTime);
                         _abilityController.DisableAllAbilities();
                         if(_pauseAnimator)
                             _pauseAnimator.SetBool("InPause", true);
+                        break;
+                    default:
+                        _warmthGroup.DOFade(0, _crossFadeTime);
                         break;
                 }
             }

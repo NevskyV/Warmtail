@@ -31,8 +31,11 @@ namespace Systems
             if (data.QuestType == QuestType.Serial && (questState == null || questState.Count == 0)) questState = new(){0};
             if (data.QuestType == QuestType.Parallel && questState == null) questState = new();
 
-            if(!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
+            if (!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
+            {
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
+                Debug.Log("add");
+            }
 
             OnQuestStarted.Invoke(data, true);
 
@@ -80,7 +83,7 @@ namespace Systems
             var questIds = _globalData.Get<SavablePlayerData>().QuestIds;
             if (!questIds.Keys.Contains(data.Id)) return;
             var questState = questIds[data.Id];
-            if (questState.Count >= data.Sequence.Count) EndQuest(data);
+            if (questState.Count > data.Sequence.Count) {EndQuest(data);}
             else
             {
                 SequenceIterationSystem.TryIterateSequence(data.Sequence, questState, task, data.QuestType,

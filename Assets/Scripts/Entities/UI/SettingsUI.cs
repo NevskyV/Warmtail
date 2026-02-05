@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using Data;
 using Entities.Localization;
+using Entities.UI.SDF;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -18,9 +19,9 @@ namespace Entities.UI
         [SerializeField] private AudioMixer _mixer;
         
         [GroupNext("Sliders")]
-        [SerializeField] private Slider _mainSoundSlider;
-        [SerializeField] private Slider _musicSlider;
-        [SerializeField] private Slider _sfxSlider;
+        [SerializeField] private SdfSlider _mainSoundSlider;
+        [SerializeField] private SdfSlider _musicSlider;
+        [SerializeField] private SdfSlider _sfxSlider;
 
         [GroupNext("Switchers")] 
         [SerializeField] private Switcher _graphicsSwitcher;
@@ -56,16 +57,23 @@ namespace Entities.UI
             _fullScreenToggle.isOn = _localData.FullscreenMode;
             _graphicsSwitcher.CurrentValue = _localData.QualityLevel;
             _languageSwitcher.CurrentValue = _localData.Language;
-            _mainSoundSlider.value = _localData.MainSoundVolume;
-            _musicSlider.value = _localData.MusicVolume;
-            _sfxSlider.value = _localData.SfxVolume;
+            _mainSoundSlider.Value = _localData.MainSoundVolume;
+            _musicSlider.Value = _localData.MusicVolume;
+            _sfxSlider.Value = _localData.SfxVolume;
             //Add Listeners
             _fullScreenToggle.onValueChanged.AddListener(ChangeFullScreenState);
             _graphicsSwitcher.Event.AddListener(ChangeQuality);
             _languageSwitcher.Event.AddListener(ChangeLanguage);
-            _mainSoundSlider.onValueChanged.AddListener(ChangeMainVolume);
-            _musicSlider.onValueChanged.AddListener(ChangeMusicVolume);
-            _sfxSlider.onValueChanged.AddListener(ChangeSfxVolume);
+            _mainSoundSlider.OnValueChange += ChangeMainVolume;
+            _musicSlider.OnValueChange += ChangeMusicVolume;
+            _sfxSlider.OnValueChange += ChangeSfxVolume;
+        }
+
+        private void OnDestroy()
+        {
+            _mainSoundSlider.OnValueChange -= ChangeMainVolume;
+            _musicSlider.OnValueChange -= ChangeMusicVolume;
+            _sfxSlider.OnValueChange -= ChangeSfxVolume;
         }
         
         public void ChangeFullScreenState(bool value)
@@ -105,7 +113,6 @@ namespace Entities.UI
         
         public void ChangeSfxVolume(float value)
         {
-            print("changedSfxVolume" + value);
             ChangeVolume("SfxVolume", value);
             _localData.SfxVolume = value;
             SaveData();

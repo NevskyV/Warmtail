@@ -42,7 +42,7 @@ namespace Entities.Triggers
                 
                 _target.position = _player.Rigidbody.transform.position;
                 _camera.Target.TrackingTarget = _target;
-                _lastZoom = _camera.Lens.OrthographicSize;
+                _lastZoom = 10;//_camera.Lens.OrthographicSize;
                 _positionComposer.Lookahead.Enabled = false;
                 _positionComposer.Composition.DeadZone.Enabled = false;
                 
