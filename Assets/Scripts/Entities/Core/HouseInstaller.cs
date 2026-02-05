@@ -13,6 +13,7 @@ using Entities.NPC;
 using Systems.Abilities;
 using Systems.Environment;
 using Unity.Cinemachine;
+using UnityEngine.InputSystem.UI;
 
 namespace Entities.Core
 {
@@ -20,6 +21,7 @@ namespace Entities.Core
     {
         [SerializeField] private Player _player;
         [SerializeField] private PlayerInput _playerInput;
+        [SerializeField] private InputSystemUIInputModule _uiInput;
         [SerializeField] private HouseManager _houseManager;
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private UIStateSystem _uiStateSystem;
@@ -45,6 +47,7 @@ namespace Entities.Core
             Container.Bind<CinemachineCamera>().FromInstance(_cam).AsSingle();
             Container.Bind<DialogueVisuals>().FromInstance(_dialogueVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
+            Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
             Container.Bind<SceneSystem>().FromNew().AsSingle();
             Container.Bind<NPCMethods>().FromNew().AsSingle();
             Container.Bind<ShoppingSystem>().FromNew().AsSingle();

@@ -31,7 +31,6 @@ namespace Systems.AbilitiesVisual
         private Player _player;
         private IAbility _ability;
         private CinemachineCamera _camera;
-        private LensSettings _lastSettings;
         private List<GameObject> _loopVfxObjs = new();
         
         [Inject]
@@ -44,8 +43,7 @@ namespace Systems.AbilitiesVisual
             _ability.UsingAbility += UsingAbility;
             _ability.EndAbility += EndAbility;
             
-            _lastSettings = _camera.Lens;
-            UpdatePlayerStats();
+            //UpdatePlayerStats();
         }
 
         public async void StartAbility()
@@ -57,14 +55,19 @@ namespace Systems.AbilitiesVisual
             _player.ObjectSfx.PlaySfx(_startSfx);
             _player.ObjectSfx.PlayLoopSfx(_loopSfx, 500);
             
-            UpdatePlayerStats();
+            //UpdatePlayerStats();
         }
         
         public void UsingAbility()
         {
             if (_loopVfxObjs.Count == 0)
             {
-                DOTween.To(() => _camera.Lens.OrthographicSize, x => _camera.Lens.OrthographicSize = x, _activeCamZoom,1);
+                var tempZoom = _camera.Lens.OrthographicSize;
+                DOTween.To(() => tempZoom, x =>
+                {
+                    tempZoom = x;
+                    _camera.Lens.OrthographicSize = tempZoom;
+                }, _activeCamZoom,1);
                 foreach (var vfx in _loopVfx)
                 {
                     var loopVfxObj = Object.Instantiate(vfx, _player.Rigidbody.position, Quaternion.identity,_player.Rigidbody.transform).gameObject;
@@ -77,11 +80,13 @@ namespace Systems.AbilitiesVisual
         
         public async void EndAbility()
         {
-            UpdatePlayerStats();
+            //UpdatePlayerStats();
             _player.ObjectSfx.StopLoopSfx();
-            DOTween.To(() => _camera.Lens.OrthographicSize, x =>
+            var tempZoom = _camera.Lens.OrthographicSize;
+            DOTween.To(() => tempZoom, x =>
             {
-                if(_ability.Enabled)_camera.Lens.OrthographicSize = x;
+                tempZoom = x;
+                _camera.Lens.OrthographicSize = tempZoom;
             }, _normalCamZoom,1);
             for (int i = _loopVfxObjs.Count - 1; i >= 0; i--)
             {
@@ -89,6 +94,7 @@ namespace Systems.AbilitiesVisual
                 if (obj == null)
                 {
                     _loopVfxObjs.RemoveAt(i);
+                    if (_loopVfxObjs.Count == 0) break;
                     continue;
                 }
                 var main = obj.GetComponent<ParticleSystem>().main;
@@ -98,12 +104,12 @@ namespace Systems.AbilitiesVisual
             }
         }
 
-        private void UpdatePlayerStats()
-        {
-            Water.SetVector(Position, 
-                new Vector4(_player.Rigidbody.position.x, _player.Rigidbody.position.y));
-            Water.SetFloat(Rotation, _player.Rigidbody.rotation - 90);
-        }
+        // private void UpdatePlayerStats()
+        // {
+        //     Water.SetVector(Position, 
+        //         new Vector4(_player.Rigidbody.position.x, _player.Rigidbody.position.y));
+        //     Water.SetFloat(Rotation, _player.Rigidbody.rotation - 90);
+        // }
 
         public void Dispose()
         {

@@ -473,8 +473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  _baseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
-  _instanceMaterial: {fileID: 2100000, guid: df880be350e51ac40b028c9882942cad, type: 2}
+  BaseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
+  InstanceMaterial: {fileID: 2100000, guid: df880be350e51ac40b028c9882942cad, type: 2}
 --- !u!1 &5624457435116435169
 GameObject:
   m_ObjectHideFlags: 0
@@ -526,8 +526,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  _baseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
-  _instanceMaterial: {fileID: 2100000, guid: c919d90bf51e8354fae89d6102d629aa, type: 2}
+  BaseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
+  InstanceMaterial: {fileID: 2100000, guid: c919d90bf51e8354fae89d6102d629aa, type: 2}
 --- !u!1 &6490547369730882229
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,8 +845,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0820011, y: 1}
   m_AnchorMax: {x: 0.8893322, y: 1}
-  m_AnchoredPosition: {x: 232.43396, y: -689.523}
-  m_SizeDelta: {x: -812.524, y: 79.0698}
+  m_AnchoredPosition: {x: 199, y: -707}
+  m_SizeDelta: {x: -914.2543, y: 79.0698}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4251271281987838401
 CanvasRenderer:
@@ -878,8 +878,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Vasya Slashyavy
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ec6d7c9ef0bf886469c2d030e2f37755, type: 2}
-  m_sharedMaterial: {fileID: 5199850514967792039, guid: ec6d7c9ef0bf886469c2d030e2f37755, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 18ab529b76db8b548b09f465b98cfff0, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 6fc62a61e5879e7418ac6bed0186cad9, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -903,8 +903,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 60
-  m_fontSizeBase: 60
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
