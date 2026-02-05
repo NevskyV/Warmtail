@@ -106,6 +106,7 @@ namespace Entities.UI
             if(_surfacingSystem.CurrentLayerIndex == data.Layer){
                 var allQuestCount = data.Sequence.Count;
                 var questState = 0;
+                print(_globalData.Get<SavablePlayerData>().QuestIds.Keys.Count);
                 if (data.QuestType == QuestType.Serial) questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id][0];
                 if (data.QuestType == QuestType.Parallel) questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id].Count;
                 

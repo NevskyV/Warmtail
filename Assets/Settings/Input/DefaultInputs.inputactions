@@ -113,6 +113,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Control",
+                    "type": "Button",
+                    "id": "2c04a2f5-e121-41d7-96c6-23a51f021de1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "R",
+                    "type": "Button",
+                    "id": "b4dc5c45-2a0f-4e90-a99f-e0124bdc7769",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -443,6 +461,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Building",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cdd4a0b-dc8b-4058-bc87-78899268942b",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Control",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08aa972d-d029-4a34-876d-771617504207",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "R",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1003,22 +1043,22 @@
                 },
                 {
                     "name": "",
-                    "id": "54675de5-65d9-4306-9487-691e15040633",
-                    "path": "<Mouse>/leftButton",
+                    "id": "aaacf20e-a43e-4efa-857a-2845fe24a005",
+                    "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Keyboard&Mouse",
+                    "groups": ";Gamepad",
                     "action": "Space",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "aaacf20e-a43e-4efa-857a-2845fe24a005",
-                    "path": "<Gamepad>/buttonSouth",
+                    "id": "a4b01dae-8b92-4375-8b3c-55dac06b6e80",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Space",
                     "isComposite": false,
                     "isPartOfComposite": false
