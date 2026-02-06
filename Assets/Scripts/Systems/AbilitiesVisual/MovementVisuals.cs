@@ -21,7 +21,7 @@ namespace Systems.AbilitiesVisual
         [field: SerializeReference] public int AbilityIndex {get; set;}
         [field: SerializeReference] public Material Water {get; set;}
         [SerializeField] private ParticleSystem _startVfx;
-        [SerializeField] private ParticleSystem[] _loopVfx;
+        //[SerializeField] private int[] _loopVfxIndexes;
         [SerializeField] private AudioClip _startSfx;
         [SerializeField] private AudioClip _loopSfx;
         [SerializeField] private Vector3 _vfxOffset;
@@ -32,6 +32,7 @@ namespace Systems.AbilitiesVisual
         private IAbility _ability;
         private CinemachineCamera _camera;
         private List<GameObject> _loopVfxObjs = new();
+        private ParticleSystem[] _loopVfx;
         
         [Inject]
         private void Construct(Player player, PlayerConfig config, CinemachineCamera camera)
@@ -42,7 +43,7 @@ namespace Systems.AbilitiesVisual
             _ability.StartAbility += StartAbility;
             _ability.UsingAbility += UsingAbility;
             _ability.EndAbility += EndAbility;
-            
+            _loopVfx = _player.GetComponentsInChildren<ParticleSystem>();
             //UpdatePlayerStats();
         }
 
@@ -60,20 +61,28 @@ namespace Systems.AbilitiesVisual
         
         public void UsingAbility()
         {
-            if (_loopVfxObjs.Count == 0)
+            
+            if (_ability.Enabled)
             {
                 var tempZoom = _camera.Lens.OrthographicSize;
-                DOTween.To(() => tempZoom, x =>
+                if (!Mathf.Approximately(tempZoom, _activeCamZoom))
                 {
-                    tempZoom = x;
-                    _camera.Lens.OrthographicSize = tempZoom;
-                }, _activeCamZoom,1);
-                foreach (var vfx in _loopVfx)
+                    DOTween.To(() => tempZoom, x =>
+                    {
+                        tempZoom = x;
+                        _camera.Lens.OrthographicSize = tempZoom;
+                    }, _activeCamZoom, 1);
+                }
+
+                if (_loopVfxObjs.Count == 0)
                 {
-                    var loopVfxObj = Object.Instantiate(vfx, _player.Rigidbody.position, Quaternion.identity,_player.Rigidbody.transform).gameObject;
-                    loopVfxObj.transform.localRotation = Quaternion.Euler(new Vector3(0,0,160));
-                    loopVfxObj.transform.localPosition += _vfxOffset;
-                    _loopVfxObjs.Add(loopVfxObj);
+                    foreach (var vfx in _loopVfx)
+                    {
+                        var main = vfx.main;
+                        main.loop = true;
+                        vfx.Play();
+                        _loopVfxObjs.Add(vfx.gameObject);
+                    }
                 }
             }
         }

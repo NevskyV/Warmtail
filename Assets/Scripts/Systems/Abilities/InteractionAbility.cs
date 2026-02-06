@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Entities.NPC;
 using Entities.PlayerScripts;
 using Entities.Props;
 using Interfaces;
@@ -107,6 +108,8 @@ namespace Systems.Abilities
 
         private void ObjectEnter(IInteractable interactable)
         {
+            if (interactable is SpeakableCharacter speakable && speakable.Graph == null) return;
+            
             var propertyBlock = new MaterialPropertyBlock();
             propertyBlock.SetInt(Enable, 1);
             var renderer = (interactable as MonoBehaviour)?.GetComponent<Renderer>();

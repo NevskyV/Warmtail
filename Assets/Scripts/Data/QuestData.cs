@@ -19,12 +19,13 @@ namespace Data
         [field: SerializeField, Dropdown(nameof(_layers))] public int Layer { get; private set; }
         
         private int[] _layers = {0,1,2};
-
+        [field: Title("Actions"), SerializeReference] 
+        public List<ISequenceAction> OnStart { get; private set; }
+        [field: SerializeReference] public List<ISequenceAction> OnComplete{ get; private set; }
+        [field: SerializeReference] public List<ISequenceAction> OnFail { get; private set; }
         [field: Title("Sequence"),SerializeField] public List<SequenceElement> Sequence { get; private set; }
         
-        [field: Title("Actions"), SerializeReference] 
-        public List<ISequenceAction> OnComplete{ get; private set; }
-        [field: SerializeReference] public List<ISequenceAction> OnFail { get; private set; }
+        
     }
 
     [Serializable]

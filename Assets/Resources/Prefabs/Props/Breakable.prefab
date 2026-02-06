@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8672401423464370930}
   - component: {fileID: 8975289944093716961}
   - component: {fileID: -131300980783543666}
+  - component: {fileID: 9169340858395228805}
   m_Layer: 0
   m_Name: Breakable
   m_TagString: Untagged
@@ -45,7 +46,7 @@ SpriteShapeRenderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
+  m_DynamicOccludee: 0
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -208,3 +209,16 @@ EdgeCollider2D:
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
   m_UseAdjacentEndPoint: 0
+--- !u!114 &9169340858395228805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123446364853792721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e42fcc4e0e08b7744a2627adf1ab8c49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.DestructibleObject
+  _destroyDelay: 0
