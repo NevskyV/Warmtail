@@ -2,6 +2,7 @@ using Data;
 using Data.Player;
 using DG.Tweening;
 using Entities.UI.SDF;
+using TMPro;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,7 @@ namespace Entities.UI
     {
         [Title("UI Elements")]
         [SerializeField] private SdfFigure _arcFigure;
+        [SerializeField] private TMP_Text _text;
         [SerializeField] private float _maxValue = 2.7f;
         [SerializeField] private float _smoothing = 0.5f;
 
@@ -40,7 +42,7 @@ namespace Entities.UI
             else
             {
                 if (_arcFigure == null) return;
-                
+                _text.text = $"{runtimeData.CurrentWarmth}\n|\n{data.Stars * 10}";
                 _tween?.Pause();
                 var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);
                 _tween = DOTween.To(() => _arcFigure.ShapeData.ParamsA.x, x =>
