@@ -70,6 +70,7 @@ namespace Entities.UI
                 switch (state)
                 {
                     case UIState.Normal:
+                        _warmthGroup.DOFade(1, _crossFadeTime);
                         DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 0, _crossFadeTime);
                         _abilityController.EnableLastAbilities();
                         if(_pauseAnimator)

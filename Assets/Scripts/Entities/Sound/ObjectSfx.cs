@@ -35,6 +35,7 @@ namespace Entities.Sound
         public async void PlayLoopSfx(AudioClip sfx, int delay = 0)
         {
             await UniTask.Delay(delay);
+            if (_source == null) return;
             if (_awaitable != null)
             {
                 DOTween.Kill(_awaitable);

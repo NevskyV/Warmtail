@@ -1905,6 +1905,28 @@ Transform:
   - {fileID: 937292770}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &576748426 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3572150272575664361, guid: 97d2b09e9df241e4694ebfe288dc2279, type: 3}
+  m_PrefabInstance: {fileID: 591990055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!114 &576748427 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6035833195593742440, guid: 97d2b09e9df241e4694ebfe288dc2279, type: 3}
+  m_PrefabInstance: {fileID: 591990055}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3203f0cf304f53a51a4cc55229f7ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfFigure
 --- !u!1001 &591990055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2710,7 +2732,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f36ee083d969ca4c97f510ee8611fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.WarmthVisual
-  _arcFigure: {fileID: 0}
+  _arcFigure: {fileID: 576748427}
+  _text: {fileID: 576748426}
   _maxValue: 2.7
   _smoothing: 0.5
 --- !u!1 &865195738

@@ -13,21 +13,22 @@ MonoBehaviour:
   m_Name: Finix 5
   m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
   <Id>k__BackingField: 5
+  QuestType: 0
   <IsPermanent>k__BackingField: 1
   <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
   <Layer>k__BackingField: 0
   <Sequence>k__BackingField:
   - Actions: []
     Tasks:
-    - rid: 7345391011349135602
+    - rid: 8818234036182057151
   <OnComplete>k__BackingField: []
   <OnFail>k__BackingField: []
   references:
     version: 2
     RefIds:
-    - rid: 7345391011349135602
-      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+    - rid: 8818234036182057151
+      type: {class: WarmTriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
-        _position: {x: 5000, y: 0}
-        description: 
+        _prefab: {fileID: 9075648897883246545, guid: ea8dde97386a48c458f44827584d22fb, type: 3}
+        _position: {x: 106, y: 225}
+        _description: 
