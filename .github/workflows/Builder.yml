@@ -169,12 +169,14 @@ jobs:
           asset_name: ${{ vars.GAME_NAME }}-win-v${{ needs.build.outputs.buildVersion }}.zip
           asset_content_type: application/zip
 
+      - name: Install butler
+        run: |
+          curl -L https://broth.itch.ovh/butler/linux-amd64/head/butler -o butler
+          chmod +x butler
+          sudo mv butler /usr/local/bin/butler
+
       - name: Upload to itch.io 🎮
-        uses: yeslayla/butler-publish-itchio-action@master
         env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          ITCH_USER: ${{ vars.ITCH_USER }}
-          ITCH_GAME: ${{ vars.ITCH_GAME }}
-          CHANNEL: windows
-          VERSION: ${{ needs.build.outputs.buildVersion }}
-          PACKAGE: build.zip
+          BUTLER_API_KEY: ${{ secrets.BUTLER_CREDENTIALS }}
+        run: |
+          butler push build.zip nevskyone/warmtail:windows --userversion ${{ needs.build.outputs.buildVersion }}
