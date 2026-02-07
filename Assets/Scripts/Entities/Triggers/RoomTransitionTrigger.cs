@@ -37,8 +37,8 @@ namespace Entities.Triggers
                 _normalColliders.ForEach(c => c.gameObject.SetActive(false));
                 _hiddenColliders.ForEach(c => c.gameObject.SetActive(true));
                 
-                _normalShadowCasters.ForEach(c => c.enabled = false);
-                _hiddenShadowCasters.ForEach(c => c.enabled = true);
+                //_normalShadowCasters.ForEach(c => c.enabled = false);
+                //_hiddenShadowCasters.ForEach(c => c.enabled = true);
             }
         }
 
@@ -53,8 +53,8 @@ namespace Entities.Triggers
                 _normalColliders.ForEach(c => c.gameObject.SetActive(true));
                 _hiddenColliders.ForEach(c => c.gameObject.SetActive(false));
                 
-                _normalShadowCasters.ForEach(c => c.enabled = true);
-                _hiddenShadowCasters.ForEach(c => c.enabled = false);
+                //_normalShadowCasters.ForEach(c => c.enabled = true);
+                //_hiddenShadowCasters.ForEach(c => c.enabled = false);
             }
         }
 
