@@ -28,24 +28,19 @@ namespace Entities.Puzzle
         
         public override void Warm()
         {
-            base.Warm();
-            if (_warmthAmount > 0 && _timerWarm != null) _timerWarm.Start();
-            else if(_warmthAmount > 0) _timerWarm = new ResettableTimer(_maxWarmthAmount, WarmLost);
+            if(_warmthAmount > 0) WarmComplete();
         }
 
         public override void WarmComplete()
         {
+            _warmthAmount = 0;
             _spriteRenderer.transform.DOLocalRotate(new Vector3(0,0,_twistedAngle), 1f);
             var color = _spriteRenderer.color;
             color.a = 1f;
             _spriteRenderer.color = color;
             OnTwisted.Invoke(_gearId);
         }
-
-        private void WarmLost()
-        {
-            if (_warmthAmount > 0) Reset();
-        }
+        
 
         public override void Reset()
         {

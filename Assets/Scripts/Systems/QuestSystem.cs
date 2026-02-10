@@ -31,11 +31,14 @@ namespace Systems
             if (data.QuestType == QuestType.Serial && (questState == null || questState.Count == 0)) questState = new(){0};
             if (data.QuestType == QuestType.Parallel && questState == null) questState = new();
 
-            if(!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
+            if (!_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
+            {
                 _globalData.Edit<SavablePlayerData>(playerData => playerData.QuestIds.Add(data.Id, questState));
+                Debug.Log("add");
+            }
 
             OnQuestStarted.Invoke(data, true);
-
+            data.OnStart.ForEach(x => x.Invoke());
             if (data.QuestType == QuestType.Serial)
             {
                 foreach (var task in data.Sequence[questState[0]].Tasks)
@@ -48,8 +51,6 @@ namespace Systems
                 {
                     data.Sequence[i].Actions.ForEach(x => x.Invoke());
                 }
-
-                TryIterateSequence(data, questState[0]);
             }
             else if (data.QuestType == QuestType.Parallel)
             {
@@ -69,7 +70,6 @@ namespace Systems
                 foreach (int i in questState)
                 {
                     data.Sequence[i].Actions.ForEach(x => x.Invoke());
-                    TryIterateSequence(data, i);
                 }
             }
 
@@ -80,7 +80,7 @@ namespace Systems
             var questIds = _globalData.Get<SavablePlayerData>().QuestIds;
             if (!questIds.Keys.Contains(data.Id)) return;
             var questState = questIds[data.Id];
-            if (questState.Count >= data.Sequence.Count) EndQuest(data);
+            if (questState.Count > data.Sequence.Count) {EndQuest(data);}
             else
             {
                 SequenceIterationSystem.TryIterateSequence(data.Sequence, questState, task, data.QuestType,

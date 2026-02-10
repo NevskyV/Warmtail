@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 namespace Interfaces
 {
-    public abstract class Warmable : MonoBehaviour
+    public class Warmable : MonoBehaviour
     {
         [SerializeField] protected float _warmFactor = 0.1f;
         protected float _warmthAmount = 1;
@@ -36,5 +36,7 @@ namespace Interfaces
         {
             _warmthAmount = _maxWarmthAmount;
         }
+        
+        public void SetWarmEvent(UnityAction action) => _warmEvent.AddListener(action);
     }
 }

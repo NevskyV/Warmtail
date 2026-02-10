@@ -1,21 +1,21 @@
 ﻿using System.Collections.Generic;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities.UI.SDF
 {
     [ExecuteAlways]
     public class SdfGroup : MonoBehaviour
     {
-        [Header("Shader Settings")] [SerializeField]
-        private Material _baseMaterial;
+        [Header("Shader Settings"),  FormerlySerializedAs("_baseMaterial")] [SerializeField]
+        public Material BaseMaterial;
 
-        [SerializeField] private Material _instanceMaterial;
+        [SerializeField, FormerlySerializedAs("_instanceMaterial")] public Material InstanceMaterial;
         private List<SdfFigure> _figures = new();
 
 
         public List<SdfFigure> Figures => _figures;
-        public Material InstanceMaterial => _instanceMaterial;
 
         private void Start()
         {
@@ -33,31 +33,34 @@ namespace Entities.UI.SDF
             _figures.AddRange(GetComponentsInChildren<SdfFigure>());
         }
 
-        [TriInspector.Button]
-        private void CreateMaterial()
+        [Button]
+        public void CreateMaterial(string suffix = "")
         {
-            if (_baseMaterial == null) return;
+            if (BaseMaterial == null) return;
 
-            if (_instanceMaterial == null)
-            {
+
 #if UNITY_EDITOR
-                string folder = "Assets/Resources/Materials/SDF_Groups";
-                if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
-                {
-                    UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials", "SDF_Groups");
-                }
-
-                
-                string assetPath = $"{folder}/{gameObject.name}_SDFMaterial.mat";
-                _instanceMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(assetPath);
-                if (!_instanceMaterial)
-                {
-                    _instanceMaterial = new Material(_baseMaterial);
-                    UnityEditor.AssetDatabase.CreateAsset(_instanceMaterial, assetPath);
-                    UnityEditor.AssetDatabase.SaveAssets();
-                }
-#endif
+            string folder = "Assets/Resources/Materials/SDF_Groups/";
+            if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
+            {
+                UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials", "SDF_Groups");
             }
+            folder += suffix;
+            if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
+            {
+                UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials/SDF_Groups", suffix);
+            }
+            
+            string assetPath = $"{folder}/{gameObject.name}_SDFMaterial.mat";
+            InstanceMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(assetPath);
+            if (!InstanceMaterial)
+            {
+                InstanceMaterial = new Material(BaseMaterial);
+                UnityEditor.AssetDatabase.CreateAsset(InstanceMaterial, assetPath);
+                UnityEditor.AssetDatabase.SaveAssets();
+            }
+#endif
+            
         }
     }
 }
