@@ -85,7 +85,32 @@ MonoBehaviour:
           rid: 676710221457391736
         MoveForce: 130
         _moreForge: 100
-        _drag: 10
+        _drag: 8
+        _accelerationTime: 2
+        _accelerationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.22888184
+            inSlope: 2
+            outSlope: 2
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
     - rid: 676710221457391733
       type: {class: DashVisual, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
       data:
