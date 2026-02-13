@@ -1,6 +1,7 @@
 using Data;
 using Data.Player;
 using Entities.UI;
+using Systems;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
@@ -24,6 +25,8 @@ namespace Entities.Core
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();
             Container.Bind<UIStateSystem>().FromInstance(_uiStateSystem).AsSingle();
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
+            
+            Container.Bind<GamepadRumble>().FromNew().AsSingle();
         }
 
         [Inject]

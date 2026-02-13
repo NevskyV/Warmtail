@@ -28,16 +28,18 @@ namespace Entities.UI
 
         public void SwitchNext()
         {
-            if (CurrentValue + 1 == _images.Count) return;
-            Event.Invoke(CurrentValue + 1);
-            Switch(CurrentValue + 1);
+            var newValue = CurrentValue + 1;
+            if (newValue == _images.Count) newValue = 0;
+            Event.Invoke(newValue);
+            Switch(newValue);
         }
         
         public void SwitchPrev()
         {
-            if (CurrentValue == 0) return;
-            Event.Invoke(CurrentValue - 1);
-            Switch(CurrentValue - 1);
+            var newValue = CurrentValue - 1;
+            if (newValue < 0) newValue = _images.Count - 1;
+            Event.Invoke(newValue);
+            Switch(newValue);
         }
         
         public virtual void Switch(int value)

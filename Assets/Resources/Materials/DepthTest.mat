@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-829600416076299514
+--- !u!114 &-7764615072089613134
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,8 +20,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GradientCell
-  m_Shader: {fileID: -6465566751694194690, guid: ed2ca1733f725e243941240c3f16aa48, type: 3}
+  m_Name: DepthTest
+  m_Shader: {fileID: -6465566751694194690, guid: dc1ae7d7c56040e45a758268f90feddd, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -29,19 +29,20 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: _Back _Color _Color_1 _Deep _Foam _Fore
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _Gradient:
-        m_Texture: {fileID: 2800000, guid: 580a783496ed3274b97fb43519d73a31, type: 3}
+    - _OutlineMainSG_2c3d250283474c12830b5f9fd4b65a02_MainTexture_1307887921_Texture2D:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
-    - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b302ea7723e7bf94abf9f39ad710a444, type: 3}
+    - _SampleTexture2D_2a9696dde5224ff98db24e8c9078969a_Texture_1_Texture2D:
+        m_Texture: {fileID: 2800000, guid: d186462c5163d6245b0df5ae142f96bd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -58,13 +59,30 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CellDensity: 13.96
-    - _CellPercent: 0.437
-    - _NoiseScale: 1.76
-    - _NoiseSpeed: 0.1
-    - _Opacity: 1
-    - _Speed: 3
+    - _BlurPower: 0.4
+    - _BlurSigma: 0.79
+    - _DepthRange: 0.6
+    - _DepthScale: 2.2
+    - _Edge: -0
+    - _FoamIntensity: 1
+    - _FoamScale: 17.22
+    - _FoamSharpness: 0
+    - _FoamSmoothness: 0
+    - _FoamSpeed: 0.3
+    - _FoamWidth: 18.77
+    - _GradientWidth: 0
+    - _QueueControl: 1
+    - _QueueOffset: 0
+    - _RawDepthThreshold: 1.57
     m_Colors:
     - White: {r: 1, g: 1, b: 1, a: 1}
+    - _Back: {r: 0.40566033, g: 0.6946316, b: 1, a: 0.44705883}
+    - _BlurRadius: {r: 1.05, g: 0.02, b: 0, a: 0}
+    - _Color: {r: 0, g: 0, b: 0, a: 1}
+    - _Color_1: {r: 0.97735846, g: 0.6251406, b: 0.6251406, a: 1}
+    - _Deep: {r: 0.112089686, g: 0.2368759, b: 0.6528301, a: 1}
+    - _Foam: {r: 0.91886795, g: 0.93173033, b: 1, a: 1}
+    - _Fore: {r: 0, g: 0, b: 0, a: 0}
+    - _Shallow: {r: 0.6156863, g: 0.82014376, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
