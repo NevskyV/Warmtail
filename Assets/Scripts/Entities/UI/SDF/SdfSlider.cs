@@ -1,8 +1,10 @@
 ﻿using System;
 using DG.Tweening;
+using Systems;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Entities.UI.SDF
 {
@@ -16,6 +18,7 @@ namespace Entities.UI.SDF
             set
             {
                 _value = Mathf.Clamp(value, 0f, 1f);
+                _gamepadRumble.ShortRumble();
                 OnValueChange?.Invoke(_value);
             }
         }
@@ -26,7 +29,7 @@ namespace Entities.UI.SDF
         [SerializeField] private RectTransform _fillRect;
         [SerializeField] private RectTransform _handleRect;
         [SerializeField] private Image _sdfImage;
-        
+        [Inject] private GamepadRumble _gamepadRumble;
         public Action<float> OnValueChange;
         
         private void Update()
@@ -36,9 +39,5 @@ namespace Entities.UI.SDF
             _handleRect.localPosition = new Vector2(Mathf.Lerp(_handleRect.localPosition.x, _value *
                 _backRect.rect.width - _backRect.rect.width / 2 - _handleRect.rect.width/8, Time.deltaTime * _speed),_handleRect.localPosition.y);
         }
-
-        
-        
-        
     }
 }

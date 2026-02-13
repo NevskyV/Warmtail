@@ -91,7 +91,7 @@ namespace Entities.UI
                         break;
                 }
             }
-            if(_selectables.TryGetValue(CurrentState, out var selectable)) EventSystem.current.SetSelectedGameObject(selectable.gameObject);
+            if(_selectables.TryGetValue(state, out var selectable)) EventSystem.current.SetSelectedGameObject(selectable.gameObject);
             
             var currentCanvas = _canvasGroups[CurrentState];
             var targetCanvas = _canvasGroups[state];

@@ -1,6 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
 using Data;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
