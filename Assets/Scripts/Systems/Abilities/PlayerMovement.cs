@@ -11,7 +11,7 @@ namespace Systems.Abilities
     [Serializable]
     public class PlayerMovement : IAbility, IFixedTickable
     {
-        public bool Enabled { get; set; } = true ;
+        public bool Enabled { get; set; } = true;
         public Action StartAbility { get; set; }
         public Action UsingAbility { get; set; }
         public Action EndAbility { get; set; }
@@ -22,6 +22,12 @@ namespace Systems.Abilities
 
         [SerializeField] private float _moreForge = 100f;
         [SerializeField] private float _drag = 5f;
+
+        [Header("Acceleration")]
+        [SerializeField] private float _accelerationTime = 0.5f;
+        [SerializeField] private AnimationCurve _accelerationCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
+
+        private float _accelerationTimer;
 
         private Vector2 _moveInput;
         private GlobalData _globalData;
@@ -58,6 +64,7 @@ namespace Systems.Abilities
         private void OnMoveCanceled(InputAction.CallbackContext context)
         {
             _moveInput = Vector2.zero;
+            _accelerationTimer = 0f;
             EndAbility?.Invoke();
         }
 
@@ -69,12 +76,21 @@ namespace Systems.Abilities
             if (_moveInput.magnitude > 0.1f)
             {
                 UsingAbility?.Invoke();
-                Vector2 force = _moveInput * MoveForce;
+
+                _accelerationTimer += Time.fixedDeltaTime;
+                float normalizedTime = Mathf.Clamp01(_accelerationTimer / _accelerationTime);
+                float accelerationMultiplier = _accelerationCurve.Evaluate(normalizedTime);
+
+                Vector2 force = _moveInput * MoveForce * accelerationMultiplier;
                 rb.AddForce(force * _moreForge, ForceMode2D.Force);
 
                 float targetAngle = Mathf.Atan2(_moveInput.y, _moveInput.x) * Mathf.Rad2Deg;
                 float newAngle = Mathf.LerpAngle(rb.rotation, targetAngle, 1.5f * Time.fixedDeltaTime);
                 rb.MoveRotation(newAngle);
+            }
+            else
+            {
+                _accelerationTimer = 0f;
             }
         }
     }
