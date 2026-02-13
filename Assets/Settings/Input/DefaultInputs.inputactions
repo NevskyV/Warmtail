@@ -44,9 +44,9 @@
                 },
                 {
                     "name": "Escape",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "28f003f7-9bc3-4244-ba92-08f4dbe0c8af",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -131,6 +131,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BottomButtons",
+                    "type": "Value",
+                    "id": "4a073e25-766a-45fa-9a78-88499649888e",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -196,6 +205,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
+                    "action": "Escape",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "759454a3-88a6-431b-9d0b-4f494bad025a",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
                     "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -485,6 +505,39 @@
                     "action": "R",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "52e56e35-1063-4898-b8ee-ced270c66d85",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BottomButtons",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "10f1a456-54e2-40b1-8d98-7c47ca847761",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "BottomButtons",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "f18b1225-4ce7-4124-8acf-76e36652faf9",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "BottomButtons",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

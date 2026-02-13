@@ -44,7 +44,6 @@ namespace Systems.AbilitiesVisual
             _ability.UsingAbility += UsingAbility;
             _ability.EndAbility += EndAbility;
             _loopVfx = _player.GetComponentsInChildren<ParticleSystem>();
-            //UpdatePlayerStats();
         }
 
         public async void StartAbility()
@@ -55,8 +54,6 @@ namespace Systems.AbilitiesVisual
             startObj.localPosition += _vfxOffset;
             _player.ObjectSfx.PlaySfx(_startSfx);
             _player.ObjectSfx.PlayLoopSfx(_loopSfx, 500);
-            
-            //UpdatePlayerStats();
         }
         
         public void UsingAbility()
@@ -86,17 +83,20 @@ namespace Systems.AbilitiesVisual
                 }
             }
         }
-        
+
         public async void EndAbility()
         {
-            //UpdatePlayerStats();
             _player.ObjectSfx.StopLoopSfx();
             var tempZoom = _camera.Lens.OrthographicSize;
-            DOTween.To(() => tempZoom, x =>
+            if (_ability.Enabled)
             {
-                tempZoom = x;
-                _camera.Lens.OrthographicSize = tempZoom;
-            }, _normalCamZoom,1);
+                DOTween.To(() => tempZoom, x =>
+                {
+                    tempZoom = x;
+                    _camera.Lens.OrthographicSize = tempZoom;
+                }, _normalCamZoom, 1);
+            }
+
             for (int i = _loopVfxObjs.Count - 1; i >= 0; i--)
             {
                 var obj =  _loopVfxObjs[i];
@@ -112,13 +112,6 @@ namespace Systems.AbilitiesVisual
                 _loopVfxObjs.Remove(obj);
             }
         }
-
-        // private void UpdatePlayerStats()
-        // {
-        //     Water.SetVector(Position, 
-        //         new Vector4(_player.Rigidbody.position.x, _player.Rigidbody.position.y));
-        //     Water.SetFloat(Rotation, _player.Rigidbody.rotation - 90);
-        // }
 
         public void Dispose()
         {
