@@ -17,7 +17,7 @@
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             
             TEXTURE2D_X_FLOAT(_SourceDepth);
-            SAMPLER(sampler_PointClamp);
+            //SAMPLER(sampler_PointClamp);
 
             struct Varyings
             {
