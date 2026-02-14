@@ -12,6 +12,7 @@ namespace Entities.Props
         [SerializeField] private AudioClip _sfx;
         [SerializeField] private float _effectDuration = 1f;
         [SerializeField] private bool _reverse;
+        [SerializeField] private bool _startInPortalState;
         
         private AudioSource _audioSource;
         
@@ -27,33 +28,25 @@ namespace Entities.Props
             {
                 _audioSource = gameObject.AddComponent<AudioSource>();
             }
+
+            ApplyState(_startInPortalState);
         }
         
         public async void Activate()
         {
-            if (_reverse)
+            await PlayEffect();
+            ApplyState(!_reverse);
+        }
+
+        private void ApplyState(bool portalActive)
+        {
+            foreach (var obj in _baseObjects)
             {
-                await PlayEffect();
-                foreach (var obj in _portalObjects)
-                {
-                    if (obj != null) obj.SetActive(false);
-                }
-                foreach (var obj in _baseObjects)
-                {
-                    if (obj != null) obj.SetActive(true);
-                }
+                if (obj != null) obj.SetActive(!portalActive);
             }
-            else
+            foreach (var obj in _portalObjects)
             {
-                await PlayEffect();
-                foreach (var obj in _baseObjects)
-                {
-                    if (obj != null) obj.SetActive(false);
-                }
-                foreach (var obj in _portalObjects)
-                {
-                    if (obj != null) obj.SetActive(true);
-                }
+                if (obj != null) obj.SetActive(portalActive);
             }
         }
         

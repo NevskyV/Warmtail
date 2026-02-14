@@ -11,18 +11,11 @@ using Zenject;
 
 namespace Entities.Props
 {
-    [Serializable]
-    public class GhostPoint
-    {
-        public Vector2 Position;
-        public Vector3 Rotation;
-    }
-
     public class GhostMemory : MonoBehaviour
     {
         [SerializeField] private RuntimeDialogueGraph _graph;
         [SerializeField] private string _prefix;
-        [SerializeField] private List<GhostPoint> _ghostPoints = new();
+        [SerializeField] private List<Transform> _ghostPoints = new();
         [SerializeField] private GameObject _ghostPrefab;
         [SerializeField] private GameObject _sparklePrefab;
         [SerializeField] private float _sparkleMoveDuration = 1f;
@@ -43,6 +36,11 @@ namespace Entities.Props
                 return;
             }
             
+            if (_graph == null || _graph.AllNodes.Count < _ghostPoints.Count)
+            {
+                Debug.LogWarning("GhostMemory: Dialogue graph has fewer nodes than ghost points.");
+            }
+
             SpawnGhostAtPoint(0);
         }
         
@@ -51,7 +49,13 @@ namespace Entities.Props
             if (index >= _ghostPoints.Count) return;
             
             var point = _ghostPoints[index];
-            _currentGhost = Instantiate(_ghostPrefab, point.Position, Quaternion.Euler(point.Rotation));
+            if (point == null)
+            {
+                Debug.LogWarning("GhostMemory: Ghost point transform is missing.");
+                return;
+            }
+
+            _currentGhost = Instantiate(_ghostPrefab, point.position, point.rotation);
             _currentGhostCollider = _currentGhost.GetComponent<Collider2D>();
             
             if (_currentGhostCollider == null)
@@ -80,7 +84,10 @@ namespace Entities.Props
         {
             if (other.CompareTag("Player"))
             {
-                _monologueVisuals.RequestSingleLine(_graph.AllNodes[_currentPointIndex].NodeId,_prefix);
+                if (_graph != null && _currentPointIndex < _graph.AllNodes.Count)
+                {
+                    _monologueVisuals.RequestSingleLine(_graph.AllNodes[_currentPointIndex].NodeId, _prefix);
+                }
                 MoveToNextPoint();
             }
         }
@@ -90,10 +97,16 @@ namespace Entities.Props
             if (_currentPointIndex >= _ghostPoints.Count - 1) return;
             
             var oldGhost = _currentGhost;
-            var oldPosition = _ghostPoints[_currentPointIndex].Position;
+            var oldPoint = _ghostPoints[_currentPointIndex];
+            var oldPosition = oldPoint != null ? (Vector2)oldPoint.position : (Vector2)transform.position;
             
             _currentPointIndex++;
             var newPoint = _ghostPoints[_currentPointIndex];
+            if (newPoint == null)
+            {
+                Debug.LogWarning("GhostMemory: Ghost point transform is missing.");
+                return;
+            }
             
             if (oldGhost != null)
             {
@@ -106,7 +119,7 @@ namespace Entities.Props
                 var sparkleTransform = sparkle.transform;
                 
                 sparkleTransform.position = oldPosition;
-                var tween = sparkleTransform.DOMove(newPoint.Position, _sparkleMoveDuration)
+                var tween = sparkleTransform.DOMove(newPoint.position, _sparkleMoveDuration)
                     .SetEase(_sparkleEase);
                 
                 SpawnGhostAtPoint(_currentPointIndex);
