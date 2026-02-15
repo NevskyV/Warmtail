@@ -13,6 +13,11 @@ namespace Entities.UI.SDF
         private List<SdfGroup> _groups = new List<SdfGroup>();
         [SerializeField] private float _groupSmoothness = 0.1f;
         [SerializeField] private int _interGroupType = 0;
+        
+        [Header("Shader Settings")] [SerializeField]
+        public Material BaseMaterial;
+
+        [SerializeField] public Material InstanceMaterial;
 
         private ComputeBuffer _shapeBuffer;
         private ComputeBuffer _propBuffer;
@@ -24,7 +29,8 @@ namespace Entities.UI.SDF
             {
                 _image = gameObject.AddComponent<Image>();
             } 
-            if (!_image.material && _groups.Count >0&& _groups[0].InstanceMaterial) _image.material = _groups[0].InstanceMaterial;
+            if(_image.material && !InstanceMaterial) {InstanceMaterial = _image.material;}
+            if (_groups.Count >0&& InstanceMaterial) _image.material = InstanceMaterial;
         }
 
         private void Update()
@@ -41,7 +47,7 @@ namespace Entities.UI.SDF
             int groupIndex = 0;
             foreach (SdfGroup group in _groups)
             {
-                if (!group || !group.gameObject.activeInHierarchy || !group.InstanceMaterial) 
+                if (!group || !group.gameObject.activeInHierarchy || !InstanceMaterial) 
                 {
                     groupIndex++;
                     continue;
@@ -67,52 +73,22 @@ namespace Entities.UI.SDF
                         GroupIndex = groupIndex
                     });
                 }
-
-                Material mat = group.InstanceMaterial;
                 
-                GroupProperty prop = new GroupProperty
-                {
-                    InterType = mat.GetInt("_INTERSECTION"),
-                    FillColor = mat.GetVector("_FillColor"),
-                    Alpha = mat.GetFloat("_Alpha"),
-                    OutlineColor = mat.GetVector("_OutlineColor"),
-                    OutlineThickness = mat.GetFloat("_OutlineThickness"),
-                    InlineColor = mat.GetVector("_InlineColor"),
-                    InlineThickness = mat.GetFloat("_InlineThickness"),
-                    InOutlineThickness = mat.GetFloat("_InOutlineThickness"),
-                    WaveFreq = mat.GetFloat("_WaveFrequency"),
-                    WaveAmp = mat.GetFloat("_WaveAmplitude"),
-                    WaveSpeed = mat.GetFloat("_WaveSpeed"),
-                };
-
-                allProps.Add(prop);
+                allProps.Add(group.GroupProperty);
 
                 groupIndex++;
             }
 
             UpdateShapeBuffer(allShapes);
             UpdatePropBuffer(allProps);
-
-            groupIndex = 0;
-            foreach (SdfGroup group in _groups)
-            {
-                if (!group || !group.gameObject.activeInHierarchy || !group.InstanceMaterial) 
-                {
-                    groupIndex++;
-                    continue;
-                }
-
-                group.InstanceMaterial.SetBuffer("_AllShapes", _shapeBuffer);
-                group.InstanceMaterial.SetInt("_ShapeCount", allShapes.Count);
-                group.InstanceMaterial.SetBuffer("_GroupProps", _propBuffer);
-                group.InstanceMaterial.SetInt("_GroupCount", allProps.Count);
-                group.InstanceMaterial.SetFloat("_GroupSmoothness", _groupSmoothness);
-                group.InstanceMaterial.SetInt("_MyGroupIndex", groupIndex);
-                group.InstanceMaterial.SetInt("_IsBaseGroup", groupIndex == 0 ? 1 : 0);
-                group.InstanceMaterial.SetFloat("_InterGroupType", _interGroupType);
-
-                groupIndex++;
-            }
+            InstanceMaterial.SetBuffer("_AllShapes", _shapeBuffer);
+            InstanceMaterial.SetInt("_ShapeCount", allShapes.Count);
+            InstanceMaterial.SetBuffer("_GroupProps", _propBuffer);
+            InstanceMaterial.SetInt("_GroupCount", allProps.Count);
+            InstanceMaterial.SetFloat("_GroupSmoothness", _groupSmoothness);
+            InstanceMaterial.SetInt("_MyGroupIndex", groupIndex);
+            InstanceMaterial.SetInt("_IsBaseGroup", groupIndex == 0 ? 1 : 0);
+            InstanceMaterial.SetFloat("_InterGroupType", _interGroupType);
         }
 
         private void UpdateShapeBuffer(List<ShapeData> data)
@@ -142,16 +118,46 @@ namespace Entities.UI.SDF
             if (_shapeBuffer != null) _shapeBuffer.Release();
             if (_propBuffer != null) _propBuffer.Release();
         }
+        
+        [TriInspector.Button]
+        public void CreateMaterial(string suffix = "")
+        {
+            if (BaseMaterial == null) return;
+            
+#if UNITY_EDITOR
+            string folder = "Assets/Resources/Materials/SDF_Groups/";
+            if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
+            {
+                UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials", "SDF_Groups");
+            }
+            folder += suffix;
+            if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
+            {
+                UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials/SDF_Groups", suffix);
+            }
+            
+            string assetPath = $"{folder}/{gameObject.name}_SDFMaterial.mat";
+            InstanceMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(assetPath);
+            if (!InstanceMaterial)
+            {
+                InstanceMaterial = new Material(BaseMaterial);
+                UnityEditor.AssetDatabase.CreateAsset(InstanceMaterial, assetPath);
+                UnityEditor.AssetDatabase.SaveAssets();
+            }
+#endif
+            _image.material = InstanceMaterial;
+        }
     }
 
+    [Serializable]
     public struct GroupProperty
     {
         public int InterType;
-        public Vector4 FillColor;
+        public Color FillColor;
         public float Alpha;
-        public Vector4 OutlineColor;
+        public Color OutlineColor;
         public float OutlineThickness;
-        public Vector4 InlineColor;
+        public Color InlineColor;
         public float InlineThickness;
         public float InOutlineThickness;
         public float WaveFreq;

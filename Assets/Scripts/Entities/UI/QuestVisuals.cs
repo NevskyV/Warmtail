@@ -192,7 +192,7 @@ namespace Entities.UI
                 if (toTarget.sqrMagnitude > 0.0001f)
                 {
                     float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
-                    marks[i].Object.transform.localRotation = Quaternion.Euler(0f, 0f, angle + 180);
+                    marks[i].Object.transform.localRotation = Quaternion.Euler(0f, 0f, angle - 90);
                 }
                 marks[i].Object.transform.position = newScreenPos;
             }

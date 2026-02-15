@@ -15,7 +15,7 @@ namespace Entities.UI
         public struct InputData
         {
             public InputActionReference Action;
-            public CanvasGroup UI;
+            public GameObject UI;
         }
 
         [SerializeField] private float _fadeTime = 2f;
@@ -26,9 +26,9 @@ namespace Entities.UI
         public async void ShowTip(InputActionReference reference)
         {
             var inputData = _tips[_playerInput.currentControlScheme].Find(x => x.Action == reference);
-            inputData.UI.DOFade(1,_fadeTime);
+            inputData.UI.SetActive(true);
             await UniTask.WaitUntil(inputData.Action.action.IsPressed);
-            inputData.UI.DOFade(0,_fadeTime);
+            inputData.UI.SetActive(false);
         }
     }
 }

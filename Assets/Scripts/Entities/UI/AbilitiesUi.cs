@@ -100,11 +100,11 @@ namespace Entities.UI
             foreach (var image in _images)
             {
                 var parent = image.transform.parent.GetComponent<SdfGroup>();
-                parent.InstanceMaterial.SetFloat("_OutlineThickness",0);
-                parent.InstanceMaterial.SetFloat("_InOutlineThickness",0);
-                parent.InstanceMaterial.SetFloat("_InlineThickness",0);
-                parent.InstanceMaterial.SetFloat("_WaveAmplitude",0);
-                parent.InstanceMaterial.SetFloat("_Alpha",1);
+                parent.GroupProperty.OutlineThickness = 0;
+                parent.GroupProperty.InOutlineThickness = 0;
+                parent.GroupProperty.InlineThickness = 0;
+                parent.GroupProperty.WaveAmp = 0;
+                parent.GroupProperty.Alpha = 1;
             }
         }
 
@@ -191,10 +191,10 @@ namespace Entities.UI
             
             var confirmedParent = _images[index].transform.parent.GetComponent<SdfGroup>();
             
-            var confirmedInlineWidth = confirmedParent.InstanceMaterial.GetFloat("_InlineThickness");
+            var confirmedInlineWidth = confirmedParent.GroupProperty.InlineThickness;
             DOTween.To(() => confirmedInlineWidth, x =>{
                 confirmedInlineWidth = x;
-                confirmedParent.InstanceMaterial.SetFloat("_InlineThickness", x);
+                confirmedParent.GroupProperty.InlineThickness = x;
             }, notConfirmed? _confirmedInWidth : _defaultInWidth, 0.5f);
         }
 
@@ -205,19 +205,19 @@ namespace Entities.UI
                 var parent = _images[i].transform.parent.GetComponent<SdfGroup>();
                 if (!warmthAbilities.Contains(i))
                 {
-                    var opacity = parent.InstanceMaterial.GetFloat("_Alpha");
+                    var opacity = parent.GroupProperty.Alpha;
                     DOTween.To(() => opacity, x =>{
                         opacity = x;
-                        parent.InstanceMaterial.SetFloat("_Alpha", x);
+                        parent.GroupProperty.Alpha = x;
                     }, _activeOpacity, 0.5f);
                     CreateOutline(i, false);
                 }
                 else
                 {
-                    var amplitude = parent.InstanceMaterial.GetFloat("_WaveAmplitude");
+                    var amplitude = parent.GroupProperty.WaveAmp;
                     DOTween.To(() => amplitude, x =>{
                         amplitude = x;
-                        parent.InstanceMaterial.SetFloat("_WaveAmplitude", x);
+                        parent.GroupProperty.WaveAmp = x;
                     }, _activeAmplitude, 0.5f);
                     CreateOutline(i, true);
                 }
@@ -231,18 +231,18 @@ namespace Entities.UI
                 var parent = _images[i].transform.parent.GetComponent<SdfGroup>();
                 if (!warmthAbilities.Contains(i))
                 {
-                    var opacity = parent.InstanceMaterial.GetFloat("_Alpha");
+                    var opacity = parent.GroupProperty.Alpha;
                     DOTween.To(() => opacity, x =>{
                         opacity = x;
-                        parent.InstanceMaterial.SetFloat("_Alpha", x);
+                        parent.GroupProperty.Alpha =  x;
                     }, _defaultOpacity, 0.5f);
                 }
                 else
                 {
-                    var amplitude = parent.InstanceMaterial.GetFloat("_WaveAmplitude");
+                    var amplitude = parent.GroupProperty.WaveAmp;
                     DOTween.To(() => amplitude, x =>{
                         amplitude = x;
-                        parent.InstanceMaterial.SetFloat("_WaveAmplitude", x);
+                        parent.GroupProperty.WaveAmp = x;
                     }, _defaultAmplitude, 0.5f);
                 }
             }
@@ -252,12 +252,12 @@ namespace Entities.UI
         {
             var selectedParent = _images[index].transform.parent.GetComponent<SdfGroup>();
             
-            DOTween.To(() => selectedParent.InstanceMaterial.GetFloat("_OutlineThickness"), x =>{
-                selectedParent.InstanceMaterial.SetFloat("_OutlineThickness", x);
+            DOTween.To(() => selectedParent.GroupProperty.OutlineThickness, x =>{
+                selectedParent.GroupProperty.OutlineThickness = x;
             }, selected? _selectedOutWidth : _defaultOutWidth, 0.5f);
             
-            DOTween.To(() => selectedParent.InstanceMaterial.GetFloat("_InOutlineThickness"), x =>{
-                selectedParent.InstanceMaterial.SetFloat("_InOutlineThickness", x);
+            DOTween.To(() => selectedParent.GroupProperty.InOutlineThickness, x =>{
+                selectedParent.GroupProperty.InOutlineThickness = x;
             }, selected? _selectedInOutWidth : _defaultInOutWidth, 0.5f);
             selectedParent.transform.parent.GetComponent<Image>().SetMaterialDirty();
         }

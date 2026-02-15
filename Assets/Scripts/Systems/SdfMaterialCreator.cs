@@ -8,7 +8,7 @@ namespace Systems
     public class SdfMaterialCreator : MonoBehaviour
     {
         [SerializeField] private Image _mainImage;
-        [Button]
+        /*[Button]
         public void CreateMaterials()
         {
             var groups = GetComponentsInChildren<SdfGroup>();
@@ -20,6 +20,6 @@ namespace Systems
             }
             _mainImage.material = groups[0].InstanceMaterial;
             Debug.Log($"Created {groups.Length} materials");
-        }
+        }*/
     }
 }

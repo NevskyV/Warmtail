@@ -473,7 +473,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  BaseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
+  GroupProperty:
+    InterType: 0
+    FillColor: {r: 0.77453184, g: 0.89433956, b: 0.88274527, a: 1}
+    Alpha: 1
+    OutlineColor: {r: 0.05906012, g: 0.26382837, b: 0.3962264, a: 1}
+    OutlineThickness: 0
+    InlineColor: {r: 0.19607843, g: 0.5028534, b: 0.50980395, a: 1}
+    InlineThickness: 0
+    InOutlineThickness: 3
+    WaveFreq: 5
+    WaveAmp: 0.004
+    WaveSpeed: 1
   InstanceMaterial: {fileID: 2100000, guid: df880be350e51ac40b028c9882942cad, type: 2}
 --- !u!1 &5624457435116435169
 GameObject:
@@ -526,7 +537,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  BaseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
+  GroupProperty:
+    InterType: 0
+    FillColor: {r: 0.77453184, g: 0.89433956, b: 0.88274527, a: 1}
+    Alpha: 1
+    OutlineColor: {r: 0.05906012, g: 0.26382837, b: 0.3962264, a: 1}
+    OutlineThickness: 0.005
+    InlineColor: {r: 0.19607843, g: 0.5028534, b: 0.50980395, a: 1}
+    InlineThickness: 0.005
+    InOutlineThickness: 3
+    WaveFreq: 5
+    WaveAmp: 0.002
+    WaveSpeed: 1
   InstanceMaterial: {fileID: 2100000, guid: c919d90bf51e8354fae89d6102d629aa, type: 2}
 --- !u!1 &6490547369730882229
 GameObject:
@@ -696,6 +718,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGlobalBlendManager
   _groupSmoothness: 0.04
   _interGroupType: 2
+  BaseMaterial: {fileID: 0}
+  InstanceMaterial: {fileID: 2100000, guid: c919d90bf51e8354fae89d6102d629aa, type: 2}
 --- !u!1 &7645812291793744974
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,6 +730,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5886020738337937877}
   - component: {fileID: 2347298445683546919}
+  - component: {fileID: 1885278932429068747}
   m_Layer: 5
   m_Name: Star (1)
   m_TagString: Untagged
@@ -720,7 +745,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7645812291793744974}
-  m_LocalRotation: {x: -0, y: -0, z: 0.17666641, w: 0.9842708}
+  m_LocalRotation: {x: 0, y: 0, z: 0.6316998, w: 0.7752132}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -753,6 +778,19 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.05, y: 0, z: 0, w: 0}
     GroupIndex: 0
+--- !u!114 &1885278932429068747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7645812291793744974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4db49abbedc4dae8f77fc6153526a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.ObjectRotator
+  _speed: {x: 0, y: 0, z: 1}
 --- !u!1 &7787519238553487719
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,10 +881,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4186806425516130385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0820011, y: 1}
-  m_AnchorMax: {x: 0.8893322, y: 1}
-  m_AnchoredPosition: {x: 168.1189, y: -707}
-  m_SizeDelta: {x: -681.9097, y: 79.0698}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 140.60803, y: 373}
+  m_SizeDelta: {x: 867.6473, y: 79.069824}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4251271281987838401
 CanvasRenderer:

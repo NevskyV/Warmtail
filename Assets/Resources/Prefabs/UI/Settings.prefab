@@ -1903,6 +1903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2536434696666148117}
   - component: {fileID: 6617775014117556030}
+  - component: {fileID: 8050998715294546097}
   m_Layer: 5
   m_Name: Box (1)
   m_TagString: Untagged
@@ -1950,6 +1951,19 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.04, y: 0, z: 0, w: 0}
     GroupIndex: 0
+--- !u!114 &8050998715294546097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3782379596323163722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4db49abbedc4dae8f77fc6153526a8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.ObjectRotator
+  _speed: {x: 0, y: 0, z: 0.4}
 --- !u!1 &4108198918916354968
 GameObject:
   m_ObjectHideFlags: 0
@@ -2164,6 +2178,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGlobalBlendManager
   _groupSmoothness: 0.1
   _interGroupType: 0
+  BaseMaterial: {fileID: 0}
+  InstanceMaterial: {fileID: 2100000, guid: 1fbafb8b0f6ff074087797dc5bff9b30, type: 2}
 --- !u!222 &7362839498721306370
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3005,8 +3021,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  BaseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
-  InstanceMaterial: {fileID: 2100000, guid: 1fbafb8b0f6ff074087797dc5bff9b30, type: 2}
+  GroupProperty:
+    InterType: 0
+    FillColor: {r: 0.77453184, g: 0.89433956, b: 0.88274527, a: 1}
+    Alpha: 1
+    OutlineColor: {r: 0.05906012, g: 0.26382837, b: 0.3962264, a: 1}
+    OutlineThickness: 0.007
+    InlineColor: {r: 0.19607843, g: 0.5028534, b: 0.50980395, a: 1}
+    InlineThickness: 0.01
+    InOutlineThickness: 3
+    WaveFreq: 5
+    WaveAmp: 0.004
+    WaveSpeed: 1
+  InstanceMaterial: {fileID: 0}
 --- !u!1 &8044865307677923754
 GameObject:
   m_ObjectHideFlags: 0
@@ -3609,10 +3636,10 @@ PrefabInstance:
     - target: {fileID: 1020454900978951600, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 13bae11562c87fc4e989311f18bd630e, type: 2}
+      objectReference: {fileID: 2100000, guid: 2b5406104eb7e9b42b914dc1918c6ffd, type: 2}
     - target: {fileID: 1367141408674568559, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23.392868
+      value: 24.288773
       objectReference: {fileID: 0}
     - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: BaseMaterial
@@ -3622,10 +3649,94 @@ PrefabInstance:
       propertyPath: InstanceMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 945db2ce0e8d0d04081305a28db65df3, type: 2}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveAmp
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveFreq
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveSpeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.b
+      value: 0.9411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.g
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.r
+      value: 0.60784316
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.b
+      value: 1.5137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.g
+      value: 0.60661507
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.r
+      value: 0.37435383
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.b
+      value: 0.7921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.g
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.r
+      value: 0.11764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineThickness
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineThickness
+      value: 0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InOutlineThickness
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2981291730495245419, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3550769301638620017, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: BaseMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: fcd0790a4944ac74a9a70a8c99a90fdf, type: 2}
+    - target: {fileID: 3550769301638620017, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: InstanceMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 2b5406104eb7e9b42b914dc1918c6ffd, type: 2}
     - target: {fileID: 3717116677295240278, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: BaseMaterial
       value: 
@@ -3787,12 +3898,124 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1367141408674568559, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1367141408674568559, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23.392868
+      value: 24.288773
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveAmp
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveFreq
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveSpeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.b
+      value: 0.9411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.g
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.r
+      value: 0.60784316
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.b
+      value: 1.5137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.g
+      value: 0.60661507
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.r
+      value: 0.37435383
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.b
+      value: 0.7921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.g
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.r
+      value: 0.11764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineThickness
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineThickness
+      value: 0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InOutlineThickness
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2981291730495245419, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981291730495245419, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.12924425
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981291730495245419, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5442233
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981291730495245419, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0.000091553
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981291730495245419, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2981291730495245419, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3550769301638620017, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: BaseMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: fcd0790a4944ac74a9a70a8c99a90fdf, type: 2}
+    - target: {fileID: 3550769301638620017, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: InstanceMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: aecc739552c8302479d1b52bc347dba5, type: 2}
+    - target: {fileID: 3717116677295240278, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineThickness
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 4780557455182638941, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_Pivot.x
@@ -3824,7 +4047,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4780557455182638941, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 38.2368
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4780557455182638941, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3937,10 +4160,10 @@ PrefabInstance:
     - target: {fileID: 1020454900978951600, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 89f027cf78933f54da48d7e360aa528a, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a757b69fd01d024cb90c122fa2bdd88, type: 2}
     - target: {fileID: 1367141408674568559, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 23.392868
+      value: 24.288773
       objectReference: {fileID: 0}
     - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: BaseMaterial
@@ -3950,10 +4173,94 @@ PrefabInstance:
       propertyPath: InstanceMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 8ddd50440a728b84aad80835dd9ad67a, type: 2}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveAmp
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveFreq
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.WaveSpeed
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.b
+      value: 0.9411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.g
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.FillColor.r
+      value: 0.60784316
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.b
+      value: 1.5137255
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.g
+      value: 0.60661507
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineColor.r
+      value: 0.37435383
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.b
+      value: 0.7921569
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.g
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineColor.r
+      value: 0.11764706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InlineThickness
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.OutlineThickness
+      value: 0.008
+      objectReference: {fileID: 0}
+    - target: {fileID: 1465657277653794579, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: GroupProperty.InOutlineThickness
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 2981291730495245419, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3550769301638620017, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: BaseMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: fcd0790a4944ac74a9a70a8c99a90fdf, type: 2}
+    - target: {fileID: 3550769301638620017, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: InstanceMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a757b69fd01d024cb90c122fa2bdd88, type: 2}
     - target: {fileID: 3717116677295240278, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: BaseMaterial
       value: 
