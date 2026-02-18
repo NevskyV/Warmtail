@@ -166,14 +166,11 @@ jobs:
         with:
           upload_url: ${{ steps.create-release.outputs.upload_url }}
           asset_path: build.zip
-          asset_name: ${{ vars.GAME_NAME }}-win-v${{ needs.build.outputs.buildVersion }}.zip
+          asset_name: ${{ vars.GAME_NAME }}-win.zip
           asset_content_type: application/zip
 
-      - name: Install butler
-        run: |
-          curl -L https://broth.itch.ovh/butler/linux-amd64/head/butler -o butler
-          chmod +x butler
-          sudo mv butler /usr/local/bin/butler
+      - name: Setup butler
+        uses: itchio/butler-setup-action@v1
 
       - name: Upload to itch.io 🎮
         env:
