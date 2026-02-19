@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Entities.Props;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Entities.UI
 {
-    public class TipsVisuals : MonoBehaviour
+    public class TipsVisuals : SavableStateObject
     {
         [Serializable]
         public struct InputData
@@ -23,11 +24,18 @@ namespace Entities.UI
         
         [Inject] private PlayerInput _playerInput;
         
-        public async void ShowTip(InputActionReference reference)
+        public async void ShowTip(InputAction reference)
         {
-            var inputData = _tips[_playerInput.currentControlScheme].Find(x => x.Action == reference);
+            print(_playerInput.currentControlScheme);
+            var inputData = _tips[_playerInput.currentControlScheme].Find(x => x.Action.action == reference);
             inputData.UI.SetActive(true);
             await UniTask.WaitUntil(inputData.Action.action.IsPressed);
+            HideTip(reference);
+        }
+        
+        public void HideTip(InputAction reference)
+        {
+            var inputData = _tips[_playerInput.currentControlScheme].Find(x => x.Action.action == reference);
             inputData.UI.SetActive(false);
         }
     }

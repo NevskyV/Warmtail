@@ -1,8 +1,10 @@
 ﻿using Data;
 using Data.Player;
 using Entities.Core;
+using Entities.UI;
 using Interfaces;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Systems.AbilitiesVisual
@@ -10,30 +12,30 @@ namespace Systems.AbilitiesVisual
     public class InteractionVisuals : IAbilityVisual
     {
         [field: SerializeReference] public int AbilityIndex { get; set; }
-        [SerializeField] private string _imageId;
-        private GameObject _image;
+        [SerializeField] private InputActionAsset _reference;
+        [SerializeField] private string _actionName;
+        private TipsVisuals _tipsVisuals;
         
         [Inject]
-        private void Construct(PlayerConfig config)
+        private void Construct(PlayerConfig config, TipsVisuals tipsVisuals)
         {
             var ability = config.Abilities[AbilityIndex];
             ability.StartAbility += StartAbility;
             ability.EndAbility += EndAbility;
-            _image = SavableObjectsResolver.FindObjectById(_imageId);
+            _tipsVisuals =  tipsVisuals;
         }
         public void StartAbility()
         {
-            _image.SetActive(true);
+            _tipsVisuals.ShowTip(_reference[_actionName]);
         }
 
         public void UsingAbility()
         {
-            _image.SetActive(false);
         }
 
         public void EndAbility()
         {
-            _image.SetActive(false);
+            _tipsVisuals.HideTip(_reference[_actionName]);
         }
     }
 }

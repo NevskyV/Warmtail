@@ -1,3 +1,4 @@
+using System;
 using AYellowpaper.SerializedCollections;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -41,14 +42,14 @@ namespace Entities.House
                 _npc[character.Value].ChangeState(true);
         }
 
-        public void LeaveNpc(int character)
+        public void LeaveNpc(float delay)
         {
+            LeaveNpcAsync(_globalData.Get<NpcSpawnData>().CurrentHomeNpc, delay);
             _globalData.Edit<NpcSpawnData>(data => data.CurrentHomeNpc = (Character)0);
-            LeaveNpcAsync((Character)character);
         }
-        private async void LeaveNpcAsync(Character character)
+        private async void LeaveNpcAsync(Character character, float delay)
         {
-            await Task.Delay(10000);
+            await Task.Delay(TimeSpan.FromSeconds(delay));
             if (_npc.ContainsKey(character)) _npc[character].ChangeState(false);
         }
     }

@@ -163,5 +163,6 @@ namespace Entities.UI.SDF
         public float WaveFreq;
         public float WaveAmp;
         public float WaveSpeed;
+        public float Smoothness;
     }
 }

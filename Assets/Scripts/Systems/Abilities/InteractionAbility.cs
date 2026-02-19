@@ -82,6 +82,7 @@ namespace Systems.Abilities
         
             foreach (var interactable in objectsInRange)
             {
+                if (interactable is SpeakableCharacter speakable && speakable.Graph == null) return;
                 if (interactable is MonoBehaviour mb)
                 {
                     float dist = Vector2.Distance(playerPos, mb.transform.position);
@@ -108,7 +109,7 @@ namespace Systems.Abilities
 
         private void ObjectEnter(IInteractable interactable)
         {
-            if (interactable is SpeakableCharacter speakable && speakable.Graph == null) return;
+            if (interactable is SpeakableCharacter speakable && !speakable.Graph) return;
             
             var propertyBlock = new MaterialPropertyBlock();
             propertyBlock.SetInt(Enable, 1);
@@ -128,7 +129,7 @@ namespace Systems.Abilities
                 propertyBlock.SetFloat(InnerOutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 1.5f, 0.5f);
-
+            Debug.Log("interactable: " + interactable);
             StartAbility?.Invoke();
         }
         

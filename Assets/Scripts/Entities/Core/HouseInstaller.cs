@@ -30,11 +30,15 @@ namespace Entities.Core
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private CinemachineCamera _cam;
         [SerializeField] private SurfacingSystem _surfacingSystem;
+        [SerializeField] private TipsVisuals _tipsVisuals;
         private QuestSystem _questSystem = new();
 
         public override void InstallBindings()
         {
             Debug.Log("set ui installer HOUSE");
+            
+            Container.Inject(new WarmthSystem());
+            
             Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.Bind<Player>().FromInstance(_player).AsSingle();
             Container.Bind<PlayerStateController>().FromNewComponentOn(_player.gameObject).AsSingle().NonLazy();
@@ -55,6 +59,7 @@ namespace Entities.Core
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
             Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
+            Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             Container.Inject(_questSystem);
             Container.Bind<DailySystem>().FromNew().AsSingle();
             

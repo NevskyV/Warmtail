@@ -12,6 +12,7 @@ struct GroupProperty {
     float waveFreq;
     float waveAmp;
     float waveSpeed;
+    float smoothness;
 };
 
 struct Shape {
@@ -392,22 +393,22 @@ void SceneSDF_float(
         float tempBase = baseDist;
 
         if (currentGroupProp.type == 0)
-            SmoothUnion_float(groupFill[g], baseDist, Smoothness, tempBase);
+            SmoothUnion_float(groupFill[g], baseDist, groupProp[g].smoothness, tempBase);
         else if (currentGroupProp.type == 1)
-            SmoothIntersection_float(groupFill[g], baseDist, Smoothness, tempBase);
+            SmoothIntersection_float(groupFill[g], baseDist, groupProp[g].smoothness, tempBase);
         else if (currentGroupProp.type == 2 && lastIndex == g)
-            SmoothDifference_float(baseDist, groupFill[g], Smoothness, tempBase);
+            SmoothDifference_float(baseDist, groupFill[g], groupProp[g].smoothness, tempBase);
     
         groupFill[g] = tempBase;
 
         float tempWavy = wavyDist;
         
         if (currentGroupProp.type == 0)
-            SmoothUnion_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
+            SmoothUnion_float(groupWavy[g], wavyDist, groupProp[g].smoothness, tempWavy);
         else if (currentGroupProp.type == 1)
-            SmoothIntersection_float(groupWavy[g], wavyDist, Smoothness, tempWavy);
+            SmoothIntersection_float(groupWavy[g], wavyDist, groupProp[g].smoothness, tempWavy);
         else if (currentGroupProp.type == 2 && lastIndex == g)
-            SmoothDifference_float(wavyDist,groupWavy[g], Smoothness, tempWavy);
+            SmoothDifference_float(wavyDist,groupWavy[g], groupProp[g].smoothness, tempWavy);
     
         lastIndex = g;
         groupWavy[g] = tempWavy;
@@ -447,6 +448,7 @@ void SceneSDF_float(
         combinedProp.waveAmp = lerp(groupProp[g].waveAmp, combinedProp.waveAmp, h);
         combinedProp.waveSpeed = lerp(groupProp[g].waveSpeed, combinedProp.waveSpeed, h);
         combinedProp.inOutlineThickness = lerp(groupProp[g].inOutlineThickness, combinedProp.inOutlineThickness, h);
+        combinedProp.smoothness = lerp(groupProp[g].smoothness, combinedProp.smoothness, h);
     }
 
     float bias = combinedProp.waveAmp * combinedProp.inOutlineThickness;
