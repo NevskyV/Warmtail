@@ -13,6 +13,7 @@ using TMPro;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 
@@ -61,6 +62,7 @@ namespace Entities.UI
         [Title("New ability")] 
         [SerializeField] private Transform _mainObject;
         [SerializeField] private Button _confirmButton;
+        [SerializeField] private InputActionReference _confirmAction;
         [SerializeField] private NewAbilityUI _newAbilityUI; 
         [Title("Hints")] 
         [SerializeField] private GameObject[] _hints;
@@ -68,12 +70,14 @@ namespace Entities.UI
         private List<WarmthAbility> _warmthAbilities;
         private PlayerConfig _playerConfig;
         private AbilitiesSystem _abilitiesSystem;
+        private TipsVisuals _tipsVisuals;
 
         [Inject]
-        private void Construct(PlayerConfig playerConfig, AbilitiesSystem abilitiesSystem)
+        private void Construct(PlayerConfig playerConfig, AbilitiesSystem abilitiesSystem, TipsVisuals tipsVisuals)
         {
             _playerConfig = playerConfig;
             _abilitiesSystem =  abilitiesSystem;
+            _tipsVisuals = tipsVisuals;
             _warmthAbilities = _playerConfig.Abilities.OfType<WarmthAbility>().ToList();
             
             _abilitiesSystem.OnSelect += SelectAbility;
@@ -276,6 +280,7 @@ namespace Entities.UI
             EventSystem.current.SetSelectedGameObject(_confirmButton.gameObject);
             
             _newAbilityUI.Name.GetComponent<TextEffect>().Refresh();
+            _tipsVisuals.ShowTip(_confirmAction);
             HideAbilities();
         }
 
