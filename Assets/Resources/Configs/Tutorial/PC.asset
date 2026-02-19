@@ -66,6 +66,7 @@ MonoBehaviour:
     - rid: 7345390956647809381
     - rid: 7345391249406034039
     - rid: 4061569151058051161
+    - rid: 8818234330180222976
     Tasks:
     - rid: 7345390956647809377
   - Actions:
@@ -543,3 +544,8 @@ MonoBehaviour:
         _active: 0
         _objectIds:
         - bf71663a-9935-4dff-8ebc-fb39c79772b8
+    - rid: 8818234330180222976
+      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _graph: {fileID: 0}
+        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
