@@ -8,10 +8,8 @@ namespace Entities.UI.SDF
     [ExecuteAlways]
     public class SdfGroup : MonoBehaviour
     {
-        [Header("Shader Settings"),  FormerlySerializedAs("_baseMaterial")] [SerializeField]
-        public Material BaseMaterial;
-
-        [SerializeField, FormerlySerializedAs("_instanceMaterial")] public Material InstanceMaterial;
+        public GroupProperty GroupProperty;
+        public Material InstanceMaterial;
         private List<SdfFigure> _figures = new();
 
 
@@ -34,33 +32,25 @@ namespace Entities.UI.SDF
         }
 
         [Button]
-        public void CreateMaterial(string suffix = "")
+        private void ParseMaterial()
         {
-            if (BaseMaterial == null) return;
-
-
-#if UNITY_EDITOR
-            string folder = "Assets/Resources/Materials/SDF_Groups/";
-            if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
-            {
-                UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials", "SDF_Groups");
-            }
-            folder += suffix;
-            if (!UnityEditor.AssetDatabase.IsValidFolder(folder))
-            {
-                UnityEditor.AssetDatabase.CreateFolder("Assets/Resources/Materials/SDF_Groups", suffix);
-            }
+            if (InstanceMaterial == null) return;
             
-            string assetPath = $"{folder}/{gameObject.name}_SDFMaterial.mat";
-            InstanceMaterial = UnityEditor.AssetDatabase.LoadAssetAtPath<Material>(assetPath);
-            if (!InstanceMaterial)
+            GroupProperty prop = new GroupProperty
             {
-                InstanceMaterial = new Material(BaseMaterial);
-                UnityEditor.AssetDatabase.CreateAsset(InstanceMaterial, assetPath);
-                UnityEditor.AssetDatabase.SaveAssets();
-            }
-#endif
-            
+                InterType = InstanceMaterial.GetInt("_INTERSECTION"),
+                FillColor = InstanceMaterial.GetVector("_FillColor"),
+                Alpha = InstanceMaterial.GetFloat("_Alpha"),
+                OutlineColor = InstanceMaterial.GetVector("_OutlineColor"),
+                OutlineThickness = InstanceMaterial.GetFloat("_OutlineThickness"),
+                InlineColor = InstanceMaterial.GetVector("_InlineColor"),
+                InlineThickness = InstanceMaterial.GetFloat("_InlineThickness"),
+                InOutlineThickness = InstanceMaterial.GetFloat("_InOutlineThickness"),
+                WaveFreq = InstanceMaterial.GetFloat("_WaveFrequency"),
+                WaveAmp = InstanceMaterial.GetFloat("_WaveAmplitude"),
+                WaveSpeed = InstanceMaterial.GetFloat("_WaveSpeed"),
+            };
+            GroupProperty = prop;
         }
     }
 }

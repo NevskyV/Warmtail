@@ -36,9 +36,12 @@ namespace Entities.UI
             _sections[value].DOFade(1, _fadeTime);
             _sections[value].blocksRaycasts = true;
             _sections[value].interactable = true;
-            if(EventSystem.current.currentSelectedGameObject != _leftArrow.gameObject && 
-               EventSystem.current.currentSelectedGameObject != _rightArrow.gameObject && 
-               EventSystem.current.currentSelectedGameObject != _backButton.gameObject) EventSystem.current.SetSelectedGameObject(_rightArrow.gameObject);
+            if (_rightArrow.IsInteractable() && EventSystem.current.currentSelectedGameObject != _leftArrow.gameObject &&
+                EventSystem.current.currentSelectedGameObject != _rightArrow.gameObject &&
+                EventSystem.current.currentSelectedGameObject != _backButton.gameObject)
+            {
+                EventSystem.current.SetSelectedGameObject(_rightArrow.gameObject);
+            }
             var navigation = _leftArrow.navigation;
             navigation.selectOnDown = _sectionFirstObj[value];
             _leftArrow.navigation = navigation;

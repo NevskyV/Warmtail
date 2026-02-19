@@ -206,8 +206,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  _baseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
-  _instanceMaterial: {fileID: 2100000, guid: 06093510ee380e4468a77f1bcd8fc3ac, type: 2}
+  GroupProperty:
+    InterType: 0
+    FillColor: {r: 0.7764706, g: 0.80126375, b: 0.89411765, a: 1}
+    Alpha: 1
+    OutlineColor: {r: 0.058823537, g: 0.17488565, b: 0.39607844, a: 1}
+    OutlineThickness: 0.007
+    InlineColor: {r: 0.19607843, g: 0.3495191, b: 0.50980395, a: 1}
+    InlineThickness: 0.015
+    InOutlineThickness: 3
+    WaveFreq: 5
+    WaveAmp: 0.004
+    WaveSpeed: 2
+  InstanceMaterial: {fileID: 0}
 --- !u!1 &2663403496237702403
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +636,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGlobalBlendManager
   _groupSmoothness: 0.02
   _interGroupType: 2
+  BaseMaterial: {fileID: 0}
+  InstanceMaterial: {fileID: 0}
 --- !u!1 &6405354856597564005
 GameObject:
   m_ObjectHideFlags: 0
