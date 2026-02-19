@@ -63,9 +63,8 @@ namespace Entities.UI
         [SerializeField] private Transform _mainObject;
         [SerializeField] private Button _confirmButton;
         [SerializeField] private InputActionReference _confirmAction;
+        [SerializeField] private InputActionReference _useAction;
         [SerializeField] private NewAbilityUI _newAbilityUI; 
-        [Title("Hints")] 
-        [SerializeField] private GameObject[] _hints;
         
         private List<WarmthAbility> _warmthAbilities;
         private PlayerConfig _playerConfig;
@@ -114,11 +113,9 @@ namespace Entities.UI
 
         private void ShowAbilities(bool show = true)
         {
-            _hints.ForEach(x => x.SetActive(false));
-            
             _confirmButton.interactable = false;
             _mainObject.DOLocalMoveY(-300, 2f);
-            _confirmButton.transform.parent.DOLocalMoveY(-300, 1.5f);
+            _confirmButton.transform.DOLocalMoveY(-300, 1.5f);
             int index = 0;
             var size = _images[0].GetComponent<RectTransform>().sizeDelta.x;
             
@@ -268,19 +265,18 @@ namespace Entities.UI
         
         private void AddAbility(int index)
         {
-            _hints[index].SetActive(true);
-            
             var config = _abilitiesConfigs.Find(x => GetAbilityType(x.Type) == _warmthAbilities[index].GetType());
             _newAbilityUI.Icon.sprite = config.Sprite;
             _newAbilityUI.Name.SetNewKey(config.Name);
             _newAbilityUI.Description.SetNewKey(config.Description);
             _mainObject.DOLocalMoveY(240, 2f);
-            _confirmButton.transform.parent.DOLocalMoveY(560, 1.5f);
+            _confirmButton.transform.DOLocalMoveY(560, 1.5f);
             _confirmButton.interactable = true;
             EventSystem.current.SetSelectedGameObject(_confirmButton.gameObject);
             
             _newAbilityUI.Name.GetComponent<TextEffect>().Refresh();
             _tipsVisuals.ShowTip(_confirmAction);
+            _tipsVisuals.ShowTip(_useAction);
             HideAbilities();
         }
 

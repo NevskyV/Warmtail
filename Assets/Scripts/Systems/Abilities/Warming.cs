@@ -51,7 +51,9 @@ namespace Systems.Abilities
         
         public void StartWarm()
         {
-            if (_isRunning) return;
+            if (_isRunning || !Enabled) return;
+            if (WarmObjectsInRadius())
+            { UsingAbility?.Invoke(); }
             _isRunning = true;
             ActiveRoutine().Forget();
         }
@@ -104,7 +106,6 @@ namespace Systems.Abilities
             {
                 _rumble.EnableRumble();
                 WarmthCost = _maxWarmthCost;
-                UsingAbility?.Invoke();
             }
             else
             {

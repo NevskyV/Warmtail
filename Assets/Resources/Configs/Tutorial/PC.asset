@@ -17,7 +17,6 @@ MonoBehaviour:
     - rid: 4204129410323054672
     Tasks: []
   - Actions:
-    - rid: 4061568655744827581
     - rid: 4061568655744827586
     Tasks:
     - rid: 4061568655744827587
@@ -119,12 +118,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4061568655744827581
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - 71ff479c-1a67-454c-a376-234bc69d0179
     - rid: 4061568655744827586
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
