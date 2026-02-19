@@ -47,7 +47,7 @@ namespace Entities.NPC
         {
             if (!Graph || (_uiStateSystem && _uiStateSystem.CurrentState == UIState.Shop)) return;
             _dialogueSystem.StartDialogue(Graph, _visuals, Id, this);
-            if (SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "GameplayIra") Graph = null;
+            Graph = null;
         }
         
         public void SetPosition(string pos)

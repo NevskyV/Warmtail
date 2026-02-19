@@ -41,8 +41,8 @@ namespace Entities.House
             int count = 0;
             if (_placementSystem.InventoryCurrent.ContainsKey(_houseItemData.Id))
                 count = _placementSystem.InventoryCurrent[_houseItemData.Id];
-            countTMP.text = count.ToString() + _unitOfMasure;
-            _block.SetActive(count <= 0);
+            countTMP.text = count + _unitOfMasure;
+            gameObject.SetActive(count > 0);
         }
 
         public void PointerDownItem()

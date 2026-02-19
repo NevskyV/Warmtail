@@ -70,12 +70,12 @@ namespace Entities.UI.SDF
     [Serializable]
     public struct ShapeData
     {
-        public int Type;
-        public Vector2 Position;
-        public float Rotation;
-        public Vector2 Size;
+        [HideInInspector] public int Type;
+        [HideInInspector] public Vector2 Position;
+        [HideInInspector] public float Rotation;
+        [HideInInspector] public Vector2 Size;
         public Vector4 ParamsA;
         public Vector4 ParamsB;
-        public int GroupIndex;
+        [HideInInspector] public int GroupIndex;
     }
 }

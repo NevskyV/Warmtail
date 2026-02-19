@@ -32,7 +32,7 @@ namespace Systems.Abilities
             WarmthCost = MaxWarmthCost;
         }
 
-        public void UseAbility()
+        public async void UseAbility()
         {
             if (_warmthSystem.CheckWarmCost(WarmthCost)  && !_drainWarmthRunning && !_cooldownRunning)
             {
@@ -41,8 +41,10 @@ namespace Systems.Abilities
                 
                 if (string.IsNullOrEmpty(MethodName))
                     MethodName = BaseMethodName;
-                GetType().GetMethod(MethodName)?.Invoke(this, null);
+                
                 DrainWarmth();
+                await UniTask.Delay(TimeSpan.FromSeconds(Tick));
+                GetType().GetMethod(MethodName)?.Invoke(this, null);
             }
         }
         
