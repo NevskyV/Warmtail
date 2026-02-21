@@ -37,8 +37,25 @@ namespace Systems.Abilities
             _config = config;
             _comboSystem = comboSystem;
             _globalData = globalData;
+            
+            SetupAbilities();
+            SetupInput(input);
 
-            var openedCount = globalData.Get<SavablePlayerData>().OpenedAbilitiesCount;
+            loader.SceneLoaded += ResetAbilities;
+        }
+
+        private void ResetAbilities(string sceneName)
+        {
+            _allAbilities = new();
+            _activeAbilities = new();
+            _confirmedAbilities = new();
+
+            if (sceneName != "HomeIra") SetupAbilities();
+        }
+
+        private void SetupAbilities()
+        {
+            var openedCount = _globalData.Get<SavablePlayerData>().OpenedAbilitiesCount;
             var warmthAbilities = _config.Abilities.OfType<WarmthAbility>().ToList();
             for (int i = 0; i < openedCount; i++)
             {
@@ -49,16 +66,6 @@ namespace Systems.Abilities
             {
                 warmthAbilities[i].InUse = false;
             }
-            
-            SetupInput(input);
-
-            loader.SceneLoaded += ResetAbilities;
-        }
-
-        private void ResetAbilities(string sceneName)
-        {
-            _activeAbilities = new();
-            _confirmedAbilities = new();
         }
 
         private async void SetupInput(PlayerInput input)
