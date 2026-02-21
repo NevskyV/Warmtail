@@ -3033,6 +3033,7 @@ MonoBehaviour:
     WaveFreq: 5
     WaveAmp: 0.004
     WaveSpeed: 1
+    Smoothness: 0
   InstanceMaterial: {fileID: 0}
 --- !u!1 &8044865307677923754
 GameObject:
@@ -3745,6 +3746,10 @@ PrefabInstance:
       propertyPath: InstanceMaterial
       value: 
       objectReference: {fileID: 2100000, guid: d5e87e35501704343a16c2155c6c7468, type: 2}
+    - target: {fileID: 4690485652786788309, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: _minValue
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 4780557455182638941, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4017,6 +4022,10 @@ PrefabInstance:
       propertyPath: GroupProperty.InlineThickness
       value: 0.02
       objectReference: {fileID: 0}
+    - target: {fileID: 4690485652786788309, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: _minValue
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 4780557455182638941, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4269,6 +4278,10 @@ PrefabInstance:
       propertyPath: InstanceMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 89baf1a1e54ae8943aa4620b948daa27, type: 2}
+    - target: {fileID: 4690485652786788309, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
+      propertyPath: _minValue
+      value: 0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 4780557455182638941, guid: cafa9554fe7e53c4daee6be04a44d7e7, type: 3}
       propertyPath: m_Pivot.x
       value: 0

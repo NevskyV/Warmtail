@@ -11,13 +11,15 @@ namespace Entities.UI.SDF
     [ExecuteAlways]
     public class SdfSlider : MonoBehaviour
     {
-        [SerializeField, Range(0, 1f)] private float _value;
+        [SerializeField, Range(0f, 1f)] private float _minValue;
+        [SerializeField, Range(0f, 1f)] private float _maxValue = 1f;
+        [SerializeField, Range(0f, 1f)] private float _value;
         public float Value
         {
             get => _value;
             set
             {
-                _value = Mathf.Clamp(value, 0f, 1f);
+                _value = Mathf.Clamp(value, _minValue, _maxValue);
                 _gamepadRumble.ShortRumble();
                 OnValueChange?.Invoke(_value);
             }
