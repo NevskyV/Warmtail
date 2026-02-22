@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
+  m_Name: Event 0
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
+  _idNode: faf6867e-4410-4567-84a4-94b0d37357c3
+  _scene: GameplayIra
+  _nextElement: {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
+  _element:
+    Actions:
+    - rid: 7007432198437208349
+    Tasks: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 7007432198437208349
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _objectIds:
+        - 2ab202c4-8aaa-4080-91f8-d8d963efea21
+        _homeScene: 0
