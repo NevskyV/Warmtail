@@ -13,23 +13,24 @@ MonoBehaviour:
   m_Name: Event 1
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNode: 6a63d855-dfa4-43f9-9b7e-0a99feba3161
-  _scene: GameplayIra
-  _nextElement: {fileID: 11400000, guid: e7afd8e6643c39443a4260bd9de089f3, type: 2}
-  _element:
+  Scene: GameplayIra
+  NextElement: {fileID: 11400000, guid: e7afd8e6643c39443a4260bd9de089f3, type: 2}
+  Element:
     Actions:
-    - rid: 7007432198437208320
+    - rid: 7007432209248551022
     Tasks:
-    - rid: 7007432209248551005
+    - rid: 7007432209248551014
   references:
     version: 2
     RefIds:
-    - rid: 7007432198437208320
-      type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+    - rid: 7007432209248551014
+      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _quest: {fileID: 11400000, guid: 37bd43537256fbb4e9d2c07105777df8, type: 2}
-    - rid: 7007432209248551005
-      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+        _reference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+        _actionName: Move
+        _tipsVisuals: e7327401-35ea-46fa-a89c-6c9ce1361d68
+        _description: 
+    - rid: 7007432209248551022
+      type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _prefab: {fileID: 3459850837378005844, guid: 3e18056f9fe35564da093f63aabed61f, type: 3}
-        _position: {x: -14.81, y: 28.15}
-        description: 
+        _type: 2

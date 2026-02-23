@@ -13,19 +13,22 @@ MonoBehaviour:
   m_Name: Event 0
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNode: faf6867e-4410-4567-84a4-94b0d37357c3
-  _scene: GameplayIra
-  _nextElement: {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
-  _element:
+  Scene: GameplayIra
+  NextElement: {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
+  Element:
     Actions:
-    - rid: 7007432198437208349
-    Tasks: []
+    - rid: 7007432209248551018
+    Tasks:
+    - rid: 7007432209248551015
   references:
     version: 2
     RefIds:
-    - rid: 7007432198437208349
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+    - rid: 7007432209248551015
+      type: {class: ButtonTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _active: 1
-        _objectIds:
-        - 2ab202c4-8aaa-4080-91f8-d8d963efea21
-        _homeScene: 0
+        _buttonId: 305f90b9-cd34-4aef-88d3-a6e77722d476
+    - rid: 7007432209248551018
+      type: {class: NotificationAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _popup: {fileID: 1307311160032710671, guid: 144371e616bacd54984a1874e7aa1047, type: 3}
+        _parentId: 90444d67-3ca5-42bc-9e15-25f02be54f15
