@@ -4205,6 +4205,7 @@ Transform:
   - {fileID: 2050093930}
   - {fileID: 424214787}
   - {fileID: 1836109678}
+  - {fileID: 1561139692}
   - {fileID: 865195739}
   - {fileID: 1897004855}
   - {fileID: 1673356535}
@@ -4924,6 +4925,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
+--- !u!1 &1561139691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1561139692}
+  - component: {fileID: 1561139693}
+  m_Layer: 0
+  m_Name: EventsSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1561139692
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561139691}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1204636205}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1561139693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561139691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef920defc09cdda4d96a461e31e23c1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventsSystem
+  _startNode: {fileID: 11400000, guid: 1757a367ada25aa4f9de6b0192b721f4, type: 2}
+  _eventConfigs:
+  - {fileID: 11400000, guid: 1757a367ada25aa4f9de6b0192b721f4, type: 2}
+  - {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
+  - {fileID: 11400000, guid: e7afd8e6643c39443a4260bd9de089f3, type: 2}
 --- !u!1 &1577569865
 GameObject:
   m_ObjectHideFlags: 0
