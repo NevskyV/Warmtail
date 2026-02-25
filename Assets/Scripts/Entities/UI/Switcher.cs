@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using Entities.Localization;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -10,20 +13,28 @@ namespace Entities.UI
     {
         [SerializeField] private LocalizedText _localizedText;
         [SerializeField] private List<string> _id = new();
-        [SerializeField] private Color _activeColor;
-        [SerializeField] private Color _deActiveColor;
-        [SerializeField] private Transform _switchesParent;
+        [SerializeField] private RectTransform _switchesParent;
+        [SerializeField] private RectTransform _transitionDot;
+        [SerializeField, Range(0,5f)] private float _transitionTime;
         public UnityEvent<int> Event { get; set; } = new();
         public int CurrentValue { get; set; }
-        private List<Image> _images = new();
+        private List<Transform> _images = new();
 
-        private void Start()
+        private async void Start()
         {
             for (int i = 0; i < _switchesParent.childCount; i++)
             {
-                _images.Add(_switchesParent.GetChild(i).GetComponent<Image>());
+                _images.Add(_switchesParent.GetChild(i));
             }
             Switch(CurrentValue);
+
+            _switchesParent.gameObject.SetActive(false);
+            _switchesParent.gameObject.SetActive(true);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_switchesParent);
+            Canvas.ForceUpdateCanvases();
+            SceneView.RepaintAll();
+            await UniTask.WaitForSeconds(_transitionTime);
+            _transitionDot.localPosition = new Vector3(_images[CurrentValue].transform.localPosition.x, 0,0);
         }
 
         public void SwitchNext()
@@ -44,9 +55,8 @@ namespace Entities.UI
         
         public virtual void Switch(int value)
         {
-            _images[CurrentValue].color = _deActiveColor;
             CurrentValue = value;
-            _images[CurrentValue].color = _activeColor;
+            _transitionDot.DOLocalMoveX(_images[CurrentValue].transform.localPosition.x, _transitionTime);
             _localizedText.SetNewKey(_id[value]);
         }
     }

@@ -48,7 +48,7 @@ namespace Entities.Core
             
             animator.SetTrigger(EndTransition);
             await UniTask.Delay(_animDuration);
-            Destroy(animator);
+            Destroy(animator.gameObject);
             
             SceneLoaded?.Invoke(sceneInd);
             if (sceneInd != "Start")
