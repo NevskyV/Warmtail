@@ -7,19 +7,32 @@ using Entities.UI;
 using UniRx;
 using UniRx.Triggers;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 namespace Entities.Props
 {
+    [Serializable]
+    public struct GhostPoint
+    {
+        public Vector2 Position;
+        public Vector3 Rotation;
+    }
+
     public class GhostMemory : MonoBehaviour
     {
         [SerializeField] private RuntimeDialogueGraph _graph;
-        [SerializeField] private string _prefix;
-        [SerializeField] private List<Transform> _ghostPoints = new();
+        [SerializeField] private string _prefix = "fragment_";
+        [SerializeField] private bool _autoStart = true;
+        [SerializeField, HideInInspector] private List<GhostPoint> _ghostPoints = new();
+        [SerializeField] private List<Transform> _ghostPointTransforms = new();
         [SerializeField] private GameObject _ghostPrefab;
         [SerializeField] private GameObject _sparklePrefab;
         [SerializeField] private float _sparkleMoveDuration = 1f;
         [SerializeField] private Ease _sparkleEase = Ease.InOutQuad;
+        [SerializeField] private float _sparkleCurveOffset = 1.5f;
+        [SerializeField] private bool _forceGhostColliderTrigger = true;
+        [SerializeField] private UnityEvent _onFinished;
 
         [Inject] private MonologueVisuals _monologueVisuals;
         
@@ -27,20 +40,71 @@ namespace Entities.Props
         private Collider2D _currentGhostCollider;
         private int _currentPointIndex = 0;
         private IDisposable _colliderSubscription;
+        private IDisposable _collisionSubscription;
+        private bool _isMoving;
         
         private void Start()
         {
-            if (_ghostPoints.Count == 0 || _ghostPrefab == null)
+            if (_autoStart)
             {
-                Debug.LogError("GhostMemory: Ghost points or prefab not set!");
-                return;
+                Begin();
             }
+        }
+
+        private void OnValidate()
+        {
+            if (_ghostPointTransforms == null) return;
             
-            if (_graph == null || _graph.AllNodes.Count < _ghostPoints.Count)
+            if (_ghostPoints == null)
+                _ghostPoints = new List<GhostPoint>(_ghostPointTransforms.Count);
+            else
+                _ghostPoints.Clear();
+
+            for (int i = 0; i < _ghostPointTransforms.Count; i++)
             {
-                Debug.LogWarning("GhostMemory: Dialogue graph has fewer nodes than ghost points.");
+                var t = _ghostPointTransforms[i];
+                if (t == null) continue;
+                _ghostPoints.Add(new GhostPoint
+                {
+                    Position = transform.InverseTransformPoint(t.position),
+                    Rotation = t.localEulerAngles
+                });
+            }
+        }
+
+        public void Begin()
+        {
+            if (_monologueVisuals == null)
+            {
+                _monologueVisuals = FindObjectOfType<MonologueVisuals>(true);
             }
 
+            if (_ghostPrefab == null)
+            {
+                return;
+            }
+
+            if ((_ghostPoints == null || _ghostPoints.Count == 0) && _ghostPointTransforms != null && _ghostPointTransforms.Count > 0)
+            {
+                _ghostPoints = new List<GhostPoint>(_ghostPointTransforms.Count);
+                for (int i = 0; i < _ghostPointTransforms.Count; i++)
+                {
+                    var t = _ghostPointTransforms[i];
+                    if (t == null) continue;
+                    _ghostPoints.Add(new GhostPoint { Position = transform.InverseTransformPoint(t.position), Rotation = t.localEulerAngles });
+                }
+            }
+
+            if (_ghostPoints == null || _ghostPoints.Count == 0)
+            {
+                return;
+            }
+
+            if (_graph == null || _graph.AllNodes.Count < _ghostPoints.Count)
+            {
+            }
+
+            _currentPointIndex = 0;
             SpawnGhostAtPoint(0);
         }
         
@@ -49,19 +113,21 @@ namespace Entities.Props
             if (index >= _ghostPoints.Count) return;
             
             var point = _ghostPoints[index];
-            if (point == null)
-            {
-                Debug.LogWarning("GhostMemory: Ghost point transform is missing.");
-                return;
-            }
-
-            _currentGhost = Instantiate(_ghostPrefab, point.position, point.rotation);
+            var worldPos = transform.TransformPoint(new Vector3(point.Position.x, point.Position.y, 0f));
+            var worldRot = transform.rotation * Quaternion.Euler(point.Rotation);
+            _currentGhost = Instantiate(_ghostPrefab, worldPos, worldRot);
             _currentGhostCollider = _currentGhost.GetComponent<Collider2D>();
             
             if (_currentGhostCollider == null)
             {
-                Debug.LogWarning("GhostMemory: Ghost prefab doesn't have a Collider2D!");
-                return;
+                var added = _currentGhost.AddComponent<CircleCollider2D>();
+                added.isTrigger = true;
+                _currentGhostCollider = added;
+            }
+
+            if (_forceGhostColliderTrigger && _currentGhostCollider is Collider2D col)
+            {
+                col.isTrigger = true;
             }
             
             SubscribeToCollider();
@@ -73,18 +139,32 @@ namespace Entities.Props
             {
                 _colliderSubscription.Dispose();
             }
+            if (_collisionSubscription != null)
+            {
+                _collisionSubscription.Dispose();
+            }
             
             if (_currentGhostCollider == null) return;
             
             _colliderSubscription = _currentGhostCollider.OnTriggerEnter2DAsObservable()
                 .Subscribe(OnGhostTriggered);
+            
+            _collisionSubscription = _currentGhostCollider.OnCollisionEnter2DAsObservable()
+                .Subscribe(c =>
+                {
+                    if (c?.collider != null)
+                    {
+                        OnGhostTriggered(c.collider);
+                    }
+                });
         }
         
         private void OnGhostTriggered(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (_isMoving) return;
+            if (other != null && other.CompareTag("Player"))
             {
-                if (_graph != null && _currentPointIndex < _graph.AllNodes.Count)
+                if (_monologueVisuals != null && _graph != null && _currentPointIndex < _graph.AllNodes.Count)
                 {
                     _monologueVisuals.RequestSingleLine(_graph.AllNodes[_currentPointIndex].NodeId, _prefix);
                 }
@@ -94,23 +174,34 @@ namespace Entities.Props
         
         private async void MoveToNextPoint()
         {
+            if (_isMoving) return;
             if (_currentPointIndex >= _ghostPoints.Count - 1) return;
+            _isMoving = true;
             
             var oldGhost = _currentGhost;
-            var oldPoint = _ghostPoints[_currentPointIndex];
-            var oldPosition = oldPoint != null ? (Vector2)oldPoint.position : (Vector2)transform.position;
+            var oldPosition = oldGhost != null ? (Vector2)oldGhost.transform.position : _ghostPoints[_currentPointIndex].Position;
             
             _currentPointIndex++;
             var newPoint = _ghostPoints[_currentPointIndex];
-            if (newPoint == null)
-            {
-                Debug.LogWarning("GhostMemory: Ghost point transform is missing.");
-                return;
-            }
+            var newPosition = (Vector2)transform.TransformPoint(new Vector3(newPoint.Position.x, newPoint.Position.y, 0f));
+            var newRotation = transform.rotation * Quaternion.Euler(newPoint.Rotation);
             
             if (oldGhost != null)
             {
                 Destroy(oldGhost);
+            }
+            
+            _currentGhost = Instantiate(_ghostPrefab, newPosition, newRotation);
+            _currentGhostCollider = _currentGhost.GetComponent<Collider2D>();
+            if (_currentGhostCollider == null)
+            {
+                var added = _currentGhost.AddComponent<CircleCollider2D>();
+                added.isTrigger = true;
+                _currentGhostCollider = added;
+            }
+            if (_forceGhostColliderTrigger)
+            {
+                _currentGhostCollider.isTrigger = true;
             }
             
             if (_sparklePrefab != null)
@@ -118,25 +209,35 @@ namespace Entities.Props
                 var sparkle = Instantiate(_sparklePrefab, oldPosition, Quaternion.identity);
                 var sparkleTransform = sparkle.transform;
                 
-                sparkleTransform.position = oldPosition;
-                var tween = sparkleTransform.DOMove(newPoint.position, _sparkleMoveDuration)
-                    .SetEase(_sparkleEase);
+                var start = (Vector3)oldPosition;
+                var end = (Vector3)newPosition;
+                var dir = (end - start);
+                var dir2 = dir.sqrMagnitude > 0.001f ? dir.normalized : Vector3.right;
+                var perp = new Vector3(-dir2.y, dir2.x, 0f);
+                var mid = (start + end) * 0.5f + perp * _sparkleCurveOffset;
                 
-                SpawnGhostAtPoint(_currentPointIndex);
+                var tween = sparkleTransform.DOPath(new[] { start, mid, end }, _sparkleMoveDuration, PathType.CatmullRom)
+                    .SetEase(_sparkleEase);
                 
                 await tween.AsyncWaitForCompletion();
                 
                 Destroy(sparkle);
             }
-            else
+
+            SubscribeToCollider();
+
+            if (_currentPointIndex >= _ghostPoints.Count - 1)
             {
-                SpawnGhostAtPoint(_currentPointIndex);
+                _onFinished?.Invoke();
             }
+
+            _isMoving = false;
         }
         
         private void OnDestroy()
         {
             _colliderSubscription?.Dispose();
+            _collisionSubscription?.Dispose();
         }
     }
 }

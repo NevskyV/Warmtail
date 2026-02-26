@@ -10,6 +10,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 using Systems.Abilities;
+using Systems.Fears;
 using Systems.Environment;
 using Systems.Swarm;
 using Unity.Cinemachine;
@@ -60,6 +61,7 @@ namespace Entities.Core
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<PlayerDataProvider>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
+            Container.BindInterfacesAndSelfTo<FearBuffSystem>().FromNew().AsSingle().NonLazy();
             
             Container.BindInterfacesAndSelfTo<DashAbility>().FromInstance(_playerConfig.Abilities
                 .OfType<DashAbility>().First()).AsSingle();

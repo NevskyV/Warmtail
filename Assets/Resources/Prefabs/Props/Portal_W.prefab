@@ -550,13 +550,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.GhostMemory
   _graph: {fileID: 0}
   _prefix: 
+  _autoStart: 0
   _ghostPoints:
-  - {fileID: 4906127783186248075}
-  - {fileID: 6827136457987751062}
+  - Position: {x: 2.49, y: -0.79}
+    Rotation: {x: 0, y: 0, z: 0}
+  - Position: {x: -1.82, y: -0.94}
+    Rotation: {x: 0, y: 0, z: 0}
+  _ghostPointTransforms: []
   _ghostPrefab: {fileID: 1208525669164743076, guid: e9733ad5c592dbc419f35d7ce83af364, type: 3}
   _sparklePrefab: {fileID: 0}
   _sparkleMoveDuration: 1
   _sparkleEase: 7
+  _sparkleCurveOffset: 1.5
+  _forceGhostColliderTrigger: 1
+  _onFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8102339389016531591
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ namespace Data.Player
         public string LastScene;
         public SerializedDictionary<int, List<int>> QuestIds;
         public List<int> FearIds = new();
+        public int ActiveFearId = -1;
         
         //MetaData
         public bool IsHomeOpened;

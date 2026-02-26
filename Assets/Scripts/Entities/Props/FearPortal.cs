@@ -13,12 +13,20 @@ namespace Entities.Props
         [SerializeField] private float _effectDuration = 1f;
         [SerializeField] private bool _reverse;
         [SerializeField] private bool _startInPortalState;
+        [SerializeField] private bool _destroyAfterActivate;
+        [SerializeField] private List<GameObject> _disableAfterActivate = new();
         
         private AudioSource _audioSource;
+        private bool _isActivating;
         
         public void SetReverse(bool reverse)
         {
             _reverse = reverse;
+        }
+        public void Initialize(List<GameObject> baseObjects, List<GameObject> portalObjects)
+        {
+            if (baseObjects != null) _baseObjects = baseObjects;
+            if (portalObjects != null) _portalObjects = portalObjects;
         }
         
         private void Awake()
@@ -34,8 +42,29 @@ namespace Entities.Props
         
         public async void Activate()
         {
+            await ActivateAsync();
+        }
+
+        public async UniTask ActivateAsync()
+        {
+            if (_isActivating) return;
+            _isActivating = true;
+
             await PlayEffect();
             ApplyState(!_reverse);
+
+            for (int i = 0; i < _disableAfterActivate.Count; i++)
+            {
+                var obj = _disableAfterActivate[i];
+                if (obj != null) obj.SetActive(false);
+            }
+
+            if (_destroyAfterActivate)
+            {
+                Destroy(gameObject);
+            }
+
+            _isActivating = false;
         }
 
         private void ApplyState(bool portalActive)
