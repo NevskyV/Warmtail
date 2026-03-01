@@ -38,6 +38,11 @@ namespace Systems.AbilitiesVisual
         private void Construct(Player player, PlayerConfig config, CinemachineCamera camera)
         {
             _player = player;
+            if (AbilityIndex < 0 || AbilityIndex >= config.Abilities.Count)
+            {
+                Debug.LogError($"Invalid AbilityIndex {AbilityIndex}");
+                return;
+            }
             _ability = config.Abilities[AbilityIndex];
             _camera = camera;
             _ability.StartAbility += StartAbility;

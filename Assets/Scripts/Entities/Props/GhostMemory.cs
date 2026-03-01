@@ -21,6 +21,7 @@ namespace Entities.Props
 
     public class GhostMemory : MonoBehaviour
     {
+        [SerializeField] private Transform _ghostParent;
         [SerializeField] private RuntimeDialogueGraph _graph;
         [SerializeField] private string _prefix = "fragment_";
         [SerializeField] private bool _autoStart = true;
@@ -106,7 +107,18 @@ namespace Entities.Props
 
             _currentPointIndex = 0;
             SpawnGhostAtPoint(0);
+            
+            var node = _graph.AllNodes[_currentPointIndex];
+
+            if (node == null)
+            {
+                Debug.LogError($"Node at index {_currentPointIndex} is NULL");
+                return;
+            }
+
+            Debug.Log($"NodeId: {node.NodeId}");
         }
+        
         
         private void SpawnGhostAtPoint(int index)
         {
@@ -115,7 +127,8 @@ namespace Entities.Props
             var point = _ghostPoints[index];
             var worldPos = transform.TransformPoint(new Vector3(point.Position.x, point.Position.y, 0f));
             var worldRot = transform.rotation * Quaternion.Euler(point.Rotation);
-            _currentGhost = Instantiate(_ghostPrefab, worldPos, worldRot);
+            var parent = _ghostParent != null ? _ghostParent : transform;
+            _currentGhost = Instantiate(_ghostPrefab, worldPos, worldRot, parent);
             _currentGhostCollider = _currentGhost.GetComponent<Collider2D>();
             
             if (_currentGhostCollider == null)
@@ -161,15 +174,42 @@ namespace Entities.Props
         
         private void OnGhostTriggered(Collider2D other)
         {
-            if (_isMoving) return;
-            if (other != null && other.CompareTag("Player"))
+            Debug.Log("Ghost triggered");
+
+            if (_isMoving) 
             {
-                if (_monologueVisuals != null && _graph != null && _currentPointIndex < _graph.AllNodes.Count)
-                {
-                    _monologueVisuals.RequestSingleLine(_graph.AllNodes[_currentPointIndex].NodeId, _prefix);
-                }
-                MoveToNextPoint();
+                Debug.Log("Is moving");
+                return;
             }
+
+            if (other == null)
+            {
+                Debug.Log("Other null");
+                return;
+            }
+
+            Debug.Log($"Other tag: {other.tag}");
+
+            if (!other.CompareTag("Player"))
+            {
+                Debug.Log("Not player");
+                return;
+            }
+
+            Debug.Log($"Graph: {_graph}");
+            Debug.Log($"MonologueVisuals: {_monologueVisuals}");
+            Debug.Log($"Index: {_currentPointIndex}");
+            Debug.Log($"Nodes count: {_graph?.AllNodes.Count}");
+
+            if (_monologueVisuals != null && _graph != null && _currentPointIndex < _graph.AllNodes.Count)
+            {
+                Debug.Log("Requesting dialogue");
+                _monologueVisuals.RequestSingleLine(
+                    _graph.AllNodes[_currentPointIndex].NodeId,
+                    _prefix);
+            }
+
+            MoveToNextPoint();
         }
         
         private async void MoveToNextPoint()
@@ -191,7 +231,8 @@ namespace Entities.Props
                 Destroy(oldGhost);
             }
             
-            _currentGhost = Instantiate(_ghostPrefab, newPosition, newRotation);
+            var parent = _ghostParent != null ? _ghostParent : transform;
+            _currentGhost = Instantiate(_ghostPrefab, newPosition, newRotation, parent);
             _currentGhostCollider = _currentGhost.GetComponent<Collider2D>();
             if (_currentGhostCollider == null)
             {
