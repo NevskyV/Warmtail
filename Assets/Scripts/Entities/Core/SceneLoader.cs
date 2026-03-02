@@ -22,7 +22,6 @@ namespace Entities.Core
         private AsyncOperation _asyncLoad;
         [Inject] private DiContainer _container;
         [Inject] private GlobalData _globalData;
-        [Inject] private ScreenshotSystem _screenshotSystem;
         
         private void Start()
         {
@@ -39,7 +38,6 @@ namespace Entities.Core
                 _container.Inject(x);
                 x.UpdateString();
             });
-            _screenshotSystem.DisableAutoScreenshot();
             SceneStartLoading?.Invoke();
             
             await UniTask.Delay(_animDuration);
@@ -54,7 +52,6 @@ namespace Entities.Core
             if (sceneInd != "Start")
             {
                 _globalData.Edit<SavablePlayerData>(data => data.LastScene = sceneInd);
-                //_screenshotSystem.EnableAutoScreenshot().Forget();
             }
         }
     }
