@@ -2,6 +2,7 @@
 using Entities.Core;
 using Entities.Props;
 using Interfaces;
+using Data;
 using UnityEngine;
 
 namespace Systems.Tasks
@@ -12,12 +13,18 @@ namespace Systems.Tasks
         public Action OnComplete { get; set; }
         private SavableStateObject _obj;
         [SerializeField] private string _objId;
-        [SerializeField] private bool _needToBe;
-        [TextArea] [SerializeField] private string description;
+        [SerializeField] private bool _needToBe; 
+        private EventsData _eventsData;
+
+        public void SetEventsData(EventsData data)
+        {
+            _eventsData = data;
+        }
+
 
         public void Activate()
         {
-            _obj = SavableObjectsResolver.FindObjectById<SavableStateObject>(_objId);
+            _obj = _eventsData.SceneObjects[_objId].GetComponent<SavableStateObject>();
             _obj.OnStateChanged += b =>
             {
                 if(b == _needToBe) MarkComplete();

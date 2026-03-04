@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Data;
 using Data.Player;
 using Entities.PlayerScripts;
 using Entities.UI;
@@ -61,6 +62,7 @@ namespace Entities.Core
             Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             Container.Inject(_questSystem);
+            Container.Bind<EventsData>().FromNew().AsSingle();
             Container.Bind<DailySystem>().FromNew().AsSingle();
             
             Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(_playerConfig.Abilities

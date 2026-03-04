@@ -1,5 +1,6 @@
 ﻿using System;
 using Entities.Core;
+using Data;
 using Entities.UI;
 using Interfaces;
 using UnityEngine;
@@ -15,13 +16,20 @@ namespace Systems.Tasks
         [SerializeField] private string _actionName;
         [SerializeField] private string _tipsVisuals;
         [TextArea] [SerializeField] private string _description;
+        private EventsData _eventsData;
+
+        public void SetEventsData(EventsData data)
+        {
+            _eventsData = data;
+        }
+
         
         private TipsVisuals _tips;
 
         public void Activate()
         {
             Completed = false;
-            SavableObjectsResolver.FindObjectById<TipsVisuals>(_tipsVisuals).ShowTip(_reference[_actionName]);
+            _eventsData.SceneObjects[_tipsVisuals].GetComponent<TipsVisuals>().ShowTip(_reference[_actionName]);
             _reference[_actionName].started += MarkComplete;
         }
 

@@ -13,12 +13,13 @@ namespace Systems.Tutorial
     public class EventsSystem : MonoBehaviour
     {
         [SerializeField] private EventConfig _startNode;
-        [SerializeField] private EventConfig[] _eventConfigs;
 
         public static Action<EventConfig> OnEventCompleted = delegate {};
         private string _finishString = "finish";
 
         [Inject] private GlobalData _globalData;
+        [Inject] private EventsData _eventsData;
+
 
         private void Start()
         {
@@ -41,6 +42,8 @@ namespace Systems.Tutorial
         
         private void StartingActivate(EventConfig config)
         {
+            SetData(config);
+
             if (_globalData.Get<SavablePlayerData>().EventsState != config.IdNode)
             {
                 if (config.NextElement) StartingActivate(config.NextElement);
@@ -54,6 +57,18 @@ namespace Systems.Tutorial
             else
             {
                 Activate(config);
+            }
+        }
+
+        private void SetData(EventConfig config)
+        {
+            foreach(ISequenceAction action in config.Element.Actions)
+            {
+                action.SetEventsData(_eventsData);
+            }
+            foreach(ITask task in config.Element.Tasks)
+            {
+                task.SetEventsData(_eventsData);
             }
         }
 

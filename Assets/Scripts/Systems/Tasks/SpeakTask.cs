@@ -1,5 +1,6 @@
 ﻿using System;
 using Interfaces;
+using Data;
 using UnityEngine;
 
 namespace Systems.Tasks
@@ -8,8 +9,14 @@ namespace Systems.Tasks
     {
         public bool Completed { get; set; }
         public Action OnComplete { get; set; }
-        [SerializeField] private string _id;
-        [TextArea] [SerializeField] private string description;
+        [SerializeField] private string _id; 
+        private EventsData _eventsData;
+
+        public void SetEventsData(EventsData data)
+        {
+            _eventsData = data;
+        }
+
 
         public void Activate()
         {

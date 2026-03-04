@@ -18,6 +18,8 @@ namespace Systems.Tutorial
         public string Scene;
         public EventConfig NextElement;
         public SequenceElement Element;
+        
+        [TextArea] [SerializeField] private string description;
 
         [Button("Copy")]
         private void Copy()
