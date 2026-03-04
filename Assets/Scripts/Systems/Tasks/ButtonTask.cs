@@ -19,6 +19,8 @@ namespace Systems.Tasks
         public void SetEventsData(EventsData data)
         {
             _eventsData = data;
+            Debug.Log("ira 1" + _eventsData);
+            Debug.Log("ira 2" + _eventsData.SceneObjects);
         }
 
         

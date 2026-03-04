@@ -9,14 +9,18 @@ namespace Systems.Tutorial
     public class TutorialSceneContext : MonoBehaviour
     {
         public SerializedDictionary<string, GameObject> SceneObjects;
-        [Inject] private EventsData _eventsData;
+        private EventsData _eventsData;
 
-        void Start()
+        [Inject]
+        private void Construct(EventsData eventsData)
         {
+            Debug.Log("ira _eventsData 1" + _eventsData);
+            _eventsData = eventsData;
             foreach (var pair in SceneObjects)
             {
                 _eventsData.SceneObjects[pair.Key] = pair.Value;
             }
+            Debug.Log("ira _eventsData 2" + _eventsData);
         }
     }
 }

@@ -11,9 +11,11 @@ namespace Systems.Tasks
     {
         public bool Completed { get; set; }
         public Action OnComplete { get; set; }
-        private SavableStateObject _obj;
+
         [SerializeField] private string _objId;
         [SerializeField] private bool _needToBe; 
+        
+        private SavableStateObject _obj;
         private EventsData _eventsData;
 
         public void SetEventsData(EventsData data)

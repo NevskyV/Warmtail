@@ -15,6 +15,7 @@ namespace Systems.SequenceActions
         public void SetEventsData(EventsData data)
         {
             _eventsData = data;
+            Debug.Log("ira 3 " + _active);
         }
 
             
@@ -22,6 +23,8 @@ namespace Systems.SequenceActions
         {
             _objectIds.ForEach(x =>
             {
+                Debug.Log("ira 4 " + _active + _eventsData);
+                Debug.Log("ira 5 " + _active + _eventsData.SceneObjects);
                 var obj = _eventsData.SceneObjects[x];
                 if (obj != null)
                 {

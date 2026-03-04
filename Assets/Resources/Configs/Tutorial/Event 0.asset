@@ -17,20 +17,16 @@ MonoBehaviour:
   NextElement: {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
   Element:
     Actions:
-    - rid: 7007432209248551018
-    Tasks:
-    - rid: 7007432209248551015
+    - rid: 5800212002074787840
+    Tasks: []
   description: 
   references:
     version: 2
     RefIds:
-    - rid: 7007432209248551015
-      type: {class: ButtonTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+    - rid: 5800212002074787840
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _buttonId: confirm name button
-        gm: {fileID: 0}
-    - rid: 7007432209248551018
-      type: {class: NotificationAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _popup: {fileID: 1307311160032710671, guid: 144371e616bacd54984a1874e7aa1047, type: 3}
-        _parentId: popup's parent gameplay
+        _active: 1
+        _objectIds:
+        - start monologue screen
+        - start monologue trigger

@@ -25,7 +25,7 @@ namespace Systems.Tasks
 
         public void Activate()
         {
-            TutorialSystem.TaskActivated.Add(this);
+            //TutorialSystem.TaskActivated.Add(this);
 
             if (_start) QuestSystem.OnQuestStarted.AddListener(MarkComplete);
             else QuestSystem.OnQuestEnded.AddListener(MarkComplete);
