@@ -15,12 +15,27 @@ namespace Editor
     [CreateAssetMenu(fileName = "DialogueGraphImporter", menuName = "Configs/DialogueGraphImporter")]
     public class DialogueGraphImporter : ScriptableSingleton<DialogueGraphImporter>
     {
-        [SerializeField] private int[] _editorGraphs;
+        [SerializeField] private string _sequence;
+        private List<int> _editorGraphs;
         private string UserName => Environment.UserName;
 
         [Button, ShowIf(nameof(UserName), "Nevsky")]
         public void ImportDialogues()
         {
+            var splitSequence = _sequence.Split();
+            _editorGraphs.Clear();
+            
+            for (var i = 0; i < splitSequence.Length; i++)
+            {
+                if (splitSequence[i] == "/")
+                {
+                    for (var j = int.Parse(splitSequence[i - 1])+1; j <= int.Parse(splitSequence[i + 1]); j++)
+                    {
+                        _editorGraphs.Add(j);
+                    }
+                }
+                else _editorGraphs.Add(int.Parse(splitSequence[i]));
+            }
             foreach (var graphPath in _editorGraphs)
             {
                 var editorGraph = GraphDatabase.LoadGraph<DialogueGraph>($"Assets/Editor/Dialogues/{graphPath}.dg");
