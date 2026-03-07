@@ -15,7 +15,7 @@ MonoBehaviour:
   <Id>k__BackingField: 4
   QuestType: 1
   <IsPermanent>k__BackingField: 1
-  <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
+  <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
   <Layer>k__BackingField: 0
   <OnStart>k__BackingField:
   - rid: 8818234041734266995
@@ -47,19 +47,16 @@ MonoBehaviour:
       data:
         _puzzleId:
         - cd292478-7dcb-4814-a8cf-4e1f75a44741
-        description: 
     - rid: 7345390956647809369
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _puzzleId:
         - 1ace8e4c-eba5-4b8f-bb3d-e45ae11e0296
-        description: 
     - rid: 7345390956647809372
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _puzzleId:
         - 673e2422-01c7-450d-a91b-506298261c32
-        description: 
     - rid: 7345391011349135555
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
