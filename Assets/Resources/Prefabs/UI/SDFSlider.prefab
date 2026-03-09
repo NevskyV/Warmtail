@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4780557455182638941}
   - component: {fileID: 4690485652786788309}
-  - component: {fileID: 7784056515381604983}
   m_Layer: 5
   m_Name: SDFSlider
   m_TagString: Untagged
@@ -51,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8910fba66b7b4528babdc6fa36823b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfSlider
+  _minValue: 0
+  _maxValue: 1
   _value: 0
   _speed: 4
   _onSelectScale: 1.2
@@ -58,19 +59,6 @@ MonoBehaviour:
   _fillRect: {fileID: 2981291730495245419}
   _handleRect: {fileID: 1367141408674568559}
   _sdfImage: {fileID: 1020454900978951600}
---- !u!114 &7784056515381604983
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 437586100729358506}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 113f15393db94da19819b05d8b7a1838, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Systems.SdfMaterialCreator
-  _mainImage: {fileID: 1020454900978951600}
 --- !u!1 &734774771660583600
 GameObject:
   m_ObjectHideFlags: 0
@@ -102,7 +90,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6183771749258697666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13193487, y: 0.5}
+  m_AnchorMin: {x: 0.11777017, y: 0.5435062}
   m_AnchorMax: {x: 0, y: 0.60069853}
   m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 0.000015259, y: 0}
@@ -177,8 +165,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  BaseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
-  InstanceMaterial: {fileID: 2100000, guid: 95487a150bc30e24db761830f4ecc942, type: 2}
+  GroupProperty:
+    InterType: 0
+    FillColor: {r: 0.49411765, g: 0.7647059, b: 0.7294118, a: 1}
+    Alpha: 1
+    OutlineColor: {r: 0.05882353, g: 0.2627451, b: 0.39607844, a: 1}
+    OutlineThickness: 0.008
+    InlineColor: {r: 0.19607843, g: 0.50980395, b: 0.49019608, a: 1}
+    InlineThickness: 0.4
+    InOutlineThickness: 3
+    WaveFreq: 2
+    WaveAmp: 0.004
+    WaveSpeed: -1
+    Smoothness: 0
+  InstanceMaterial: {fileID: 0}
 --- !u!1 &3364141445991968976
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,7 +210,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5554376756034526064}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13193487, y: 0.5}
+  m_AnchorMin: {x: 0.12991147, y: 0.53642386}
   m_AnchorMax: {x: 0.86297566, y: 0.60069853}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
@@ -285,8 +285,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  BaseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
-  InstanceMaterial: {fileID: 2100000, guid: 5afb17f40852f2244873a09bc5322a02, type: 2}
+  GroupProperty:
+    InterType: 0
+    FillColor: {r: 0.49575645, g: 0.7660377, b: 0.7300002, a: 1}
+    Alpha: 1
+    OutlineColor: {r: 0.05882353, g: 0.2627451, b: 0.39607844, a: 1}
+    OutlineThickness: 0.009
+    InlineColor: {r: 0.19607843, g: 0.50980395, b: 0.49085993, a: 1}
+    InlineThickness: 0.025
+    InOutlineThickness: 3
+    WaveFreq: 10
+    WaveAmp: 0.004
+    WaveSpeed: 3
+    Smoothness: 0
+  InstanceMaterial: {fileID: 0}
 --- !u!1 &6495193217750535996
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,8 +348,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a9ce761dddd4f198145c6e97eaf97fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
-  BaseMaterial: {fileID: 2100000, guid: 15937ef1b9cc7b94085964530be97c66, type: 2}
-  InstanceMaterial: {fileID: 2100000, guid: fcd0790a4944ac74a9a70a8c99a90fdf, type: 2}
+  GroupProperty:
+    InterType: 0
+    FillColor: {r: 0.7764706, g: 0.89411765, b: 0.8782793, a: 1}
+    Alpha: 1
+    OutlineColor: {r: 0.058823537, g: 0.26203755, b: 0.39607844, a: 1}
+    OutlineThickness: 0.005
+    InlineColor: {r: 0.19607843, g: 0.50980395, b: 0.49019608, a: 1}
+    InlineThickness: 0.01
+    InOutlineThickness: 3
+    WaveFreq: 2
+    WaveAmp: 0.004
+    WaveSpeed: -1
+    Smoothness: 0
+  InstanceMaterial: {fileID: 0}
 --- !u!1 &7117089933486634364
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,8 +397,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: -107.92413, y: 0.000023425}
-  m_SizeDelta: {x: 194.1826, y: 62.386}
+  m_AnchoredPosition: {x: -110, y: 10.2}
+  m_SizeDelta: {x: 194.1826, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6321321797975193740
 CanvasRenderer:
@@ -546,6 +570,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGlobalBlendManager
   _groupSmoothness: 0.03
   _interGroupType: 0
+  BaseMaterial: {fileID: 0}
+  InstanceMaterial: {fileID: 2100000, guid: fcd0790a4944ac74a9a70a8c99a90fdf, type: 2}
 --- !u!222 &2163341079747837224
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -566,7 +592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
-  m_Material: {fileID: 2100000, guid: fcd0790a4944ac74a9a70a8c99a90fdf, type: 2}
+  m_Material: {fileID: 2100000, guid: aecc739552c8302479d1b52bc347dba5, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -621,8 +647,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.048, y: 0.5448998}
   m_AnchorMax: {x: 0.048, y: 0.5448998}
-  m_AnchoredPosition: {x: 23.392868, y: 3.0034447}
-  m_SizeDelta: {x: 55, y: 55}
+  m_AnchoredPosition: {x: 24.288757, y: 9.4}
+  m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3184121304223471383
 MonoBehaviour:
@@ -688,7 +714,6 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 5001323308663143866}
   _onSelectScale: 1.2
   _moveFactor: 0.1
-  _mouseMoveFactor: 0.01
   _slider: {fileID: 4690485652786788309}
 --- !u!114 &8064870111111249854
 MonoBehaviour:

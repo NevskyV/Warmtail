@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
+  m_Name: Event 2
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
+  _idNode: 6a63d855-dfa4-43f9-9b7e-0a99feba3161
+  Scene: GameplayIra
+  NextElement: {fileID: 11400000, guid: 9969460c6aae8ff4093797b84f22eac0, type: 2}
+  Element:
+    Actions:
+    - rid: 5800212002074787994
+    Tasks:
+    - rid: 5800212002074787843
+  description: 
+  references:
+    version: 2
+    RefIds:
+    - rid: 5800212002074787843
+      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _reference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+        _actionName: Move
+        _tipsVisuals: tips visuals gameplay
+        _description: 
+    - rid: 5800212002074787994
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 0
+        _objectIds: []

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Data;
+using EasyTextEffects.Editor.MyBoxCopy.Extensions;
+using ModestTree;
 using Systems;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -46,7 +48,7 @@ namespace Entities.PlayerScripts
         {
             _input.SwitchCurrentActionMap("UI");
             _abilityController.DisableAllAbilities();
-            _rbs.ForEach(x =>
+            _rbs.Except(_player.Rigidbody).ForEach(x =>
             {
                 x.bodyType = RigidbodyType2D.Static;
                 x.simulated = false;
@@ -56,6 +58,7 @@ namespace Entities.PlayerScripts
             _player.Animator.SetBool(IsSleeping, false);
             
             await UniTask.Delay(TimeSpan.FromSeconds(_player.Animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.1f));
+            if (_player.Animator.GetBool(IsSleeping)) return;
             
             _input.SwitchCurrentActionMap("Player");
             

@@ -16,6 +16,7 @@ namespace Data.Player
         public SerializedDictionary<int, int> Inventory;
         public string TimeLastGame;
         public int TutorState;
+        public string EventsState;
         public string LastScene;
         public SerializedDictionary<int, List<int>> QuestIds;
         public List<int> FearIds = new();

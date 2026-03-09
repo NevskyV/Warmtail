@@ -1,6 +1,7 @@
 ﻿using System;
 using Interfaces;
 using UniRx;
+using Data;
 using UniRx.Triggers;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -12,8 +13,14 @@ namespace Systems.Tasks
         public bool Completed { get; set; }
         public Action OnComplete { get; set; }
         [SerializeField] private Collider2D _prefab;
-        [SerializeField] private Vector2 _position;
-        [TextArea] [SerializeField] private string description;
+        [SerializeField] private Vector2 _position; 
+        private EventsData _eventsData;
+
+        public void SetEventsData(EventsData data)
+        {
+            _eventsData = data;
+        }
+
 
         public void Activate()
         {

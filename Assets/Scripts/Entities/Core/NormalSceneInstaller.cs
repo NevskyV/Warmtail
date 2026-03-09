@@ -34,6 +34,7 @@ namespace Entities.Core
         [SerializeField] private FreezeVisuals _freezeVisuals;
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private ComboConfig _comboConfig;
+        [SerializeField] private TipsVisuals _tipsVisuals;
        
         public override void InstallBindings()
         {
@@ -53,10 +54,13 @@ namespace Entities.Core
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             Container.Bind<ComboConfig>().FromInstance(_comboConfig).AsSingle();
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
+            Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             
             Container.Bind<QuestSystem>().FromNew().AsSingle().NonLazy();
             Container.Bind<SceneSystem>().FromNew().AsSingle();
+            Container.Bind<EventsData>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
+            Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<PlayerDataProvider>().FromNew().AsSingle();
@@ -72,7 +76,7 @@ namespace Entities.Core
                 .FromInstance(_playerConfig.Abilities)
                 .AsSingle();
             
-            Container.BindInterfacesAndSelfTo<AbilitiesSystem>().AsSingle().NonLazy();
+            Container.Bind<AbilitiesSystem>().FromNew().AsSingle();
             Container.Bind<ComboSystem>().FromNew().AsSingle().NonLazy();
             
             Container.Bind<SceneLoader>().FromComponentInHierarchy().AsSingle();

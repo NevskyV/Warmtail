@@ -17,7 +17,6 @@ MonoBehaviour:
     - rid: 4204129410323054672
     Tasks: []
   - Actions:
-    - rid: 4061568655744827581
     - rid: 4061568655744827586
     Tasks:
     - rid: 4061568655744827587
@@ -66,6 +65,7 @@ MonoBehaviour:
     - rid: 7345390956647809381
     - rid: 7345391249406034039
     - rid: 4061569151058051161
+    - rid: 8818234330180222976
     Tasks:
     - rid: 7345390956647809377
   - Actions:
@@ -118,37 +118,28 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 4061568655744827581
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - 71ff479c-1a67-454c-a376-234bc69d0179
     - rid: 4061568655744827586
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
-        - df2bd107-5710-43ec-8898-1a3a1d213a9c
-        - a655b7cc-2769-4725-b9a0-10569eedca2d
+        - start monologue trigger
+        - start monologue screen
     - rid: 4061568655744827587
       type: {class: ButtonTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _buttonId: 305f90b9-cd34-4aef-88d3-a6e77722d476
+        _buttonId: confirm name button
     - rid: 4061568888548098232
       type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _objId: ee3a06b9-1cfb-43dc-9171-0b2930291130
+        _objId: star (0)
         _needToBe: 0
-        description: "\u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430 \u043D\u0430
-          \u0441\u0431\u043E\u0440 \u0437\u0432\u0435\u0437\u0434\u044B + \u043D\u043E\u0432\u0430\u044F
-          \u0430\u0431\u0438\u043B\u043A\u0430\n"
     - rid: 4061568888548098233
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
-        - 8c6a7119-6b03-49d7-a372-465b962599c6
+        - cam trigger 0
     - rid: 4061569070873968771
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -180,8 +171,6 @@ MonoBehaviour:
       data:
         _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
         _position: {x: -4.4, y: 300}
-        description: "\u043F\u0440\u043E\u0432\u0435\u0440\u043A\u0430 \u0434\u043E\u0448\u0435\u043B
-          \u043B\u0438 \u0438\u0433\u0440\u043E\u043A"
     - rid: 4061569151058051161
       type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -191,7 +180,6 @@ MonoBehaviour:
       data:
         _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
         _position: {x: 84, y: 35}
-        description: 
     - rid: 4061569158116278364
       type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -201,15 +189,15 @@ MonoBehaviour:
       data:
         _active: 1
         _objectIds:
-        - df2bd107-5710-43ec-8898-1a3a1d213a9c
-        - a655b7cc-2769-4725-b9a0-10569eedca2d
+        - start monologue trigger
+        - start monologue screen
     - rid: 4204129410323054674
       type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _asset: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-        _action: Move
-        description: "\u043F\u0440\u043E\u0432\u0435\u0440\u044F\u0435\u043C \u043D\u0430\u0436\u0430\u043B
-          \u043B\u0438 \u0438\u0433\u0440\u043E\u043A \u043D\u0430 \u0434\u0432\u0438\u0436\u0435\u043D\u0438\u0435"
+        _reference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+        _actionName: Move
+        _tipsVisuals: tips visuals gameplay
+        _description: 
     - rid: 4204129410323054675
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -222,46 +210,38 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: 56f437edbb8080249a589b9fe742f9c2, type: 2}
         _start: 0
         _home: 0
-        description: "\u043F\u043E\u0441\u043B\u0435 \u0437\u0430\u0434\u0430\u043D\u0438\u044F
-          \u0441\u0431\u043E\u0440\u0430 \u0440\u0430\u043A\u0443\u0448\u0435\u043A"
     - rid: 7345390844638658706
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _characterId: tertilus gameplay
         _splineId: 0dbcaf53-a94a-40ed-ab48-4bdda97ec04c
         _move: 1
     - rid: 7345390844638658707
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _graph: {fileID: 11400000, guid: e0425e3b33f2e6d4c97a07660592ee2a, type: 2}
-        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _npcId: tertilus gameplay
     - rid: 7345390883105669217
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _graph: {fileID: 11400000, guid: 8266e6ea59151b741ab722d126132c08, type: 2}
-        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _npcId: tertilus gameplay
     - rid: 7345390883105669221
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _id: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
-        description: "\u043F\u0440\u0438\u0448\u043B\u0438 \u0432 \u043C\u0435\u0441\u0442\u043E
-          \u0434\u043B\u044F \u043A\u0432\u0435\u0441\u0442\u0430 \u0441 \u0442\u0440\u043E\u0441\u0442\u044E"
+        _id: tertilus gameplay
     - rid: 7345390883105669233
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _questData: {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}
         _start: 0
         _home: 0
-        description: "\u0442\u0435\u0440\u0442\u0438\u043B\u0443\u0441 \u0437\u0430\u0445\u043E\u0434\u0438\u0442
-          \u0432 \u0434\u043E\u043C, \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u0442\u0441\u044F
-          \u0442\u0440\u0438\u0433\u0433\u0435\u0440 \u0434\u043B\u044F \u043F\u0435\u0440\u0435\u0445\u043E\u0434\u0430
-          \u0432 \u0434\u043E\u043C"
     - rid: 7345390883105669234
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
-        - c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        - tertilus gameplay
         _homeScene: 0
     - rid: 7345390883105669845
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
@@ -269,43 +249,34 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}
         _start: 1
         _home: 0
-        description: "\u0438\u0434\u0435\u043C \u0432 \u0434\u043E\u043C, \u0441\u043A\u0440\u044B\u0432\u0430\u0435\u043C
-          \u0442\u0440\u0438\u0433\u0433\u0435\u0440, \u043F\u0435\u0440\u0435\u043A\u0440\u044B\u0432\u0430\u044E\u0449\u0438\u0439
-          \u043F\u0440\u043E\u0445\u043E\u0434"
     - rid: 7345390883105669848
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _characterId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _characterId: tertilus gameplay
         _splineId: f1d85757-23b1-465d-b9af-e82fed8506f7
         _move: 1
     - rid: 7345390883105669849
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _graph: {fileID: 11400000, guid: 534c4acde52ceb54a853813085877dee, type: 2}
-        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _npcId: tertilus gameplay
     - rid: 7345390921796026623
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _questData: {fileID: 11400000, guid: 37bd43537256fbb4e9d2c07105777df8, type: 2}
         _start: 0
         _home: 1
-        description: "\u043A\u043E\u0433\u0434\u0430 \u0440\u0430\u0441\u0441\u0442\u0430\u0432\u0438\u043B\u0438
-          \u043F\u0440\u0435\u0434\u043C\u0435\u0442\u044B \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F
-          \u0444\u0438\u043D\u0438\u043A\u0441 \u0438 \u0442\u0440\u0438\u0433\u0433\u0435\u0440
-          \u043A\u0430\u043C\u0435\u0440\u044B"
     - rid: 7345390921796026667
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _questData: {fileID: 11400000, guid: 890df765c8bdd084bbf049f139a867cf, type: 2}
         _start: 0
         _home: 0
-        description: "\u043F\u043E\u0441\u043B\u0435 \u043A\u0432\u0435\u0441\u0442\u0430
-          \u0441 \u0442\u0440\u043E\u0441\u0442\u044E"
     - rid: 7345390921796026668
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _graph: {fileID: 11400000, guid: 2161cc893dff2d945852dc5b02bdd5fb, type: 2}
-        _npcId: c0a4e396-bc2b-4d82-8d44-a5455874d1a0
+        _npcId: tertilus gameplay
     - rid: 7345390921796026669
       type: {class: StickAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data: 
@@ -323,9 +294,6 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
         _start: 1
         _home: 0
-        description: "\u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043C
-          \u043A\u0440\u0438\u0441\u0442\u0430\u043B\u043B\u044B \u0438 \u0443\u043A\u0437\u0430\u0442\u0430\u0435\u043B\u0438
-          \u043D\u0430 \u043D\u0438\u0445"
     - rid: 7345390956647809381
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -341,9 +309,6 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
         _start: 0
         _home: 0
-        description: "\u043C\u0435\u043D\u044F\u0435\u043C \u0434\u0438\u0430\u043B\u043E\u0433
-          \u043F\u043E\u0441\u043B\u0435 \u043A\u0432\u0435\u0441\u0442\u0430 \u0441
-          \u043A\u0440\u0438\u0441\u0442\u0430\u043B\u043B\u0430\u043C\u0438"
     - rid: 7345391011349135590
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -360,12 +325,6 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: 808a613be07c6734f8f1ec6234beb68d, type: 2}
         _start: 1
         _home: 0
-        description: "\u043A\u043E\u0433\u0434\u0430 \u0444\u0438\u043D\u0438\u043A\u0441
-          \u0443\u0441\u043B\u044B\u0448\u0430\u043B\u0430 \u043A\u0440\u0438\u043A,
-          \u0432\u043A\u043B\u044E\u0447\u0430\u0435\u043C \u0438\u0437\u043E\u0431\u0440\u0430\u0436\u0435\u043D\u0438\u0435
-          \u043F\u043E\u0440\u0442\u0430\u043B\u0430, \u043C\u0435\u043D\u044F\u0435\u043C
-          \u0444\u0438\u043D\u0438\u043A\u0441\u0443 \u0441\u043F\u043B\u0430\u0439\u043D
-          \u0430\u043D\u0438\u043C\u0430\u0446\u0438\u0438 \u0438 \u0434\u0438\u0430\u043B\u043E\u0433"
     - rid: 7345391011349135600
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -385,7 +344,7 @@ MonoBehaviour:
         - 1170db84-64a6-4dff-980d-6a8c4a4c99d3
         - f5c0b7f4-cfc4-42ac-b061-6fa46ead0076
         - 065dcc41-3444-4447-a0ed-f2746b312ba7
-        - 8444325e-7e1d-480a-8ee7-eb1cd401fe86
+        - 1c83306f-7085-4708-892f-d8352169638e
         _homeScene: 0
     - rid: 7345391011349135611
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
@@ -408,32 +367,16 @@ MonoBehaviour:
       data:
         _puzzleId:
         - 30f1ff6f-1cc8-4a32-b07f-707f71e7c73d
-        description: "\u043A\u043E\u0433\u0434\u0430 \u0440\u0435\u0448\u0438\u043B\u0438
-          \u0433\u043E\u043B\u043E\u0432\u043E\u043B\u043E\u043C\u043A\u0443, \u0443\u0431\u0438\u0440\u0430\u0435\u043C
-          \u0431\u0430\u0440\u044C\u0435\u0440\u044B, \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u043C
-          \u0442\u0440\u0438\u0433\u0433\u0435\u0440 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430,
-          \u043F\u0435\u0440\u0435\u043D\u043E\u0441\u0438\u043C \u043A \u043D\u0430\u043C
-          \u043D\u043F\u0441, \u043E\u0431\u043D\u043E\u0432\u043B\u044F\u0435\u043C
-          \u0441\u043F\u043B\u0430\u0439\u043D\u044B"
     - rid: 7345391011349135658
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _id: a44ada89-02ae-410f-884b-d8a67d49cd51
-        description: "\u043F\u043E\u0441\u043B\u0435 \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430
-          \u0443\u0431\u0438\u0440\u0430\u0435\u043C \u0442\u0440\u0438\u0433\u0433\u0435\u0440
-          \u0440\u0430\u0437\u0433\u043E\u0432\u043E\u0440\u0430, \u0441\u043F\u0430\u0432\u043D\u0438\u043C
-          \u0434\u0435\u0439\u043B\u0438\u043A\u0438 \u0438 \u0441\u043A\u0440\u044B\u0432\u0430\u0435\u043C
-          \u043E\u0441\u043D\u043E\u0432\u043D\u044B\u0445 \u043D\u043F\u0441"
     - rid: 7345391042134016112
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _questData: {fileID: 11400000, guid: 808a613be07c6734f8f1ec6234beb68d, type: 2}
         _start: 0
         _home: 0
-        description: "\u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u044E\u0442\u0441\u044F
-          \u0431\u0430\u0440\u044C\u0435\u0440\u044B, \u043D\u0435\u0434\u0430\u044E\u0449\u0438\u0439
-          \u043D\u0430\u043C \u0443\u0439\u0442\u0438 \u0438 \u0442\u0440\u0438\u0433\u0433\u0435\u0440
-          \u043F\u043E\u0440\u0442\u0430\u043B\u0430"
     - rid: 7345391042134016147
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -501,9 +444,6 @@ MonoBehaviour:
         _questData: {fileID: 11400000, guid: 771a9b84d572de847a2a483e0f685425, type: 2}
         _start: 0
         _home: 0
-        description: "\u0443\u0441\u0442\u0430\u043D\u0430\u0432\u043B\u0438\u0432\u0430\u0435\u043C
-          \u0434\u0438\u0430\u043B\u043E\u0433 \u043F\u043E\u0441\u043B\u0435 \u043F\u043E\u043F\u044B\u0442\u043A\u0438
-          \u043E\u0442\u043E\u0433\u0440\u0435\u0442\u044C \u043F\u0440\u0438\u0437\u043C\u0443"
     - rid: 7345391249406034039
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -527,9 +467,6 @@ MonoBehaviour:
       data:
         _prefab: {fileID: 3459850837378005844, guid: 4b5c61f41edd0b54aae236ec9d6ba332, type: 3}
         _position: {x: -9.2699995, y: 323.12}
-        description: "\u0437\u0430\u0448\u043B\u0438 \u0432 \u043F\u043E\u0440\u0442\u0430\u043B
-          => \u0441\u0442\u0430\u0432\u0438\u043C \u043C\u0430\u0440\u043A\u0443
-          \u043D\u0430 \u043F\u0430\u0437\u043B"
     - rid: 7345391410517114991
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -543,3 +480,8 @@ MonoBehaviour:
         _active: 0
         _objectIds:
         - bf71663a-9935-4dff-8ebc-fb39c79772b8
+    - rid: 8818234330180222976
+      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _graph: {fileID: 0}
+        _npcId: tertilus gameplay

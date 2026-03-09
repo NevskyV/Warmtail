@@ -41,10 +41,9 @@ namespace Entities.UI
         public async void ProcessDialogue()
         {
             while(true){
+                await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
                 if(_isEnded) break;
                 _dialogueSystem.ActivateNewNode();
-                await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
-                print("waited");
             }
         }
             
@@ -68,7 +67,7 @@ namespace Entities.UI
             var line = LocalizationManager.GetStringFromKey("Star_"+ _dialogueSystem.DialogueGraph.DialogueId+ "_" + node.NodeId);
             
             _currentLineDuration = line.Length * _perCharFadeTime + _delayTime;
-            print(_currentLineDuration);
+            print(line);
             _currentText.GetComponent<TMP_Text>().text = line;
             var effect = _currentText.GetComponent<TextEffect>();
             effect.Refresh();

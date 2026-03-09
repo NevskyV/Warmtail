@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8903166154341145952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e374994ce30f455cb6ce88aa19bd54dd, type: 3}
+  m_Name: DepthCopyFeature
+  m_EditorClassIdentifier: Assembly-CSharp::DepthCopy2DFeature
+  m_Active: 1
+  _depthCopyShader: {fileID: 4800000, guid: f37f938da2ef47c5bafc7221adc87dc5, type: 3}
+  _injectionPoint: 300
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24,8 +39,9 @@ MonoBehaviour:
     probeSamplingDebugMesh: {fileID: -3555484719484374845, guid: 57d7c4c16e2765b47a4d2069b311bffe, type: 3}
     probeSamplingDebugTexture: {fileID: 2800000, guid: 24ec0e140fb444a44ab96ee80844e18e, type: 3}
     probeVolumeBlendStatesCS: {fileID: 0}
-  m_RendererFeatures: []
-  m_RendererFeatureMap: 
+  m_RendererFeatures:
+  - {fileID: -8903166154341145952}
+  m_RendererFeatureMap: a02237ba8d997184
   m_UseNativeRenderPass: 0
   m_LayerMask:
     serializedVersion: 2

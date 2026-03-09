@@ -81,7 +81,7 @@ namespace Systems.Abilities
                 float normalizedTime = Mathf.Clamp01(_accelerationTimer / _accelerationTime);
                 float accelerationMultiplier = _accelerationCurve.Evaluate(normalizedTime);
 
-                Vector2 force = _moveInput * MoveForce * accelerationMultiplier;
+                Vector2 force = _moveInput * (MoveForce * accelerationMultiplier);
                 rb.AddForce(force * _moreForge, ForceMode2D.Force);
 
                 float targetAngle = Mathf.Atan2(_moveInput.y, _moveInput.x) * Mathf.Rad2Deg;

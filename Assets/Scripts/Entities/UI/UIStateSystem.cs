@@ -6,9 +6,11 @@ using Systems;
 using Systems.Effects;
 using TriInspector;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Entities.UI
@@ -18,6 +20,7 @@ namespace Entities.UI
         [SerializeReference, Range(0.5f, 5f)] private float _crossFadeTime;
         
         [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, CanvasGroup> _canvasGroups = new();
+        [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, Selectable> _selectables = new();
         [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, UIState> _escapeTransitions = new();
         [SerializeField] private CanvasGroup _warmthGroup;
         
@@ -88,7 +91,8 @@ namespace Entities.UI
                         break;
                 }
             }
-
+            if(_selectables.TryGetValue(state, out var selectable)) EventSystem.current.SetSelectedGameObject(selectable.gameObject);
+            
             var currentCanvas = _canvasGroups[CurrentState];
             var targetCanvas = _canvasGroups[state];
             if (currentCanvas)
@@ -115,6 +119,6 @@ namespace Entities.UI
     [Serializable]
     public enum UIState
     {
-        Normal, Settings, Pause, Saves, Dialogue, Building, Shop
+        Normal, Settings, Pause, Dialogue, Building, Shop
     }
 }

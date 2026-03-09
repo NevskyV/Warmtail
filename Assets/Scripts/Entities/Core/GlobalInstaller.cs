@@ -2,6 +2,7 @@ using Data;
 using Entities.Localization;
 using Entities.Sound;
 using Systems;
+using Systems.Abilities;
 using Systems.DataSystems;
 using Systems.Effects;
 using UnityEngine;
@@ -21,7 +22,6 @@ namespace Entities.Core
             Debug.Log("set ui installer GLOBAL");
             Container.Bind<SaveSystem>().FromNew().AsSingle();
             Container.Bind<CrossfadeEffect>().FromNew().AsSingle();
-            Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             
             Container.Bind<SceneLoader>().FromInstance(_sceneLoader).AsSingle();
             Container.Bind<LocalizationManager>().FromInstance(_localizationManager).AsSingle();

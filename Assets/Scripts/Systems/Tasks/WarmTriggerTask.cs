@@ -1,6 +1,7 @@
 ﻿using System;
 using Interfaces;
 using UnityEngine;
+using Data;
 using Object = UnityEngine.Object;
 
 namespace Systems.Tasks
@@ -12,6 +13,13 @@ namespace Systems.Tasks
         [SerializeField] private Collider2D _prefab;
         [SerializeField] private Vector2 _position;
         [TextArea] [SerializeField] private string _description;
+        private EventsData _eventsData;
+
+        public void SetEventsData(EventsData data)
+        {
+            _eventsData = data;
+        }
+
 
         public void Activate()
         {

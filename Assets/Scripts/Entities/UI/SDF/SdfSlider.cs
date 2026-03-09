@@ -1,21 +1,26 @@
 ﻿using System;
 using DG.Tweening;
+using Systems;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Entities.UI.SDF
 {
     [ExecuteAlways]
     public class SdfSlider : MonoBehaviour
     {
-        [SerializeField, Range(0, 1f)] private float _value;
+        [SerializeField, Range(0f, 1f)] private float _minValue;
+        [SerializeField, Range(0f, 1f)] private float _maxValue = 1f;
+        [SerializeField, Range(0f, 1f)] private float _value;
         public float Value
         {
             get => _value;
             set
             {
-                _value = Mathf.Clamp(value, 0f, 1f);
+                _value = Mathf.Clamp(value, _minValue, _maxValue);
+                _gamepadRumble.ShortRumble();
                 OnValueChange?.Invoke(_value);
             }
         }
@@ -26,19 +31,16 @@ namespace Entities.UI.SDF
         [SerializeField] private RectTransform _fillRect;
         [SerializeField] private RectTransform _handleRect;
         [SerializeField] private Image _sdfImage;
-        
+        [Inject] private GamepadRumble _gamepadRumble;
         public Action<float> OnValueChange;
         
         private void Update()
         {
+            
             _fillRect.anchorMax = new Vector2(Mathf.Lerp(_fillRect.anchorMax.x, _value *
                 _backRect.anchorMax.x, Time.deltaTime * _speed), _fillRect.anchorMax.y);
             _handleRect.localPosition = new Vector2(Mathf.Lerp(_handleRect.localPosition.x, _value *
                 _backRect.rect.width - _backRect.rect.width / 2 - _handleRect.rect.width/8, Time.deltaTime * _speed),_handleRect.localPosition.y);
         }
-
-        
-        
-        
     }
 }

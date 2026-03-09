@@ -65,17 +65,18 @@ namespace Entities.UI.SDF
         public ShapeType Type { get; private set; }
         public string SType => ParameterDescriptions[Type];
         public ShapeData ShapeData;
+        public bool UseParent;
     }
 
     [Serializable]
     public struct ShapeData
     {
-        public int Type;
-        public Vector2 Position;
-        public float Rotation;
-        public Vector2 Size;
+        [HideInInspector] public int Type;
+        [HideInInspector] public Vector2 Position;
+        [HideInInspector] public float Rotation;
+        [HideInInspector] public Vector2 Size;
         public Vector4 ParamsA;
         public Vector4 ParamsB;
-        public int GroupIndex;
+        [HideInInspector] public int GroupIndex;
     }
 }
