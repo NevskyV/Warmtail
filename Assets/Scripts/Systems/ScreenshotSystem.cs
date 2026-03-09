@@ -2,7 +2,10 @@
 using System.IO;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Entities.Core;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Systems
 {
@@ -11,11 +14,20 @@ namespace Systems
         private readonly string _rootFolderPath;
         private CancellationTokenSource _cts;
         public Action<bool> ScreenShotState = null;
+        private string _lastScreenShotPath; 
+        private PlayerInput _playerInput;
+        private SceneLoader _sceneLoader;
 
-        public ScreenshotSystem()
+        [Inject]
+        public ScreenshotSystem(PlayerInput playerInput, SceneLoader sceneLoader)
         {
+            _playerInput =  playerInput;
+            _sceneLoader = sceneLoader;
             _cts = new CancellationTokenSource();
             _rootFolderPath = Path.Combine(Application.persistentDataPath, "Screenshots");
+            _sceneLoader.SceneStartLoading += DisableAutoScreenshot;
+            _sceneLoader.SceneLoaded += EnableAutoScreenshot;
+            _playerInput.actions["F12"].performed += _ => TakeScreenShot(ScreenshotType.User);
         }
 
         public async void TakeScreenShot(ScreenshotType type)
@@ -30,7 +42,7 @@ namespace Systems
             }
             
             var fullFilePath = Path.Combine(typeFolderPath, fileName);
-
+            _lastScreenShotPath = fullFilePath;
             ScreenShotState?.Invoke(false);
             await UniTask.WaitForEndOfFrame();
             
@@ -40,6 +52,11 @@ namespace Systems
             ScreenShotState?.Invoke(true);
 
             Debug.Log($"Take {type} screenshot saved to: {fullFilePath}");
+        }
+
+        public void DeleteScreenShot()
+        {
+            File.Delete(_lastScreenShotPath);
         }
 
         public void Dispose()
@@ -64,8 +81,9 @@ namespace Systems
             DisableAutoScreenshot();
         }
 
-        public async UniTaskVoid EnableAutoScreenshot()
+        public async void EnableAutoScreenshot(string sceneName)
         {
+            if (sceneName == "Start") return;
             if (_cts != null) _cts.Dispose();
             _cts = new CancellationTokenSource();
 

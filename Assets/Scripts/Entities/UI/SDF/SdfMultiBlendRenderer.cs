@@ -60,7 +60,7 @@ namespace Entities.UI.SDF
                 {
                     if (!figure) continue;
 
-                    Vector2 normalizedPos = figure.transform.localPosition / parentSize;
+                    Vector2 normalizedPos = (figure.UseParent? figure.transform.parent.localPosition +  figure.transform.localPosition: figure.transform.localPosition) / parentSize;
 
                     allShapes.Add(new ShapeData
                     {

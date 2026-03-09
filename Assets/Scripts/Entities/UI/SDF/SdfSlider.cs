@@ -36,6 +36,7 @@ namespace Entities.UI.SDF
         
         private void Update()
         {
+            
             _fillRect.anchorMax = new Vector2(Mathf.Lerp(_fillRect.anchorMax.x, _value *
                 _backRect.anchorMax.x, Time.deltaTime * _speed), _fillRect.anchorMax.y);
             _handleRect.localPosition = new Vector2(Mathf.Lerp(_handleRect.localPosition.x, _value *

@@ -59,6 +59,7 @@ namespace Entities.Core
             Container.Bind<PlacementSystem>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
+            Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             Container.Inject(_questSystem);
