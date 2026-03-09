@@ -14,19 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNode: 6a63d855-dfa4-43f9-9b7e-0a99feba3161
   Scene: GameplayIra
-  NextElement: {fileID: 0}
+  NextElement: {fileID: 11400000, guid: 9969460c6aae8ff4093797b84f22eac0, type: 2}
   Element:
     Actions:
-    - rid: 7007432229148688384
+    - rid: 5800212002074787994
     Tasks:
-    - rid: 7007432209248551013
+    - rid: 5800212002074787843
+  description: 
   references:
     version: 2
     RefIds:
-    - rid: 7007432209248551013
-      type: {class: ShellsTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data: 
-    - rid: 7007432229148688384
-      type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+    - rid: 5800212002074787843
+      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _type: 3
+        _reference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+        _actionName: Move
+        _tipsVisuals: tips visuals gameplay
+        _description: 
+    - rid: 5800212002074787994
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 0
+        _objectIds: []

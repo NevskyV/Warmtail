@@ -1,4 +1,5 @@
-﻿using Interfaces;
+﻿using Data;
+using Interfaces;
 using System;
 
 namespace Systems.Tasks
@@ -7,6 +8,13 @@ namespace Systems.Tasks
     {
         public bool Completed { get; set; }
         public Action OnComplete { get; set; }
+        private EventsData _eventsData;
+
+        public void SetEventsData(EventsData data)
+        {
+            _eventsData = data;
+        }
+
 
         public void Activate()
         {

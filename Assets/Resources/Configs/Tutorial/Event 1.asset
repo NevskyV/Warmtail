@@ -17,20 +17,21 @@ MonoBehaviour:
   NextElement: {fileID: 11400000, guid: e7afd8e6643c39443a4260bd9de089f3, type: 2}
   Element:
     Actions:
-    - rid: 7007432209248551022
+    - rid: 5800212002074787842
     Tasks:
-    - rid: 7007432209248551014
+    - rid: 5800212002074787841
+  description: 
   references:
     version: 2
     RefIds:
-    - rid: 7007432209248551014
-      type: {class: KeyPressTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+    - rid: 5800212002074787841
+      type: {class: ButtonTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _reference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
-        _actionName: Move
-        _tipsVisuals: e7327401-35ea-46fa-a89c-6c9ce1361d68
-        _description: 
-    - rid: 7007432209248551022
-      type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+        _buttonId: confirm name button
+    - rid: 5800212002074787842
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _type: 2
+        _active: 0
+        _objectIds:
+        - start monologue screen
+        - start monologue trigger

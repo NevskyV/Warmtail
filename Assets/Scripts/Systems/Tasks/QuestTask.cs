@@ -3,6 +3,7 @@ using Interfaces;
 using Data;
 using Systems.Tutorial;
 using UnityEngine;
+using Data;
 using UnityEngine.SceneManagement;
 
 namespace Systems.Tasks
@@ -13,12 +14,18 @@ namespace Systems.Tasks
         public Action OnComplete { get; set; }
         [SerializeField] private QuestData _questData;
         [SerializeField] private bool _start;
-        [SerializeField] private bool _home = false;
-        [TextArea] [SerializeField] private string description;
+        [SerializeField] private bool _home = false; 
+        private EventsData _eventsData;
+
+        public void SetEventsData(EventsData data)
+        {
+            _eventsData = data;
+        }
+
 
         public void Activate()
         {
-            TutorialSystem.TaskActivated.Add(this);
+            //TutorialSystem.TaskActivated.Add(this);
 
             if (_start) QuestSystem.OnQuestStarted.AddListener(MarkComplete);
             else QuestSystem.OnQuestEnded.AddListener(MarkComplete);
