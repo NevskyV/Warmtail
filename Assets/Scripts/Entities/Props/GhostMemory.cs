@@ -245,6 +245,8 @@ namespace Entities.Props
                 _currentGhostCollider.isTrigger = true;
             }
             
+            _currentGhost.SetActive(false);
+            
             if (_sparklePrefab != null)
             {
                 var sparkle = Instantiate(_sparklePrefab, oldPosition, Quaternion.identity);
@@ -263,6 +265,11 @@ namespace Entities.Props
                 await tween.AsyncWaitForCompletion();
                 
                 Destroy(sparkle);
+            }
+            
+            if (_currentGhost != null)
+            {
+                _currentGhost.SetActive(true);
             }
 
             SubscribeToCollider();
