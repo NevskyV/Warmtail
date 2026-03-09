@@ -7,7 +7,7 @@ namespace Editor
 {
     public static class LocalizationExporter
     {
-        private static string ToolPath = "C:/Users/Nevsky/RiderProjects/ConsoleApp2/ConsoleApp2/bin/Release/net10.0/ConsoleApp2.exe";
+        private static string ToolPath = "\"D:\\Programms\\DialogueExporter\\GoogleSheetsExporter.exe\"";
  
         public static void Export(
             string sheetName,
