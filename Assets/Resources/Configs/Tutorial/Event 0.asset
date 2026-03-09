@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
+  m_Name: Event 0
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
+  _idNode: faf6867e-4410-4567-84a4-94b0d37357c3
+  Scene: GameplayIra
+  NextElement: {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
+  Element:
+    Actions:
+    - rid: 7007432209248551018
+    Tasks:
+    - rid: 7007432209248551015
+  references:
+    version: 2
+    RefIds:
+    - rid: 7007432209248551015
+      type: {class: ButtonTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _buttonId: 305f90b9-cd34-4aef-88d3-a6e77722d476
+    - rid: 7007432209248551018
+      type: {class: NotificationAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _popup: {fileID: 1307311160032710671, guid: 144371e616bacd54984a1874e7aa1047, type: 3}
+        _parentId: 90444d67-3ca5-42bc-9e15-25f02be54f15
