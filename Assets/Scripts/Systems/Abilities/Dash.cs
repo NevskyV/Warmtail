@@ -18,6 +18,8 @@ namespace Systems.Abilities
         [SerializeField] private float _dashCooldownDuration = 1f;
         [SerializeField] private int _normalSpeed = 60;
         [SerializeField] private int _dashSpeed = 100;
+        [SerializeField] private int _slowdownSpeed = 30;
+        [SerializeField] private float _slowdownDuration = 2f;
         private float _lastDashTime = -Mathf.Infinity;
         private UniTask _dashTask;
         private bool _dashLoopRunning;
@@ -108,6 +110,10 @@ namespace Systems.Abilities
                 _camNoise.enabled = false;
                 _dashLoopRunning = false;
                 _rumble.DisableRumble();
+                
+                ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _slowdownSpeed;
+                await UniTask.Delay(TimeSpan.FromSeconds(_slowdownDuration));
+                
                 ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
                 await UniTask.Delay(TimeSpan.FromSeconds(_dashCooldownDuration));
             }

@@ -15,6 +15,12 @@ namespace Systems
         private const float _increaseIntervalSeconds = 0.6f;
         private const float _cooldownSeconds = 1.5f;
 
+        /// <summary>
+        /// Multiplier applied to all warmth consumption (DecreaseWarmth calls).
+        /// 1 = default, 0.5 = half cost, 2 = double cost.
+        /// </summary>
+        public float WarmthConsumptionMultiplier { get; set; } = 1f;
+
         private GlobalData _globalData;
 
         private ResettableTimer _cooldownTimer;
@@ -35,6 +41,11 @@ namespace Systems
         public void DecreaseWarmth(int value)
         {
             if (value <= 0) return;
+            if (WarmthConsumptionMultiplier != 1f)
+            {
+                value = Mathf.CeilToInt(value * WarmthConsumptionMultiplier);
+                if (value <= 0) return;
+            }
             _globalData.Edit<RuntimePlayerData>(data =>
             {
                 data.CurrentWarmth = Mathf.Max(data.CurrentWarmth - value, 0);
