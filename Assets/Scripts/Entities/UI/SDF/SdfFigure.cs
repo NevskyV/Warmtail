@@ -65,6 +65,7 @@ namespace Entities.UI.SDF
         public ShapeType Type { get; private set; }
         public string SType => ParameterDescriptions[Type];
         public ShapeData ShapeData;
+        public bool UseParent;
     }
 
     [Serializable]
