@@ -12,42 +12,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
   m_Name: Event 3
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
-  _idNode: 6a63d855-dfa4-43f9-9b7e-0a99feba3161
-  Once: 0
+  _idNod: 9b0202dc-555f-4b87-8d2a-9278666fea02
+  Once: 1
   Scene: Gameplay
-  NextElement: {fileID: 11400000, guid: 411ce74defe152449ad5bd743a8b6235, type: 2}
+  NextElement: {fileID: 11400000, guid: a2008510772a8424fb55836d01379dd5, type: 2}
   Element:
     Actions:
-    - rid: 5800212002074788003
-    - rid: 5800212002074788190
-    - rid: 5800212002074787996
+    - rid: 5800212002074788002
+    - rid: 5800212002074788217
     Tasks:
-    - rid: 5800212002074787995
-  description: "\u0438 \u0442\u0435\u043A\u0441\u0442 \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0438"
+    - rid: 5800212002074788000
+  description: "\u0422\u0440\u0438\u0433\u0433\u0435\u0440 \u043D\u0430 \u043B\u0451\u0434,
+    \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0448\u043A\u0430\u043B\u0430
+    \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u044B \u0438 \u0442\u0435\u043A\u0441\u0442
+    \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0438  [1]"
   references:
     version: 2
     RefIds:
-    - rid: 5800212002074787995
-      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+    - rid: 5800212002074788000
+      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _objId: star (0)
-        _needToBe: 0
-    - rid: 5800212002074787996
+        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
+        _position: {x: 35, y: 11}
+    - rid: 5800212002074788002
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
-        _objectIds: []
-    - rid: 5800212002074788003
+        _objectIds:
+        - tutor trigger 0
+    - rid: 5800212002074788217
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
-        _objectIds:
-        - cam trigger 0
-        _homeScene: 0
-    - rid: 5800212002074788190
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - tertilus gameplay
+        _objectIds: []
         _homeScene: 0
