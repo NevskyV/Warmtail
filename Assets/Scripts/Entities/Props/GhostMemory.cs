@@ -109,14 +109,7 @@ namespace Entities.Props
             SpawnGhostAtPoint(0);
             
             var node = _graph.AllNodes[_currentPointIndex];
-
-            if (node == null)
-            {
-                Debug.LogError($"Node at index {_currentPointIndex} is NULL");
-                return;
-            }
-
-            Debug.Log($"NodeId: {node.NodeId}");
+            
         }
         
         
@@ -148,16 +141,7 @@ namespace Entities.Props
         
         private void SubscribeToCollider()
         {
-            if (_colliderSubscription != null)
-            {
-                _colliderSubscription.Dispose();
-            }
-            if (_collisionSubscription != null)
-            {
-                _collisionSubscription.Dispose();
-            }
-            
-            if (_currentGhostCollider == null) return;
+            if (!_currentGhostCollider) return;
             
             _colliderSubscription = _currentGhostCollider.OnTriggerEnter2DAsObservable()
                 .Subscribe(OnGhostTriggered);
@@ -174,36 +158,13 @@ namespace Entities.Props
         
         private void OnGhostTriggered(Collider2D other)
         {
-            Debug.Log("Ghost triggered");
-
-            if (_isMoving) 
+            if (_isMoving || !other || !other.CompareTag("Player")) 
             {
-                Debug.Log("Is moving");
                 return;
             }
-
-            if (other == null)
+            
+            if (_monologueVisuals && _graph && _currentPointIndex < _graph.AllNodes.Count)
             {
-                Debug.Log("Other null");
-                return;
-            }
-
-            Debug.Log($"Other tag: {other.tag}");
-
-            if (!other.CompareTag("Player"))
-            {
-                Debug.Log("Not player");
-                return;
-            }
-
-            Debug.Log($"Graph: {_graph}");
-            Debug.Log($"MonologueVisuals: {_monologueVisuals}");
-            Debug.Log($"Index: {_currentPointIndex}");
-            Debug.Log($"Nodes count: {_graph?.AllNodes.Count}");
-
-            if (_monologueVisuals != null && _graph != null && _currentPointIndex < _graph.AllNodes.Count)
-            {
-                Debug.Log("Requesting dialogue");
                 _monologueVisuals.RequestSingleLine(
                     _graph.AllNodes[_currentPointIndex].NodeId,
                     _prefix);
@@ -212,21 +173,21 @@ namespace Entities.Props
             MoveToNextPoint();
         }
         
-        private async void MoveToNextPoint()
+        private async UniTaskVoid MoveToNextPoint()
         {
             if (_isMoving) return;
             if (_currentPointIndex >= _ghostPoints.Count - 1) return;
             _isMoving = true;
             
             var oldGhost = _currentGhost;
-            var oldPosition = oldGhost != null ? (Vector2)oldGhost.transform.position : _ghostPoints[_currentPointIndex].Position;
+            var oldPosition = oldGhost ? (Vector2)oldGhost.transform.position : _ghostPoints[_currentPointIndex].Position;
             
             _currentPointIndex++;
             var newPoint = _ghostPoints[_currentPointIndex];
             var newPosition = (Vector2)transform.TransformPoint(new Vector3(newPoint.Position.x, newPoint.Position.y, 0f));
             var newRotation = transform.rotation * Quaternion.Euler(newPoint.Rotation);
             
-            if (oldGhost != null)
+            if (oldGhost)
             {
                 Destroy(oldGhost);
             }
@@ -234,7 +195,7 @@ namespace Entities.Props
             var parent = _ghostParent != null ? _ghostParent : transform;
             _currentGhost = Instantiate(_ghostPrefab, newPosition, newRotation, parent);
             _currentGhostCollider = _currentGhost.GetComponent<Collider2D>();
-            if (_currentGhostCollider == null)
+            if (_currentGhostCollider)
             {
                 var added = _currentGhost.AddComponent<CircleCollider2D>();
                 added.isTrigger = true;
@@ -247,7 +208,7 @@ namespace Entities.Props
             
             _currentGhost.SetActive(false);
             
-            if (_sparklePrefab != null)
+            if (_sparklePrefab)
             {
                 var sparkle = Instantiate(_sparklePrefab, oldPosition, Quaternion.identity);
                 var sparkleTransform = sparkle.transform;
@@ -267,7 +228,7 @@ namespace Entities.Props
                 Destroy(sparkle);
             }
             
-            if (_currentGhost != null)
+            if (_currentGhost)
             {
                 _currentGhost.SetActive(true);
             }
