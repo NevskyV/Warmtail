@@ -17,6 +17,7 @@ namespace Systems.Tutorial
 
         public bool Once;
         public string Scene;
+        public bool AnyScene;
         public EventConfig NextElement;
         public SequenceElement Element;
         

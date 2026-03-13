@@ -47,15 +47,16 @@ namespace Systems.Tutorial
 
             if (_globalData.Get<SavablePlayerData>().EventsState != config.IdNode)
             {
-                if (config.NextElement) StartingActivate(config.NextElement);
-
-                if (config.Scene != SceneManager.GetActiveScene().name) return;
-                if (config.Once) return;
+                if ((config.Scene == SceneManager.GetActiveScene().name || config.AnyScene) &&
+                    !config.Once) {
                 
-                foreach(ISequenceAction action in config.Element.Actions)
-                {
-                    action.Invoke();
+                    foreach(ISequenceAction action in config.Element.Actions)
+                    {
+                        action.Invoke();
+                    }
                 }
+            
+                if (config.NextElement) StartingActivate(config.NextElement);
             }
             else
             {
@@ -79,7 +80,7 @@ namespace Systems.Tutorial
 
         private void Activate(EventConfig config)
         {
-            if (config.Scene != SceneManager.GetActiveScene().name) return;
+            if (config.Scene != SceneManager.GetActiveScene().name && !config.AnyScene) return;
             
             if (config.Element.Tasks.Count == 0) Invoke(config);
             else
@@ -96,6 +97,7 @@ namespace Systems.Tutorial
         private void Invoke(EventConfig config)
         {
             Debug.Log("ira _eventsData 7 " + config.description);
+
             foreach(ISequenceAction action in config.Element.Actions)
             {
                 action.Invoke();

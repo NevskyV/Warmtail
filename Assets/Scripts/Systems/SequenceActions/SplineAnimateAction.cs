@@ -3,6 +3,9 @@ using Interfaces;
 using UnityEngine;
 using Data;
 using UnityEngine.Splines;
+using System.Threading.Tasks;
+using System;
+using Cysharp.Threading.Tasks;
 
 namespace Systems.SequenceActions
 {
@@ -20,15 +23,22 @@ namespace Systems.SequenceActions
         }
 
 
-        public void Invoke()
+        public async void Invoke()
         {
+            Debug.Log ("ira spline " + _splineId);
+
             var character = _eventsData.SceneObjects[_characterId].GetComponent<SplineAnimate>();
             character.Container = _eventsData.SceneObjects[_splineId].GetComponent<SplineContainer>();
             if (_loop) character.Loop = SplineAnimate.LoopMode.Loop;
             else character.Loop = SplineAnimate.LoopMode.Once;
 
+            await UniTask.Yield(PlayerLoopTiming.LastPostLateUpdate);
+
             character.Restart(false);
-            if (_move) character.Play();
+            if (_move) {
+                Debug.Log ("ira spline move " + _splineId);
+                character.Play();
+            }
         }
     }
 }

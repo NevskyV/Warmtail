@@ -15,10 +15,12 @@ MonoBehaviour:
   _idNod: f3123168-1dc3-4b01-ac95-eccc20ac7155
   Once: 0
   Scene: Gameplay
+  AnyScene: 0
   NextElement: {fileID: 11400000, guid: 5477cd915eb8de544aeb55c221635a42, type: 2}
   Element:
     Actions:
     - rid: 5800212002074788224
+    - rid: 5800212002074788274
     Tasks:
     - rid: 5800212002074788223
   description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
@@ -37,3 +39,9 @@ MonoBehaviour:
         _characterId: tertilus gameplay
         _splineId: tertilus spline 1 gameplay
         _move: 1
+        _loop: 0
+    - rid: 5800212002074788274
+      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _graph: {fileID: 11400000, guid: 2161cc893dff2d945852dc5b02bdd5fb, type: 2}
+        _npcId: tertilus gameplay
