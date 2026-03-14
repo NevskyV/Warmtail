@@ -15,6 +15,7 @@ MonoBehaviour:
   _idNod: c19d8ce5-163b-4169-9467-f05ea013b400
   Once: 1
   Scene: Gameplay
+  AnyScene: 0
   NextElement: {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
   Element:
     Actions:
@@ -28,7 +29,7 @@ MonoBehaviour:
     - rid: 5800212002074787840
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _active: 1
+        _active: 0
         _objectIds:
         - start monologue screen
         - start monologue trigger

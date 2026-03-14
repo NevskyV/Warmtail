@@ -28,6 +28,7 @@ namespace Entities.Core
         [SerializeField] private UIStateSystem _uiStateSystem;
         [SerializeField] private ShoppingManager _shoppingManager;
         [SerializeField] private DialogueVisuals _dialogueVisuals;
+        [SerializeField] private MonologueVisuals _monologueVisuals;
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private CinemachineCamera _cam;
         [SerializeField] private SurfacingSystem _surfacingSystem;
@@ -51,6 +52,7 @@ namespace Entities.Core
             Container.Bind<ShoppingManager>().FromInstance(_shoppingManager).AsSingle();
             Container.Bind<CinemachineCamera>().FromInstance(_cam).AsSingle();
             Container.Bind<DialogueVisuals>().FromInstance(_dialogueVisuals).AsSingle();
+            Container.Bind<MonologueVisuals>().FromInstance(_monologueVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
             Container.Bind<SceneSystem>().FromNew().AsSingle();
