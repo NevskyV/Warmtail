@@ -13,16 +13,18 @@ namespace Systems.Tutorial
     public class EventsSystem : MonoBehaviour
     {
         [SerializeField] private EventConfig _startNode;
-        [SerializeField] private EventConfig[] _eventConfigs;
 
         public static Action<EventConfig> OnEventCompleted = delegate {};
         private string _finishString = "finish";
 
         [Inject] private GlobalData _globalData;
+        [Inject] private EventsData _eventsData;
 
-        private void Start()
+
+        private void Awake()
         {
             OnEventCompleted += Invoke;
+            Debug.Log("ira _eventsData 3 " + _eventsData);
             StartSystem();
         }
         private void OnDestroy()
@@ -41,6 +43,8 @@ namespace Systems.Tutorial
         
         private void StartingActivate(EventConfig config)
         {
+            SetData(config);
+
             if (_globalData.Get<SavablePlayerData>().EventsState != config.IdNode)
             {
                 if (config.NextElement) StartingActivate(config.NextElement);
@@ -53,8 +57,23 @@ namespace Systems.Tutorial
             }
             else
             {
+                Debug.Log("ira _eventsData 5 " + config.Element.Tasks.Count);
                 Activate(config);
             }
+        }
+
+        private void SetData(EventConfig config)
+        {
+            foreach(ISequenceAction action in config.Element.Actions)
+            {
+                action.SetEventsData(_eventsData);
+            }
+            foreach(ITask task in config.Element.Tasks)
+            {
+                Debug.Log("ira _eventsData 3.5 " + config.Element.Tasks.Count);
+                task.SetEventsData(_eventsData);
+            }
+            Debug.Log("ira _eventsData 4 " + config.Element.Tasks.Count);
         }
 
         private void Activate(EventConfig config)
@@ -66,6 +85,7 @@ namespace Systems.Tutorial
             {
                 foreach(ITask task in config.Element.Tasks)
                 {
+                    Debug.Log("ira _eventsData 6 " + config.Element.Tasks.Count);
                     task.Activate();
                     task.OnComplete += config.TaskCompleted;
                 }
@@ -86,6 +106,8 @@ namespace Systems.Tutorial
             else
             {
                 _globalData.Edit<SavablePlayerData>(data => data.EventsState = config.NextElement.IdNode);
+            
+                SetData(config.NextElement);
                 Activate(config.NextElement);
             }
         }
