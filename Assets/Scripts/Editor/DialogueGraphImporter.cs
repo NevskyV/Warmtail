@@ -16,7 +16,7 @@ namespace Editor
     public class DialogueGraphImporter : ScriptableSingleton<DialogueGraphImporter>
     {
         [SerializeField] private string _sequence;
-        private List<int> _editorGraphs;
+        private List<int> _editorGraphs = new();
         private string UserName => Environment.UserName;
 
         [Button, ShowIf(nameof(UserName), "Nevsky")]
