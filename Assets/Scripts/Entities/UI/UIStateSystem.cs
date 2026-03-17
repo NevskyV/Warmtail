@@ -31,6 +31,7 @@ namespace Entities.UI
         private PlayerAbilityController _abilityController;
         private ScreenshotSystem _screenshotSystem;
         public UIState CurrentState { get; private set; }
+        public Action<UIState> OnStateChange { get; set; }
 
         [Inject]
         private void Construct(PlayerInput input, ScreenshotSystem screenshotSystem, [InjectOptional] PlayerAbilityController abilityController)
@@ -108,7 +109,7 @@ namespace Entities.UI
                 targetCanvas.blocksRaycasts = true;
             }
             CurrentState = state;
-            
+            OnStateChange?.Invoke(CurrentState);
             await foreach (var (a, b) in CrossfadeEffect.CrossfadeTwins(_crossFadeTime))
             {
                 if (currentCanvas) currentCanvas.alpha = a;
@@ -120,6 +121,6 @@ namespace Entities.UI
     [Serializable]
     public enum UIState
     {
-        Normal, Settings, Pause, Dialogue, Building, Shop, Map
+        Normal, Settings, Pause, Dialogue, Building, Shop, Map, Bestiary, FearMenu
     }
 }

@@ -15,17 +15,13 @@ namespace Data.Player
         public List<Vector2> RespawnPositions = new(){new Vector2(-25.5f, 1)};
         public SerializedDictionary<int, int> Inventory;
         public string TimeLastGame;
-        public int TutorState;
         public string EventsState;
         public string LastScene;
         public SerializedDictionary<int, List<int>> QuestIds;
         public List<int> FearIds = new();
         public int ActiveFearId = -1;
         
-        //MetaData
         public bool IsHomeOpened;
-        public bool HasBeatenGame;
-        public bool HasInteracted;
     }
     
     [Serializable]
