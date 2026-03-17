@@ -13,15 +13,17 @@ MonoBehaviour:
   m_Name: Finix 7
   m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
   <Id>k__BackingField: 7
+  QuestType: 0
   <IsPermanent>k__BackingField: 1
-  <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
+  <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
   <Layer>k__BackingField: 0
+  <OnStart>k__BackingField: []
+  <OnComplete>k__BackingField: []
+  <OnFail>k__BackingField: []
   <Sequence>k__BackingField:
   - Actions: []
     Tasks:
     - rid: 7345391011349135621
-  <OnComplete>k__BackingField: []
-  <OnFail>k__BackingField: []
   references:
     version: 2
     RefIds:
@@ -30,4 +32,3 @@ MonoBehaviour:
       data:
         _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
         _position: {x: 100000, y: 0}
-        description: 

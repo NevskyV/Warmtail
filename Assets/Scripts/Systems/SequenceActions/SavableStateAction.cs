@@ -23,9 +23,11 @@ namespace Systems.SequenceActions
         
         public void Invoke()
         {
+            Debug.Log ("ira SavableStateAction ");
             if ((_homeScene && (SceneManager.GetActiveScene().name == "HomeIra" || SceneManager.GetActiveScene().name == "Home")) ||
                 ( !_homeScene && (SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "GameplayIra") ) )
                 {
+                    Debug.Log ("ira SavableStateAction yes " );
                     _objectIds.ForEach(x => 
                         _eventsData.SceneObjects[x].GetComponent<SavableStateObject>().ChangeState(_active)) ;
                 }

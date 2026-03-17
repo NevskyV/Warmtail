@@ -15,12 +15,14 @@ namespace Systems.SequenceActions
 
         public void SetEventsData(EventsData data)
         {
+            Debug.Log ("ira Dialogue " + _npcId);
             _eventsData = data;
         }
 
         
         public void Invoke()
         {
+            Debug.Log ("ira Dialogue move " + _eventsData.SceneObjects[_npcId].transform.name);
             _eventsData.SceneObjects[_npcId].GetComponent<SpeakableCharacter>().Graph = _graph;
         }
     }

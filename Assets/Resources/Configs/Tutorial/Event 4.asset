@@ -12,32 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
   m_Name: Event 4
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
-  _idNode: 6a63d855-dfa4-43f9-9b7e-0a99feba3161
-  Scene: GameplayIra
-  NextElement: {fileID: 0}
+  _idNod: 3cecca12-b6d3-49b8-9d5b-d55d504e7b0a
+  Once: 0
+  Scene: Gameplay
+  AnyScene: 0
+  NextElement: {fileID: 11400000, guid: 7983235695eda1743a8e4dcda3b93ef1, type: 2}
   Element:
     Actions:
-    - rid: 5800212002074787994
-    - rid: 5800212002074787996
+    - rid: 5800212002074788219
     Tasks:
-    - rid: 5800212002074787995
-  description: 
+    - rid: 5800212148699267191
+  description: "\u0421\u043F\u0430\u0432\u043D \u0422\u0435\u0440\u0442\u0438\u043B\u0443\u0441\u0430
+    \u0438 \u0443\u0441\u0442\u0430\u043D\u043E\u0432\u043A\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430"
   references:
     version: 2
     RefIds:
-    - rid: 5800212002074787994
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - cam trigger 0
-    - rid: 5800212002074787995
-      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _objId: star (0)
-        _needToBe: 0
-    - rid: 5800212002074787996
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+    - rid: 5800212002074788219
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
-        _objectIds: []
+        _objectIds:
+        - tertilus gameplay
+        _homeScene: 0
+    - rid: 5800212148699267191
+      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
+        _position: {x: 79.23, y: 35.32}

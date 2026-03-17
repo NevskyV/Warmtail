@@ -24,7 +24,6 @@ namespace Systems.Tutorial
         private void Awake()
         {
             OnEventCompleted += Invoke;
-            Debug.Log("ira _eventsData 3 " + _eventsData);
             StartSystem();
         }
         private void OnDestroy()
@@ -44,20 +43,26 @@ namespace Systems.Tutorial
         private void StartingActivate(EventConfig config)
         {
             SetData(config);
+            Debug.Log("ira _eventsData 3 " + config.description + "||" + _globalData.Get<SavablePlayerData>().EventsState);
 
             if (_globalData.Get<SavablePlayerData>().EventsState != config.IdNode)
             {
-                if (config.NextElement) StartingActivate(config.NextElement);
 
-                if (config.Scene != SceneManager.GetActiveScene().name) return;
-                foreach(ISequenceAction action in config.Element.Actions)
-                {
-                    action.Invoke();
-                }
+                if ((config.Scene == SceneManager.GetActiveScene().name || config.AnyScene) && 
+                    !config.Once)
+                    {
+                    
+                        foreach(ISequenceAction action in config.Element.Actions)
+                        {
+                            action.Invoke();
+                        }
+                    }
+
+                if (config.NextElement) StartingActivate(config.NextElement);
             }
             else
             {
-                Debug.Log("ira _eventsData 5 " + config.Element.Tasks.Count);
+                Debug.Log("ira _eventsData 5 " + config.description);
                 Activate(config);
             }
         }
@@ -70,22 +75,21 @@ namespace Systems.Tutorial
             }
             foreach(ITask task in config.Element.Tasks)
             {
-                Debug.Log("ira _eventsData 3.5 " + config.Element.Tasks.Count);
                 task.SetEventsData(_eventsData);
             }
-            Debug.Log("ira _eventsData 4 " + config.Element.Tasks.Count);
+            Debug.Log("ira _eventsData 4 " + config.description);
         }
 
         private void Activate(EventConfig config)
         {
-            if (config.Scene != SceneManager.GetActiveScene().name) return;
+            if (config.Scene != SceneManager.GetActiveScene().name && !config.AnyScene) return;
             
             if (config.Element.Tasks.Count == 0) Invoke(config);
             else
             {
                 foreach(ITask task in config.Element.Tasks)
                 {
-                    Debug.Log("ira _eventsData 6 " + config.Element.Tasks.Count);
+                    Debug.Log("ira _eventsData 6 " + config.description);
                     task.Activate();
                     task.OnComplete += config.TaskCompleted;
                 }
@@ -94,6 +98,8 @@ namespace Systems.Tutorial
         
         private void Invoke(EventConfig config)
         {
+            Debug.Log("ira _eventsData 7 " + config.description + "||||||" + config.NextElement.description);
+
             foreach(ISequenceAction action in config.Element.Actions)
             {
                 action.Invoke();
@@ -101,11 +107,13 @@ namespace Systems.Tutorial
 
             if (config.NextElement == null)
             {
+                Debug.Log("ira _eventsData 8.1 " + config.description + " " + _globalData.Get<SavablePlayerData>().EventsState);
                 _globalData.Edit<SavablePlayerData>(data => data.EventsState = _finishString);
             }
             else
             {
                 _globalData.Edit<SavablePlayerData>(data => data.EventsState = config.NextElement.IdNode);
+                Debug.Log("ira _eventsData 8 " + config.description + " " + _globalData.Get<SavablePlayerData>().EventsState);
             
                 SetData(config.NextElement);
                 Activate(config.NextElement);
