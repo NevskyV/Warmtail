@@ -41,6 +41,8 @@ namespace Systems
             data.OnStart.ForEach(x => x.Invoke());
             if (data.QuestType == QuestType.Serial)
             {
+                Debug.Log("ira activate quest");
+
                 foreach (var task in data.Sequence[questState[0]].Tasks)
                 {
                     task.Activate();
@@ -102,6 +104,7 @@ namespace Systems
         
         public static void EndQuest(QuestData data)
         {
+            Debug.Log("ira end quest " + _globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id));
             OnQuestEnded.Invoke(data, false);
             data.OnComplete.ForEach(x => x.Invoke());
             if(_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))

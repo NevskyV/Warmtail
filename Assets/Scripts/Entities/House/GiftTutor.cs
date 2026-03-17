@@ -13,7 +13,7 @@ namespace Entities.House
 
         public void AddToInventory()
         {
-            _shoppingSystem.BuyItem(_item, _character, false);
+            _shoppingSystem.BuyItem(_item, _character, false, 0);
         }
     }
 }

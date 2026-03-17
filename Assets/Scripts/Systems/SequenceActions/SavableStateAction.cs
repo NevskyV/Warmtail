@@ -28,8 +28,10 @@ namespace Systems.SequenceActions
                 ( !_homeScene && (SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "GameplayIra") ) )
                 {
                     Debug.Log ("ira SavableStateAction yes " );
-                    _objectIds.ForEach(x => 
-                        _eventsData.SceneObjects[x].GetComponent<SavableStateObject>().ChangeState(_active)) ;
+                    _objectIds.ForEach(x => {
+                        if (_eventsData.SceneObjects.ContainsKey(x)) 
+                            _eventsData.SceneObjects[x].GetComponent<SavableStateObject>().ChangeState(_active); 
+                        });
                 }
         }
     }

@@ -13,13 +13,13 @@ namespace Systems
         [Inject] private GlobalData _globalData;
         [Inject] private ShoppingManager _shoppingManager;
         
-        public void BuyItem(HouseItemData item, Character character, bool isLast)
+        public void BuyItem(HouseItemData item, Character character, bool isLast, int price)
         {
             int shells = _globalData.Get<SavablePlayerData>().Shells;
-            if (shells < item.Price) Debug.Log("не хватает ракушек!");
+            if (shells < price) Debug.Log("не хватает ракушек!");
             else
             {
-                _globalData.Edit<SavablePlayerData>(data => {data.Shells -= item.Price;});
+                _globalData.Edit<SavablePlayerData>(data => {data.Shells -= price;});
                 Debug.Log("ракушек теперь " + _globalData.Get<SavablePlayerData>().Shells);
                 if (isLast) PurchaseLastItem (character);
 

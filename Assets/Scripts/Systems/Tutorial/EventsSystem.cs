@@ -52,6 +52,7 @@ namespace Systems.Tutorial
                     !config.Once)
                     {
                     
+                        Debug.Log("ira _eventsData 5,5 " + config.description);
                         foreach(ISequenceAction action in config.Element.Actions)
                         {
                             action.Invoke();
