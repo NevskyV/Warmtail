@@ -26,6 +26,7 @@ namespace Systems.AbilitiesVisual
         }
         public void StartAbility()
         {
+            if (_tipsVisuals == null || _reference == null) return;
             _tipsVisuals.ShowTip(_reference[_actionName]);
         }
 
@@ -35,6 +36,7 @@ namespace Systems.AbilitiesVisual
 
         public void EndAbility()
         {
+            if (!_tipsVisuals || !_reference) return;
             _tipsVisuals.HideTip(_reference[_actionName]);
         }
     }

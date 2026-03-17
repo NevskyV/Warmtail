@@ -31,7 +31,8 @@ namespace Data.Player
     [Serializable]
     public class RuntimePlayerData : IRuntimeData
     {
-        public int CurrentWarmth;
+        public int CurrentCells;
+        public float CurrentCellProgress;
         public bool WasInGame;
         public int Speed;
     }

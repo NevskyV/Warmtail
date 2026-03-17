@@ -37,8 +37,7 @@ namespace Entities.UI
             _dialogueSystem.StartDialogue(graph, this, null, invoker);
             ProcessDialogue();
         }
-        
-        public async void ProcessDialogue()
+        async UniTaskVoid ProcessDialogue()
         {
             while(true){
                 await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));

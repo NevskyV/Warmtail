@@ -1,6 +1,3 @@
-using System;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
 using UnityEngine;
@@ -8,105 +5,97 @@ using Zenject;
 
 namespace Systems
 {
-
     public class WarmthSystem
     {
-        private const int _warmthIncreaseRate = 1;
-        private const float _increaseIntervalSeconds = 0.6f;
-        private const float _cooldownSeconds = 1.5f;
-
-        /// <summary>
-        /// Multiplier applied to all warmth consumption (DecreaseWarmth calls).
-        /// 1 = default, 0.5 = half cost, 2 = double cost.
-        /// </summary>
         public float WarmthConsumptionMultiplier { get; set; } = 1f;
 
-        private GlobalData _globalData;
+        public int MaxCells => _globalData.Get<SavablePlayerData>().Stars;
+        public bool HasCells => _globalData.Get<RuntimePlayerData>().CurrentCells > 0;
 
-        private ResettableTimer _cooldownTimer;
-        private CancellationTokenSource _increaseCts;
-        private bool _isIncreasing;
+        private GlobalData _globalData;
+        private int _lastStars;
 
         [Inject]
         private void Construct(GlobalData globalData)
         {
             _globalData = globalData;
+            _lastStars = _globalData.Get<SavablePlayerData>().Stars;
             _globalData.Edit<RuntimePlayerData>(data =>
             {
-                data.CurrentWarmth = _globalData.Get<SavablePlayerData>().Stars * 10;
+                data.CurrentCells = _lastStars;
+                data.CurrentCellProgress = 0f;
             });
-            _globalData.SubscribeTo<SavablePlayerData>(StartIncreaseIfNotRunning);
+            _globalData.SubscribeTo<SavablePlayerData>(OnStarsChanged);
         }
 
-        public void DecreaseWarmth(int value)
+        private void OnStarsChanged()
         {
-            if (value <= 0) return;
-            if (WarmthConsumptionMultiplier != 1f)
-            {
-                value = Mathf.CeilToInt(value * WarmthConsumptionMultiplier);
-                if (value <= 0) return;
-            }
+            var stars = _globalData.Get<SavablePlayerData>().Stars;
+            if (stars <= _lastStars) { _lastStars = stars; return; }
+
+            var gained = stars - _lastStars;
+            _lastStars = stars;
             _globalData.Edit<RuntimePlayerData>(data =>
             {
-                data.CurrentWarmth = Mathf.Max(data.CurrentWarmth - value, 0);
+                data.CurrentCells = Mathf.Min(data.CurrentCells + gained, stars);
             });
-            
-            _increaseCts?.Cancel();
-            _increaseCts?.Dispose();
-            _increaseCts = null;
-            _isIncreasing = false;
-            //Debug.Log("decrease");
-            _cooldownTimer ??= new ResettableTimer(_cooldownSeconds, StartIncreaseIfNotRunning);
-            _cooldownTimer.Start();
         }
 
-        private void StartIncreaseIfNotRunning()
+        public bool DrainCurrentCell(float drainPercent)
         {
-            if (_isIncreasing) return;
-            _isIncreasing = true;
-            _increaseCts?.Dispose();
-            _increaseCts = new CancellationTokenSource();
-            RunIncreaseAsync(_increaseCts.Token).Forget();
-        }
+            if (drainPercent <= 0f) return true;
 
-        private async UniTaskVoid RunIncreaseAsync(CancellationToken token)
-        {
-            try
+            var runtime = _globalData.Get<RuntimePlayerData>();
+            if (runtime.CurrentCells <= 0) return false;
+
+            var effectiveDrain = drainPercent * WarmthConsumptionMultiplier;
+            bool hasRemaining = true;
+
+            _globalData.Edit<RuntimePlayerData>(data =>
             {
-                while (true)
+                data.CurrentCellProgress += effectiveDrain;
+                if (data.CurrentCellProgress >= 1f)
                 {
-                    token.ThrowIfCancellationRequested();
-
-                    var max = _globalData.Get<SavablePlayerData>().Stars * 10;
-                    var current = _globalData.Get<RuntimePlayerData>().CurrentWarmth;
-
-                    if (current >= max) break;
-
-                    _globalData.Edit<RuntimePlayerData>(data =>
-                    {
-                        var newVal = Mathf.Min(data.CurrentWarmth + _warmthIncreaseRate, max);
-                        data.CurrentWarmth = newVal;
-                    });
-                    //Debug.Log("increase");
-                    await UniTask.Delay(TimeSpan.FromSeconds(_increaseIntervalSeconds), cancellationToken: token);
+                    data.CurrentCells = Mathf.Max(data.CurrentCells - 1, 0);
+                    data.CurrentCellProgress = 0f;
+                    hasRemaining = data.CurrentCells > 0;
                 }
-            }
-            catch (OperationCanceledException) { }
-            finally
-            {
-                _isIncreasing = false;
-                if (_increaseCts != null)
-                {
-                    _increaseCts.Dispose();
-                    _increaseCts = null;
-                }
-            }
+            });
+
+            return hasRemaining;
         }
 
-        public bool CheckWarmCost(int cost)
+        public void ConsumeCurrentCell()
         {
-            var current = _globalData.Get<RuntimePlayerData>().CurrentWarmth;
-            return current >= cost;
+            var runtime = _globalData.Get<RuntimePlayerData>();
+            if (runtime.CurrentCells <= 0) return;
+
+            _globalData.Edit<RuntimePlayerData>(data =>
+            {
+                data.CurrentCells = Mathf.Max(data.CurrentCells - 1, 0);
+                data.CurrentCellProgress = 0f;
+            });
+        }
+
+        public bool ConsumeCells(int count)
+        {
+            if (_globalData.Get<RuntimePlayerData>().CurrentCells < count) return false;
+
+            _globalData.Edit<RuntimePlayerData>(data =>
+            {
+                data.CurrentCells = Mathf.Max(data.CurrentCells - count, 0);
+                data.CurrentCellProgress = 0f;
+            });
+            return true;
+        }
+
+        public void AddCell()
+        {
+            var max = MaxCells;
+            _globalData.Edit<RuntimePlayerData>(data =>
+            {
+                data.CurrentCells = Mathf.Min(data.CurrentCells + 1, max);
+            });
         }
     }
 }
