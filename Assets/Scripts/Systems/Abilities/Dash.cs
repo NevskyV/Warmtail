@@ -54,14 +54,14 @@ namespace Systems.Abilities
         public void ActivateDash()
         {
             _applyCost = true;
-            WarmthCost = 0;
+            DrainPercent = 0f;
             StartAbility?.Invoke();
         }
 
         public void ActivateDashNoCost()
         {
-            _applyCost =  false;
-            WarmthCost = 0;
+            _applyCost = false;
+            DrainPercent = 0f;
             StartAbility?.Invoke();
         }
 
@@ -76,8 +76,7 @@ namespace Systems.Abilities
 
                 if (_surfacingSystem.TryChangeLayer(dir))
                 {
-                    WarmthCost = MaxWarmthCost;
-
+                    DrainPercent = _drainPercentPerTick;
                     _layerInput = 0;
                 }
             }
@@ -100,7 +99,7 @@ namespace Systems.Abilities
                 while (Enabled && _dashLoopRunning && _moveInput.magnitude > 0.1f)
                 {
                     _camNoise.enabled = true;
-                    WarmthCost = _applyCost? MaxWarmthCost : 0;
+                    DrainPercent = _applyCost ? _drainPercentPerTick : 0f;
                     Dash();
                     await UniTask.Delay(500);
                 }

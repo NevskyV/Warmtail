@@ -14,28 +14,26 @@ namespace Systems.Abilities
     {
         [Header("Normal Warm")]
         [SerializeField] private float _radius = 3f;
-        
+
         [Header("Explosion")]
         [SerializeField] private float _explosionDuration = 0.5f;
-        [SerializeField] private int _explosionCost = 50;
-        
+        [SerializeField] private int _explosionCellCost = 1;
+
         private WarmthSystem _warmthSystem;
         private GamepadRumble _rumble;
         private bool _isRunning;
-        private int _maxWarmthCost;
         private AbilityTriggerZone<Warmable> _triggerZone;
-        
+
         [Inject]
-        public void Construct(Player player,  WarmthSystem warmthSystem, GamepadRumble gamepadRumble)
+        public void Construct(Player player, WarmthSystem warmthSystem, GamepadRumble gamepadRumble)
         {
             _warmthSystem = warmthSystem;
             _rumble = gamepadRumble;
-            _maxWarmthCost = WarmthCost;
             _triggerZone = GetOrCreateTriggerZone(player, "WarmingTrigger", _radius);
             _triggerZone.Wake();
             EndAbility += StopWarm;
         }
-        
+
         private AbilityTriggerZone<Warmable> GetOrCreateTriggerZone(Player player, string name, float radius)
         {
             var triggerObj = player.Rigidbody.transform.Find(name)?.gameObject;
@@ -45,30 +43,29 @@ namespace Systems.Abilities
                 triggerObj.transform.SetParent(player.Rigidbody.transform);
                 triggerObj.transform.localPosition = Vector3.zero;
             }
-            
             return new AbilityTriggerZone<Warmable>(triggerObj, radius);
         }
-        
+
         public void StartWarm()
         {
             if (_isRunning || !Enabled) return;
             if (WarmObjectsInRadius())
-            { UsingAbility?.Invoke(); }
+                UsingAbility?.Invoke();
             _isRunning = true;
             ActiveRoutine().Forget();
         }
-        
+
         public void PerformExplosion()
         {
             PerformExplosionInternal().Forget();
         }
-        
+
         private void StopWarm()
         {
             _rumble.DisableRumble();
             _isRunning = false;
         }
-        
+
         private async UniTaskVoid ActiveRoutine()
         {
             while (Enabled && _isRunning)
@@ -80,19 +77,16 @@ namespace Systems.Abilities
 
         private async UniTask PerformExplosionInternal()
         {
-            if (!_warmthSystem.CheckWarmCost(_explosionCost))
-            { 
+            if (!_warmthSystem.ConsumeCells(_explosionCellCost))
+            {
                 StopWarm();
                 return;
             }
             _rumble.EnableRumble();
-            _warmthSystem.DecreaseWarmth(_explosionCost);
             float timer = 0;
-            
             while (timer < _explosionDuration)
             {
-                timer += Time.deltaTime;
-
+                timer += UnityEngine.Time.deltaTime;
                 WarmObjectsInRadius(true);
                 await UniTask.Yield();
             }
@@ -105,31 +99,27 @@ namespace Systems.Abilities
             if (WarmObjectsInRadius())
             {
                 _rumble.EnableRumble();
-                WarmthCost = _maxWarmthCost;
+                DrainPercent = _drainPercentPerTick;
             }
             else
             {
-                _rumble.DisableRumble();;
-                WarmthCost = 0;
+                _rumble.DisableRumble();
+                DrainPercent = 0f;
             }
         }
-        
 
         private bool WarmObjectsInRadius(bool complete = false)
         {
             var warmableObjects = _triggerZone.ObjectsInRange.ToList();
-            
             for (int i = 0; i < warmableObjects.Count; i++)
             {
                 if (warmableObjects[i] == null) continue;
-                if(complete)
+                if (complete)
                     warmableObjects[i].WarmComplete();
                 else
                     warmableObjects[i].Warm();
             }
-            
             return warmableObjects.Count > 0;
         }
     }
 }
-
