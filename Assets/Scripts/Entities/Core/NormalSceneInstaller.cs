@@ -35,6 +35,7 @@ namespace Entities.Core
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private ComboConfig _comboConfig;
         [SerializeField] private TipsVisuals _tipsVisuals;
+        [SerializeField] private MarksVisuals _marksVisuals;
        
         public override void InstallBindings()
         {
@@ -55,6 +56,7 @@ namespace Entities.Core
             Container.Bind<ComboConfig>().FromInstance(_comboConfig).AsSingle();
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
+            Container.Bind<MarksVisuals>().FromInstance(_marksVisuals).AsSingle();
             
             Container.Bind<QuestSystem>().FromNew().AsSingle().NonLazy();
             Container.Bind<SceneSystem>().FromNew().AsSingle();
