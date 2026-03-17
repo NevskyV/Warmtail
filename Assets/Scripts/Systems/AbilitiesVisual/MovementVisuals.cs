@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Data.Player;
@@ -102,19 +102,15 @@ namespace Systems.AbilitiesVisual
                 }, _normalCamZoom, 1);
             }
 
-            for (int i = _loopVfxObjs.Count - 1; i >= 0; i--)
+            var snapshot = new List<GameObject>(_loopVfxObjs);
+            _loopVfxObjs.Clear();
+            foreach (var obj in snapshot)
             {
-                var obj =  _loopVfxObjs[i];
-                if (obj == null)
-                {
-                    _loopVfxObjs.RemoveAt(i);
-                    if (_loopVfxObjs.Count == 0) break;
-                    continue;
-                }
-                var main = obj.GetComponent<ParticleSystem>().main;
+                if (obj == null) continue;
+                var ps = obj.GetComponent<ParticleSystem>();
+                var main = ps.main;
                 main.loop = false;
-                await UniTask.Delay(TimeSpan.FromSeconds(main.duration - obj.GetComponent<ParticleSystem>().time));
-                _loopVfxObjs.Remove(obj);
+                await UniTask.Delay(TimeSpan.FromSeconds(main.duration - ps.time));
             }
         }
 

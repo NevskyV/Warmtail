@@ -40,7 +40,7 @@ namespace Entities.Props
             ApplyState(_startInPortalState);
         }
         
-        public async void Activate()
+        public async UniTaskVoid Activate()
         {
             await ActivateAsync();
         }
@@ -93,5 +93,13 @@ namespace Entities.Props
             
             await UniTask.Delay((int)(_effectDuration * 1000));
         }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player")) return;
+
+            Activate();
+        }
     }
+    
+    
 }

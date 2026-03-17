@@ -9,6 +9,7 @@ namespace Entities.Props
 {
     public class FearCore : MonoBehaviour, IInteractable
     {
+        [SerializeField] private bool _locked = true;
         [SerializeField] private FearPortal _portalPrefab;
         [SerializeField] private FearConfig _fearConfig;
         [SerializeField] private Transform _spawnPoint;
@@ -16,18 +17,26 @@ namespace Entities.Props
         [SerializeField] private List<GameObject> _portalObjects = new();
         
         [Inject] private GlobalData _globalData;
-        
+
+        private void Awake()
+        {
+            if (_portalPrefab != null)
+                _portalPrefab.gameObject.SetActive(false);
+        }
+        public void Unlock()
+        {
+            _locked = false;
+        }
         public void Interact()
         {
+            if (_locked) return;
             if (_portalPrefab == null || _fearConfig == null) return;
-            
-            Vector3 spawnPosition = _spawnPoint != null ? _spawnPoint.position : transform.position;
-            var portal = Instantiate(_portalPrefab, spawnPosition, Quaternion.identity);
-            
+
+            var portal = _portalPrefab;
+
             portal.gameObject.SetActive(true);
             portal.SetReverse(true);
             portal.Initialize(_baseObjects, _portalObjects);
-            portal.Activate();
             
             if (_globalData != null)
             {

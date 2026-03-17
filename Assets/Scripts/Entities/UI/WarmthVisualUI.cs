@@ -3,20 +3,17 @@ using Data.Player;
 using DG.Tweening;
 using Entities.UI.SDF;
 using TMPro;
-using TriInspector;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Entities.UI
 {
     public class WarmthVisualUI : MonoBehaviour
     {
-        [Title("UI Elements")]
         [SerializeField] private SdfFigure _arcFigure;
         [SerializeField] private TMP_Text _text;
-        [SerializeField] private float _maxValue = 2.7f;
-        [SerializeField] private float _smoothing = 0.5f;
+        [SerializeField] private float _maxAngle = 2.7f;
+        [SerializeField] private float _smoothing = 0.2f;
 
         private GlobalData _globalData;
         private Tween _tween;
@@ -31,25 +28,23 @@ namespace Entities.UI
 
         private void UpdateVisual()
         {
-            var data = _globalData.Get<SavablePlayerData>();
-            var runtimeData = _globalData.Get<RuntimePlayerData>();
+            var runtime = _globalData.Get<RuntimePlayerData>();
 
-            if (data.Stars == 0)
-            {
-                if (_arcFigure == null) return;
-                _arcFigure.ShapeData.ParamsA.x = 0;
-            }
-            else
-            {
-                if (_arcFigure == null) return;
-                _text.text = $"{runtimeData.CurrentWarmth}\n|\n{data.Stars * 10}";
-                _tween?.Pause();
-                var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);
-                _tween = DOTween.To(() => _arcFigure.ShapeData.ParamsA.x, x =>
-                {
-                    _arcFigure.ShapeData.ParamsA.x = x;
-                }, newAmount * _maxValue, _smoothing);
-            }
+            if (_text != null)
+                _text.text = runtime.CurrentCells.ToString();
+
+            if (_arcFigure == null) return;
+
+            float targetAngle = runtime.CurrentCells > 0
+                ? (1f - runtime.CurrentCellProgress) * _maxAngle
+                : 0f;
+
+            _tween?.Kill();
+            _tween = DOTween.To(
+                () => _arcFigure.ShapeData.ParamsA.x,
+                x => _arcFigure.ShapeData.ParamsA.x = x,
+                targetAngle,
+                _smoothing);
         }
     }
 }
