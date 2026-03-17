@@ -10,6 +10,7 @@ namespace Systems
         public float WarmthConsumptionMultiplier { get; set; } = 1f;
 
         public int MaxCells => _globalData.Get<SavablePlayerData>().Stars;
+        public int CurrentCells => _globalData.Get<RuntimePlayerData>().CurrentCells;
         public bool HasCells => _globalData.Get<RuntimePlayerData>().CurrentCells > 0;
 
         private GlobalData _globalData;
@@ -96,6 +97,11 @@ namespace Systems
             {
                 data.CurrentCells = Mathf.Min(data.CurrentCells + 1, max);
             });
+        }
+
+        private async void RestoreCells()
+        {
+            //TODO: slow restore of cells like opposite drain. Enable this after get amulet from NPC (check in savable player data)
         }
     }
 }

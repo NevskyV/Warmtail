@@ -15,6 +15,12 @@ namespace Entities.Sound
 {
     public class MusicStateSystem : MonoBehaviour
     {
+        public AudioClip HomeTrack
+        {
+            get => _clips[MusicState.Home][0];
+            set => _clips[MusicState.Home][0] = value;
+        }
+        
         [SerializeReference, Range(0.5f, 8f)] private float _crossFadeTime;
         [SerializeField] private AudioSource _source1;
         [SerializeField] private AudioSource _source2;

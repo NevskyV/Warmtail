@@ -11,6 +11,7 @@ namespace Data.House
     {
         [SerializeField, TableList(Draggable = true, AlwaysExpanded = true)]
         public List<PairForHouseItem> PlacedHouseItems = new();
+        public int HouseTrack;
     }
     [Serializable]
     public class PairForHouseItem
