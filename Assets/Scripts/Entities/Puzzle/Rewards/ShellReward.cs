@@ -3,10 +3,11 @@ using Data.Player;
 using UnityEngine;
 using Zenject;
 
-namespace Entities.Props
+namespace Entities.Puzzle.Rewards
 {
-    public class ShellReward : MonoBehaviour
+    public class ShellReward : Reward
     {
+        [SerializeField] private int _amount = 50;
         private GlobalData _globalData;
 
         [Inject]
@@ -15,11 +16,11 @@ namespace Entities.Props
             _globalData = globalData;
         }
 
-        public void Reward()
+        public override void Get()
         {
             _globalData.Edit<SavablePlayerData>(player =>
             {
-                player.Shells += 50;
+                player.Shells += _amount;
             });
         }
     }

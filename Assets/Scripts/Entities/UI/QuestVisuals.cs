@@ -21,7 +21,6 @@ namespace Entities.UI
     {
         [Title("Settings")]
         [SerializeField] private List<QuestData> _allQuests;
-        [SerializeField, Tooltip("x: horizontal\ny: top\nz:bottom")] private Vector3 _markOffset;
         [SerializeField] private Camera _cam;
 
         [SerializeField, Dropdown(nameof(GetDropdownStrings))]
@@ -29,12 +28,11 @@ namespace Entities.UI
         [SerializeField, Dropdown(nameof(GetDropdownStrings))]
         private string _incorrectLayerState;
         [Title("UI")]
-        [SerializeField] private GameObject _markPrefab;
-        [SerializeField] private RectTransform _markHud;
         [SerializeField] private GameObject _questPrefab;
         [SerializeField] private RectTransform _questHud;
-
-        private SerializedDictionary<QuestData, List<MarkUIData>> _createdMarks;
+        [SerializeField, PreviewObject] private Sprite _mapMarkSprite;
+        
+        private SerializedDictionary<QuestData, List<MarksVisuals.Mark>> _createdMarks;
         private SerializedDictionary<QuestData, GameObject> _createdQuests;
 
         public List<QuestData> AllQuests => _allQuests;
@@ -42,13 +40,16 @@ namespace Entities.UI
         private DiContainer _diContainer;
         private GlobalData _globalData;
         private SurfacingSystem _surfacingSystem;
+        private MarksVisuals _marksVisuals;
 
         [Inject]
-        private void Construct(DiContainer diContainer, GlobalData globalData, SurfacingSystem surfacingSystem)
+        private void Construct(DiContainer diContainer, GlobalData globalData,
+            SurfacingSystem surfacingSystem, MarksVisuals marksVisuals)
         {
             _diContainer = diContainer;
             _globalData = globalData;
             _surfacingSystem = surfacingSystem;
+            _marksVisuals = marksVisuals;
             _createdMarks = new();
             _createdQuests = new();
             StickAction.OnStickTaked += StickQuest;
@@ -130,20 +131,21 @@ namespace Entities.UI
         
         public void SpawnMarks(QuestData data, Vector2 markPos)
         {
-            var newMark = Instantiate(_markPrefab, _markHud);
             if (!_createdMarks.ContainsKey(data)) _createdMarks[data] = new();
-            _createdMarks[data].Add(new MarkUIData
+            var newMark = new MarksVisuals.Mark
             {
-                Object = newMark.gameObject,
-                WorldPos = markPos
-            });
+                Sprite = _mapMarkSprite,
+                WorldPosition = markPos
+            };
+            _createdMarks[data].Add(newMark);
+            _marksVisuals.SpawnMark(newMark, true);
         }
 
         public void DestroyMark(QuestData data, Vector2 markPos)
         {
-            var mark = _createdMarks[data].Find(x => x.WorldPos == markPos);
+            var mark = _createdMarks[data].Find(x => x.WorldPosition == markPos);
             if (mark == null) return;
-            Destroy(mark.Object);
+            _marksVisuals.DestroyMark(mark);
             _createdMarks[data].Remove(mark);
         }
 
@@ -151,51 +153,9 @@ namespace Entities.UI
         {
             foreach (var mark in _createdMarks[data])
             {
-                Destroy(mark.Object);
+                _marksVisuals.DestroyMark(mark);
             }
-        }
-        
-        public void Update()
-        {
-            if (_createdMarks == null) return;
-            foreach (var mark in _createdMarks)
-            {
-                CalculateMarksPositions(mark.Value);
-            }
-        }
-        
-        private void CalculateMarksPositions(List<MarkUIData> marks)
-        {
-            for (var i = 0; i < marks.Count; i++)
-            {
-                var screenPos = _cam.WorldToScreenPoint(marks[i].WorldPos);
-
-                Vector2 newScreenPos = new Vector2(screenPos.x, screenPos.y);
-                if (screenPos.x > Screen.width - Screen.width * _markOffset.x)
-                {
-                    newScreenPos.x = Screen.width - Screen.width * _markOffset.x;
-                }
-                else if (screenPos.x < Screen.width * _markOffset.x)
-                {
-                    newScreenPos.x = Screen.width * _markOffset.x;
-                }
-                
-                if (screenPos.y > Screen.height - Screen.height * _markOffset.y)
-                {
-                    newScreenPos.y = Screen.height - Screen.height * _markOffset.y;
-                }
-                else if (screenPos.y < Screen.height * _markOffset.z)
-                {
-                    newScreenPos.y = Screen.height * _markOffset.z;
-                }
-                Vector2 toTarget = (Vector2)screenPos - newScreenPos;
-                if (toTarget.sqrMagnitude > 0.0001f)
-                {
-                    float angle = Mathf.Atan2(toTarget.y, toTarget.x) * Mathf.Rad2Deg;
-                    marks[i].Object.transform.localRotation = Quaternion.Euler(0f, 0f, angle - 90);
-                }
-                marks[i].Object.transform.position = newScreenPos;
-            }
+            _createdMarks[data].Clear();
         }
         
         private IEnumerable<TriDropdownItem<string>> GetDropdownStrings()

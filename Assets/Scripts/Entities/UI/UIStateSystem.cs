@@ -1,7 +1,7 @@
 using System;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Entities.PlayerScripts;
-using Entities.UI.SDF;
 using Systems;
 using Systems.Effects;
 using TriInspector;
@@ -31,6 +31,7 @@ namespace Entities.UI
         private PlayerAbilityController _abilityController;
         private ScreenshotSystem _screenshotSystem;
         public UIState CurrentState { get; private set; }
+        public Action<UIState> OnStateChange { get; set; }
 
         [Inject]
         private void Construct(PlayerInput input, ScreenshotSystem screenshotSystem, [InjectOptional] PlayerAbilityController abilityController)
@@ -61,14 +62,14 @@ namespace Entities.UI
         private void EscapeTransition(InputAction.CallbackContext ctx)
         {
             if(_escapeTransitions.ContainsKey(CurrentState))
-                SwitchCurrentStateAsync(_escapeTransitions[CurrentState]);
+                SwitchCurrentStateAsync(_escapeTransitions[CurrentState]).Forget();
         }
         
-        public void SwitchCurrentState(int id) => SwitchCurrentStateAsync((UIState)id);
+        public void SwitchCurrentState(int id) => SwitchCurrentStateAsync((UIState)id).Forget();
         
-        public async void SwitchCurrentStateAsync(UIState state)
+        public async UniTask SwitchCurrentStateAsync(UIState state)
         {
-            if (SceneManager.GetActiveScene().name != "Start" && _abilityController != null)
+            if (SceneManager.GetActiveScene().name != "Start" && _abilityController)
             {
                 switch (state)
                 {
@@ -87,6 +88,7 @@ namespace Entities.UI
                             _pauseAnimator.SetBool("InPause", true);
                         break;
                     default:
+                        _abilityController.DisableAllAbilities();
                         _warmthGroup.DOFade(0, _crossFadeTime);
                         break;
                 }
@@ -107,7 +109,7 @@ namespace Entities.UI
                 targetCanvas.blocksRaycasts = true;
             }
             CurrentState = state;
-            
+            OnStateChange?.Invoke(CurrentState);
             await foreach (var (a, b) in CrossfadeEffect.CrossfadeTwins(_crossFadeTime))
             {
                 if (currentCanvas) currentCanvas.alpha = a;
@@ -119,6 +121,6 @@ namespace Entities.UI
     [Serializable]
     public enum UIState
     {
-        Normal, Settings, Pause, Dialogue, Building, Shop
+        Normal, Settings, Pause, Dialogue, Building, Shop, Map, Bestiary, FearMenu, MusicSelection, Photo
     }
 }

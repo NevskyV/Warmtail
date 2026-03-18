@@ -18,6 +18,8 @@ namespace Systems.Abilities
         [SerializeField] private float _dashCooldownDuration = 1f;
         [SerializeField] private int _normalSpeed = 60;
         [SerializeField] private int _dashSpeed = 100;
+        [SerializeField] private int _slowdownSpeed = 30;
+        [SerializeField] private float _slowdownDuration = 2f;
         private float _lastDashTime = -Mathf.Infinity;
         private UniTask _dashTask;
         private bool _dashLoopRunning;
@@ -52,14 +54,14 @@ namespace Systems.Abilities
         public void ActivateDash()
         {
             _applyCost = true;
-            WarmthCost = 0;
+            DrainPercent = 0f;
             StartAbility?.Invoke();
         }
 
         public void ActivateDashNoCost()
         {
-            _applyCost =  false;
-            WarmthCost = 0;
+            _applyCost = false;
+            DrainPercent = 0f;
             StartAbility?.Invoke();
         }
 
@@ -74,8 +76,7 @@ namespace Systems.Abilities
 
                 if (_surfacingSystem.TryChangeLayer(dir))
                 {
-                    WarmthCost = MaxWarmthCost;
-
+                    DrainPercent = _drainPercentPerTick;
                     _layerInput = 0;
                 }
             }
@@ -98,7 +99,7 @@ namespace Systems.Abilities
                 while (Enabled && _dashLoopRunning && _moveInput.magnitude > 0.1f)
                 {
                     _camNoise.enabled = true;
-                    WarmthCost = _applyCost? MaxWarmthCost : 0;
+                    DrainPercent = _applyCost ? _drainPercentPerTick : 0f;
                     Dash();
                     await UniTask.Delay(500);
                 }
@@ -108,6 +109,10 @@ namespace Systems.Abilities
                 _camNoise.enabled = false;
                 _dashLoopRunning = false;
                 _rumble.DisableRumble();
+                
+                ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _slowdownSpeed;
+                await UniTask.Delay(TimeSpan.FromSeconds(_slowdownDuration));
+                
                 ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
                 await UniTask.Delay(TimeSpan.FromSeconds(_dashCooldownDuration));
             }

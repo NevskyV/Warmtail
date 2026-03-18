@@ -37,8 +37,7 @@ namespace Entities.UI
             _dialogueSystem.StartDialogue(graph, this, null, invoker);
             ProcessDialogue();
         }
-        
-        public async void ProcessDialogue()
+        async UniTaskVoid ProcessDialogue()
         {
             while(true){
                 await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
@@ -76,13 +75,29 @@ namespace Entities.UI
         
         public async void RequestSingleLine(string id, string prefix = "fragment_")
         {
-            _currentText = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
-            _currentText.localPosition = ChooseRandomPosition();
-            _currentText.GetComponent<TMP_Text>().text = 
-                LocalizationManager.GetStringFromKey(prefix + id);
-            _currentText.GetComponent<TextEffect>().Refresh();
-            await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
-            Destroy(_currentText.gameObject);
+            var textRect = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
+            textRect.localPosition = ChooseRandomPosition();
+
+            var line = LocalizationManager.GetStringFromKey(prefix + id);
+            textRect.GetComponent<TMP_Text>().text = line;
+
+            var duration = line.Length * _perCharFadeTime + _delayTime;
+
+            var effect = textRect.GetComponent<TextEffect>();
+            effect.Refresh();
+            effect.StartManualEffects();
+
+            try
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: this.GetCancellationTokenOnDestroy());
+            }
+            catch
+            {
+                return;
+            }
+
+            if (textRect && textRect.gameObject)
+                Destroy(textRect.gameObject);
         }
 
 

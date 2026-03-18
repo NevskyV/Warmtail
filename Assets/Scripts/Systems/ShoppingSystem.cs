@@ -13,7 +13,7 @@ namespace Systems
         [Inject] private GlobalData _globalData;
         [Inject] private ShoppingManager _shoppingManager;
         
-        public void BuyItem(HouseItemData item, Character character, bool isLast, int price)
+        public void BuyItem(BuyableItemData item, Character character, bool isLast, int price)
         {
             int shells = _globalData.Get<SavablePlayerData>().Shells;
             if (shells < price) Debug.Log("не хватает ракушек!");

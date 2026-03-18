@@ -612,6 +612,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.GhostMemory
   _graph: {fileID: 11400000, guid: 050cd29a2d6b1c34ea3e096a317adeeb, type: 2}
   _prefix: tertilus10
+  _autoStart: 0
   _ghostPoints:
   - Position: {x: 5, y: -11}
     Rotation: {x: 0, y: 0, z: 0}
@@ -631,10 +632,16 @@ MonoBehaviour:
     Rotation: {x: 0, y: 0, z: 0}
   - Position: {x: 132, y: -70}
     Rotation: {x: 0, y: 0, z: 0}
+  _ghostPointTransforms: []
   _ghostPrefab: {fileID: 724532255432851820}
   _sparklePrefab: {fileID: 7886650645936084699, guid: ec134ff17927eb6469bdcddacfe33f13, type: 3}
   _sparkleMoveDuration: 1
   _sparkleEase: 7
+  _sparkleCurveOffset: 1.5
+  _forceGhostColliderTrigger: 1
+  _onFinished:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &-6866136572642674117
 MonoBehaviour:
   m_ObjectHideFlags: 0
