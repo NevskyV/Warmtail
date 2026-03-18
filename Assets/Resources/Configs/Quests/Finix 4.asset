@@ -46,23 +46,23 @@ MonoBehaviour:
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _puzzleId:
-        - cd292478-7dcb-4814-a8cf-4e1f75a44741
+        - puzzle finix quest lever
     - rid: 7345390956647809369
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _puzzleId:
-        - 1ace8e4c-eba5-4b8f-bb3d-e45ae11e0296
+        - puzzle finix quest ray
     - rid: 7345390956647809372
       type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _puzzleId:
-        - 673e2422-01c7-450d-a91b-506298261c32
+        - puzzle finix quest gear
     - rid: 7345391011349135555
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
-        - cd292478-7dcb-4814-a8cf-4e1f75a44741
+        - puzzle finix quest lever
         _homeScene: 0
     - rid: 7345391011349135556
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
@@ -70,13 +70,13 @@ MonoBehaviour:
         _spawn: 0
         _questData: {fileID: 11400000}
         _position: {x: 33.6, y: 35.4}
-        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+        _questVisualsId: quest visauls
     - rid: 7345391011349135557
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
-        - 1ace8e4c-eba5-4b8f-bb3d-e45ae11e0296
+        - puzzle finix quest ray
         _homeScene: 0
     - rid: 7345391011349135558
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
@@ -84,13 +84,13 @@ MonoBehaviour:
         _spawn: 0
         _questData: {fileID: 11400000}
         _position: {x: -44.4, y: 185.7}
-        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+        _questVisualsId: quest visauls
     - rid: 7345391011349135559
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
         _objectIds:
-        - 673e2422-01c7-450d-a91b-506298261c32
+        - puzzle finix quest gear
         _homeScene: 0
     - rid: 7345391011349135560
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
@@ -98,25 +98,25 @@ MonoBehaviour:
         _spawn: 0
         _questData: {fileID: 11400000}
         _position: {x: 185.6, y: 280.4}
-        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+        _questVisualsId: quest visauls
     - rid: 8818234041734266995
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _spawn: 1
         _questData: {fileID: 11400000}
         _position: {x: 33.6, y: 35.4}
-        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+        _questVisualsId: quest visauls
     - rid: 8818234041734266996
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _spawn: 1
         _questData: {fileID: 11400000}
         _position: {x: -44.4, y: 185.7}
-        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+        _questVisualsId: quest visauls
     - rid: 8818234041734266997
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _spawn: 1
         _questData: {fileID: 11400000}
         _position: {x: 185.6, y: 280.4}
-        _questVisualsId: 81434e2b-c9f7-4aee-9aaf-ac55286a8b2f
+        _questVisualsId: quest visauls

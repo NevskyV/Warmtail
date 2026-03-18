@@ -99,7 +99,7 @@ namespace Systems.Tutorial
         
         private void Invoke(EventConfig config)
         {
-            Debug.Log("ira _eventsData 7 " + config.description + "||||||" + config.NextElement.description);
+            Debug.Log("ira _eventsData 7 " + config.description );
 
             foreach(ISequenceAction action in config.Element.Actions)
             {

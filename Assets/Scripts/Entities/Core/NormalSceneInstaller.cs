@@ -34,6 +34,7 @@ namespace Entities.Core
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private ComboConfig _comboConfig;
         [SerializeField] private TipsVisuals _tipsVisuals;
+        private QuestSystem _questSystem = new();
        
         public override void InstallBindings()
         {
@@ -55,7 +56,6 @@ namespace Entities.Core
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             
-            Container.Bind<QuestSystem>().FromNew().AsSingle().NonLazy();
             Container.Bind<SceneSystem>().FromNew().AsSingle();
             Container.Bind<EventsData>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
@@ -64,6 +64,10 @@ namespace Entities.Core
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<PlayerDataProvider>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
+            
+            Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
+            
+            Container.Inject(_questSystem);
             
             Container.BindInterfacesAndSelfTo<DashAbility>().FromInstance(_playerConfig.Abilities
                 .OfType<DashAbility>().First()).AsSingle();

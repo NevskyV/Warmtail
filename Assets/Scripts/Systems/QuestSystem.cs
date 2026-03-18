@@ -18,9 +18,12 @@ namespace Systems
         public static UnityEvent<QuestData, bool> OnQuestUpdated = new();
         public static UnityEvent<QuestData, bool> OnQuestEnded = new();
 
+        public static EventsData _eventsData;
+
         [Inject]
-        private void Construct(GlobalData globalData)
+        private void Construct(GlobalData globalData, EventsData eventsData)
         {
+            _eventsData = eventsData;
             _globalData = globalData;
         }
         
@@ -38,13 +41,30 @@ namespace Systems
             }
 
             OnQuestStarted.Invoke(data, true);
-            data.OnStart.ForEach(x => x.Invoke());
+            data.OnStart.ForEach(x => {
+                x.SetEventsData(_eventsData);
+                x.Invoke();
+            });
+
+            foreach (var seq in data.Sequence)
+            {
+                foreach (var action in seq.Actions)
+                {
+                    action.SetEventsData(_eventsData);
+                }
+                foreach (var task in seq.Tasks)
+                {
+                    task.SetEventsData(_eventsData);
+                }
+            }
+
             if (data.QuestType == QuestType.Serial)
             {
                 Debug.Log("ira activate quest");
 
                 foreach (var task in data.Sequence[questState[0]].Tasks)
                 {
+                    task.SetEventsData(_eventsData);
                     task.Activate();
                     task.OnComplete += () => TryIterateSequence(data, questState[0]);
                 }
