@@ -22,7 +22,8 @@ namespace Systems.SequenceActions
         
         public void Invoke()
         {
-            Debug.Log ("ira Dialogue move " + _eventsData.SceneObjects[_npcId].transform.name);
+            Debug.Log ("ira Dialogue move ");
+            if (!_eventsData.SceneObjects.ContainsKey(_npcId)) return ;
             _eventsData.SceneObjects[_npcId].GetComponent<SpeakableCharacter>().Graph = _graph;
         }
     }

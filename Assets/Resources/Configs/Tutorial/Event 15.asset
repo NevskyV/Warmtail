@@ -15,6 +15,7 @@ MonoBehaviour:
   _idNod: cf082b3f-74a2-42f4-a438-04f777e3eb0e
   Once: 0
   Scene: Gameplay
+  AnyScene: 0
   NextElement: {fileID: 11400000, guid: 9a9fbf97e4b59364ea934deb769c6712, type: 2}
   Element:
     Actions:
@@ -36,12 +37,12 @@ MonoBehaviour:
     - rid: 5800212002074788251
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _graph: {fileID: 0}
+        _graph: {fileID: 11400000, guid: 46a86c5142330b44681a46cd28dda3fb, type: 2}
         _npcId: finix gameplay
     - rid: 5800212002074788255
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _characterId: finix gameplay
-        _splineId: finix spline 0 gameplay
+        _splineId: finix spline 1 gameplay
         _move: 0
         _loop: 0

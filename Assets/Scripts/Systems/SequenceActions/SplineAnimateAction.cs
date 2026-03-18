@@ -27,6 +27,8 @@ namespace Systems.SequenceActions
         {
             Debug.Log ("ira spline " + _splineId);
 
+            if (!_eventsData.SceneObjects.ContainsKey(_characterId) || !_eventsData.SceneObjects.ContainsKey(_splineId)) return;
+
             var character = _eventsData.SceneObjects[_characterId].GetComponent<SplineAnimate>();
             character.Container = _eventsData.SceneObjects[_splineId].GetComponent<SplineContainer>();
             if (_loop) character.Loop = SplineAnimate.LoopMode.Loop;

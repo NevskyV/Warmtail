@@ -11,6 +11,8 @@ namespace Entities.Puzzle
         public static Action<string> OnPuzzleSolved = delegate {};
         public UnityEvent OnSolved = new();
 
+        [SerializeField] private string _eventsName;
+
         public void Start()
         {
         }
@@ -19,7 +21,7 @@ namespace Entities.Puzzle
         }
         public void Solve()
         {
-            OnPuzzleSolved?.Invoke(Id);
+            OnPuzzleSolved?.Invoke(_eventsName);
             OnSolved.Invoke();
             Debug.Log("RayPuzzle выполнено");
             Invoke("DestroyPuzzle", 0.5f);
