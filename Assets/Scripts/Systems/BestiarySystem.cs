@@ -34,7 +34,7 @@ namespace Systems
 
         private void Reward()
         {
-            _shoppingSystem.BuyItem(_companionItemData,Character.Finix,true);
+            _shoppingSystem.BuyItem(_companionItemData,Character.Finix,true,0);
         }
     }
 }
