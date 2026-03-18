@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.SceneManagement;
 using Zenject;
 using Entities.PlayerScripts;
@@ -64,6 +65,15 @@ namespace Systems
             }
 
             SetPosition(pos.GetRandom());
+        }
+
+        public void DieAtNearest(Vector2 from)
+        {
+            var nearest = _globalData.Get<SavablePlayerData>().RespawnPositions
+                .Select(p => p.ToUnity())
+                .OrderBy(p => Vector2.SqrMagnitude(p - from))
+                .First();
+            SetPosition(nearest);
         }
 
         private void SetPosition(Vector2 pos)

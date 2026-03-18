@@ -35,5 +35,7 @@ namespace Data.Player
         public float CurrentCellProgress;
         public bool WasInGame;
         public int Speed;
+        public float Temperature = 50f;
+        public float HeatAttraction = 0f;
     }
 }
