@@ -275,8 +275,8 @@ namespace Entities.UI
             EventSystem.current.SetSelectedGameObject(_confirmButton.gameObject);
             
             _newAbilityUI.Name.GetComponent<TextEffect>().Refresh();
-            _tipsVisuals.ShowTip(_confirmAction);
-            _tipsVisuals.ShowTip(_useAction);
+            _tipsVisuals?.ShowTip(_confirmAction);
+            _tipsVisuals?.ShowTip(_useAction);
             HideAbilities();
         }
 
