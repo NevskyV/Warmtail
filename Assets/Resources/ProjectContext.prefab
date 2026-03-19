@@ -152,7 +152,6 @@ MonoBehaviour:
         Inventory:
           _serializedList: []
         TimeLastGame: 
-        TutorState: 0
         EventsState: 
         LastScene: GameplayIra
         QuestIds:
@@ -160,8 +159,7 @@ MonoBehaviour:
         FearIds: 
         ActiveFearId: -1
         IsHomeOpened: 0
-        HasBeatenGame: 0
-        HasInteracted: 0
+        GotAmulet: 0
     - rid: 4204128997775507584
       type: {class: DialogueVarData, ns: Data, asm: Assembly-CSharp}
       data:
@@ -212,6 +210,7 @@ MonoBehaviour:
       type: {class: HouseData, ns: Data.House, asm: Assembly-CSharp}
       data:
         PlacedHouseItems: []
+        HouseTrack: 0
     - rid: 4204128997775507589
       type: {class: WorldData, ns: Data, asm: Assembly-CSharp}
       data:
@@ -220,6 +219,8 @@ MonoBehaviour:
         SavableNpcState:
           _serializedList: []
         CollectedStars: 
+        CreaturesIds: 
+        MaxCreatures: 0
 --- !u!114 &5226292807223728779
 MonoBehaviour:
   m_ObjectHideFlags: 0
