@@ -36,7 +36,7 @@ namespace Entities.UI
         }
         public void ClickBuy()
         {
-            _shoppingSystem.BuyItem(_shopItem.Item, _character, _shopItem.IsLast, _shopItem.Item.Price);
+            _shoppingSystem.BuyItem(_shopItem.Item, _character, _shopItem.IsLast);
             SetPreferencesButton();
         }
 }
