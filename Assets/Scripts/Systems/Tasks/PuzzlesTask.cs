@@ -21,6 +21,7 @@ namespace Systems.Tasks
 
         public void Activate()
         {
+            DrawPuzzle.OnPuzzleSolved += MarkComplete;
             LeversPuzzle.OnPuzzleSolved += MarkComplete;
             RayPuzzle.OnPuzzleSolved += MarkComplete;
             GearsPuzzle.OnPuzzleSolved += MarkComplete;
@@ -35,6 +36,7 @@ namespace Systems.Tasks
             
             Completed = true;
             OnComplete?.Invoke();
+            DrawPuzzle.OnPuzzleSolved -= MarkComplete;
             LeversPuzzle.OnPuzzleSolved -= MarkComplete;
             RayPuzzle.OnPuzzleSolved -= MarkComplete;
             GearsPuzzle.OnPuzzleSolved -= MarkComplete;

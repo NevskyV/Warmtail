@@ -62,12 +62,13 @@ namespace Entities.Core
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
             Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
-            Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
-            Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
-            Container.Inject(_questSystem);
-            Container.Bind<EventsData>().FromNew().AsSingle();
             Container.Bind<DailySystem>().FromNew().AsSingle();
+            Container.Bind<EventsData>().FromNew().AsSingle();
+            Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
+            Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
             
+            Container.Inject(_questSystem);
+
             Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(_playerConfig.Abilities
                 .OfType<PlayerMovement>().First()).AsSingle();
             
