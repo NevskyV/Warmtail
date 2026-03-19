@@ -26,10 +26,7 @@ namespace Interfaces
             if (_warmthAmount <= 0) return;
             _warmthAmount -= _warmFactor;
             if (_warmthAmount <= 0)
-            {
-                _warmthSystem?.AddCell();
                 WarmComplete();
-            }
             else
             {
                 _timer ??= new ResettableTimer(5, Reset);
@@ -39,6 +36,7 @@ namespace Interfaces
 
         public virtual void WarmComplete()
         {
+            _warmthSystem?.AddCell();
             _warmEvent.Invoke();
         }
 

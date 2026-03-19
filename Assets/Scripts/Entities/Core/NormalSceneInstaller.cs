@@ -64,6 +64,7 @@ namespace Entities.Core
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
+            Container.BindInterfacesAndSelfTo<TemperatureSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<PlayerDataProvider>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
