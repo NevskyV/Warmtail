@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
+  m_Name: Event 16.5
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
+  _idNod: 4d9ce3da-0f38-49ac-a668-0bdfc5799466
+  Once: 0
+  Scene: Gameplay
+  AnyScene: 0
+  NextElement: {fileID: 11400000, guid: bf9249fb80ce4854181e9fb2646a116d, type: 2}
+  Element:
+    Actions:
+    - rid: 5800212318539743431
+    Tasks:
+    - rid: 5800212318539743430
+  description: 
+  references:
+    version: 2
+    RefIds:
+    - rid: 5800212318539743430
+      type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _id: finix gameplay
+    - rid: 5800212318539743431
+      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _characterId: finix gameplay
+        _splineId: finix spline 2 gameplay
+        _move: 1
+        _loop: 0

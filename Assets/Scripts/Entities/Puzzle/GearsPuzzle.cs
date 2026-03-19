@@ -10,15 +10,16 @@ namespace Entities.Puzzle
 {
     public class GearsPuzzle : SavableStateObject, IPuzzle
     {
-        [SerializeField] private GameObject _gearPref;
-        [SerializeField] private Transform[] _levelsPositions;
-        [SerializeField] private int _gearCount;
-
-        private int _activated;
-
         public static UnityEvent OnReseted = new();
         public UnityEvent OnSolved = new();
         public static Action<string> OnPuzzleSolved = delegate {};
+ 
+        [SerializeField] private GameObject _gearPref;
+        [SerializeField] private Transform[] _levelsPositions;
+        [SerializeField] private int _gearCount;
+        [SerializeField] private string _eventsName;
+
+        private int _activated;
 
         void Awake()
         {
@@ -51,7 +52,7 @@ namespace Entities.Puzzle
 
         public void Solve()
         {
-            OnPuzzleSolved?.Invoke(Id);
+            OnPuzzleSolved?.Invoke(_eventsName);
             OnSolved.Invoke();
             Debug.Log("GearsPuzzle выполнено");
             Invoke("DestroyPuzzle", 0.5f);

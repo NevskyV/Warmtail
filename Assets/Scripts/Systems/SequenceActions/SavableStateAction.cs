@@ -23,11 +23,15 @@ namespace Systems.SequenceActions
         
         public void Invoke()
         {
+            Debug.Log ("ira SavableStateAction ");
             if ((_homeScene && (SceneManager.GetActiveScene().name == "HomeIra" || SceneManager.GetActiveScene().name == "Home")) ||
                 ( !_homeScene && (SceneManager.GetActiveScene().name == "Gameplay" || SceneManager.GetActiveScene().name == "GameplayIra") ) )
                 {
-                    _objectIds.ForEach(x => 
-                        _eventsData.SceneObjects[x].GetComponent<SavableStateObject>().ChangeState(_active)) ;
+                    Debug.Log ("ira SavableStateAction yes " );
+                    _objectIds.ForEach(x => {
+                        if (_eventsData.SceneObjects.ContainsKey(x)) 
+                            _eventsData.SceneObjects[x].GetComponent<SavableStateObject>().ChangeState(_active); 
+                        });
                 }
         }
     }

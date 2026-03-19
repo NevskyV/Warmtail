@@ -12,19 +12,21 @@ namespace Systems.Tutorial
     [CreateAssetMenu(fileName = "EventConfig", menuName = "Configs/EventConfig")]
     public class EventConfig : ScriptableObject
     {
-        [SerializeField, ReadOnly] private string _idNode = Guid.NewGuid().ToString();
-        public string IdNode => _idNode;
+        [SerializeField, ReadOnly] private string _idNod = Guid.NewGuid().ToString();
+        public string IdNode => _idNod;
 
+        public bool Once;
         public string Scene;
+        public bool AnyScene;
         public EventConfig NextElement;
         public SequenceElement Element;
         
-        [TextArea] [SerializeField] private string description;
+        [TextArea] [SerializeField] public string description;
 
         [Button("Copy")]
         private void Copy()
         {
-            GUIUtility.systemCopyBuffer = _idNode;
+            GUIUtility.systemCopyBuffer = _idNod;
         }
 
         public void TaskCompleted()

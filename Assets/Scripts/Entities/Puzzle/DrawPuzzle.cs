@@ -2,17 +2,20 @@ using Entities.Props;
 using Interfaces;
 using UnityEngine.Events;
 using UnityEngine;
+using System;
 using Systems;
 
 namespace Entities.Puzzle
 {
     public class DrawPuzzle : SavableStateObject, IPuzzle
     {
-        [SerializeField] private float _during;
-        [SerializeField] private DrawPuzzleTrigger[] _triggers;
-
+        public static Action<string> OnPuzzleSolved = delegate {};
         [HideInInspector] public UnityEvent OnReseted;
         public UnityEvent OnSolved = new();
+
+        [SerializeField] private float _during;
+        [SerializeField] private DrawPuzzleTrigger[] _triggers;
+        [SerializeField] private string _eventsName;
 
         private ResettableTimer _timer;
         private bool _isComplete;
@@ -39,6 +42,7 @@ namespace Entities.Puzzle
         {
             _isComplete = true;
             OnSolved.Invoke();
+            OnPuzzleSolved?.Invoke(_eventsName);
             Debug.Log("DrawPuzzle выполнено");
             Invoke("DestroyPuzzle", 0.5f);
         }
