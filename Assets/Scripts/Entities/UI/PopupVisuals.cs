@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Entities.UI
 {
-    public class PopupVisuals : MonoBehaviour
+    public class Popup : MonoBehaviour
     {
         [SerializeField] private NotificationPopup _normalNotificationPopup;
         [SerializeField, SerializedDictionary] private SerializedDictionary<PopupType, Transform> _popupHolders;
