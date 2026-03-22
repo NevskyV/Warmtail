@@ -128,6 +128,8 @@ MonoBehaviour:
         CurrentCellProgress: 0
         WasInGame: 0
         Speed: 8
+        Temperature: 50
+        HeatAttraction: 0
     - rid: 1601399754601005135
       type: {class: SettingsData, ns: Data, asm: Assembly-CSharp}
       data:
@@ -180,14 +182,23 @@ MonoBehaviour:
           Name: jelicaLevel
           Value: 0
         - Type: 1
-          Name: wonFinixRace
-          Value: false
-        - Type: 1
           Name: getStick
           Value: false
         - Type: 2
           Name: inventory
           Value: 0
+        - Type: 1
+          Name: canActivateStatues
+          Value: false
+        - Type: 2
+          Name: statuesActive
+          Value: 1
+        - Type: 1
+          Name: helpedTorvald
+          Value: false
+        - Type: 1
+          Name: gotAmulet
+          Value: false
     - rid: 4204128997775507585
       type: {class: ShellsData, ns: Data, asm: Assembly-CSharp}
       data:
