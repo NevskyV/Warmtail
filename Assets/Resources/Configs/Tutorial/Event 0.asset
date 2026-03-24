@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Event 0
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: 4b9815f1-02c3-43bf-82ea-797309448a33
-  Once: 0
+  Once: 1
   Scene: Gameplay
   AnyScene: 0
   NextElement: {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
@@ -29,7 +29,7 @@ MonoBehaviour:
     - rid: 5800212328378531933
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _active: 0
+        _active: 1
         _objectIds:
         - start monologue screen
         - start monologue trigger

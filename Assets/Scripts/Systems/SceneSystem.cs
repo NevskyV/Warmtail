@@ -24,6 +24,7 @@ namespace Systems
             {"GameplayNearHome" , new Vector2(124.2f, 259f)},
             {"HomeAtCarpet" , new Vector2(18.15f, -24.82f)},
             {"HomeNearDoor" , new Vector2(22.55f, 3.08f)},
+            {"FearWorld" , new Vector2(-20.4f, 197.2f)}
         };
 
         [Inject]        
@@ -44,10 +45,15 @@ namespace Systems
             bool isHomeOpened = _globalData.Get<SavablePlayerData>().IsHomeOpened;
             
             Vector2 pos = new();
-            if (!isHomeOpened && !_atHome) pos = _spawnPoints["GameplayStart"];
-            if (isHomeOpened && !_atHome) pos = _spawnPoints["GameplayNearHome"];
-            if (_atHome && FirstSpawn) pos = _spawnPoints["HomeAtCarpet"];
-            if (_atHome && !FirstSpawn) pos = _spawnPoints["HomeNearDoor"];
+            if (_globalData.Get<SavablePlayerData>().IsInFearWorld) pos = _spawnPoints["FearWorld"];
+
+            else 
+            {
+                if (!isHomeOpened && !_atHome) pos = _spawnPoints["GameplayStart"];
+                if (isHomeOpened && !_atHome) pos = _spawnPoints["GameplayNearHome"];
+                if (_atHome && FirstSpawn) pos = _spawnPoints["HomeAtCarpet"];
+                if (_atHome && !FirstSpawn) pos = _spawnPoints["HomeNearDoor"];
+            }
 
             FirstSpawn = false;
 

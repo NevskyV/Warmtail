@@ -22,6 +22,7 @@ namespace Data.Player
         public int ActiveFearId = -1;
         
         public bool IsHomeOpened;
+        public bool IsInFearWorld;
         public bool GotAmulet;
     }
     
