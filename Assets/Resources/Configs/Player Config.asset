@@ -22,12 +22,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 676710221457391727
       type: {class: DashAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 676710221457391733
-        MaxWarmthCost: 2
+        _drainPercentPerTick: 0.25
         Tick: 0.5
         Cooldown: 0
         <BaseMethodName>k__BackingField: ActivateDash
@@ -35,12 +37,14 @@ MonoBehaviour:
         _dashCooldownDuration: 1
         _normalSpeed: 130
         _dashSpeed: 230
+        _slowdownSpeed: 30
+        _slowdownDuration: 2
     - rid: 676710221457391728
       type: {class: MetabolismAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 676710221457391734
-        MaxWarmthCost: 1
+        _drainPercentPerTick: 0.25
         Tick: 0.5
         Cooldown: 0.6
         <BaseMethodName>k__BackingField: ApplyNewSpeed
@@ -50,26 +54,24 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: 676710221457391735
-        MaxWarmthCost: 1
+        _drainPercentPerTick: 0.25
         Tick: 0.5
         Cooldown: 0
         <BaseMethodName>k__BackingField: StartWarm
         _radius: 3
         _explosionDuration: 0.5
-        _explosionCost: 50
+        _explosionCellCost: 1
     - rid: 676710221457391730
       type: {class: ResonanceAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 4061569042658361469
-        MaxWarmthCost: 1
+        _drainPercentPerTick: 0.25
         Tick: 0.5
         Cooldown: 0.6
         <BaseMethodName>k__BackingField: ActivateResonance
         _searchRadius: 12
         _interactRadius: 5
-        _warmthDrain: 2
-        _drainInterval: 0.5
         _returnPosition: {x: -20.184103, y: -12.798991}
     - rid: 676710221457391731
       type: {class: InteractionAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
@@ -83,7 +85,7 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: 676710221457391736
-        MoveForce: 292.7
+        MoveForce: 100
         _moreForge: 100
         _drag: 8
         _accelerationTime: 2

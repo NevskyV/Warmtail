@@ -20,9 +20,14 @@ MonoBehaviour:
   Element:
     Actions:
     - rid: 5800212318539743431
+    - rid: 5800212431756066965
+    - rid: 5800212431756066975
     Tasks:
     - rid: 5800212318539743430
-  description: 
+  description: "\u0424\u0438\u043D\u0438\u043A\u0441 \u0443\u0445\u043B\u043E\u0434\u0438\u0442,
+    \u043F\u043E\u044F\u0432\u043B\u044F\u044E\u0442\u0441\u044F \u043F\u043E\u0440\u0442\u0430\u043B
+    \u0438  \u0441\u0442\u0435\u043D\u044B, \u043C\u0435\u043D\u044F\u0435\u0442\u044F
+    \u0441\u043F\u0430\u0432\u043D"
   references:
     version: 2
     RefIds:
@@ -37,3 +42,14 @@ MonoBehaviour:
         _splineId: finix spline 2 gameplay
         _move: 1
         _loop: 0
+    - rid: 5800212431756066965
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _objectIds:
+        - fear world
+        _homeScene: 0
+    - rid: 5800212431756066975
+      type: {class: FearSpawnAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        isInFearWorld: 1
