@@ -3013,7 +3013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.WarmthVisual
   _arcFigure: {fileID: 576748427}
   _text: {fileID: 576748426}
-  _maxValue: 2.7
+  _maxAngle: 2.7
   _smoothing: 0.5
 --- !u!1 &865195738
 GameObject:
@@ -3389,11 +3389,6 @@ CanvasGroup:
 --- !u!224 &899467492 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3347595861233721655, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
-  m_PrefabInstance: {fileID: 899467490}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &899467493 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 4253318843041039975, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
   m_PrefabInstance: {fileID: 899467490}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &899467494 stripped
@@ -7327,22 +7322,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.QuestVisuals
   _allQuests:
-  - {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
-  - {fileID: 11400000, guid: 771a9b84d572de847a2a483e0f685425, type: 2}
-  - {fileID: 11400000, guid: 808a613be07c6734f8f1ec6234beb68d, type: 2}
-  - {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
-  - {fileID: 11400000, guid: 56f437edbb8080249a589b9fe742f9c2, type: 2}
-  - {fileID: 11400000, guid: 890df765c8bdd084bbf049f139a867cf, type: 2}
-  - {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}
   - {fileID: 11400000, guid: 37bd43537256fbb4e9d2c07105777df8, type: 2}
-  _markOffset: {x: 0, y: 0, z: 0}
   _cam: {fileID: 404321504}
   _correctLayerState: quest_progress
   _incorrectLayerState: incorrect_layer
-  _markPrefab: {fileID: 10223315964271821, guid: e374e174dc25cce4a946958607fc9975, type: 3}
-  _markHud: {fileID: 899467493}
   _questPrefab: {fileID: 6104912841410499881, guid: dfc1f7d1234a9bc41bd397b469b9a1f4, type: 3}
   _questHud: {fileID: 899467494}
+  _mapMarkSprite: {fileID: 0}
 --- !u!95 &1967198262 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 7402819743636634974, guid: 97d2b09e9df241e4694ebfe288dc2279, type: 3}
@@ -9741,6 +9727,7 @@ MonoBehaviour:
   _cam: {fileID: 120628539}
   _surfacingSystem: {fileID: 1673356536}
   _tipsVisuals: {fileID: 1621299276}
+  _marksVisuals: {fileID: 0}
 --- !u!1 &2062651858
 GameObject:
   m_ObjectHideFlags: 0
