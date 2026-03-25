@@ -18,21 +18,19 @@ namespace Entities.House
 
         private UIStateSystem _uiStateSystem;
         private GlobalData _globalData;
-        private NPCMethods _npcMethods;
 
         [Inject]
-        private void Construct(UIStateSystem uiStateSystem, GlobalData globalData, NPCMethods npcMethods)
+        private void Construct(UIStateSystem uiStateSystem, GlobalData globalData)
         {
             _uiStateSystem = uiStateSystem;
             _globalData = globalData;
-            _npcMethods = npcMethods;
         }
 
 
         public void OpenNpcShop(int num) => OpenNpcShop((Character)num);
         public void OpenNpcShop(Character character)
         {
-            _npcMethods.CheckNpcData(character);
+            CheckNpcData(character);
 
             NPCInfoForShop npcInfoForShop = _allNpcInfo[(int)character];
             int levelCount = npcInfoForShop.LevelCount;
@@ -53,6 +51,21 @@ namespace Entities.House
                 _levelButtons[i].interactable = (i < curLvl);
             }
             if (_uiStateSystem.CurrentState != UIState.Shop) _uiStateSystem.SwitchCurrentStateAsync(UIState.Shop);
+        }
+        
+        public void CheckNpcData(Character character)
+        {
+            if (_globalData.Get<NPCData>().Levels == null)
+                _globalData.Edit<NPCData>(data =>{data.Levels = new();});
+
+            if (!_globalData.Get<NPCData>().Levels.ContainsKey(character))
+                _globalData.Edit<NPCData>(data =>{data.Levels[character] = 1;});
+
+            if (_globalData.Get<NPCData>().BoughtLastItem == null)
+                _globalData.Edit<NPCData>(data =>{data.BoughtLastItem = new();});
+            
+            if (!_globalData.Get<NPCData>().BoughtLastItem.ContainsKey(character))
+                _globalData.Edit<NPCData>(data =>{data.BoughtLastItem[character] = false;});
         }
     }
 }
