@@ -33,6 +33,7 @@ namespace Entities.Core
         [SerializeField] private CinemachineCamera _cam;
         [SerializeField] private SurfacingSystem _surfacingSystem;
         [SerializeField] private TipsVisuals _tipsVisuals;
+        [SerializeField] private MarksVisuals _marksVisuals;
         private QuestSystem _questSystem = new();
 
         public override void InstallBindings()
@@ -64,6 +65,7 @@ namespace Entities.Core
             Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             Container.Bind<DailySystem>().FromNew().AsSingle();
             Container.Bind<EventsData>().FromNew().AsSingle();
+            Container.Bind<MarksVisuals>().FromInstance(_marksVisuals).AsSingle();
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();
             
