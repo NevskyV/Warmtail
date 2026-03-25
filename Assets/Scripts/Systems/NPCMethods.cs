@@ -2,15 +2,16 @@ using Entities.NPC;
 using Zenject;
 using Data;
 using Data.NPCShop;
+using Entities.House;
 
 namespace Systems
 {
     public class NPCMethods 
     {
-        [Inject] private ShoppingManager _shoppingManager;
+        [Inject] private ShoppingVisuals _shoppingVisuals;
         [Inject] private GlobalData _globalData;
 
-        public void OpenNPCShop(int num) => _shoppingManager.OpenNPCShop((Character)num);
+        public void OpenNPCShop(int num) => _shoppingVisuals.OpenNpcShop((Character)num);
 
         public void RaiseFriendship(int num) => RaiseFriendship((Character)num);
         public void RaiseFriendship(Character character)

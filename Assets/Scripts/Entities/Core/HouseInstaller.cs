@@ -26,7 +26,6 @@ namespace Entities.Core
         [SerializeField] private HouseManager _houseManager;
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private UIStateSystem _uiStateSystem;
-        [SerializeField] private ShoppingManager _shoppingManager;
         [SerializeField] private DialogueVisuals _dialogueVisuals;
         [SerializeField] private MonologueVisuals _monologueVisuals;
         [SerializeField] private QuestVisuals _questVisuals;
@@ -50,15 +49,12 @@ namespace Entities.Core
             Container.Bind<HouseManager>().FromInstance(_houseManager).AsSingle();
             Container.Bind<PlayerConfig>().FromInstance(_playerConfig).AsSingle();
             Container.Bind<UIStateSystem>().FromInstance(_uiStateSystem).AsSingle();
-            Container.Bind<ShoppingManager>().FromInstance(_shoppingManager).AsSingle();
             Container.Bind<CinemachineCamera>().FromInstance(_cam).AsSingle();
             Container.Bind<DialogueVisuals>().FromInstance(_dialogueVisuals).AsSingle();
             Container.Bind<MonologueVisuals>().FromInstance(_monologueVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
             Container.Bind<SceneSystem>().FromNew().AsSingle();
-            Container.Bind<NPCMethods>().FromNew().AsSingle();
-            Container.Bind<ShoppingSystem>().FromNew().AsSingle();
             Container.Bind<PlacementSystem>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();

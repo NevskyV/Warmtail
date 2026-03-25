@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Data;
 using Data.Player;
+using Entities.House;
 using Entities.PlayerScripts;
 using Entities.UI;
 using Interfaces;
@@ -37,6 +38,7 @@ namespace Entities.Core
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private TipsVisuals _tipsVisuals;
         [SerializeField] private MarksVisuals _marksVisuals;
+        [SerializeField] private ShoppingVisuals _shoppingVisuals;
         
         [Title("UI")]
         [SerializeField] private InputSystemUIInputModule _uiInput;
@@ -78,6 +80,7 @@ namespace Entities.Core
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             Container.Bind<MarksVisuals>().FromInstance(_marksVisuals).AsSingle();
+            Container.Bind<ShoppingVisuals>().FromInstance(_shoppingVisuals).AsSingle();
         }
 
         private void BuildSystems()

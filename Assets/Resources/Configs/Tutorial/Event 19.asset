@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Event 19
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: f04bed63-5c06-47cd-b161-29a8efa336e0
-  Once: 1
+  <Once>k__BackingField: 1
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
-  NextElement: {fileID: 11400000, guid: 17c5365e98d58ba408ce45fea83c0d1b, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: 17c5365e98d58ba408ce45fea83c0d1b, type: 2}
   Element:
     Actions:
     - rid: 5800212431756066950
@@ -46,7 +46,7 @@ MonoBehaviour:
       data:
         _active: 1
         _objectIds:
-        - invites monolohue trigger
+        - invites monologue trigger
     - rid: 5800212431756066976
       type: {class: FearSpawnAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

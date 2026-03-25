@@ -86,17 +86,17 @@ MonoBehaviour:
         <Visual>k__BackingField:
           rid: 676710221457391736
         MoveForce: 100
-        _moreForge: 100
-        _drag: 8
-        _accelerationTime: 2
+        _moreForge: 50
+        _drag: 5
+        _accelerationTime: 1
         _accelerationCurve:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0.22888184
-            inSlope: 2
-            outSlope: 2
+            value: 0.401062
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
@@ -141,8 +141,8 @@ MonoBehaviour:
         _startSfx: {fileID: 8300000, guid: ef8b251d5336856448d5c1b453469495, type: 3}
         _loopSfx: {fileID: 8300000, guid: b4c4814241c043a41806ce49d27c1b36, type: 3}
         _vfxOffset: {x: 0, y: 0, z: 0}
-        _normalCamZoom: 10
-        _activeCamZoom: 13
+        _normalCamZoom: 3.5
+        _activeCamZoom: 4
     - rid: 4061569042658361469
       type: {class: ResonanceVisuals, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
       data:

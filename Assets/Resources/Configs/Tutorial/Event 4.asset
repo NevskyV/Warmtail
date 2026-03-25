@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Event 4
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: 3cecca12-b6d3-49b8-9d5b-d55d504e7b0a
-  Once: 0
+  <Once>k__BackingField: 0
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
-  NextElement: {fileID: 11400000, guid: 7983235695eda1743a8e4dcda3b93ef1, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: 7983235695eda1743a8e4dcda3b93ef1, type: 2}
   Element:
     Actions:
     - rid: 5800212002074788219
@@ -38,8 +38,8 @@ MonoBehaviour:
     - rid: 5800212148699267191
       type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
-        _position: {x: 79.23, y: 35.32}
+        _prefab: {fileID: 3459850837378005844, guid: 4b5c61f41edd0b54aae236ec9d6ba332, type: 3}
+        _position: {x: 14.67, y: -21}
     - rid: 5800212456216723579
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

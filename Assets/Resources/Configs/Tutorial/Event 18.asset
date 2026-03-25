@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Event 18
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: 09c3b52a-13be-48f6-aa61-6c54bccfd59d
-  Once: 0
+  <Once>k__BackingField: 0
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
-  NextElement: {fileID: 11400000, guid: 955a72a164a880544850907f395b00ea, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: 955a72a164a880544850907f395b00ea, type: 2}
   Element:
     Actions:
     - rid: 5800212431756066966
@@ -52,7 +52,7 @@ MonoBehaviour:
       type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _characterId: finix gameplay
-        _splineId: finix spline after fear 1 gameplay
+        _splineId: finix spline after fear gameplay
         _move: 1
         _loop: 0
     - rid: 5800212431756066979

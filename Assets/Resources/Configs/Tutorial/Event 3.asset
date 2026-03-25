@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Event 3
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: 9b0202dc-555f-4b87-8d2a-9278666fea02
-  Once: 1
+  <Once>k__BackingField: 1
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
-  NextElement: {fileID: 11400000, guid: a2008510772a8424fb55836d01379dd5, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: a2008510772a8424fb55836d01379dd5, type: 2}
   Element:
     Actions:
     - rid: 5800212002074788002
@@ -45,5 +45,5 @@ MonoBehaviour:
     - rid: 5800212148699267190
       type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
-        _position: {x: -25.13877, y: 10.27}
+        _prefab: {fileID: 3459850837378005844, guid: 4b5c61f41edd0b54aae236ec9d6ba332, type: 3}
+        _position: {x: 4, y: -21.66}
