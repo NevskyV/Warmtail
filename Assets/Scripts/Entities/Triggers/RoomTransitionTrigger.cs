@@ -62,9 +62,9 @@ namespace Entities.Triggers
         {
             if (other.CompareTag("Player"))
             {
-                for (int i = 0; i < _hiddenControllers.Length; i++)
+                for (int i = 0; i < _hiddenSprites.Length; i++)
                 {
-                    FadeIn(_normalControllers[i], _hiddenControllers[i]);
+                    Fade(_normalSprites[i], _hiddenSprites[i]);
                 }
                 _normalColliders.ForEach(c => c.gameObject.SetActive(false));
                 _hiddenColliders.ForEach(c => c.gameObject.SetActive(true));
@@ -75,9 +75,9 @@ namespace Entities.Triggers
         {
             if (other.CompareTag("Player"))
             {
-                for (int i = 0; i < _hiddenControllers.Length; i++)
+                for (int i = 0; i < _hiddenSprites.Length; i++)
                 {
-                    FadeOut(_normalControllers[i], _hiddenControllers[i]);
+                    Fade(_hiddenSprites[i], _normalSprites[i]);
                 }
                 _normalColliders.ForEach(c => c.gameObject.SetActive(true));
                 _hiddenColliders.ForEach(c => c.gameObject.SetActive(false));
