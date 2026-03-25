@@ -5,6 +5,7 @@ using Zenject;
 using System;
 using System.Collections.Generic;
 using TriInspector;
+using UnityEngine.Serialization;
 
 namespace Systems.Tutorial
 {
@@ -15,13 +16,14 @@ namespace Systems.Tutorial
         [SerializeField, ReadOnly] private string _idNod = Guid.NewGuid().ToString();
         public string IdNode => _idNod;
 
-        public bool Once;
-        public string Scene;
-        public bool AnyScene;
-        public EventConfig NextElement;
+        [field: SerializeReference, FormerlySerializedAs("Once")] public bool Once{ get; private set; }
+        [field: SerializeReference] public bool AnyScene { get; private set; }
+        [Scene, HideIf(nameof(AnyScene))] public string Scene;
+        
+        [field: SerializeReference, FormerlySerializedAs("NextElement")] public EventConfig NextElement{ get; private set; }
         public SequenceElement Element;
         
-        [TextArea] [SerializeField] public string description;
+        [TextArea,SerializeField, FormerlySerializedAs("description")] private string _description;
 
         [Button("Copy")]
         private void Copy()

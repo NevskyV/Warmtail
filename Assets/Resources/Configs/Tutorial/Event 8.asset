@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: 56e1d695-8985-4e44-aa30-647858c2a75f
   Once: 0
-  Scene: Gameplay
-  AnyScene: 0
+  <AnyScene>k__BackingField: 0
+  Scene: Assets/Scenes/Gameplay.unity
   NextElement: {fileID: 11400000, guid: 3593bed53f4f56a4c8d7cda0e623e38b, type: 2}
   Element:
     Actions:
@@ -23,7 +23,7 @@ MonoBehaviour:
     - rid: 5800212216453791904
     Tasks:
     - rid: 5800212002074788225
-  description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
+  _description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
     \u0422\u0435\u0440\u0442\u0438\u043B\u0443\u0441 \u0437\u0430\u0445\u043E\u0434\u0438\u0442
     \u0432 \u0434\u043E\u043C"
   references:
