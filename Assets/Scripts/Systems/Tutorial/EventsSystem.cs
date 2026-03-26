@@ -43,14 +43,12 @@ namespace Systems.Tutorial
         private void StartingActivate(EventConfig config)
         {
             SetData(config);
-
+            
             if (_globalData.Get<SavablePlayerData>().EventsState != config.IdNode)
             {
-
-                if ((config.Scene == SceneManager.GetActiveScene().name || config.AnyScene) && 
+                if ((config.Scene == SceneManager.GetActiveScene().path || config.AnyScene) && 
                     !config.Once)
                 {
-                    
                     foreach(ISequenceAction action in config.Element.Actions)
                     {
                         action.Invoke();
@@ -79,8 +77,7 @@ namespace Systems.Tutorial
 
         private void Activate(EventConfig config)
         {
-            if (config.Scene != SceneManager.GetActiveScene().name && !config.AnyScene) return;
-            
+            if (config.Scene != SceneManager.GetActiveScene().path && !config.AnyScene) return;
             if (config.Element.Tasks.Count == 0) Invoke(config);
             else
             {
