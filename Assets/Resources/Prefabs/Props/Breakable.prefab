@@ -83,7 +83,7 @@ SpriteShapeRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -4
   m_MaskInteraction: 0
   m_Color: {r: 1, g: 0.073584795, b: 0.073584795, a: 1}
   m_ShapeTexture: {fileID: 2800000, guid: 6741a77cdc234f340ad9c00865a6caed, type: 3}
@@ -98,8 +98,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   - {fileID: 21300000, guid: 608e61deb05c54660bebf5a4dd2ee02d, type: 3}
   m_LocalAABB:
-    m_Center: {x: 0.45867896, y: -0.010338306, z: 0}
-    m_Extent: {x: 3.644332, y: 2.1437886, z: 0}
+    m_Center: {x: 0.3120761, y: -0.052347064, z: 0}
+    m_Extent: {x: 3.3720925, y: 1.1937209, z: 0}
   m_SpriteSortPoint: 0
 --- !u!114 &8975289944093716961
 MonoBehaviour:
@@ -133,12 +133,12 @@ MonoBehaviour:
       corner: 1
       m_CornerMode: 1
   m_SpriteShape: {fileID: 11400000, guid: 4d1f529895acb7d4cafb9e5554ee192c, type: 2}
-  m_FillPixelPerUnit: 100
+  m_FillPixelPerUnit: 3000
   m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
   m_StretchUV: 0
-  m_WorldSpaceUV: 0
+  m_WorldSpaceUV: 1
   m_CornerAngleThreshold: 30
   m_ColliderDetail: 16
   m_ColliderOffset: 0
@@ -154,17 +154,15 @@ MonoBehaviour:
   m_Creator: {fileID: 0}
   m_Modifiers: []
   m_ColliderSegment:
-  - {x: -2.9975748, y: 0.6423595}
-  - {x: -0.83704484, y: 0.3768183}
-  - {x: 0.018848566, y: 0.25724256}
-  - {x: 0.7878102, y: 0.119626865}
-  - {x: 1.1543822, y: 0.037764575}
-  - {x: 1.5168537, y: -0.05615615}
-  - {x: 1.8811047, y: -0.16465245}
-  - {x: 2.253016, y: -0.2902428}
-  - {x: 2.638466, y: -0.43544576}
-  - {x: 3.0433326, y: -0.60277987}
-  - {x: 3.4734907, y: -0.7947625}
+  - {x: -2.9973238, y: 0.6443436}
+  - {x: -0.79170114, y: 0.3728012}
+  - {x: 0.019157937, y: 0.25921854}
+  - {x: 0.78821677, y: 0.12158514}
+  - {x: 1.51739, y: -0.054229353}
+  - {x: 1.8817103, y: -0.16274634}
+  - {x: 2.6392007, y: -0.4335855}
+  - {x: 3.0441222, y: -0.60094225}
+  - {x: 3.4743285, y: -0.7929465}
   m_ShadowSegment: []
 --- !u!68 &-131300980783543666
 EdgeCollider2D:
@@ -201,19 +199,17 @@ EdgeCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0.5
   m_Points:
-  - {x: -2.9975748, y: 0.6423595}
-  - {x: -0.83704484, y: 0.3768183}
-  - {x: 0.018848566, y: 0.25724256}
-  - {x: 0.7878102, y: 0.119626865}
-  - {x: 1.1543822, y: 0.037764575}
-  - {x: 1.5168537, y: -0.05615615}
-  - {x: 1.8811047, y: -0.16465245}
-  - {x: 2.253016, y: -0.2902428}
-  - {x: 2.638466, y: -0.43544576}
-  - {x: 3.0433326, y: -0.60277987}
-  - {x: 3.4734907, y: -0.7947625}
+  - {x: -2.9973238, y: 0.6443436}
+  - {x: -0.79170114, y: 0.3728012}
+  - {x: 0.019157937, y: 0.25921854}
+  - {x: 0.78821677, y: 0.12158514}
+  - {x: 1.51739, y: -0.054229353}
+  - {x: 1.8817103, y: -0.16274634}
+  - {x: 2.6392007, y: -0.4335855}
+  - {x: 3.0441222, y: -0.60094225}
+  - {x: 3.4743285, y: -0.7929465}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0

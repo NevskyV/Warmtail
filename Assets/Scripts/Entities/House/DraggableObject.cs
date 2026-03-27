@@ -71,7 +71,7 @@ namespace Entities.House
             if (_leftClickAction.WasReleasedThisFrame())
             {
                 if (!_isClickedNow) DisableMenu();
-                else OnPointerUp();
+                else HandlePointerUp();
                 _isClickedNow = false;
             }
 
@@ -103,13 +103,15 @@ namespace Entities.House
             _posMouseOnPointerDown = Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
             _posObjectOnPointerDown = transform.position;
             _isClickedNow = true;
+            Debug.Log("ira draggable disable 1");
             DisableMenu();
         }
         public void OnPointerUp(PointerEventData pointerEventData)
         {
-            OnPointerUp();
+            Debug.Log("ira draggable 1");
+            HandlePointerUp();
         }
-        private void OnPointerUp()
+        private void HandlePointerUp()
         {
             Vector2 pos = transform.position;
             if (_posObjectOnConfirmedState != pos) {
@@ -118,18 +120,23 @@ namespace Entities.House
             }
             DisableMenu();
             EnableMenu();
+            Debug.Log("ira draggable 2");
             _isPlacementing = false;
         }
         private void DisableMenu()
         {
+            Debug.Log("ira draggable disable 2");
             if (!_isMenuEnabled) return;
+            Debug.Log("ira draggable 3");
             _isMenuEnabled = false;
             _buttonsForConfirmed.SetActive(false);
             _buttonsForEditing.SetActive(false);
         }
         private void EnableMenu()
         {
+            Debug.Log("ira draggable 3");
             if (_isMenuEnabled) return;
+            Debug.Log("ira draggable 4");
             _isMenuEnabled = true;
             if (_isConfirmed) _buttonsForConfirmed.SetActive(true);
             else _buttonsForEditing.SetActive(true);

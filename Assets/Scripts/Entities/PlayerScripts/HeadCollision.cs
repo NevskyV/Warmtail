@@ -1,4 +1,4 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Systems;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -9,7 +9,7 @@ namespace Entities.PlayerScripts
     [RequireComponent(typeof(Rigidbody2D))]
     public class HeadCollision : MonoBehaviour
     {
-        [SerializeField, Range(0f,20f)] private float _minVelocity = 1f;
+        [SerializeField, Range(0f,20f)] private float _minVelocity = 5f;
         private GamepadRumble _rumble;
         private CinemachineBasicMultiChannelPerlin _camNoise;
         private Rigidbody2D _rb;

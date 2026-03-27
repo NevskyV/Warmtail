@@ -110,8 +110,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   _spriteRenderer: {fileID: 4644494243135170636}
-  _twistingSprite: {fileID: 9143868440440847147, guid: 7c5c126a462b8334096cba02be062fcd, type: 3}
-  _untwistSprite: {fileID: 9143868440440847147, guid: 7c5c126a462b8334096cba02be062fcd, type: 3}
+  _twistedAngle: 90
 --- !u!58 &5115051477864116294
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -142,7 +141,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

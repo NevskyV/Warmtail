@@ -26,7 +26,10 @@ namespace Entities.Localization
             {"Jelica", "739200791"},
             {"Star", "317498044"},
             {"Fragments", "1106492096"},
-            {"Quests", "2071454227"}
+            {"Teo", "286670253"},
+            {"Torvald", "580163994"},
+            {"Lumi", "1987237332"},
+            {"Unknown", "1422272265"},
         };
 
         public static ReactiveProperty<Language> CurrentLanguage { get; } = new(Language.ru);
@@ -61,7 +64,7 @@ namespace Entities.Localization
                     if (!Directory.Exists(folder)) Directory.CreateDirectory(folder);
 
                     var path = Path.Combine(folder, tableName + ".tsv");
-
+                    if(!File.Exists(path)) File.Create(path).Close();
                     var data = req.downloadHandler.data;
                     File.WriteAllBytes(path, data);
 

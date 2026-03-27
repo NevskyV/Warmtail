@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Tertilus 1
   m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
   <Id>k__BackingField: 1
+  QuestType: 0
   <IsPermanent>k__BackingField: 1
-  <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
+  <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
   <Layer>k__BackingField: 0
+  <OnStart>k__BackingField: []
+  <OnComplete>k__BackingField: []
+  <OnFail>k__BackingField: []
   <Sequence>k__BackingField:
   - Actions:
     - rid: 7345390883105669850
@@ -26,8 +30,6 @@ MonoBehaviour:
     - rid: 7345390883105669852
     Tasks:
     - rid: 7345390883105669775
-  <OnComplete>k__BackingField: []
-  <OnFail>k__BackingField: []
   references:
     version: 2
     RefIds:
@@ -43,12 +45,10 @@ MonoBehaviour:
       data:
         _puzzleId:
         - a4c148fd-58fa-4978-95cb-5e3064a494c2
-        description: 
     - rid: 7345390883105669775
       type: {class: InteractTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _triggerId: 77cd1b7e-580b-4254-9147-7baf1f964b62
-        description: 
     - rid: 7345390883105669850
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

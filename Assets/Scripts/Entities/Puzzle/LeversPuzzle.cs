@@ -10,13 +10,14 @@ namespace Entities.Puzzle
 {
     public class LeversPuzzle : SavableStateObject, IPuzzle
     {
+        public static Action<string> OnPuzzleSolved = delegate {};
+        public UnityEvent OnSolved = new();
+
         [SerializeField] private GameObject _leverPref;
         [SerializeField] private Transform[] _leversPositions;
         [SerializeField] private int _leverCount;
         [SerializeField] private int _leverActive;
-
-        public static Action<string> OnPuzzleSolved = delegate {};
-        public UnityEvent OnSolved = new();
+        [SerializeField] private string _eventsName;
 
         void Awake()
         {
@@ -51,7 +52,7 @@ namespace Entities.Puzzle
         public void Solve()
         {
             OnSolved.Invoke();
-            OnPuzzleSolved?.Invoke(Id);
+            OnPuzzleSolved?.Invoke(_eventsName);
             Debug.Log("LevesPuzzle выполнено");
             Invoke("DestroyPuzzle", 0.5f);
         }

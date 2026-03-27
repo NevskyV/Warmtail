@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa871b3d15394443b22bf02d69a17fd0, type: 3}
+  m_Name: 200002
+  m_EditorClassIdentifier: Assembly-CSharp::Data.RuntimeDialogueGraph
+  <EntryNodeId>k__BackingField: 4fdcc030-6069-45f7-9dfd-0dbf87de879b
+  <AllNodes>k__BackingField:
+  - rid: 6510803696893034509
+  - rid: 6510803696893034510
+  - rid: 6510803696893034511
+  - rid: 6510803696893034512
+  - rid: 6510803696893034513
+  - rid: 6510803696893034514
+  - rid: 6510803696893034515
+  - rid: 6510803696893034516
+  <DialogueId>k__BackingField: 200002
+  references:
+    version: 2
+    RefIds:
+    - rid: 6510803696893034509
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 4fdcc030-6069-45f7-9dfd-0dbf87de879b
+        NextNodeIds:
+        - 5203948c-5273-4701-844f-36fff9f337b7
+        Text: "\u0421\u043F\u0430\u0441\u0438\u0431\u043E \u0431\u043E\u043B\u044C\u0448\u043E\u0435!"
+        Character: 8
+        Emotion: 1
+        DisplayName: 
+    - rid: 6510803696893034510
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 5203948c-5273-4701-844f-36fff9f337b7
+        NextNodeIds:
+        - ec76c949-a6e7-4d09-a48d-4ebb14bd520b
+        Text: "\u041A\u0430\u043A \u0442\u0435\u0431\u044F \u0437\u0432\u0430\u0442\u044C
+          \u0442\u043E?"
+        Character: 8
+        Emotion: 1
+        DisplayName: 
+    - rid: 6510803696893034511
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: ec76c949-a6e7-4d09-a48d-4ebb14bd520b
+        NextNodeIds:
+        - 5b4fd40e-5d3b-45b7-bb68-6723d3c255f6
+        Text: "\u041A\u0430\u043A \u0442\u0435\u0431\u044F \u0437\u0432\u0430\u0442\u044C
+          \u0442\u043E?"
+        Character: 8
+        Emotion: 1
+        DisplayName: 
+    - rid: 6510803696893034512
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 5b4fd40e-5d3b-45b7-bb68-6723d3c255f6
+        NextNodeIds:
+        - 754828bc-42c0-421f-b671-d12c0cd40bd4
+        Text: '{playerName}!'
+        Character: 0
+        Emotion: 1
+        DisplayName: 
+    - rid: 6510803696893034513
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 754828bc-42c0-421f-b671-d12c0cd40bd4
+        NextNodeIds:
+        - 4ce0624a-e07d-43e2-bd60-f77e6cef75a5
+        Text: "\u0421\u043B\u0443\u0448\u0430\u0439, {playerName}, \u0440\u0430\u0437
+          \u0442\u044B \u043C\u043D\u0435 \u043F\u043E\u043C\u043E\u0433, \u0442\u043E
+          \u044F \u043F\u043E\u043A\u0430\u0436\u0443, \u0433\u0434\u0435 <link=hlight>\u043C\u043E\u0439
+          \u043C\u0430\u0433\u0430\u0437\u0438\u043D\u0447\u0438\u043A</link>, \u0438
+          \u0434\u0430\u043C \u0441\u043A\u0438\u043A\u0443 \u043D\u0430 \u0442\u043E\u0432\u0430\u0440\u044B!"
+        Character: 8
+        Emotion: 0
+        DisplayName: 
+    - rid: 6510803696893034514
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 4ce0624a-e07d-43e2-bd60-f77e6cef75a5
+        NextNodeIds:
+        - 8f279ce6-28e8-4f47-a8c2-a1dd6e1c45c3
+        Text: "\u0421 \u0440\u0430\u0434\u043E\u0441\u0442\u044C\u044E \u0437\u0430\u043A\u0443\u043F\u043B\u044E\u0441\u044C
+          \u0443 \u0432\u0430\u0441, \u043C\u0438\u0441\u0442\u0435\u0440 \u0422\u043E\u0440\u0432\u0430\u043B\u044C\u0434!"
+        Character: 0
+        Emotion: 1
+        DisplayName: 
+    - rid: 6510803696893034515
+      type: {class: ActionNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 43dd9592-ec5b-4b82-b3d2-aa48468b6e0c
+        NextNodeIds: []
+        EventInd: 1
+    - rid: 6510803696893034516
+      type: {class: SetNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 8f279ce6-28e8-4f47-a8c2-a1dd6e1c45c3
+        NextNodeIds:
+        - 43dd9592-ec5b-4b82-b3d2-aa48468b6e0c
+        <Variables>k__BackingField:
+        - VarName: helpedTorvald
+          Operation: 0
+          Value: true
