@@ -57,6 +57,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.05, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &1561767939721351274
 GameObject:
   m_ObjectHideFlags: 0
@@ -419,7 +420,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4919893853094644452}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -540,7 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
   GroupProperty:
     InterType: 0
-    FillColor: {r: 0.77453184, g: 0.89433956, b: 0.88274527, a: 1}
+    FillColor: {r: 0.7830188, g: 0.93783903, b: 1, a: 1}
     Alpha: 1
     OutlineColor: {r: 0.05906012, g: 0.26382837, b: 0.3962264, a: 1}
     OutlineThickness: 0.005
@@ -780,6 +781,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.05, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!114 &1885278932429068747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -850,6 +852,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.05, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8355672708355300815
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1072,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8979459332610031441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1126,3 +1130,4 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.05, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0

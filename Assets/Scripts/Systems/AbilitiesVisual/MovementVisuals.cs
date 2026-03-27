@@ -32,6 +32,7 @@ namespace Systems.AbilitiesVisual
         private IAbility _ability;
         private CinemachineCamera _camera;
         private List<GameObject> _loopVfxObjs = new();
+        private Transform _startVfxObj;
         private ParticleSystem[] _loopVfx;
         
         [Inject]
@@ -54,9 +55,15 @@ namespace Systems.AbilitiesVisual
         public async void StartAbility()
         {
             if (!_ability.Enabled || _loopVfxObjs.Count > 0) return;
-            var startObj = (await ObjectSpawnSystem.Spawn(_startVfx, _player.Rigidbody.position, _player.Rigidbody.transform)).transform;
-            startObj.localRotation = Quaternion.Euler(new Vector3(0, 0, 160));
-            startObj.localPosition += _vfxOffset;
+            if (!_startVfxObj)
+            {
+                _startVfxObj =
+                    (await ObjectSpawnSystem.Spawn(_startVfx, _player.Rigidbody.position, _player.Rigidbody.transform))
+                    .transform;
+                _startVfxObj.localRotation = Quaternion.Euler(new Vector3(0, 0, 160));
+                _startVfxObj.localPosition += _vfxOffset;
+            }
+
             _player.ObjectSfx.PlaySfx(_startSfx);
             _player.ObjectSfx.PlayLoopSfx(_loopSfx, 500);
         }

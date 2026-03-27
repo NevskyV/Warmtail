@@ -57,6 +57,7 @@ MonoBehaviour:
     ParamsA: {x: 0.24, y: 0.35, z: 0.07, w: 0}
     ParamsB: {x: 0.02, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &964475909167962050
 GameObject:
   m_ObjectHideFlags: 0
@@ -497,6 +498,7 @@ MonoBehaviour:
     WaveFreq: 10
     WaveAmp: 0.002
     WaveSpeed: 1
+    Smoothness: 0
   InstanceMaterial: {fileID: 0}
 --- !u!1 &4093458199769758882
 GameObject:
@@ -607,6 +609,7 @@ MonoBehaviour:
     ParamsA: {x: 0.24, y: 0.35, z: 0.07, w: 0}
     ParamsB: {x: 0.02, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &6015164588097573598
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,6 +667,7 @@ MonoBehaviour:
     ParamsA: {x: 0.24, y: 0.35, z: 0.07, w: 0}
     ParamsB: {x: 0.02, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &7152806615079206341
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +840,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.ChangeDialogueVarUI
   _button: {fileID: 1166421571229164190}
   _varName: playerName
-  <VarValue>k__BackingField: Warmtail
+  <VarValue>k__BackingField: "\u0422\u0435\u043F\u043B\u043E\u0445\u0432\u043E\u0441\u0442\u0438\u043A"
 --- !u!114 &8828764193989274845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1142,6 +1146,7 @@ MonoBehaviour:
     ParamsA: {x: 0.24, y: 0.35, z: 0.07, w: 0}
     ParamsB: {x: 0.02, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8609275407764246072
 GameObject:
   m_ObjectHideFlags: 0
@@ -1358,3 +1363,4 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.02, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0

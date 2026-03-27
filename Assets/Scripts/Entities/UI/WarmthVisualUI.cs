@@ -29,14 +29,15 @@ namespace Entities.UI
         private void UpdateVisual()
         {
             var runtime = _globalData.Get<RuntimePlayerData>();
+            var savable = _globalData.Get<SavablePlayerData>();
 
-            if (_text != null)
+            if (_text)
                 _text.text = runtime.CurrentCells.ToString();
 
-            if (_arcFigure == null) return;
+            if (!_arcFigure) return;
 
             float targetAngle = runtime.CurrentCells > 0
-                ? (1f - runtime.CurrentCellProgress) * _maxAngle
+                ? (runtime.CurrentCellProgress / savable.Stars) * _maxAngle
                 : 0f;
 
             _tween?.Kill();

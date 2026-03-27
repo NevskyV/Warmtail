@@ -153,11 +153,11 @@ namespace Entities.UI.SDF
     public struct GroupProperty
     {
         public int InterType;
-        public Color FillColor;
+        [ColorUsage(false, true)] public Color FillColor;
         public float Alpha;
-        public Color OutlineColor;
+        [ColorUsage(false, true)]public Color OutlineColor;
         public float OutlineThickness;
-        public Color InlineColor;
+        [ColorUsage(false, true)]public Color InlineColor;
         public float InlineThickness;
         public float InOutlineThickness;
         public float WaveFreq;

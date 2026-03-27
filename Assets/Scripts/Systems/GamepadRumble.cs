@@ -7,8 +7,15 @@ namespace Systems
 {
     public class GamepadRumble
     {
-        [Inject] private GlobalData _globalData;
-        [Inject] private PlayerInput _playerInput;
+        private GlobalData _globalData;
+        private PlayerInput _playerInput;
+        [Inject] 
+        private void Construct(GlobalData globalData, PlayerInput playerInput)
+        {
+            _globalData = globalData;
+            _playerInput = playerInput;
+            new CursorHideSystem().Construct(_playerInput);
+        }
         public async void ShortRumble()
         {
             if (Gamepad.current == null || _playerInput.currentControlScheme != "Gamepad") return;
