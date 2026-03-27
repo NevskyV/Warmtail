@@ -123,8 +123,17 @@ namespace Entities.UI
         
         public void DestroyMark(Mark mark)
         {
-            if(_mapMarks.ContainsKey(mark)) Destroy(_mapMarks[mark]);
-            if(_hudMarks.ContainsKey(mark)) Destroy(_hudMarks[mark]);
+            if (_mapMarks.ContainsKey(mark))
+            {
+                Destroy(_mapMarks[mark]);
+                _mapMarks.Remove(mark);
+            }
+
+            if (_hudMarks.ContainsKey(mark))
+            {
+                Destroy(_hudMarks[mark]);
+                _hudMarks.Remove(mark);
+            }
         }
     }
 }

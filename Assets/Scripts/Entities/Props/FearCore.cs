@@ -12,7 +12,6 @@ namespace Entities.Props
         [SerializeField] private bool _locked = true;
         [SerializeField] private FearPortal _portalPrefab;
         [SerializeField] private FearConfig _fearConfig;
-        [SerializeField] private Transform _spawnPoint;
         [SerializeField] private List<GameObject> _baseObjects = new();
         [SerializeField] private List<GameObject> _portalObjects = new();
         

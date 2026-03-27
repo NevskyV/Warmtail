@@ -14,13 +14,16 @@ namespace Entities.Props
 {
     public class Star : SavableStateObject, IInteractable
     {
+        [SerializeField] private int _locationIndex;
         [SerializeField] private AudioClip _sfx;
         private MonologueVisuals _monologueVisuals;
+        private MapVisuals _mapVisuals;
         private List<int> _ids = new();
         
         [Inject]
-        public void Construct(MonologueVisuals monologueVisuals)
+        public void Construct(MonologueVisuals monologueVisuals, MapVisuals mapVisuals)
         {
+            _mapVisuals = mapVisuals;
             _monologueVisuals = monologueVisuals;
             for (int i = 0; i < 30; i++)
             {
@@ -41,6 +44,7 @@ namespace Entities.Props
                 var v = new Vector2(transform.position.x, transform.position.y);
                 playerData.RespawnPositions.Add(v.ToNumerics());
             });
+            _mapVisuals.OpenLocation(_locationIndex);
             GetComponent<ObjectSfx>().PlaySfx(_sfx);
             ChangeState(false);
         }

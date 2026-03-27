@@ -19,20 +19,27 @@ namespace Entities.UI
         
         public async void StartDrain(string objId)
         {
-            if (_lastObjId == objId || _isFreezing || _uiStateSystem.CurrentState == UIState.Pause) return;
+            if (_lastObjId == objId || _isFreezing || _uiStateSystem.CurrentState != UIState.Normal) return;
             _token?.Cancel();
             _token = new CancellationTokenSource();
             _lastObjId = objId;
             
             _isFreezing = true;
 
-            var task =  _freezeMaterial.DOFloat(0, DissolveAmount, _freezeTime).AsyncWaitForCompletion();
-            await task;
+            var task = _freezeMaterial.DOFloat(0, DissolveAmount, _freezeTime);
+            DOTween.Play(task);
+            _uiStateSystem.OnStateChange += state =>
+            {
+                print(state);
+                if(state != UIState.Normal) DOTween.Pause(task);
+                else DOTween.Play(task);
+            };
+            await task.AsyncWaitForCompletion();
             if (_freezeMaterial.GetFloat(DissolveAmount) > 0) return;
             _stateController.Die();
             _freezeMaterial.SetFloat(DissolveAmount, 1);
         }
-        
+
         public async void StopDrain(string objId)
         {
             if(_lastObjId != objId) return;

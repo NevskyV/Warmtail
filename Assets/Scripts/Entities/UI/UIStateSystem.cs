@@ -17,6 +17,7 @@ namespace Entities.UI
 {
     public class UIStateSystem : MonoBehaviour
     {
+        private static readonly int InPause = Animator.StringToHash("InPause");
         [SerializeReference, Range(0.5f, 5f)] private float _crossFadeTime;
         
         [SerializeField] private AYellowpaper.SerializedCollections.SerializedDictionary<UIState, CanvasGroup> _canvasGroups = new();
@@ -78,14 +79,16 @@ namespace Entities.UI
                         DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 0, _crossFadeTime);
                         _abilityController.EnableLastAbilities();
                         if(_pauseAnimator)
-                            _pauseAnimator.SetBool("InPause", false);
+                            _pauseAnimator.SetBool(InPause, false);
                         break;
-                    case UIState.Pause:
-                        _warmthGroup.DOFade(1, _crossFadeTime);
+                    case UIState.Hidden or UIState.Pause:
                         DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 1, _crossFadeTime);
-                        _abilityController.DisableAllAbilities();
-                        if(_pauseAnimator)
-                            _pauseAnimator.SetBool("InPause", true);
+                        if (state == UIState.Pause){
+                            _warmthGroup.DOFade(1, _crossFadeTime);
+                            _abilityController.DisableAllAbilities();
+                            if (_pauseAnimator)
+                                _pauseAnimator.SetBool(InPause, true);
+                        }
                         break;
                     default:
                         _abilityController.DisableAllAbilities();
@@ -121,6 +124,6 @@ namespace Entities.UI
     [Serializable]
     public enum UIState
     {
-        Normal, Settings, Pause, Dialogue, Building, Shop, Map, Bestiary, FearMenu, MusicSelection, Photo
+        Normal, Settings, Pause, Dialogue, Building, Shop, Map, Bestiary, FearMenu, MusicSelection, Photo, Hidden
     }
 }

@@ -25,45 +25,35 @@ MonoBehaviour:
   <OnFail>k__BackingField: []
   <Sequence>k__BackingField:
   - Actions:
-    - rid: 7345391011349135555
     - rid: 7345391011349135556
     Tasks:
-    - rid: 7345390956647809365
+    - rid: 6510803811907666093
   - Actions:
-    - rid: 7345391011349135557
     - rid: 7345391011349135558
     Tasks:
-    - rid: 7345390956647809369
+    - rid: 6510803811907666095
   - Actions:
-    - rid: 7345391011349135559
     - rid: 7345391011349135560
     Tasks:
-    - rid: 7345390956647809372
+    - rid: 6510803811907666096
   references:
     version: 2
     RefIds:
-    - rid: 7345390956647809365
-      type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+    - rid: 6510803811907666093
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _puzzleId:
-        - puzzle finix quest lever
-    - rid: 7345390956647809369
-      type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+        _objId: puzzle finix quest lever
+        _needToBe: 0
+    - rid: 6510803811907666095
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _puzzleId:
-        - puzzle finix quest ray
-    - rid: 7345390956647809372
-      type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+        _objId: puzzle finix quest ray
+        _needToBe: 0
+    - rid: 6510803811907666096
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _puzzleId:
-        - puzzle finix quest gear
-    - rid: 7345391011349135555
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - puzzle finix quest lever
-        _homeScene: 0
+        _objId: puzzle finix quest gear
+        _needToBe: 0
     - rid: 7345391011349135556
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -71,13 +61,6 @@ MonoBehaviour:
         _questData: {fileID: 11400000}
         _position: {x: 28.6, y: 23.1}
         _questVisualsId: quest visauls
-    - rid: 7345391011349135557
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - puzzle finix quest ray
-        _homeScene: 0
     - rid: 7345391011349135558
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -85,13 +68,6 @@ MonoBehaviour:
         _questData: {fileID: 11400000}
         _position: {x: 4, y: -3.2}
         _questVisualsId: quest visauls
-    - rid: 7345391011349135559
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - puzzle finix quest gear
-        _homeScene: 0
     - rid: 7345391011349135560
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
