@@ -58,8 +58,6 @@ namespace Entities.UI
                     CalculateRectPosition(mark);
                 }
             };
-
-            SpawnMark(new Mark(){Sprite = _dynamicMarks[0].Sprite, WorldPosition = new Vector2(50, 10)}, true);
         }
         
         public void SpawnMark(Mark mark, bool inHud)

@@ -40,7 +40,6 @@ namespace Entities.Core
             Debug.Log("set ui installer HOUSE");
             
             Container.Inject(new WarmthSystem());
-            
             Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.Bind<Player>().FromInstance(_player).AsSingle();
             Container.Bind<PlayerStateController>().FromNewComponentOn(_player.gameObject).AsSingle().NonLazy();

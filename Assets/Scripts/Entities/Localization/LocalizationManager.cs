@@ -30,6 +30,7 @@ namespace Entities.Localization
             {"Torvald", "580163994"},
             {"Lumi", "1987237332"},
             {"Unknown", "1422272265"},
+            {"Quests", "2071454227"},
         };
 
         public static ReactiveProperty<Language> CurrentLanguage { get; } = new(Language.ru);
@@ -66,7 +67,7 @@ namespace Entities.Localization
                     var path = Path.Combine(folder, tableName + ".tsv");
                     if(!File.Exists(path)) File.Create(path).Close();
                     var data = req.downloadHandler.data;
-                    File.WriteAllBytes(path, data);
+                    if (data != null) File.WriteAllBytes(path, data);
 
 #if UNITY_EDITOR
                     UnityEditor.AssetDatabase.Refresh();

@@ -21,11 +21,11 @@ namespace Systems
         public static bool FirstSpawn = true;
 
         private Dictionary<string, Vector2> _spawnPoints = new(){
-            {"GameplayStart" , new Vector2(-25.5f, 1)},
-            {"GameplayNearHome" , new Vector2(124.2f, 259f)},
-            {"HomeAtCarpet" , new Vector2(18.15f, -24.82f)},
-            {"HomeNearDoor" , new Vector2(22.55f, 3.08f)},
-            {"FearWorld" , new Vector2(-20.4f, 197.2f)}
+            {"GameplayStart" , new Vector2(-7.66f, -37f)},
+            {"GameplayNearHome" , new Vector2(9.31f, 18.91f)},
+            {"HomeAtCarpet" , new Vector2(19.5f, -19.5f)},
+            {"HomeNearDoor" , new Vector2(22.35f, -8.45f)},
+            {"FearWorld" , new Vector2(-24.2f, 0f)}
         };
 
         [Inject]        

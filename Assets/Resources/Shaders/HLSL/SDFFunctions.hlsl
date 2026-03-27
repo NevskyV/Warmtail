@@ -351,11 +351,11 @@ void SceneSDF_float(
     float GlobalTime,
     out float fillMask,
     out float outlineMask,
-    out float4 fillColor,
+    out float3 fillColor,
     out float alpha,
-    out float4 outlineColor,
+    out float3 outlineColor,
     out float outlineThickness,
-    out float4 inlineColor,
+    out float3 inlineColor,
     out float inlineThickness)
 {
     float groupFill[MAX_GROUPS];
@@ -438,7 +438,7 @@ void SceneSDF_float(
         combinedFill = tempFill;
         combinedWavy = tempWavy;
 
-        combinedProp.fillColor = lerp(groupProp[g].fillColor, combinedProp.fillColor, h);
+        combinedProp.fillColor =lerp(groupProp[g].fillColor, combinedProp.fillColor, h);
         combinedProp.alpha = lerp(groupProp[g].alpha, combinedProp.alpha, h);
         combinedProp.outlineColor = lerp(groupProp[g].outlineColor, combinedProp.outlineColor, h);
         combinedProp.outlineThickness = lerp(groupProp[g].outlineThickness, combinedProp.outlineThickness, h);
@@ -459,10 +459,10 @@ void SceneSDF_float(
     outlineMask *= step(0.0, combinedWavy + bias);
     if (combinedProp.outlineThickness == 0) outlineMask = 0;
     fillMask = combinedFill;
-    fillColor = combinedProp.fillColor;
+    fillColor = combinedProp.fillColor.xyz;
     alpha = combinedProp.alpha;
-    outlineColor = combinedProp.outlineColor;
+    outlineColor = combinedProp.outlineColor.xyz;
     outlineThickness = combinedProp.outlineThickness;
-    inlineColor = combinedProp.inlineColor;
+    inlineColor = combinedProp.inlineColor.xyz;
     inlineThickness = combinedProp.inlineThickness;
 }

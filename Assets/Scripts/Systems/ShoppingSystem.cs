@@ -12,7 +12,6 @@ namespace Systems
     public class ShoppingSystem
     {
         [Inject] private GlobalData _globalData;
-        [Inject] private ShoppingVisuals _shoppingVisuals;
         
         public void BuyItem(BuyableItemData item, Character character, bool isLast)
         {
@@ -35,7 +34,6 @@ namespace Systems
         private void PurchaseLastItem(Character character)
         {
             _globalData.Edit<NPCData>(data => {data.BoughtLastItem[character] = true;});
-            _shoppingVisuals.OpenNpcShop(character);
         }
     }
 }

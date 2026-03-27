@@ -25,6 +25,7 @@ namespace Entities.Triggers
 
         private List<int> _firstPoints = new();
         private List<List<Vector2>> _differentPoints = new();
+        private bool _isHidden = true;
         
         private void Start()
         {
@@ -60,7 +61,7 @@ namespace Entities.Triggers
         
         private void TriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && _isHidden)
             {
                 for (int i = 0; i < _hiddenSprites.Length; i++)
                 {
@@ -68,12 +69,13 @@ namespace Entities.Triggers
                 }
                 _normalColliders.ForEach(c => c.gameObject.SetActive(false));
                 _hiddenColliders.ForEach(c => c.gameObject.SetActive(true));
+                _isHidden = false;
             }
         }
 
         private void HiddenTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") && !_isHidden)
             {
                 for (int i = 0; i < _hiddenSprites.Length; i++)
                 {
@@ -81,6 +83,7 @@ namespace Entities.Triggers
                 }
                 _normalColliders.ForEach(c => c.gameObject.SetActive(true));
                 _hiddenColliders.ForEach(c => c.gameObject.SetActive(false));
+                _isHidden = true;
             }
         }
 

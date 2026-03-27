@@ -46,7 +46,7 @@ namespace Entities.Core
         
         [Title("Map")]
         [SerializeField] private SwarmController _swarmController;
-        //[SerializeField] private SurfacingSystem _surfacingSystem;
+        [SerializeField] private SurfacingSystem _surfacingSystem;
        
         // ReSharper disable Unity.PerformanceAnalysis
         public override void InstallBindings()
@@ -57,8 +57,6 @@ namespace Entities.Core
             BuildVisuals();
             BuildAbilities();
             BuildUI();
-           
-            //Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
         }
 
         private void BuildPlayer()
@@ -89,6 +87,7 @@ namespace Entities.Core
             Container.Bind<EventsData>().FromNew().AsSingle();
             Container.Bind<DialogueSystem>().FromNew().AsSingle();
             Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
+            Container.Bind<SurfacingSystem>().FromInstance(_surfacingSystem).AsSingle();
             Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<TemperatureSystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
