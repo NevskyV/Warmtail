@@ -19,7 +19,9 @@ namespace Entities.Sound
                 _awaitable.Dispose();
                 _awaitable = null;
             }
-            _source.PlayOneShot(_clips[sfxName]);
+            var obj = Instantiate(new GameObject("sfx")).AddComponent<AudioSource>();
+            obj.PlayOneShot(_clips[sfxName]);
+            Destroy(obj.gameObject, 5f);
         }
         
         public void PlaySfx(AudioClip sfx)
@@ -29,7 +31,9 @@ namespace Entities.Sound
                 DOTween.Kill(_awaitable);
                 _awaitable = null;
             }
-            _source.PlayOneShot(sfx);
+            var obj = Instantiate(new GameObject("sfx")).AddComponent<AudioSource>();
+            obj.PlayOneShot(sfx);
+            Destroy(obj.gameObject, 5f);
         }
         
         public async void PlayLoopSfx(AudioClip sfx, int delay = 0)

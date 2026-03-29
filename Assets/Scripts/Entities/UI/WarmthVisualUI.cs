@@ -32,12 +32,12 @@ namespace Entities.UI
             var savable = _globalData.Get<SavablePlayerData>();
 
             if (_text)
-                _text.text = runtime.CurrentCells.ToString();
+                _text.text = runtime.CurrentCells + "/" + savable.Stars;
 
             if (!_arcFigure) return;
 
             float targetAngle = runtime.CurrentCells > 0
-                ? (runtime.CurrentCellProgress / savable.Stars) * _maxAngle
+                ? (runtime.CurrentCells / savable.Stars) * _maxAngle
                 : 0f;
 
             _tween?.Kill();

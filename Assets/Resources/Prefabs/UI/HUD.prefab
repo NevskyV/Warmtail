@@ -488,6 +488,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &568986573885667465
 GameObject:
   m_ObjectHideFlags: 0
@@ -598,7 +599,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 265, y: -0.00001359}
+  m_AnchoredPosition: {x: -164, y: -0.00001359}
   m_SizeDelta: {x: 232.3675, y: 91.9136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7057412971219856486
@@ -772,6 +773,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &882961313438611790
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,7 +960,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 264.64, y: 0.0000019073}
+  m_AnchoredPosition: {x: -164, y: 0.0000019073}
   m_SizeDelta: {x: 255.4713, y: 84.677}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4747843591965976093
@@ -1131,6 +1133,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.03, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &1129416725396975313
 GameObject:
   m_ObjectHideFlags: 0
@@ -1262,6 +1265,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: -0.65, z: 0, w: 0.53}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &1319111681378490978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1319,6 +1323,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.03, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &1391179397661266314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1832,6 +1837,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.03, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &1886898578803151251
 GameObject:
   m_ObjectHideFlags: 0
@@ -2471,6 +2477,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.ResourcesUI
   _shells: {fileID: 4669389923918355137}
   _stars: {fileID: 3826040113441531307}
+  _addPrefab: {fileID: 7593657590401235095, guid: 3cc5a664130c6e9488bba1e005866ed4, type: 3}
+  _startEndYPos: {x: -78, y: 0}
+  _transitionDuration: 1
 --- !u!1 &2313168842078091321
 GameObject:
   m_ObjectHideFlags: 0
@@ -2528,6 +2537,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &2316605411001535422
 GameObject:
   m_ObjectHideFlags: 0
@@ -2585,6 +2595,7 @@ MonoBehaviour:
     ParamsA: {x: -0.25, y: 0.5, z: 0.25, w: 0.5}
     ParamsB: {x: 0.04, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &2349664765663267423
 GameObject:
   m_ObjectHideFlags: 0
@@ -2642,6 +2653,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &2372661302021526606
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,6 +2937,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &2725625657909846967
 GameObject:
   m_ObjectHideFlags: 0
@@ -2983,6 +2996,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &3005454263353731575
 GameObject:
   m_ObjectHideFlags: 0
@@ -3332,6 +3346,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.04, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &3196502721274274281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3390,6 +3405,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.04, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!114 &6151329327214702747
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3460,6 +3476,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &3236755071190103095
 GameObject:
   m_ObjectHideFlags: 0
@@ -3786,6 +3803,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &3836577980350690539
 GameObject:
   m_ObjectHideFlags: 0
@@ -3844,6 +3862,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &3896098153733082992
 GameObject:
   m_ObjectHideFlags: 0
@@ -3901,6 +3920,7 @@ MonoBehaviour:
     ParamsA: {x: 0.09, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &4228420596172585041
 GameObject:
   m_ObjectHideFlags: 0
@@ -4238,7 +4258,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 133.22351, y: -205.22351}
+  m_AnchoredPosition: {x: 1788, y: -205.22351}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4291932420980265793
@@ -4262,6 +4282,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &4699001816261137808
 GameObject:
   m_ObjectHideFlags: 0
@@ -4319,6 +4340,7 @@ MonoBehaviour:
     ParamsA: {x: 0.09, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &4752121851012751427
 GameObject:
   m_ObjectHideFlags: 0
@@ -4376,6 +4398,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &4889680977056260318
 GameObject:
   m_ObjectHideFlags: 0
@@ -4866,6 +4889,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &5337615827753916788
 GameObject:
   m_ObjectHideFlags: 0
@@ -5646,6 +5670,7 @@ MonoBehaviour:
     ParamsA: {x: 0.09, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &6016194389351066414
 GameObject:
   m_ObjectHideFlags: 0
@@ -5704,6 +5729,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &6024475163650703155
 GameObject:
   m_ObjectHideFlags: 0
@@ -5844,7 +5870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 264.64, y: 0.0000019073}
+  m_AnchoredPosition: {x: -164, y: 0.0000019073}
   m_SizeDelta: {x: 255.4713, y: 84.677}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1033647118134561708
@@ -6091,6 +6117,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.04, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &6676951128874440346
 GameObject:
   m_ObjectHideFlags: 0
@@ -6149,6 +6176,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!114 &2207352267203428346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6170,6 +6198,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.02, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &6871965335443751824
 GameObject:
   m_ObjectHideFlags: 0
@@ -6230,6 +6259,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.03, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &7260765353219686711
 GameObject:
   m_ObjectHideFlags: 0
@@ -6465,6 +6495,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.03, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &7414033772999951379
 GameObject:
   m_ObjectHideFlags: 0
@@ -6500,7 +6531,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 265, y: -0.00001359}
+  m_AnchoredPosition: {x: -164, y: -0.00001359}
   m_SizeDelta: {x: 232.3675, y: 91.9136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3570086804306066678
@@ -7271,6 +7302,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8345868114043128176
 GameObject:
   m_ObjectHideFlags: 0
@@ -7328,6 +7360,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.04, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8513937861385148651
 GameObject:
   m_ObjectHideFlags: 0
@@ -7386,6 +7419,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.01, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!114 &234696650888146459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7407,6 +7441,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.02, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8524671542113962018
 GameObject:
   m_ObjectHideFlags: 0
@@ -7539,6 +7574,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0.02, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8633325457965434013
 GameObject:
   m_ObjectHideFlags: 0
@@ -7596,6 +7632,7 @@ MonoBehaviour:
     ParamsA: {x: 0.09, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8723111859126668054
 GameObject:
   m_ObjectHideFlags: 0
@@ -7632,7 +7669,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 133.22, y: -390}
+  m_AnchoredPosition: {x: 1788, y: -390}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &9204781369110573496
@@ -7656,6 +7693,7 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0
 --- !u!1 &8729576028481593058
 GameObject:
   m_ObjectHideFlags: 0
@@ -8028,3 +8066,4 @@ MonoBehaviour:
     ParamsA: {x: 0, y: 0, z: 0, w: 0}
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
+  UseParent: 0

@@ -20,8 +20,8 @@ namespace Entities.Triggers
         [SerializeField] private Collider2D[] _hiddenColliders;
         [SerializeField] private SpriteShapeRenderer[] _normalSprites;
         [SerializeField] private SpriteShapeRenderer[] _hiddenSprites;
-        [SerializeField] private SpriteShapeController[] _normalControllers;
-        [SerializeField] private SpriteShapeController[] _hiddenControllers;
+        private SpriteShapeController[] _normalControllers;
+        private SpriteShapeController[] _hiddenControllers;
 
         private List<int> _firstPoints = new();
         private List<List<Vector2>> _differentPoints = new();
@@ -35,7 +35,7 @@ namespace Entities.Triggers
                 _hiddenColliders[i].OnTriggerEnter2DAsObservable().Subscribe(HiddenTriggerEnter2D);
             }
             
-            for (int j = 0; j < _hiddenControllers.Length; j++)
+            /*for (int j = 0; j < _hiddenControllers.Length; j++)
             {
                 var minSpline = _normalControllers[j].spline;
                 var maxSpline = _hiddenControllers[j].spline;
@@ -56,7 +56,7 @@ namespace Entities.Triggers
                     }
                     else if (!found) _firstPoints[j]++;
                 }
-            }
+            }*/
         }
         
         private void TriggerEnter2D(Collider2D other)

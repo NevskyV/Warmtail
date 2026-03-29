@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Event 7
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: f3123168-1dc3-4b01-ac95-eccc20ac7155
-  Once: 0
+  <Once>k__BackingField: 0
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
-  NextElement: {fileID: 11400000, guid: 5477cd915eb8de544aeb55c221635a42, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: 5477cd915eb8de544aeb55c221635a42, type: 2}
   Element:
     Actions:
     - rid: 5800212002074788224
     - rid: 5800212002074788274
+    - rid: 6510803830513074263
     Tasks:
     - rid: 5800212002074788223
   _description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
@@ -45,3 +46,7 @@ MonoBehaviour:
       data:
         _graph: {fileID: 11400000, guid: 2161cc893dff2d945852dc5b02bdd5fb, type: 2}
         _npcId: tertilus gameplay
+    - rid: 6510803830513074263
+      type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _quest: {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}

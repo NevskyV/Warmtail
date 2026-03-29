@@ -15,7 +15,8 @@ namespace Entities.Props
     public class Star : SavableStateObject, IInteractable
     {
         [SerializeField] private int _locationIndex;
-        [SerializeField] private AudioClip _sfx;
+        [SerializeField] private string _sfx;
+        [SerializeField] private ParticleSystem _vfx;
         private MonologueVisuals _monologueVisuals;
         private MapVisuals _mapVisuals;
         private List<int> _ids = new();
@@ -46,6 +47,7 @@ namespace Entities.Props
             });
             _mapVisuals.OpenLocation(_locationIndex);
             GetComponent<ObjectSfx>().PlaySfx(_sfx);
+            ObjectSpawnSystem.Spawn(_vfx, transform.position);
             ChangeState(false);
         }
     }

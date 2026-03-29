@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e33c2e89a147b6a6e3a0fd6895bebc, type: 3}
+  m_Name: Finix 3
+  m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
+  <Id>k__BackingField: 4
+  QuestType: 1
+  <IsPermanent>k__BackingField: 1
+  <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
+  <Layer>k__BackingField: 0
+  <OnStart>k__BackingField:
+  - rid: 8818234041734266995
+  - rid: 8818234041734266996
+  - rid: 8818234041734266997
+  <OnComplete>k__BackingField: []
+  <OnFail>k__BackingField: []
+  <Sequence>k__BackingField:
+  - Actions:
+    - rid: 7345391011349135556
+    Tasks:
+    - rid: 6510803811907666093
+  - Actions:
+    - rid: 7345391011349135558
+    Tasks:
+    - rid: 6510803811907666095
+  - Actions:
+    - rid: 7345391011349135560
+    Tasks:
+    - rid: 6510803811907666096
+  references:
+    version: 2
+    RefIds:
+    - rid: 6510803811907666093
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _objId: puzzle finix quest lever
+        _needToBe: 0
+    - rid: 6510803811907666095
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _objId: puzzle finix quest ray
+        _needToBe: 0
+    - rid: 6510803811907666096
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _objId: puzzle finix quest gear
+        _needToBe: 0
+    - rid: 7345391011349135556
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 0
+        _questData: {fileID: 11400000}
+        _position: {x: 28.6, y: 23.1}
+        _questVisualsId: quest visauls
+    - rid: 7345391011349135558
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 0
+        _questData: {fileID: 11400000}
+        _position: {x: 4, y: -3.2}
+        _questVisualsId: quest visauls
+    - rid: 7345391011349135560
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 0
+        _questData: {fileID: 11400000}
+        _position: {x: -9, y: 25.9}
+        _questVisualsId: quest visauls
+    - rid: 8818234041734266995
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000}
+        _position: {x: 28.6, y: 23.1}
+        _questVisualsId: quest visauls
+    - rid: 8818234041734266996
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000}
+        _position: {x: 4, y: -3.2}
+        _questVisualsId: quest visauls
+    - rid: 8818234041734266997
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000}
+        _position: {x: -9, y: 25.9}
+        _questVisualsId: quest visauls
