@@ -37,7 +37,7 @@ namespace Entities.UI
             if (!_arcFigure) return;
 
             float targetAngle = runtime.CurrentCells > 0
-                ? (runtime.CurrentCells / savable.Stars) * _maxAngle
+                ? (runtime.CurrentCells * 1.0f / savable.Stars) * _maxAngle
                 : 0f;
 
             _tween?.Kill();

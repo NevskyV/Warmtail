@@ -2480,6 +2480,7 @@ MonoBehaviour:
   _addPrefab: {fileID: 7593657590401235095, guid: 3cc5a664130c6e9488bba1e005866ed4, type: 3}
   _startEndYPos: {x: -78, y: 0}
   _transitionDuration: 1
+  _strength: 5
 --- !u!1 &2313168842078091321
 GameObject:
   m_ObjectHideFlags: 0
@@ -3511,8 +3512,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -251.30121, y: -377.04694}
-  m_SizeDelta: {x: 462.86, y: 635.3538}
+  m_AnchoredPosition: {x: -251.30121, y: -461.82}
+  m_SizeDelta: {x: 462.86, y: 804.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5283155165419730635
 MonoBehaviour:
@@ -3546,7 +3547,7 @@ MonoBehaviour:
     m_Top: -50
     m_Bottom: 0
   m_ChildAlignment: 1
-  m_Spacing: -100
+  m_Spacing: -250
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
