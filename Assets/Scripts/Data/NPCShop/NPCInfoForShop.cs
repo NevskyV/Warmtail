@@ -8,6 +8,7 @@ namespace Data.NPCShop
     [CreateAssetMenu(fileName = "NPC Shop Data", menuName = "Configs/NPC Shop Data")]
     public class NPCInfoForShop : ScriptableObject
     {
+        public Character Character;
         public int LevelCount;
         public List<ShopItem> ShopItemList;
     }

@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Entities.Core;
+using Entities.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -17,6 +18,8 @@ namespace Systems
         private string _lastScreenShotPath; 
         private PlayerInput _playerInput;
         private SceneLoader _sceneLoader;
+        
+        public string LastScreenShotPath => _lastScreenShotPath;
 
         [Inject]
         public ScreenshotSystem(PlayerInput playerInput, SceneLoader sceneLoader)

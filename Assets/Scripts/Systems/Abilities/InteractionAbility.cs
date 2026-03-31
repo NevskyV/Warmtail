@@ -31,7 +31,6 @@ namespace Systems.Abilities
         private PlayerInput _playerInput;
         private GamepadRumble  _rumble;
         private AbilityTriggerZone<IInteractable> _triggerZone;
-        private AbilityTriggerZone<Ice> _iceTriggerZone;
         private CompositeDisposable _disposables = new();
     
         [Inject]
@@ -43,15 +42,11 @@ namespace Systems.Abilities
             _rumble = gamepadRumble;
             
             _triggerZone = GetOrCreateTriggerZone<IInteractable>(player, "InteractionTrigger", _interactionRadius);
-            _iceTriggerZone = GetOrCreateTriggerZone<Ice>(player, "IceTrigger", _interactionRadius);
             
             _triggerZone.Wake();
             _triggerZone.OnObjectEnter.Subscribe(ObjectEnter);
             _triggerZone.OnObjectExit.Subscribe(ObjectExit);
             
-            _iceTriggerZone.Wake();
-            _iceTriggerZone.OnObjectEnter.Subscribe(x => x.TriggerEnter2D());
-            _iceTriggerZone.OnObjectExit.Subscribe(x => x.TriggerExit2D());
             
             _playerInput.actions["Interact"].performed += Interact;
         }
