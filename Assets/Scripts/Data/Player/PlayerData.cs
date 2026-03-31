@@ -12,7 +12,7 @@ namespace Data.Player
         public int Shells;
         public int ActiveLayers;
         public List<int> SeenReplicas;
-        public List<Vector2> RespawnPositions = new(){new Vector2(-25.5f, 1)};
+        public List<Vector2> RespawnPositions = new(){new Vector2(-7.66f, -37)};
         public SerializedDictionary<int, int> Inventory;
         public string TimeLastGame;
         public string EventsState;
@@ -22,6 +22,7 @@ namespace Data.Player
         public int ActiveFearId = -1;
         
         public bool IsHomeOpened;
+        public bool IsInFearWorld;
         public bool GotAmulet;
     }
     

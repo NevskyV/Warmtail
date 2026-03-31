@@ -58,8 +58,6 @@ namespace Entities.UI
                     CalculateRectPosition(mark);
                 }
             };
-
-            SpawnMark(new Mark(){Sprite = _dynamicMarks[0].Sprite, WorldPosition = new Vector2(50, 10)}, true);
         }
         
         public void SpawnMark(Mark mark, bool inHud)
@@ -125,8 +123,17 @@ namespace Entities.UI
         
         public void DestroyMark(Mark mark)
         {
-            if(_mapMarks.ContainsKey(mark)) Destroy(_mapMarks[mark]);
-            if(_hudMarks.ContainsKey(mark)) Destroy(_hudMarks[mark]);
+            if (_mapMarks.ContainsKey(mark))
+            {
+                Destroy(_mapMarks[mark]);
+                _mapMarks.Remove(mark);
+            }
+
+            if (_hudMarks.ContainsKey(mark))
+            {
+                Destroy(_hudMarks[mark]);
+                _hudMarks.Remove(mark);
+            }
         }
     }
 }

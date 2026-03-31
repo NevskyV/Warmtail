@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Data;
 using Data.Player;
 using DG.Tweening;
@@ -11,7 +12,11 @@ namespace Entities.UI
     public class WarmthVisualUI : MonoBehaviour
     {
         [SerializeField] private SdfFigure _arcFigure;
-        [SerializeField] private TMP_Text _text;
+        [SerializeField] private List<SdfGroup> _groups;
+        [SerializeField] private List<SdfFigure> _figures;
+        [SerializeField, ColorUsage(false, true)] private Color _activeColor;
+        [SerializeField, ColorUsage(false, true)] private Color _inactiveColor;
+        [SerializeField] private float _activeOutline = 0.05f;
         [SerializeField] private float _maxAngle = 2.7f;
         [SerializeField] private float _smoothing = 0.2f;
 
@@ -29,22 +34,42 @@ namespace Entities.UI
         private void UpdateVisual()
         {
             var runtime = _globalData.Get<RuntimePlayerData>();
+            var savable = _globalData.Get<SavablePlayerData>();
 
-            if (_text != null)
-                _text.text = runtime.CurrentCells.ToString();
+            for (int i = 0; i < _figures.Count; i++)
+            {
+                if (i < _figures.Count - savable.Stars)
+                {
+                    _figures[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    if (i + savable.Stars - _figures.Count < runtime.CurrentCells)
+                    {
+                        _groups[i].GroupProperty.FillColor = _activeColor;
+                        _groups[i].GroupProperty.OutlineThickness = _activeOutline;
+                    }
+                    else
+                    {
+                        _groups[i].GroupProperty.FillColor = _inactiveColor;
+                        _groups[i].GroupProperty.OutlineThickness = 0f;
+                    }
+                    _figures[i].gameObject.SetActive(true);
+                }
+            }
 
-            if (_arcFigure == null) return;
+            if (!_arcFigure) return;
 
-            float targetAngle = runtime.CurrentCells > 0
-                ? (1f - runtime.CurrentCellProgress) * _maxAngle
-                : 0f;
+            // float targetAngle = runtime.CurrentCells > 0
+            //     ? (runtime.CurrentCells * 1.0f / savable.Stars) * _maxAngle
+            //     : 0f;
 
-            _tween?.Kill();
-            _tween = DOTween.To(
-                () => _arcFigure.ShapeData.ParamsA.x,
-                x => _arcFigure.ShapeData.ParamsA.x = x,
-                targetAngle,
-                _smoothing);
+            // _tween?.Kill();
+            // _tween = DOTween.To(
+            //     () => _arcFigure.ShapeData.ParamsA.x,
+            //     x => _arcFigure.ShapeData.ParamsA.x = x,
+            //     targetAngle,
+            //     _smoothing);
         }
     }
 }

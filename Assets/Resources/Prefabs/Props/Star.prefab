@@ -48,11 +48,11 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.9960785, g: 0.9960785, b: 0.8431373, a: 1}
-  m_Intensity: 0.7
+  m_Color: {r: 1, g: 1, b: 0.5415094, a: 1}
+  m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000
+  m_ApplyToSortingLayers: 00000000ddcb4c332d821476
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -93,9 +93,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 987249838922042923}
+  - component: {fileID: 357891790984819666}
   - component: {fileID: 5801004670100212976}
   - component: {fileID: 4306280909307693358}
-  - component: {fileID: 357891790984819666}
   - component: {fileID: 6066675266112532177}
   - component: {fileID: 1546654221935382874}
   - component: {fileID: -7213515185846599696}
@@ -116,12 +116,29 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 21.06, y: -5.92, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3617492239952908494}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &357891790984819666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5408055647751344482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8dcf5c2d8c28f344b7bd60f06b243f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Star
+  _id:
+    Value: 
+  _locationIndex: 0
+  _sfx: pickup
+  _vfx: {fileID: 6236112277574274500, guid: a97d040a384d2a648b3fd337090e55c7, type: 3}
 --- !u!212 &5801004670100212976
 SpriteRenderer:
   serializedVersion: 2
@@ -167,8 +184,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 860670941
+  m_SortingLayer: 3
   m_SortingOrder: -1
   m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: eeb0e449d06833146a0f692f4231078f, type: 3}
@@ -217,21 +234,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.073115036, y: 0.055131517}
   m_Radius: 0.8954917
---- !u!114 &357891790984819666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5408055647751344482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8dcf5c2d8c28f344b7bd60f06b243f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Star
-  _id:
-    Value: 
-  _sfx: {fileID: 8300000, guid: 1089e9d2c9d3f384d8d388df3383d755, type: 3}
 --- !u!114 &6066675266112532177
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,7 +248,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Sound.ObjectSfx
   _source: {fileID: 1546654221935382874}
   _clips:
-    _serializedList: []
+    _serializedList:
+    - Key: pickup
+      Value: {fileID: 8300000, guid: e130a2b14b89a374ca9420f8cbd77848, type: 3}
 --- !u!82 &1546654221935382874
 AudioSource:
   m_ObjectHideFlags: 0
@@ -364,7 +368,7 @@ MonoBehaviour:
   m_CastsShadows: 1
   m_SelfShadows: 0
   m_AlphaCutoff: 0.1
-  m_ApplyToSortingLayers: 00000000911d778ae72eaef4
+  m_ApplyToSortingLayers: 00000000911d778ae72eaef4ddcb4c33
   m_ShapePath:
   - {x: -1.5, y: -1.4999995, z: 0}
   - {x: -1.5, y: 1.5, z: 0}
@@ -385,7 +389,7 @@ MonoBehaviour:
     m_TrimEdge: 0.1
     m_FlipX: 0
     m_FlipY: 0
-    m_InitialTrim: 0.1
+    m_InitialTrim: 0
   m_CastingOption: 1
   m_PreviousTrimEdge: 0.1
   m_PreviousEdgeProcessing: 1

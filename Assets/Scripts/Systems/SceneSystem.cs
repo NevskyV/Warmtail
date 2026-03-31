@@ -21,10 +21,11 @@ namespace Systems
         public static bool FirstSpawn = true;
 
         private Dictionary<string, Vector2> _spawnPoints = new(){
-            {"GameplayStart" , new Vector2(-25.5f, 1)},
-            {"GameplayNearHome" , new Vector2(124.2f, 259f)},
-            {"HomeAtCarpet" , new Vector2(18.15f, -24.82f)},
-            {"HomeNearDoor" , new Vector2(22.55f, 3.08f)},
+            {"GameplayStart" , new Vector2(-7.66f, -37f)},
+            {"GameplayNearHome" , new Vector2(8f, 21.2f)},
+            {"HomeAtCarpet" , new Vector2(19.5f, -19.5f)},
+            {"HomeNearDoor" , new Vector2(22.35f, -8.45f)},
+            {"FearWorld" , new Vector2(-24.2f, 0f)}
         };
 
         [Inject]        
@@ -45,10 +46,15 @@ namespace Systems
             bool isHomeOpened = _globalData.Get<SavablePlayerData>().IsHomeOpened;
             
             Vector2 pos = new();
-            if (!isHomeOpened && !_atHome) pos = _spawnPoints["GameplayStart"];
-            if (isHomeOpened && !_atHome) pos = _spawnPoints["GameplayNearHome"];
-            if (_atHome && FirstSpawn) pos = _spawnPoints["HomeAtCarpet"];
-            if (_atHome && !FirstSpawn) pos = _spawnPoints["HomeNearDoor"];
+            if (_globalData.Get<SavablePlayerData>().IsInFearWorld) pos = _spawnPoints["FearWorld"];
+
+            else 
+            {
+                if (!isHomeOpened && !_atHome) pos = _spawnPoints["GameplayStart"];
+                if (isHomeOpened && !_atHome) pos = _spawnPoints["GameplayNearHome"];
+                if (_atHome && FirstSpawn) pos = _spawnPoints["HomeAtCarpet"];
+                if (_atHome && !FirstSpawn) pos = _spawnPoints["HomeNearDoor"];
+            }
 
             FirstSpawn = false;
 

@@ -12,18 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
   m_Name: Event 0
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
-  _idNode: faf6867e-4410-4567-84a4-94b0d37357c3
-  Scene: GameplayIra
-  NextElement: {fileID: 0}
+  _idNod: 4b9815f1-02c3-43bf-82ea-797309448a33
+  Once: 1
+  <AnyScene>k__BackingField: 0
+  Scene: Assets/Scenes/Gameplay.unity
+  NextElement: {fileID: 11400000, guid: 85b6c8d9a0a89ff488d6d7a94d5e93fd, type: 2}
   Element:
     Actions:
-    - rid: 5800212216453792250
+    - rid: 5800212328378531933
     Tasks: []
-  description: 
+  _description: "\u041D\u0430\u0447\u0438\u043D\u0430\u0435\u0442 \u043C\u043E\u043D\u043E\u043B\u043E\u0433
+    \u0437\u0432\u0451\u0437\u0434\u044B [1]"
   references:
     version: 2
     RefIds:
-    - rid: 5800212216453792250
-      type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+    - rid: 5800212328378531933
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _type: 2
+        _active: 1
+        _objectIds:
+        - start monologue screen
+        - start monologue trigger
+        _homeScene: 0

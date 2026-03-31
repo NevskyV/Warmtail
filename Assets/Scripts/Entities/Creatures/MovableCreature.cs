@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Entities.Creatures
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Seeker))]
-    public class MovableCreature : MonoBehaviour
+    public class MovableCreature : Creature
     {
         [SerializeField] private float _speed = 100;
         [SerializeField] private float _rotationSpeed = 100;
@@ -20,6 +20,7 @@ namespace Entities.Creatures
         
         private Seeker _seeker;
         private Rigidbody2D _rb;
+        private Vector2 _lastPos;
 
         private void Awake()
         {
@@ -40,7 +41,8 @@ namespace Entities.Creatures
         
         private void UpdatePath()
         {
-            if(_seeker.IsDone())
+            if(_seeker.IsDone() && Vector3.Distance(_rb.position, _target.position) > _nextWaypointDist 
+                                && Vector3.Distance(_rb.position, _lastPos) > _nextWaypointDist)
                 _seeker.StartPath(_rb.position, _target.position, OnPathComplete);
         }
 
@@ -51,6 +53,7 @@ namespace Entities.Creatures
 
         private void FixedUpdate()
         {
+            _lastPos =  _rb.position;
             if (_path == null) return;
 
             if (_currentWaypoint >= _path.vectorPath.Count)

@@ -10,6 +10,7 @@ namespace Data
         public List<int> CollectedStars = new();
         public List<int> CreaturesIds = new();
         public int MaxCreatures;
+        public List<int> ActivatedStatues = new(){0};
     }
 
 }

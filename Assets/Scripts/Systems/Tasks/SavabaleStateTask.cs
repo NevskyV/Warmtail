@@ -27,10 +27,8 @@ namespace Systems.Tasks
         public void Activate()
         {
             _obj = _eventsData.SceneObjects[_objId].GetComponent<SavableStateObject>();
-            Debug.Log("iraaaa1");
             _obj.OnStateChanged += b =>
             {
-                Debug.Log("iraaaa2");
                 if(b == _needToBe) MarkComplete();
             };
         }

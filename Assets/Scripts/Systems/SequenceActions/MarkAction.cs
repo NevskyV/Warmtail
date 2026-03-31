@@ -23,11 +23,6 @@ namespace Systems.SequenceActions
         
         public void Invoke()
         {
-            Debug.Log("ira marks 0 " + _questVisualsId + " | " + _spawn + " | " + _position);
-            Debug.Log("ira marks 1 " + _eventsData);
-            Debug.Log("ira marks 2 " + _eventsData.SceneObjects);
-            Debug.Log("ira marks 3 " + _eventsData.SceneObjects[_questVisualsId]);
-            Debug.Log("ira marks 4 " + _eventsData.SceneObjects[_questVisualsId].GetComponent<QuestVisuals>());
             QuestVisuals q = _eventsData.SceneObjects[_questVisualsId].GetComponent<QuestVisuals>();
             if(_spawn) q.SpawnMarks(_questData, _position);
             else q.DestroyMark(_questData, _position);

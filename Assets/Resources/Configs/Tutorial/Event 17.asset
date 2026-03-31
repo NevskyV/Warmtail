@@ -13,17 +13,30 @@ MonoBehaviour:
   m_Name: Event 17
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: b0c36662-0aad-45a1-b4ba-6c2999710607
-  Once: 0
-  Scene: Gameplay
-  AnyScene: 0
+  Once: 1
+  <AnyScene>k__BackingField: 0
+  Scene: Assets/Scenes/Gameplay.unity
   NextElement: {fileID: 11400000, guid: 5eb702e5f8981d742aa5c6484e842533, type: 2}
   Element:
-    Actions: []
-    Tasks: []
-  description: "\u0416\u0434\u0451\u0442 \u0442\u0435\u043D\u044C \u0441\u0442\u0440\u0430\u0445\u0430,
+    Actions:
+    - rid: 5800212431756066949
+    Tasks:
+    - rid: 5800212431756066985
+  _description: "\u0416\u0434\u0451\u0442 \u0442\u0435\u043D\u044C \u0441\u0442\u0440\u0430\u0445\u0430,
     \u043F\u043E\u043A\u0430\u0437\u044B\u0432\u0430\u0435\u0442 \u043E\u0431\u0443\u0447\u0435\u043D\u0438\u0435
     \u043A\u043E\u043B\u043B\u0435\u043A\u0446\u0438\u0438 \u0441\u0442\u0440\u0430\u0445\u0430
     (\u043C\u043E\u043D\u043E\u043B\u043E\u0433 -7) [1]"
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5800212431756066949
+      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _objectIds:
+        - fear collection ability trigger
+    - rid: 5800212431756066985
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _objId: fear base
+        _needToBe: 0

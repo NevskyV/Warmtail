@@ -13,37 +13,31 @@ MonoBehaviour:
   m_Name: Event 3
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: 9b0202dc-555f-4b87-8d2a-9278666fea02
-  Once: 1
-  Scene: Gameplay
-  AnyScene: 0
-  NextElement: {fileID: 11400000, guid: a2008510772a8424fb55836d01379dd5, type: 2}
+  <Once>k__BackingField: 1
+  <AnyScene>k__BackingField: 0
+  Scene: Assets/Scenes/Gameplay.unity
+  <NextElement>k__BackingField: {fileID: 11400000, guid: a2008510772a8424fb55836d01379dd5, type: 2}
   Element:
     Actions:
-    - rid: 5800212002074788002
     - rid: 5800212002074788217
     Tasks:
     - rid: 5800212148699267190
-  description: "\u0422\u0440\u0438\u0433\u0433\u0435\u0440 \u043D\u0430 \u043B\u0451\u0434,
+  _description: "\u0422\u0440\u0438\u0433\u0433\u0435\u0440 \u043D\u0430 \u043B\u0451\u0434,
     \u043F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u0448\u043A\u0430\u043B\u0430
     \u0442\u0435\u043C\u043F\u0435\u0440\u0430\u0442\u0443\u0440\u044B \u0438 \u0442\u0435\u043A\u0441\u0442
     \u043F\u043E\u0434\u0441\u043A\u0430\u0437\u043A\u0438  [1]"
   references:
     version: 2
     RefIds:
-    - rid: 5800212002074788002
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - cam trigger on first ice
     - rid: 5800212002074788217
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
-        _objectIds: []
+        _objectIds:
+        - temperature monologue
         _homeScene: 0
     - rid: 5800212148699267190
       type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _prefab: {fileID: 3459850837378005844, guid: 6481b0d960a46454fa457acefff61214, type: 3}
-        _position: {x: -25.13877, y: 10.27}
+        _prefab: {fileID: 3459850837378005844, guid: 4b5c61f41edd0b54aae236ec9d6ba332, type: 3}
+        _position: {x: 11.5, y: -16.72}

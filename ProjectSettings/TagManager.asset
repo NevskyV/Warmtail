@@ -14,7 +14,7 @@ TagManager:
   - VisibleObjects
   - 131312312
   - LayerTransition
-  - 
+  - Walls
   - 
   - 
   - 
@@ -47,7 +47,10 @@ TagManager:
   - name: Player
     uniqueID: 4105055975
     locked: 0
-  - name: HiddenWalls
+  - name: GlowingObject
+    uniqueID: 860670941
+    locked: 0
+  - name: Walls
     uniqueID: 1981055533
     locked: 0
   m_RenderingLayers:

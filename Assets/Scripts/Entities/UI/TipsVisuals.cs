@@ -23,12 +23,31 @@ namespace Entities.UI
         [SerializeField] private SerializedDictionary<string, List<InputData>> _tips;
         
         [Inject] private PlayerInput _playerInput;
-        
+        private HashSet<InputAction> _lastInputActions = new ();
+
+        private void Start()
+        {
+            _playerInput.onControlsChanged += OnControlsChanged;
+        }
+
+        private void OnControlsChanged(PlayerInput input)
+        {
+            foreach (var lastInputAction in _lastInputActions)
+            {
+                foreach (var (scheme, data) in _tips)
+                {
+                    HideTip(lastInputAction, scheme);
+                }
+                ShowTip(lastInputAction);
+            }
+        }
+
         public async void ShowTip(InputAction reference)
         {
             print(_playerInput.currentControlScheme);
             var inputData = _tips[_playerInput.currentControlScheme].Find(x => x.Action.action == reference);
             inputData.UI.SetActive(true);
+            _lastInputActions.Add(inputData.Action);
             await UniTask.WaitUntil(inputData.Action.action.IsPressed);
             HideTip(reference);
         }
@@ -36,6 +55,13 @@ namespace Entities.UI
         public void HideTip(InputAction reference)
         {
             var inputData = _tips[_playerInput.currentControlScheme].Find(x => x.Action.action == reference);
+            inputData.UI.SetActive(false);
+            _lastInputActions.Remove(inputData.Action);
+        }
+        
+        public void HideTip(InputAction reference, string controlScheme)
+        {
+            var inputData = _tips[controlScheme].Find(x => x.Action.action == reference);
             inputData.UI.SetActive(false);
         }
     }

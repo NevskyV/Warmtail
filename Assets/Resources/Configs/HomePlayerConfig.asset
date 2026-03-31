@@ -25,9 +25,34 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: 4061568888548098192
-        MoveForce: 80
-        _moreForge: 80
-        _drag: 4.5
+        MoveForce: 100
+        _moreForge: 50
+        _drag: 5
+        _accelerationTime: 1
+        _accelerationCurve:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0.401062
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
     - rid: 4061568888548098191
       type: {class: InteractionAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
@@ -41,11 +66,8 @@ MonoBehaviour:
         <AbilityIndex>k__BackingField: 0
         <Water>k__BackingField: {fileID: -876546973899608171, guid: 5ae7af3ea0172074b89f725cc66218ed, type: 3}
         _startVfx: {fileID: 2481209622800388774, guid: cafe15bac3e3191498824cd3d30a4bf1, type: 3}
-        _loopVfx:
-        - {fileID: 4594389035895401464, guid: 5a4b004cf2a7ddf439e15f1f06d759cf, type: 3}
-        - {fileID: 2481209622800388774, guid: da27ccfedea99c249985faf86c9fd17c, type: 3}
         _startSfx: {fileID: 8300000, guid: ef8b251d5336856448d5c1b453469495, type: 3}
         _loopSfx: {fileID: 8300000, guid: b4c4814241c043a41806ce49d27c1b36, type: 3}
         _vfxOffset: {x: 0, y: 0, z: 0}
-        _normalCamZoom: 10
-        _activeCamZoom: 13
+        _normalCamZoom: 3.5
+        _activeCamZoom: 4

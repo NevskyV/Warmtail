@@ -5,13 +5,13 @@ using Data.House;
 using Data.Player;
 using Data.NPCShop;
 using Data;
+using Entities.House;
 
 namespace Systems
 {
     public class ShoppingSystem
     {
         [Inject] private GlobalData _globalData;
-        [Inject] private ShoppingManager _shoppingManager;
         
         public void BuyItem(BuyableItemData item, Character character, bool isLast)
         {
@@ -34,7 +34,6 @@ namespace Systems
         private void PurchaseLastItem(Character character)
         {
             _globalData.Edit<NPCData>(data => {data.BoughtLastItem[character] = true;});
-            _shoppingManager.OpenNPCShop(character);
         }
     }
 }
