@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
+  m_Name: Event 16
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
+  _idNod: 52303779-41c1-4656-bb7c-74d85501e59f
+  <Once>k__BackingField: 0
+  <AnyScene>k__BackingField: 0
+  Scene: Assets/Scenes/Gameplay.unity
+  <NextElement>k__BackingField: {fileID: 11400000, guid: 8030c91fa0bc55949806ba169922ea30, type: 2}
+  Element:
+    Actions:
+    - rid: 5800212002074788253
+    - rid: 5800212002074788254
+    - rid: 6510803830513074266
+    Tasks:
+    - rid: 5800212002074788252
+  _description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
+    \u0441\u043F\u043B\u0430\u0439\u043D \u0424\u0438\u043D\u0438\u043A\u0441 \u0434\u043E
+    \u043F\u043E\u0440\u0442\u0430\u043B\u0430 \u0438 \u043D\u043E\u0432\u044B\u0439
+    \u0434\u0438\u0430\u043B\u043E\u0433"
+  references:
+    version: 2
+    RefIds:
+    - rid: 5800212002074788252
+      type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _id: finix gameplay
+    - rid: 5800212002074788253
+      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _characterId: finix gameplay
+        _splineId: finix spline 1 gameplay
+        _move: 1
+        _loop: 0
+    - rid: 5800212002074788254
+      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _graph: {fileID: 11400000, guid: d63495bebd650b5409805fcca9d8fe32, type: 2}
+        _npcId: finix gameplay
+    - rid: 6510803830513074266
+      type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _quest: {fileID: 11400000, guid: 771a9b84d572de847a2a483e0f685425, type: 2}

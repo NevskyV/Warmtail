@@ -1,22 +1,23 @@
+using System.Collections.Generic;
 using Data;
 using Data.Player;
 using DG.Tweening;
 using Entities.UI.SDF;
 using TMPro;
-using TriInspector;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Entities.UI
 {
     public class WarmthVisualUI : MonoBehaviour
     {
-        [Title("UI Elements")]
-        [SerializeField] private SdfFigure _arcFigure;
-        [SerializeField] private TMP_Text _text;
-        [SerializeField] private float _maxValue = 2.7f;
-        [SerializeField] private float _smoothing = 0.5f;
+        [SerializeField] private List<SdfGroup> _groups;
+        [SerializeField] private List<SdfFigure> _figures;
+        [SerializeField, ColorUsage(false, true)] private Color _activeColor;
+        [SerializeField, ColorUsage(false, true)] private Color _inactiveColor;
+        [SerializeField] private float _activeOutline = 0.05f;
+        [SerializeField] private float _maxAngle = 2.7f;
+        [SerializeField] private float _smoothing = 0.2f;
 
         private GlobalData _globalData;
         private Tween _tween;
@@ -31,25 +32,43 @@ namespace Entities.UI
 
         private void UpdateVisual()
         {
-            var data = _globalData.Get<SavablePlayerData>();
-            var runtimeData = _globalData.Get<RuntimePlayerData>();
+            var runtime = _globalData.Get<RuntimePlayerData>();
+            var savable = _globalData.Get<SavablePlayerData>();
 
-            if (data.Stars == 0)
+            for (int i = 0; i < _figures.Count; i++)
             {
-                if (_arcFigure == null) return;
-                _arcFigure.ShapeData.ParamsA.x = 0;
-            }
-            else
-            {
-                if (_arcFigure == null) return;
-                _text.text = $"{runtimeData.CurrentWarmth}\n|\n{data.Stars * 10}";
-                _tween?.Pause();
-                var newAmount = runtimeData.CurrentWarmth / (data.Stars * 10.0f);
-                _tween = DOTween.To(() => _arcFigure.ShapeData.ParamsA.x, x =>
+                if (i < _figures.Count - savable.Stars)
                 {
-                    _arcFigure.ShapeData.ParamsA.x = x;
-                }, newAmount * _maxValue, _smoothing);
+                    _figures[i].gameObject.SetActive(false);
+                }
+                else
+                {
+                    if (i + savable.Stars - _figures.Count < runtime.CurrentCells)
+                    {
+                        _groups[i].GroupProperty.FillColor = _activeColor;
+                        _groups[i].GroupProperty.OutlineThickness = _activeOutline;
+                    }
+                    else
+                    {
+                        _groups[i].GroupProperty.FillColor = _inactiveColor;
+                        _groups[i].GroupProperty.OutlineThickness = 0f;
+                    }
+                    _figures[i].gameObject.SetActive(true);
+                }
             }
+
+            //if (!_arcFigure) return;
+
+            // float targetAngle = runtime.CurrentCells > 0
+            //     ? (runtime.CurrentCells * 1.0f / savable.Stars) * _maxAngle
+            //     : 0f;
+
+            // _tween?.Kill();
+            // _tween = DOTween.To(
+            //     () => _arcFigure.ShapeData.ParamsA.x,
+            //     x => _arcFigure.ShapeData.ParamsA.x = x,
+            //     targetAngle,
+            //     _smoothing);
         }
     }
 }

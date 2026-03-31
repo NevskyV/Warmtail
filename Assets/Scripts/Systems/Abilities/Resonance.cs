@@ -15,9 +15,7 @@ namespace Systems.Abilities
     {
         [SerializeField] private float _searchRadius = 12f;
         [SerializeField] private float _interactRadius = 5f;
-        [SerializeField] private float _warmthDrain = 1f;
-        [SerializeField] private float _drainInterval = 0.5f;
-       
+
         [SerializeField] private Vector2 _returnPosition;
         private Transform _playerTransform;
         private Player _player;
@@ -29,8 +27,7 @@ namespace Systems.Abilities
         private bool _dashMode;
 
         private CancellationTokenSource _tickCts;
-        private CancellationTokenSource _warmthCts;
-        
+
         private Rigidbody2D _originalPlayerRb;
         private Rigidbody2D _currentPlayerRb;
 
@@ -98,24 +95,7 @@ namespace Systems.Abilities
             _tickCts?.Cancel();
             _tickCts = new CancellationTokenSource();
             ControlSwarm(_tickCts.Token).Forget();
-
-            _warmthCts?.Cancel();
-            _warmthCts = new CancellationTokenSource();
-            DrainWarmthPeriodically(_warmthCts.Token).Forget();
         }
-
-        private async UniTaskVoid DrainWarmthPeriodically(CancellationToken token)
-        {
-            try
-            {
-                while (!token.IsCancellationRequested)
-                {
-                    await UniTask.Delay(TimeSpan.FromSeconds(_drainInterval), cancellationToken: token);
-                }
-            }
-            catch (OperationCanceledException) { }
-        }
-        
 
         private async UniTaskVoid ControlSwarm(CancellationToken token)
         {
@@ -176,7 +156,6 @@ namespace Systems.Abilities
             Vector2 returnPos = _returnPosition;
             
             _tickCts?.Cancel();
-            _warmthCts?.Cancel();
 
             if (_activeSwarm != null)
             {

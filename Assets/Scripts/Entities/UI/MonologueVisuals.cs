@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Nodes;
+using DG.Tweening;
 using EasyTextEffects;
 using Entities.Localization;
 using Interfaces;
@@ -22,23 +23,27 @@ namespace Entities.UI
         private RectTransform _currentText;
         private LocalizationManager _localizationManager;
         private DialogueSystem _dialogueSystem;
+        private UIStateSystem _uiStateSystem;
         private bool _isEnded;
         private float _currentLineDuration;
+        public bool _needToShow;
 
         [Inject]
-        private void Construct(LocalizationManager localizationManager, DialogueSystem dialogueSystem, GlobalData data)
+        private void Construct(LocalizationManager localizationManager, DialogueSystem dialogueSystem, GlobalData data,
+            UIStateSystem uiStateSystem)
         {
             _localizationManager = localizationManager;
             _dialogueSystem = dialogueSystem;
+            _uiStateSystem = uiStateSystem;
         }
 
-        public void StartMonologue(RuntimeDialogueGraph graph, IEventInvoker invoker)
+        public void StartMonologue(RuntimeDialogueGraph graph, IEventInvoker invoker, bool needToShow)
         {
             _dialogueSystem.StartDialogue(graph, this, null, invoker);
+            _needToShow = needToShow;
             ProcessDialogue();
         }
-        
-        public async void ProcessDialogue()
+        async UniTaskVoid ProcessDialogue()
         {
             while(true){
                 await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
@@ -53,12 +58,14 @@ namespace Entities.UI
             _isEnded = false;
             _currentText = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
             _currentText.localPosition = ChooseRandomPosition();
+            _uiStateSystem.SwitchCurrentStateAsync(UIState.Hidden).Forget();
         }
 
         public void HideVisuals()
         {
             _isEnded = true;
             Destroy(_currentText.gameObject);
+            if (_needToShow)_uiStateSystem.SwitchCurrentStateAsync(UIState.Normal).Forget();
         }
 
         public void RequestNewLine(TextNode node)
@@ -76,13 +83,29 @@ namespace Entities.UI
         
         public async void RequestSingleLine(string id, string prefix = "fragment_")
         {
-            _currentText = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
-            _currentText.localPosition = ChooseRandomPosition();
-            _currentText.GetComponent<TMP_Text>().text = 
-                LocalizationManager.GetStringFromKey(prefix + id);
-            _currentText.GetComponent<TextEffect>().Refresh();
-            await UniTask.Delay(TimeSpan.FromSeconds(_currentLineDuration));
-            Destroy(_currentText.gameObject);
+            var textRect = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
+            textRect.localPosition = ChooseRandomPosition();
+
+            var line = LocalizationManager.GetStringFromKey(prefix + id);
+            textRect.GetComponent<TMP_Text>().text = line;
+
+            var duration = line.Length * _perCharFadeTime + _delayTime;
+
+            var effect = textRect.GetComponent<TextEffect>();
+            effect.Refresh();
+            effect.StartManualEffects();
+
+            try
+            {
+                await UniTask.Delay(TimeSpan.FromSeconds(duration), cancellationToken: this.GetCancellationTokenOnDestroy());
+            }
+            catch
+            {
+                return;
+            }
+
+            if (textRect && textRect.gameObject)
+                Destroy(textRect.gameObject);
         }
 
 

@@ -13,7 +13,10 @@ namespace Entities.House
 
         public void AddToInventory()
         {
+            var lastPrice = _item.Price;
+            _item.Price = 0;
             _shoppingSystem.BuyItem(_item, _character, false);
+            _item.Price = lastPrice;
         }
     }
 }

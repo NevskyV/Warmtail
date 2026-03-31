@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Data.Player;
@@ -32,12 +32,18 @@ namespace Systems.AbilitiesVisual
         private IAbility _ability;
         private CinemachineCamera _camera;
         private List<GameObject> _loopVfxObjs = new();
+        private Transform _startVfxObj;
         private ParticleSystem[] _loopVfx;
         
         [Inject]
         private void Construct(Player player, PlayerConfig config, CinemachineCamera camera)
         {
             _player = player;
+            if (AbilityIndex < 0 || AbilityIndex >= config.Abilities.Count)
+            {
+                Debug.LogError($"Invalid AbilityIndex {AbilityIndex}");
+                return;
+            }
             _ability = config.Abilities[AbilityIndex];
             _camera = camera;
             _ability.StartAbility += StartAbility;
@@ -49,9 +55,15 @@ namespace Systems.AbilitiesVisual
         public async void StartAbility()
         {
             if (!_ability.Enabled || _loopVfxObjs.Count > 0) return;
-            var startObj = (await ObjectSpawnSystem.Spawn(_startVfx, _player.Rigidbody.position, _player.Rigidbody.transform)).transform;
-            startObj.localRotation = Quaternion.Euler(new Vector3(0, 0, 160));
-            startObj.localPosition += _vfxOffset;
+            if (!_startVfxObj)
+            {
+                _startVfxObj =
+                    (await ObjectSpawnSystem.Spawn(_startVfx, _player.Rigidbody.position, _player.Rigidbody.transform))
+                    .transform;
+                _startVfxObj.localRotation = Quaternion.Euler(new Vector3(0, 0, 160));
+                _startVfxObj.localPosition += _vfxOffset;
+            }
+
             _player.ObjectSfx.PlaySfx(_startSfx);
             _player.ObjectSfx.PlayLoopSfx(_loopSfx, 500);
         }
@@ -97,19 +109,15 @@ namespace Systems.AbilitiesVisual
                 }, _normalCamZoom, 1);
             }
 
-            for (int i = _loopVfxObjs.Count - 1; i >= 0; i--)
+            var snapshot = new List<GameObject>(_loopVfxObjs);
+            _loopVfxObjs.Clear();
+            foreach (var obj in snapshot)
             {
-                var obj =  _loopVfxObjs[i];
-                if (obj == null)
-                {
-                    _loopVfxObjs.RemoveAt(i);
-                    if (_loopVfxObjs.Count == 0) break;
-                    continue;
-                }
-                var main = obj.GetComponent<ParticleSystem>().main;
+                if (obj == null) continue;
+                var ps = obj.GetComponent<ParticleSystem>();
+                var main = ps.main;
                 main.loop = false;
-                await UniTask.Delay(TimeSpan.FromSeconds(main.duration - obj.GetComponent<ParticleSystem>().time));
-                _loopVfxObjs.Remove(obj);
+                await UniTask.Delay(TimeSpan.FromSeconds(main.duration - ps.time));
             }
         }
 

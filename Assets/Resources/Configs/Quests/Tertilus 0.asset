@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Tertilus 0
   m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
   <Id>k__BackingField: 0
+  QuestType: 0
   <IsPermanent>k__BackingField: 1
-  <Scene>k__BackingField: Assets/Scenes/GameplayIra.unity
+  <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
   <Layer>k__BackingField: 0
+  <OnStart>k__BackingField: []
+  <OnComplete>k__BackingField: []
+  <OnFail>k__BackingField: []
   <Sequence>k__BackingField:
   - Actions: []
     Tasks:
@@ -26,8 +30,6 @@ MonoBehaviour:
   - Actions: []
     Tasks:
     - rid: 7345390883105669496
-  <OnComplete>k__BackingField: []
-  <OnFail>k__BackingField: []
   references:
     version: 2
     RefIds:

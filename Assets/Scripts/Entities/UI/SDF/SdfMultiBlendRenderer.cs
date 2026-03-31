@@ -60,7 +60,7 @@ namespace Entities.UI.SDF
                 {
                     if (!figure) continue;
 
-                    Vector2 normalizedPos = figure.transform.localPosition / parentSize;
+                    Vector2 normalizedPos = (figure.UseParent? figure.transform.parent.localPosition +  figure.transform.localPosition: figure.transform.localPosition) / parentSize;
 
                     allShapes.Add(new ShapeData
                     {
@@ -153,11 +153,11 @@ namespace Entities.UI.SDF
     public struct GroupProperty
     {
         public int InterType;
-        public Color FillColor;
+        [ColorUsage(false, true)] public Color FillColor;
         public float Alpha;
-        public Color OutlineColor;
+        [ColorUsage(false, true)]public Color OutlineColor;
         public float OutlineThickness;
-        public Color InlineColor;
+        [ColorUsage(false, true)]public Color InlineColor;
         public float InlineThickness;
         public float InOutlineThickness;
         public float WaveFreq;

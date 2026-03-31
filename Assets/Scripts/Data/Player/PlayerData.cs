@@ -12,25 +12,28 @@ namespace Data.Player
         public int Shells;
         public int ActiveLayers;
         public List<int> SeenReplicas;
-        public List<Vector2> RespawnPositions = new(){new Vector2(-25.5f, 1)};
+        public List<Vector2> RespawnPositions = new(){new Vector2(-7.66f, -37)};
         public SerializedDictionary<int, int> Inventory;
         public string TimeLastGame;
-        public int TutorState;
+        public string EventsState;
         public string LastScene;
         public SerializedDictionary<int, List<int>> QuestIds;
         public List<int> FearIds = new();
+        public int ActiveFearId = -1;
         
-        //MetaData
         public bool IsHomeOpened;
-        public bool HasBeatenGame;
-        public bool HasInteracted;
+        public bool IsInFearWorld;
+        public bool GotAmulet;
     }
     
     [Serializable]
     public class RuntimePlayerData : IRuntimeData
     {
-        public int CurrentWarmth;
+        public int CurrentCells;
+        public float CurrentCellProgress;
         public bool WasInGame;
         public int Speed;
+        public float Temperature = 50f;
+        public float HeatAttraction = 0f;
     }
 }

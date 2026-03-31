@@ -1,4 +1,5 @@
 ﻿using System;
+using Data;
 
 namespace Interfaces
 {
@@ -7,5 +8,6 @@ namespace Interfaces
         public bool Completed { get; set; }
         public Action OnComplete { get; set; }
         public void Activate();
+        public void SetEventsData(EventsData data);
     }
 }

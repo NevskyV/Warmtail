@@ -5,15 +5,15 @@ using Data.House;
 using Data.Player;
 using Data.NPCShop;
 using Data;
+using Entities.House;
 
 namespace Systems
 {
     public class ShoppingSystem
     {
         [Inject] private GlobalData _globalData;
-        [Inject] private ShoppingManager _shoppingManager;
         
-        public void BuyItem(HouseItemData item, Character character, bool isLast)
+        public void BuyItem(BuyableItemData item, Character character, bool isLast)
         {
             int shells = _globalData.Get<SavablePlayerData>().Shells;
             if (shells < item.Price) Debug.Log("не хватает ракушек!");
@@ -34,7 +34,6 @@ namespace Systems
         private void PurchaseLastItem(Character character)
         {
             _globalData.Edit<NPCData>(data => {data.BoughtLastItem[character] = true;});
-            _shoppingManager.OpenNPCShop(character);
         }
     }
 }

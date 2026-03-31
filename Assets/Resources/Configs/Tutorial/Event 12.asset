@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
+  m_Name: Event 12
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
+  _idNod: 3be42b34-faf6-4c59-81cf-6f0e871d2db9
+  Once: 1
+  <AnyScene>k__BackingField: 0
+  Scene: Assets/Scenes/Gameplay.unity
+  NextElement: {fileID: 11400000, guid: dd038f851c36c6c42860fbdf3c939cac, type: 2}
+  Element:
+    Actions:
+    - rid: 5800212002074788240
+    Tasks:
+    - rid: 5800212002074788239
+  _description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
+    \u0434\u0430\u0451\u0442 \u043D\u043E\u0432\u0443\u044E \u0441\u043F\u043E\u0441\u043E\u0431\u043D\u043E\u0441\u0442\u044C
+    \u0434\u044D\u0448\u0430 [1]"
+  references:
+    version: 2
+    RefIds:
+    - rid: 5800212002074788239
+      type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _id: finix gameplay
+    - rid: 5800212002074788240
+      type: {class: AddAbilityAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _type: 5

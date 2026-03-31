@@ -124,9 +124,12 @@ MonoBehaviour:
     - rid: 1601399230582489401
       type: {class: RuntimePlayerData, ns: Data.Player, asm: Assembly-CSharp}
       data:
-        CurrentWarmth: 0
+        CurrentCells: 0
+        CurrentCellProgress: 0
         WasInGame: 0
         Speed: 8
+        Temperature: 50
+        HeatAttraction: 0
     - rid: 1601399754601005135
       type: {class: SettingsData, ns: Data, asm: Assembly-CSharp}
       data:
@@ -151,14 +154,15 @@ MonoBehaviour:
         Inventory:
           _serializedList: []
         TimeLastGame: 
-        TutorState: 0
-        LastScene: GameplayIra
+        EventsState: 
+        LastScene: Gameplay
         QuestIds:
           _serializedList: []
         FearIds: 
+        ActiveFearId: -1
         IsHomeOpened: 0
-        HasBeatenGame: 0
-        HasInteracted: 0
+        IsInFearWorld: 0
+        GotAmulet: 0
     - rid: 4204128997775507584
       type: {class: DialogueVarData, ns: Data, asm: Assembly-CSharp}
       data:
@@ -179,14 +183,26 @@ MonoBehaviour:
           Name: jelicaLevel
           Value: 0
         - Type: 1
-          Name: wonFinixRace
-          Value: false
-        - Type: 1
           Name: getStick
           Value: false
         - Type: 2
           Name: inventory
           Value: 0
+        - Type: 1
+          Name: canActivateStatues
+          Value: false
+        - Type: 2
+          Name: statuesActive
+          Value: 7
+        - Type: 1
+          Name: helpedTorvald
+          Value: false
+        - Type: 1
+          Name: gotAmulet
+          Value: false
+        - Type: 1
+          Name: interactWTeo
+          Value: false
     - rid: 4204128997775507585
       type: {class: ShellsData, ns: Data, asm: Assembly-CSharp}
       data:
@@ -209,6 +225,7 @@ MonoBehaviour:
       type: {class: HouseData, ns: Data.House, asm: Assembly-CSharp}
       data:
         PlacedHouseItems: []
+        HouseTrack: 0
     - rid: 4204128997775507589
       type: {class: WorldData, ns: Data, asm: Assembly-CSharp}
       data:
@@ -216,6 +233,10 @@ MonoBehaviour:
           _serializedList: []
         SavableNpcState:
           _serializedList: []
+        CollectedStars: 
+        CreaturesIds: 
+        MaxCreatures: 0
+        ActivatedStatues: 
 --- !u!114 &5226292807223728779
 MonoBehaviour:
   m_ObjectHideFlags: 0

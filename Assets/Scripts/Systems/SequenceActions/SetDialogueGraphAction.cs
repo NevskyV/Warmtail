@@ -1,5 +1,6 @@
 ﻿using Data;
 using Entities.Core;
+using Data;
 using Entities.NPC;
 using Interfaces;
 using UnityEngine;
@@ -10,10 +11,20 @@ namespace Systems.SequenceActions
     {
         [SerializeField] private RuntimeDialogueGraph _graph;
         [SerializeField] private string _npcId;
+        private EventsData _eventsData;
+
+        public void SetEventsData(EventsData data)
+        {
+            Debug.Log ("ira Dialogue " + _npcId);
+            _eventsData = data;
+        }
+
         
         public void Invoke()
         {
-            SavableObjectsResolver.FindObjectById<SpeakableCharacter>(_npcId).Graph = _graph;
+            Debug.Log ("ira Dialogue move ");
+            if (!_eventsData.SceneObjects.ContainsKey(_npcId)) return ;
+            _eventsData.SceneObjects[_npcId].GetComponent<SpeakableCharacter>().Graph = _graph;
         }
     }
 }

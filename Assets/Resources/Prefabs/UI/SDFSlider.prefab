@@ -50,6 +50,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8910fba66b7b4528babdc6fa36823b5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfSlider
+  _minValue: 0
+  _maxValue: 1
   _value: 0
   _speed: 4
   _onSelectScale: 1.2
@@ -89,7 +91,7 @@ RectTransform:
   m_Father: {fileID: 6183771749258697666}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.11777017, y: 0.5435062}
-  m_AnchorMax: {x: 0.39869413, y: 0.60069853}
+  m_AnchorMax: {x: 0, y: 0.60069853}
   m_AnchoredPosition: {x: 0.000061035156, y: 0}
   m_SizeDelta: {x: 0.000015259, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -165,16 +167,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
   GroupProperty:
     InterType: 0
-    FillColor: {r: 0, g: 0, b: 0, a: 0}
-    Alpha: 0
-    OutlineColor: {r: 0, g: 0, b: 0, a: 0}
-    OutlineThickness: 0
-    InlineColor: {r: 0, g: 0, b: 0, a: 0}
-    InlineThickness: 0
-    InOutlineThickness: 0
-    WaveFreq: 0
-    WaveAmp: 0
-    WaveSpeed: 0
+    FillColor: {r: 0.49411765, g: 0.7647059, b: 0.7294118, a: 1}
+    Alpha: 1
+    OutlineColor: {r: 0.05882353, g: 0.2627451, b: 0.39607844, a: 1}
+    OutlineThickness: 0.008
+    InlineColor: {r: 0.19607843, g: 0.50980395, b: 0.49019608, a: 1}
+    InlineThickness: 0.4
+    InOutlineThickness: 3
+    WaveFreq: 2
+    WaveAmp: 0.004
+    WaveSpeed: -1
+    Smoothness: 0
   InstanceMaterial: {fileID: 0}
 --- !u!1 &3364141445991968976
 GameObject:
@@ -284,16 +287,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
   GroupProperty:
     InterType: 0
-    FillColor: {r: 0.60809535, g: 0.6533037, b: 0.93962264, a: 1}
+    FillColor: {r: 0.49575645, g: 0.7660377, b: 0.7300002, a: 1}
     Alpha: 1
-    OutlineColor: {r: 0.117647074, g: 0.24906853, b: 0.7921569, a: 1}
+    OutlineColor: {r: 0.05882353, g: 0.2627451, b: 0.39607844, a: 1}
     OutlineThickness: 0.009
-    InlineColor: {r: 0.37435383, g: 0.60661507, b: 1.5137255, a: 1}
+    InlineColor: {r: 0.19607843, g: 0.50980395, b: 0.49085993, a: 1}
     InlineThickness: 0.025
     InOutlineThickness: 3
     WaveFreq: 10
     WaveAmp: 0.004
     WaveSpeed: 3
+    Smoothness: 0
   InstanceMaterial: {fileID: 0}
 --- !u!1 &6495193217750535996
 GameObject:
@@ -346,16 +350,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.UI.SDF.SdfGroup
   GroupProperty:
     InterType: 0
-    FillColor: {r: 0.7764706, g: 0.8020783, b: 0.89411765, a: 1}
+    FillColor: {r: 0.7764706, g: 0.89411765, b: 0.8782793, a: 1}
     Alpha: 1
-    OutlineColor: {r: 0.076552495, g: 0.058823537, b: 0.39607844, a: 1}
+    OutlineColor: {r: 0.058823537, g: 0.26203755, b: 0.39607844, a: 1}
     OutlineThickness: 0.005
-    InlineColor: {r: 0.2228645, g: 0.19607843, b: 0.50980395, a: 1}
+    InlineColor: {r: 0.19607843, g: 0.50980395, b: 0.49019608, a: 1}
     InlineThickness: 0.01
     InOutlineThickness: 3
-    WaveFreq: 3
+    WaveFreq: 2
     WaveAmp: 0.004
     WaveSpeed: -1
+    Smoothness: 0
   InstanceMaterial: {fileID: 0}
 --- !u!1 &7117089933486634364
 GameObject:
@@ -642,7 +647,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.048, y: 0.5448998}
   m_AnchorMax: {x: 0.048, y: 0.5448998}
-  m_AnchoredPosition: {x: 23.392868, y: 9.4}
+  m_AnchoredPosition: {x: 24.288757, y: 9.4}
   m_SizeDelta: {x: 45, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &3184121304223471383

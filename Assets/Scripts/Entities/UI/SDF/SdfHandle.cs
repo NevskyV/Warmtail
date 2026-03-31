@@ -51,8 +51,9 @@ namespace Entities.UI.SDF
         {
             if (_isSelected && _uiInputModule.leftClick.action.IsPressed())
             {
-                _slider.Value  = (_uiInputModule.point.action.ReadValue<Vector2>().x - _sliderRect.position.x
-                                     ) / _sliderRect.sizeDelta.x;
+                RectTransformUtility.ScreenPointToLocalPointInRectangle(_sliderRect,
+                    _uiInputModule.point.action.ReadValue<Vector2>(), Camera.current, out Vector2 localPoint);
+                _slider.Value  = localPoint.x / _sliderRect.sizeDelta.x;
             }
         }
 

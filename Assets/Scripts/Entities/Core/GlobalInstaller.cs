@@ -22,7 +22,7 @@ namespace Entities.Core
             Debug.Log("set ui installer GLOBAL");
             Container.Bind<SaveSystem>().FromNew().AsSingle();
             Container.Bind<CrossfadeEffect>().FromNew().AsSingle();
-            Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
+            Container.Bind<ShoppingSystem>().FromNew().AsSingle();
             
             Container.Bind<SceneLoader>().FromInstance(_sceneLoader).AsSingle();
             Container.Bind<LocalizationManager>().FromInstance(_localizationManager).AsSingle();

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Entities.Props
 {
@@ -10,14 +12,24 @@ namespace Entities.Props
         [SerializeField] private List<GameObject> _portalObjects = new();
         [SerializeField] private ParticleSystem _vfx;
         [SerializeField] private AudioClip _sfx;
+        [SerializeField] private Volume _volume;
         [SerializeField] private float _effectDuration = 1f;
         [SerializeField] private bool _reverse;
+        [SerializeField] private bool _startInPortalState;
+        [SerializeField] private bool _destroyAfterActivate;
+        [SerializeField] private List<GameObject> _disableAfterActivate = new();
         
         private AudioSource _audioSource;
+        private bool _isActivating;
         
         public void SetReverse(bool reverse)
         {
             _reverse = reverse;
+        }
+        public void Initialize(List<GameObject> baseObjects, List<GameObject> portalObjects)
+        {
+            if (baseObjects != null) _baseObjects = baseObjects;
+            if (portalObjects != null) _portalObjects = portalObjects;
         }
         
         private void Awake()
@@ -27,33 +39,46 @@ namespace Entities.Props
             {
                 _audioSource = gameObject.AddComponent<AudioSource>();
             }
+
+            ApplyState(_startInPortalState);
         }
         
-        public async void Activate()
+        public async UniTaskVoid Activate()
         {
-            if (_reverse)
+            await ActivateAsync();
+        }
+
+        public async UniTask ActivateAsync()
+        {
+            if (_isActivating) return;
+            _isActivating = true;
+
+            await PlayEffect();
+            ApplyState(!_reverse);
+
+            for (int i = 0; i < _disableAfterActivate.Count; i++)
             {
-                await PlayEffect();
-                foreach (var obj in _portalObjects)
-                {
-                    if (obj != null) obj.SetActive(false);
-                }
-                foreach (var obj in _baseObjects)
-                {
-                    if (obj != null) obj.SetActive(true);
-                }
+                var obj = _disableAfterActivate[i];
+                if (obj != null) obj.SetActive(false);
             }
-            else
+
+            if (_destroyAfterActivate)
             {
-                await PlayEffect();
-                foreach (var obj in _baseObjects)
-                {
-                    if (obj != null) obj.SetActive(false);
-                }
-                foreach (var obj in _portalObjects)
-                {
-                    if (obj != null) obj.SetActive(true);
-                }
+                Destroy(gameObject);
+            }
+
+            _isActivating = false;
+        }
+
+        private void ApplyState(bool portalActive)
+        {
+            foreach (var obj in _baseObjects)
+            {
+                if (obj != null) obj.SetActive(!portalActive);
+            }
+            foreach (var obj in _portalObjects)
+            {
+                if (obj != null) obj.SetActive(portalActive);
             }
         }
         
@@ -68,8 +93,16 @@ namespace Entities.Props
             {
                 _audioSource.PlayOneShot(_sfx);
             }
-            
+            DOTween.To(()=>_volume.weight, x => _volume.weight = x, _reverse? 0:1, _effectDuration);
             await UniTask.Delay((int)(_effectDuration * 1000));
         }
+        private void OnTriggerEnter2D(Collider2D other)
+        {
+            if (!other.CompareTag("Player")) return;
+
+            Activate();
+        }
     }
+    
+    
 }

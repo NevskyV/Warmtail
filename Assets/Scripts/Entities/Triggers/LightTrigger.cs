@@ -19,6 +19,8 @@ namespace Entities.Triggers
 
         private async void OnTriggerEnter2D(Collider2D other)
         {
+            if (other.tag != "Player") return;
+
             DOTween.To(()=> _light.intensity, x => _light.intensity = x, _intensity, _fadeTime);
             DOTween.To(()=> _light.pointLightOuterRadius, x => _light.pointLightOuterRadius = x, _outerRadius, _fadeTime);
             DOTween.To(()=> _light.pointLightInnerRadius, x => _light.pointLightInnerRadius = x, _innerRadius, _fadeTime);

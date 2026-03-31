@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -18.71, y: 13.6, z: 0}
-  m_LocalScale: {x: 1.5999999, y: 1.5999999, z: 1.5999999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -48,16 +48,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Entities.NPC.SpeakableCharacter
   _id:
     Value: 
-  <Graph>k__BackingField: {fileID: 11400000, guid: 41872ed484cc51146b5d53d3152bc9cc, type: 2}
+  <Graph>k__BackingField: {fileID: 0}
   <Actions>k__BackingField: []
-  _maxWarmPercent: 0
-  <CanWarm>k__BackingField: 1
-  _warmAction:
-    m_PersistentCalls:
-      m_Calls: []
   <SavableState>k__BackingField: []
 --- !u!212 &358481429861404722
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -103,6 +99,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 21300000, guid: 80585aa20259c4041a7d53897f50e6cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -112,7 +109,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &8499531372379064396
 BoxCollider2D:

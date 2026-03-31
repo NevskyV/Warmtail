@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c998a132b516c14ba1e02b26ac7f1ae, type: 3}
   m_Name: tertilus
   m_EditorClassIdentifier: Assembly-CSharp::Data.NPCShop.NPCInfoForShop
-  LevelCount: 3
+  Character: 1
+  LevelCount: 1
   ShopItemList:
   - Item: {fileID: 11400000, guid: f365905d69a81864b9bc74a033a621c9, type: 2}
     NeedLevel: 1
     IsLast: 0
   - Item: {fileID: 11400000, guid: 4a28d45cd07aec04594b5e25fc1c9d23, type: 2}
-    NeedLevel: 2
+    NeedLevel: 1
     IsLast: 0
   - Item: {fileID: 11400000, guid: 2bb9622e024d03946be4a4577c26df9e, type: 2}
-    NeedLevel: 3
+    NeedLevel: 1
     IsLast: 0
   - Item: {fileID: 11400000, guid: 3ae96946563e4e842b2d5748bff5043a, type: 2}
-    NeedLevel: 3
+    NeedLevel: 1
     IsLast: 1

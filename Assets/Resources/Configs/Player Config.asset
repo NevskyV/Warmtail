@@ -22,12 +22,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 676710221457391727
       type: {class: DashAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 676710221457391733
-        MaxWarmthCost: 2
+        _drainPercentPerTick: 0.25
         Tick: 0.5
         Cooldown: 0
         <BaseMethodName>k__BackingField: ActivateDash
@@ -35,12 +37,14 @@ MonoBehaviour:
         _dashCooldownDuration: 1
         _normalSpeed: 130
         _dashSpeed: 230
+        _slowdownSpeed: 30
+        _slowdownDuration: 2
     - rid: 676710221457391728
       type: {class: MetabolismAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 676710221457391734
-        MaxWarmthCost: 1
+        _drainPercentPerTick: 0.25
         Tick: 0.5
         Cooldown: 0.6
         <BaseMethodName>k__BackingField: ApplyNewSpeed
@@ -50,51 +54,49 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: 676710221457391735
-        MaxWarmthCost: 1
+        _drainPercentPerTick: 0.25
         Tick: 0.5
         Cooldown: 0
         <BaseMethodName>k__BackingField: StartWarm
-        _radius: 3
+        _radius: 1.5
         _explosionDuration: 0.5
-        _explosionCost: 50
+        _explosionCellCost: 1
     - rid: 676710221457391730
       type: {class: ResonanceAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 4061569042658361469
-        MaxWarmthCost: 1
+        _drainPercentPerTick: 0.25
         Tick: 0.5
         Cooldown: 0.6
         <BaseMethodName>k__BackingField: ActivateResonance
         _searchRadius: 12
         _interactRadius: 5
-        _warmthDrain: 2
-        _drainInterval: 0.5
         _returnPosition: {x: -20.184103, y: -12.798991}
     - rid: 676710221457391731
       type: {class: InteractionAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 4061569107506757824
-        _interactionRadius: 2.5
+        _interactionRadius: 1.5
         _interactionOffset: {x: 0, y: 0, z: 0}
     - rid: 676710221457391732
       type: {class: PlayerMovement, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
           rid: 676710221457391736
-        MoveForce: 130
-        _moreForge: 100
-        _drag: 8
-        _accelerationTime: 2
+        MoveForce: 100
+        _moreForge: 50
+        _drag: 5
+        _accelerationTime: 1
         _accelerationCurve:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
-            value: 0.22888184
-            inSlope: 2
-            outSlope: 2
+            value: 0.401062
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
             inWeight: 0
@@ -139,8 +141,8 @@ MonoBehaviour:
         _startSfx: {fileID: 8300000, guid: ef8b251d5336856448d5c1b453469495, type: 3}
         _loopSfx: {fileID: 8300000, guid: b4c4814241c043a41806ce49d27c1b36, type: 3}
         _vfxOffset: {x: 0, y: 0, z: 0}
-        _normalCamZoom: 10
-        _activeCamZoom: 13
+        _normalCamZoom: 3.5
+        _activeCamZoom: 4
     - rid: 4061569042658361469
       type: {class: ResonanceVisuals, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
       data:
