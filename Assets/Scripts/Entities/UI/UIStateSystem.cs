@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Entities.PlayerScripts;
@@ -27,6 +28,7 @@ namespace Entities.UI
         
         [Title("Pause"), SerializeField] private Animator _pauseAnimator;
         [SerializeField] private Volume _pauseVolume;
+        [SerializeField] private Image _screenshot;
         
         private PlayerInput _playerInput;
         private PlayerAbilityController _abilityController;
@@ -45,6 +47,11 @@ namespace Entities.UI
         private void ChangeObjectState(bool state)
         {
             gameObject.SetActive(state);
+            if (state)
+            {
+                SwitchCurrentStateAsync(UIState.Photo).Forget();
+                _screenshot.sprite = ImageLoadSystem.LoadNewSprite(_screenshotSystem.LastScreenShotPath);
+            }
         }
 
         private void OnEnable()

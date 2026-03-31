@@ -11,7 +11,6 @@ namespace Entities.UI
 {
     public class WarmthVisualUI : MonoBehaviour
     {
-        [SerializeField] private SdfFigure _arcFigure;
         [SerializeField] private List<SdfGroup> _groups;
         [SerializeField] private List<SdfFigure> _figures;
         [SerializeField, ColorUsage(false, true)] private Color _activeColor;
@@ -58,7 +57,7 @@ namespace Entities.UI
                 }
             }
 
-            if (!_arcFigure) return;
+            //if (!_arcFigure) return;
 
             // float targetAngle = runtime.CurrentCells > 0
             //     ? (runtime.CurrentCells * 1.0f / savable.Stars) * _maxAngle

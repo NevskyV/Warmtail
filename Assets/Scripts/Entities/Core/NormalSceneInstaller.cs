@@ -34,7 +34,6 @@ namespace Entities.Core
         [Title("Visuals")]
         [SerializeField] private DialogueVisuals _dialogueVisuals;
         [SerializeField] private MonologueVisuals _monologueVisuals;
-        [SerializeField] private FreezeVisuals _freezeVisuals;
         [SerializeField] private QuestVisuals _questVisuals;
         [SerializeField] private TipsVisuals _tipsVisuals;
         [SerializeField] private MarksVisuals _marksVisuals;
@@ -75,7 +74,6 @@ namespace Entities.Core
         {
             Container.Bind<DialogueVisuals>().FromInstance(_dialogueVisuals).AsSingle();
             Container.Bind<MonologueVisuals>().FromInstance(_monologueVisuals).AsSingle();
-            Container.Bind<FreezeVisuals>().FromInstance(_freezeVisuals).AsSingle();
             Container.Bind<QuestVisuals>().FromInstance(_questVisuals).AsSingle();
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             Container.Bind<MarksVisuals>().FromInstance(_marksVisuals).AsSingle();

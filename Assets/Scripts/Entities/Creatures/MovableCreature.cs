@@ -21,6 +21,8 @@ namespace Entities.Creatures
         private Seeker _seeker;
         private Rigidbody2D _rb;
         private Vector2 _lastPos;
+        
+        public void SetSpeed(float speed) => _speed = speed;
 
         private void Awake()
         {
@@ -42,7 +44,7 @@ namespace Entities.Creatures
         private void UpdatePath()
         {
             if(_seeker.IsDone() && Vector3.Distance(_rb.position, _target.position) > _nextWaypointDist 
-                                && Vector3.Distance(_rb.position, _lastPos) > _nextWaypointDist)
+                                )
                 _seeker.StartPath(_rb.position, _target.position, OnPathComplete);
         }
 

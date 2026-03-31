@@ -39,8 +39,8 @@ namespace Entities.UI
         
         private Dictionary<Mark, GameObject> _hudMarks = new();
         private Dictionary<Mark, GameObject> _mapMarks = new();
-
-        [Inject] private PlayerInput _playerInput;
+        
+        [Inject] private UIStateSystem _uiStateSystem;
 
         private void Start()
         {
@@ -50,12 +50,15 @@ namespace Entities.UI
                 SpawnMark(mark, false);
             }
 
-            _playerInput.actions["Map"].performed += _ =>
+            _uiStateSystem.OnStateChange += state =>
             {
-                foreach (var mark in _dynamicMarks)
+                if (state == UIState.Map)
                 {
-                    mark.WorldPosition = mark.Target.position;
-                    CalculateRectPosition(mark);
+                    foreach (var mark in _dynamicMarks)
+                    {
+                        mark.WorldPosition = mark.Target.position;
+                        CalculateRectPosition(mark);
+                    }
                 }
             };
         }

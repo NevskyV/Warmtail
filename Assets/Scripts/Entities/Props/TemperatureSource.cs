@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Entities.Props
 {
-    public class TemperatureSource : MonoBehaviour
+    public class TemperatureSource : SavableStateObject
     {
         [SerializeField] private float _tempPerSecond = 15f;
         [SerializeField] private float _radius = 3f;
@@ -23,7 +23,7 @@ namespace Entities.Props
 
         private void FixedUpdate()
         {
-            if (_playerRb == null || _temperatureSystem == null) return;
+            if (!_playerRb || _temperatureSystem == null) return;
 
             var dist = Vector2.Distance(_playerRb.position, (Vector2)transform.position);
             if (dist > _radius) return;
