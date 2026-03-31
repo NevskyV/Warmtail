@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Entities.Props
 {
@@ -10,6 +12,7 @@ namespace Entities.Props
         [SerializeField] private List<GameObject> _portalObjects = new();
         [SerializeField] private ParticleSystem _vfx;
         [SerializeField] private AudioClip _sfx;
+        [SerializeField] private Volume _volume;
         [SerializeField] private float _effectDuration = 1f;
         [SerializeField] private bool _reverse;
         [SerializeField] private bool _startInPortalState;
@@ -90,7 +93,7 @@ namespace Entities.Props
             {
                 _audioSource.PlayOneShot(_sfx);
             }
-            
+            DOTween.To(()=>_volume.weight, x => _volume.weight = x, _reverse? 0:1, _effectDuration);
             await UniTask.Delay((int)(_effectDuration * 1000));
         }
         private void OnTriggerEnter2D(Collider2D other)

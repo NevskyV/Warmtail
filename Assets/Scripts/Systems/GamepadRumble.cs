@@ -1,5 +1,6 @@
 ﻿using Cysharp.Threading.Tasks;
 using Data;
+using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
@@ -14,7 +15,7 @@ namespace Systems
         {
             _globalData = globalData;
             _playerInput = playerInput;
-            new CursorHideSystem().Construct(_playerInput);
+            _playerInput.onControlsChanged += CheckDevice;
         }
         public async void ShortRumble()
         {
@@ -34,6 +35,15 @@ namespace Systems
         {
             if (Gamepad.current == null || _playerInput.currentControlScheme != "Gamepad") return;
             Gamepad.current.ResetHaptics();
+        }
+        
+        private void CheckDevice(PlayerInput input)
+        {
+            Debug.Log(input.currentControlScheme);
+            if(input.currentControlScheme == "Gamepad")
+                Cursor.visible = false;
+            else if(input.currentControlScheme == "Keyboard&Mouse")
+                Cursor.visible = true;
         }
     }
 }

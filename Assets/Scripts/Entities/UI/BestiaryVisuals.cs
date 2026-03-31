@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Data;
 using Entities.Localization;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -12,6 +13,7 @@ namespace Entities.UI
         [SerializeField] private List<CreatureConfig> _creatures;
         [SerializeField] private GameObject _cardPrefab;
         [SerializeField] private Transform _cardsParent;
+        [SerializeField] private TMP_Text _progress;
         [Inject] private GlobalData _globalData;
         [Inject] private UIStateSystem _uiStateSystem;
 
@@ -30,6 +32,7 @@ namespace Entities.UI
                 Destroy(_cardsParent.GetChild(i).gameObject);
             }
 
+            int count = 0;
             foreach(var id in _globalData.Get<WorldData>().CreaturesIds)
             {
                 var creature = _creatures[id];
@@ -37,7 +40,11 @@ namespace Entities.UI
                 obj.GetChild(0).GetComponent<LocalizedText>().SetNewKey(creature.Name);
                 obj.GetChild(1).GetComponent<LocalizedText>().SetNewKey(creature.Description);
                 obj.GetChild(2).GetComponent<Image>().sprite = creature.Icon;
+                count++;
             }
+            
+            _progress.text = Mathf.Ceil((count * 1.0f / _globalData.Get<WorldData>().MaxCreatures) * 100) + "%";
+            if (_progress.text == "100%") _progress.color = Color.lightGreen;
         }
     }
 }

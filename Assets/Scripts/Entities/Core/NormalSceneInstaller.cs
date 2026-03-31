@@ -39,6 +39,7 @@ namespace Entities.Core
         [SerializeField] private TipsVisuals _tipsVisuals;
         [SerializeField] private MarksVisuals _marksVisuals;
         [SerializeField] private ShoppingVisuals _shoppingVisuals;
+        [SerializeField] private MapVisuals _mapVisuals;
         
         [Title("UI")]
         [SerializeField] private InputSystemUIInputModule _uiInput;
@@ -79,6 +80,7 @@ namespace Entities.Core
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             Container.Bind<MarksVisuals>().FromInstance(_marksVisuals).AsSingle();
             Container.Bind<ShoppingVisuals>().FromInstance(_shoppingVisuals).AsSingle();
+            Container.Bind<MapVisuals>().FromInstance(_mapVisuals).AsSingle();
         }
 
         private void BuildSystems()

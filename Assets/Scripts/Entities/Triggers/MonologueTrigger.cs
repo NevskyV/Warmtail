@@ -13,6 +13,7 @@ namespace Entities.Triggers
     {
         [SerializeField] private RuntimeDialogueGraph _graph;
         [field : SerializeField] public List<UnityEvent> Actions { get; set; }
+        [SerializeField] private bool _needToShow = true;
         [Inject] private MonologueVisuals _monologueVisuals;
         [Inject] private GlobalData _data;
         
@@ -20,7 +21,7 @@ namespace Entities.Triggers
         {
             if (other.CompareTag("Player"))
             {
-                _monologueVisuals.StartMonologue(_graph, this);
+                _monologueVisuals.StartMonologue(_graph, this, _needToShow);
                 ChangeState(false);
             }
         }

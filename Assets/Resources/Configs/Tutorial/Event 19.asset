@@ -20,7 +20,6 @@ MonoBehaviour:
   Element:
     Actions:
     - rid: 5800212431756066950
-    - rid: 5800212431756066967
     - rid: 5800212431756066976
     Tasks:
     - rid: 5800212431756066951
@@ -41,12 +40,6 @@ MonoBehaviour:
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _id: dialogue after fear
-    - rid: 5800212431756066967
-      type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - invites monologue trigger
     - rid: 5800212431756066976
       type: {class: FearSpawnAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

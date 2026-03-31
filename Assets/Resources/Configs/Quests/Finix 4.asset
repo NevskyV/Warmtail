@@ -12,111 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e33c2e89a147b6a6e3a0fd6895bebc, type: 3}
   m_Name: Finix 4
   m_EditorClassIdentifier: Assembly-CSharp::Data.QuestData
-  <Id>k__BackingField: 4
-  QuestType: 1
+  <Id>k__BackingField: 5
+  QuestType: 0
   <IsPermanent>k__BackingField: 1
   <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
   <Layer>k__BackingField: 0
   <OnStart>k__BackingField:
-  - rid: 8818234041734266995
-  - rid: 8818234041734266996
-  - rid: 8818234041734266997
+  - rid: 6510803830513074264
   <OnComplete>k__BackingField: []
   <OnFail>k__BackingField: []
   <Sequence>k__BackingField:
-  - Actions:
-    - rid: 7345391011349135555
-    - rid: 7345391011349135556
+  - Actions: []
     Tasks:
-    - rid: 7345390956647809365
-  - Actions:
-    - rid: 7345391011349135557
-    - rid: 7345391011349135558
-    Tasks:
-    - rid: 7345390956647809369
-  - Actions:
-    - rid: 7345391011349135559
-    - rid: 7345391011349135560
-    Tasks:
-    - rid: 7345390956647809372
+    - rid: 6510803830513074265
   references:
     version: 2
     RefIds:
-    - rid: 7345390956647809365
-      type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _puzzleId:
-        - puzzle finix quest lever
-    - rid: 7345390956647809369
-      type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _puzzleId:
-        - puzzle finix quest ray
-    - rid: 7345390956647809372
-      type: {class: PuzzlesTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _puzzleId:
-        - puzzle finix quest gear
-    - rid: 7345391011349135555
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - puzzle finix quest lever
-        _homeScene: 0
-    - rid: 7345391011349135556
-      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _spawn: 0
-        _questData: {fileID: 11400000}
-        _position: {x: 28.6, y: 23.1}
-        _questVisualsId: quest visauls
-    - rid: 7345391011349135557
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - puzzle finix quest ray
-        _homeScene: 0
-    - rid: 7345391011349135558
-      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _spawn: 0
-        _questData: {fileID: 11400000}
-        _position: {x: 4, y: -3.2}
-        _questVisualsId: quest visauls
-    - rid: 7345391011349135559
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - puzzle finix quest gear
-        _homeScene: 0
-    - rid: 7345391011349135560
-      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _spawn: 0
-        _questData: {fileID: 11400000}
-        _position: {x: -9, y: 25.9}
-        _questVisualsId: quest visauls
-    - rid: 8818234041734266995
+    - rid: 6510803830513074264
       type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _spawn: 1
         _questData: {fileID: 11400000}
-        _position: {x: 28.6, y: 23.1}
+        _position: {x: -24.84, y: 0}
         _questVisualsId: quest visauls
-    - rid: 8818234041734266996
-      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+    - rid: 6510803830513074265
+      type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _spawn: 1
-        _questData: {fileID: 11400000}
-        _position: {x: 4, y: -3.2}
-        _questVisualsId: quest visauls
-    - rid: 8818234041734266997
-      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _spawn: 1
-        _questData: {fileID: 11400000}
-        _position: {x: -9, y: 25.9}
-        _questVisualsId: quest visauls
+        _prefab: {fileID: 3459850837378005844, guid: 4b5c61f41edd0b54aae236ec9d6ba332, type: 3}
+        _position: {x: -24.84, y: 0}

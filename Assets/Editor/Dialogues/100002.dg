@@ -33,9 +33,11 @@ MonoBehaviour:
         - rid: 6510803690743660641
         - rid: 6510803690743660881
         - rid: 6510803690743660893
+        - rid: 6510803882351001698
         m_GraphWireModels:
         - rid: 6510803690743660887
         - rid: 6510803690743660899
+        - rid: 6510803882351001699
         m_GraphStickyNoteModels: []
         m_GraphPlacematModels: []
         m_GraphVariableModels: []
@@ -46,9 +48,9 @@ MonoBehaviour:
         m_LastKnownBounds:
           serializedVersion: 2
           x: 94.399994
-          y: 300.80002
-          width: 939.2001
-          height: 182.39996
+          y: 298.4
+          width: 1273.6
+          height: 184.79999
         m_GraphElementMetaData:
         - m_Guid:
             m_Value0: 9913236280952053267
@@ -90,6 +92,22 @@ MonoBehaviour:
             Hash: 818531d262d60b19a97aee4448ae7c2e
           m_Category: 2
           m_Index: 1
+        - m_Guid:
+            m_Value0: 14270975398586557147
+            m_Value1: 8549439191196838120
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: db22179f83b00cc6e82817c4a5b5a576
+          m_Category: 0
+          m_Index: 3
+        - m_Guid:
+            m_Value0: 7578671990713763726
+            m_Value1: 17792249015365347670
+          m_HashGuid:
+            serializedVersion: 2
+            Hash: 8e47b2a305da2c695629254c36c4eaf6
+          m_Category: 2
+          m_Index: 2
         m_EntryPoint:
           rid: 6510803690743660641
         m_Graph:
@@ -368,3 +386,78 @@ MonoBehaviour:
           m_PortDirection: 1
           m_PortOrientation: 0
           m_Title: in
+    - rid: 6510803882351001698
+      type: {class: UserNodeModelImp, ns: Unity.GraphToolkit.Editor.Implementation, asm: Unity.GraphToolkit.Editor}
+      data:
+        m_Guid:
+          m_Value0: 14270975398586557147
+          m_Value1: 8549439191196838120
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: db22179f83b00cc6e82817c4a5b5a576
+        m_Version: 2
+        m_Position: {x: 1119.2, y: 298.18826}
+        m_Title: 
+        m_Tooltip: 
+        m_NodePreviewModel:
+          rid: -2
+        m_State: 0
+        m_InputConstantsById:
+          m_KeyList:
+          - Event Index
+          m_ValueList:
+          - rid: 6510803882351001700
+        m_InputPortInfos:
+          expandedPortsById:
+            m_KeyList: []
+            m_ValueList: 
+        m_OutputPortInfos:
+          expandedPortsById:
+            m_KeyList: []
+            m_ValueList: 
+        m_Collapsed: 0
+        m_CurrentModeIndex: 0
+        m_ElementColor:
+          m_Color: {r: 0, g: 0, b: 0, a: 0}
+          m_HasUserColor: 0
+        m_Node:
+          rid: 6510803882351001701
+    - rid: 6510803882351001699
+      type: {class: WireModel, ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Guid:
+          m_Value0: 7578671990713763726
+          m_Value1: 17792249015365347670
+        m_HashGuid:
+          serializedVersion: 2
+          Hash: 8e47b2a305da2c695629254c36c4eaf6
+        m_Version: 2
+        m_FromPortReference:
+          m_NodeModelGuid:
+            m_Value0: 16239485547317734755
+            m_Value1: 16870923428560982757
+          m_NodeModelHashGuid:
+            serializedVersion: 2
+            Hash: 63adf696103e5ee1e55231e8788f21ea
+          m_UniqueId: out
+          m_PortDirection: 2
+          m_PortOrientation: 0
+          m_Title: out
+        m_ToPortReference:
+          m_NodeModelGuid:
+            m_Value0: 14270975398586557147
+            m_Value1: 8549439191196838120
+          m_NodeModelHashGuid:
+            serializedVersion: 2
+            Hash: db22179f83b00cc6e82817c4a5b5a576
+          m_UniqueId: in
+          m_PortDirection: 1
+          m_PortOrientation: 0
+          m_Title: in
+    - rid: 6510803882351001700
+      type: {class: 'Constant`1[[System.Int32, mscorlib]]', ns: Unity.GraphToolkit.Editor, asm: Unity.GraphToolkit.Internal.Editor}
+      data:
+        m_Value: 0
+    - rid: 6510803882351001701
+      type: {class: ActionNode, ns: Editor, asm: Assembly-CSharp-Editor}
+      data: 

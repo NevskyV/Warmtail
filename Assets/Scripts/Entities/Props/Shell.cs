@@ -2,6 +2,7 @@
 using Data;
 using Data.Player;
 using DG.Tweening;
+using Entities.Sound;
 using Interfaces;
 using Systems;
 using UnityEngine;
@@ -14,6 +15,8 @@ namespace Entities.Props
         private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
         public static Action OnShellsChanged = delegate {};
         [SerializeField] private int _shellsAmount;
+        [SerializeField] private string _sfx;
+        [SerializeField] private ParticleSystem _vfx;
         private GlobalData _globalData;
         private MaterialPropertyBlock _propertyBlock;
         private SpriteRenderer _renderer;
@@ -57,6 +60,8 @@ namespace Entities.Props
             });
             OnShellsChanged?.Invoke();
             _timer.Stop();
+            GetComponent<ObjectSfx>().PlaySfx(_sfx);
+            ObjectSpawnSystem.Spawn(_vfx, transform.position);
             Destroy(gameObject);
         }
         

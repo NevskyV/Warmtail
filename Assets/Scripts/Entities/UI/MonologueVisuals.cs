@@ -2,6 +2,7 @@
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Nodes;
+using DG.Tweening;
 using EasyTextEffects;
 using Entities.Localization;
 using Interfaces;
@@ -22,19 +23,24 @@ namespace Entities.UI
         private RectTransform _currentText;
         private LocalizationManager _localizationManager;
         private DialogueSystem _dialogueSystem;
+        private UIStateSystem _uiStateSystem;
         private bool _isEnded;
         private float _currentLineDuration;
+        public bool _needToShow;
 
         [Inject]
-        private void Construct(LocalizationManager localizationManager, DialogueSystem dialogueSystem, GlobalData data)
+        private void Construct(LocalizationManager localizationManager, DialogueSystem dialogueSystem, GlobalData data,
+            UIStateSystem uiStateSystem)
         {
             _localizationManager = localizationManager;
             _dialogueSystem = dialogueSystem;
+            _uiStateSystem = uiStateSystem;
         }
 
-        public void StartMonologue(RuntimeDialogueGraph graph, IEventInvoker invoker)
+        public void StartMonologue(RuntimeDialogueGraph graph, IEventInvoker invoker, bool needToShow)
         {
             _dialogueSystem.StartDialogue(graph, this, null, invoker);
+            _needToShow = needToShow;
             ProcessDialogue();
         }
         async UniTaskVoid ProcessDialogue()
@@ -52,12 +58,14 @@ namespace Entities.UI
             _isEnded = false;
             _currentText = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
             _currentText.localPosition = ChooseRandomPosition();
+            _uiStateSystem.SwitchCurrentStateAsync(UIState.Hidden).Forget();
         }
 
         public void HideVisuals()
         {
             _isEnded = true;
             Destroy(_currentText.gameObject);
+            if (_needToShow)_uiStateSystem.SwitchCurrentStateAsync(UIState.Normal).Forget();
         }
 
         public void RequestNewLine(TextNode node)

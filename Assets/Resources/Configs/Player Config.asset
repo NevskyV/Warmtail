@@ -58,7 +58,7 @@ MonoBehaviour:
         Tick: 0.5
         Cooldown: 0
         <BaseMethodName>k__BackingField: StartWarm
-        _radius: 3
+        _radius: 1.5
         _explosionDuration: 0.5
         _explosionCellCost: 1
     - rid: 676710221457391730
@@ -78,7 +78,7 @@ MonoBehaviour:
       data:
         <Visual>k__BackingField:
           rid: 4061569107506757824
-        _interactionRadius: 2.5
+        _interactionRadius: 1.5
         _interactionOffset: {x: 0, y: 0, z: 0}
     - rid: 676710221457391732
       type: {class: PlayerMovement, ns: Systems.Abilities, asm: Assembly-CSharp}

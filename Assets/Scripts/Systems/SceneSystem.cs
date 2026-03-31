@@ -22,7 +22,7 @@ namespace Systems
 
         private Dictionary<string, Vector2> _spawnPoints = new(){
             {"GameplayStart" , new Vector2(-7.66f, -37f)},
-            {"GameplayNearHome" , new Vector2(9.31f, 18.91f)},
+            {"GameplayNearHome" , new Vector2(8f, 21.2f)},
             {"HomeAtCarpet" , new Vector2(19.5f, -19.5f)},
             {"HomeNearDoor" , new Vector2(22.35f, -8.45f)},
             {"FearWorld" , new Vector2(-24.2f, 0f)}
