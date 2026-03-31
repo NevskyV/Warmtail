@@ -161,9 +161,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcee3ec999d4425c811217f6e7809e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Creatures.MovableCreature
-  _speed: 1
-  _rotationSpeed: 100
+  _temperature: 1
+  _animator: {fileID: 0}
+  _interactionCooldown: 1
+  _speed: 5
+  _rotationSpeed: 400
   _nextWaypointDist: 0.2
-  _pathUpdateTick: 0.1
-  _rotationOffset: {x: 0, y: 1, z: 0}
+  _pathUpdateTick: 0.5
+  _rotationOffset: {x: 0, y: 0, z: -1}
   _target: {fileID: 0}
