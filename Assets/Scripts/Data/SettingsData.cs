@@ -11,6 +11,7 @@ namespace Data
         [Range(0.001f,1)] public float SfxVolume;
         public int QualityLevel;
         public bool FullscreenMode;
+        public bool HDR;
         public int Language;
 
         [Range(0f, 1)] public float LongLowRumble;
