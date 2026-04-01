@@ -15,6 +15,7 @@ namespace Data
         public string HeaderPreview => LocalizationManager.GetStringFromKey("quest_header_" + Id);
         public QuestType QuestType;
         [field: SerializeField] public bool IsPermanent { get; private set; } = true;
+        [field: SerializeField] public uint Reward { get; private set; } = 2;
         [field: Title("Scene Settings"), SerializeField, Scene] public string Scene { get; private set; }
         [field: SerializeField, Dropdown(nameof(_layers))] public int Layer { get; private set; }
         

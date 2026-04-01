@@ -29,7 +29,7 @@ namespace Entities.Sound
         private SerializedDictionary<MusicState, List<AudioClip>> _clips = new();
 
         [Inject] private SceneLoader _sceneLoader;
-        private MusicState _currentState;
+        private MusicState _currentState = MusicState.Menu;
         private CancellationTokenSource _tokenSource;
 
         private void Start()

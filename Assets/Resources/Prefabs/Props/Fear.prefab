@@ -92,12 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.FearCore
   _locked: 1
-  _portalPrefab: {fileID: 3970005779046107654, guid: 0b03360aa5afeb14f878a46e905034ca, type: 3}
   _fearConfig: {fileID: 11400000, guid: e65b326e7a0cd834393ef5fe79f4863c, type: 2}
-  _baseObjects:
-  - {fileID: 5181204630676896465}
-  _portalObjects:
-  - {fileID: 2250752846926702763}
+  "_\u043EbjectsToDisable": []
+  "_\u043EbjectsToEnable": []
 --- !u!1 &1883266585033798635
 GameObject:
   m_ObjectHideFlags: 0
@@ -275,7 +272,6 @@ GameObject:
   - component: {fileID: 2164599030916522791}
   - component: {fileID: 2669175635209556987}
   - component: {fileID: 7247555276797480078}
-  - component: {fileID: 8139156808466142928}
   - component: {fileID: 4965648463512961816}
   m_Layer: 0
   m_Name: Portal_Exit
@@ -404,48 +400,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 5.12, y: 5.12}
   m_EdgeRadius: 0
---- !u!114 &8139156808466142928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4404766573768821210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d24c93469137b0e4fb098ac9491f3eb2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entities.Triggers.UnityEventTrigger
-  _id:
-    Value: 
-  _destroyAfter: 1
-  _event:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Entities.Props.SavableStateObject, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Entities.NPC.SpeakableCharacter, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &4965648463512961816
 MonoBehaviour:
   m_ObjectHideFlags: 0
