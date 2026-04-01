@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8983541670367168003
 Transform:
   m_ObjectHideFlags: 0
@@ -152,12 +152,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a470ad874eeae742b027af42233840d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.FearPortal
-  _baseObjects: []
-  _portalObjects: []
+  _baseObjects:
+  - {fileID: 0}
+  _portalObjects:
+  - {fileID: 0}
+  - {fileID: 0}
   _vfx: {fileID: 0}
   _sfx: {fileID: 0}
+  _volume: {fileID: 0}
   _effectDuration: 1
-  _reverse: 0
+  _reverse: 1
   _startInPortalState: 0
   _destroyAfterActivate: 1
   _disableAfterActivate: []

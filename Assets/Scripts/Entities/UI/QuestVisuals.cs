@@ -1,4 +1,5 @@
-﻿using AYellowpaper.SerializedCollections;
+﻿using System;
+using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using System.IO;
 using Cysharp.Threading.Tasks;
@@ -31,7 +32,7 @@ namespace Entities.UI
         [SerializeField] private GameObject _questPrefab;
         [SerializeField] private RectTransform _questHud;
         [SerializeField, PreviewObject] private Sprite _mapMarkSprite;
-        
+        [SerializeField] private float _completeAnimationDuration = 1.5f;
         private SerializedDictionary<QuestData, List<MarksVisuals.Mark>> _createdMarks;
         private SerializedDictionary<QuestData, GameObject> _createdQuests;
 
@@ -121,11 +122,22 @@ namespace Entities.UI
             }
         }
         
-        public void DestroyQuest(QuestData data)
+        public async void DestroyQuest(QuestData data)
         {
-            if (_createdQuests.ContainsKey(data)) Destroy(_createdQuests[data]);
             if (_createdMarks.ContainsKey(data)) DestroyMarks(data);
             if (_createdMarks.ContainsKey(data)) _createdMarks.Remove(data);
+            
+            
+            _createdQuests[data].transform.GetChild(3).GetComponent<TMP_Text>().text = "+" + data.Reward;
+            _globalData.Edit<SavablePlayerData>(player =>
+            {
+                player.Shells += (int)data.Reward;
+            });
+            var animator = _createdQuests[data].GetComponent<Animator>();
+            animator.SetTrigger("Complete");
+            await UniTask.Delay(TimeSpan.FromSeconds(_completeAnimationDuration));
+            
+            if (_createdQuests.ContainsKey(data)) Destroy(_createdQuests[data]);
             if (_createdQuests.ContainsKey(data)) _createdQuests.Remove(data);
         }
         

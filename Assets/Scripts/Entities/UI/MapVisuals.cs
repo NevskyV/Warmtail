@@ -63,14 +63,7 @@ namespace Entities.UI
                     _globalData.Get<WorldData>().CollectedStars.Contains(i) ? 1 : 0);
             }
         }
-
-        private void OnDestroy()
-        {
-            _playerInput.actions["Map"].performed -= ChangeMapVisibility;
-            _playerInput.actions["Click"].performed -= StartDrag;
-            _playerInput.actions["Click"].canceled -= EndDrag;
-            _playerInput.actions["Scroll"].performed -= ScaleMap;
-        }
+        
 
         private void Update()
         {
