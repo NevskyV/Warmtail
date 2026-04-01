@@ -32,6 +32,7 @@ namespace Entities.UI
 
         private void UpdateVisual()
         {
+            if(_figures == null || _figures.Count <= 0 || !_figures[0]){ return;}
             var runtime = _globalData.Get<RuntimePlayerData>();
             var savable = _globalData.Get<SavablePlayerData>();
 
@@ -56,19 +57,6 @@ namespace Entities.UI
                     _figures[i].gameObject.SetActive(true);
                 }
             }
-
-            //if (!_arcFigure) return;
-
-            // float targetAngle = runtime.CurrentCells > 0
-            //     ? (runtime.CurrentCells * 1.0f / savable.Stars) * _maxAngle
-            //     : 0f;
-
-            // _tween?.Kill();
-            // _tween = DOTween.To(
-            //     () => _arcFigure.ShapeData.ParamsA.x,
-            //     x => _arcFigure.ShapeData.ParamsA.x = x,
-            //     targetAngle,
-            //     _smoothing);
         }
     }
 }

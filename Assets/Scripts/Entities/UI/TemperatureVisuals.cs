@@ -29,6 +29,7 @@ namespace Entities.UI
 
         private void UpdateVisual()
         {
+            if (!_temperatureGroup || !_separator || !_temperatureImage) return;
             var runtime = _globalData.Get<RuntimePlayerData>();
             var savable = _globalData.Get<SavablePlayerData>();
 

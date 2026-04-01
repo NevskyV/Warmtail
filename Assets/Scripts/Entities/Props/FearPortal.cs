@@ -22,16 +22,6 @@ namespace Entities.Props
         private AudioSource _audioSource;
         private bool _isActivating;
         
-        public void SetReverse(bool reverse)
-        {
-            _reverse = reverse;
-        }
-        public void Initialize(List<GameObject> baseObjects, List<GameObject> portalObjects)
-        {
-            if (baseObjects != null) _baseObjects = baseObjects;
-            if (portalObjects != null) _portalObjects = portalObjects;
-        }
-        
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();

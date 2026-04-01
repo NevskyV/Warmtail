@@ -10,18 +10,12 @@ namespace Entities.Props
     public class FearCore : MonoBehaviour, IInteractable
     {
         [SerializeField] private bool _locked = true;
-        [SerializeField] private FearPortal _portalPrefab;
         [SerializeField] private FearConfig _fearConfig;
-        [SerializeField] private List<GameObject> _baseObjects = new();
-        [SerializeField] private List<GameObject> _portalObjects = new();
+        [SerializeField] private List<GameObject> _оbjectsToDisable = new();
+        [SerializeField] private List<GameObject> _оbjectsToEnable = new();
         
         [Inject] private GlobalData _globalData;
-
-        private void Awake()
-        {
-            if (_portalPrefab != null)
-                _portalPrefab.gameObject.SetActive(false);
-        }
+        
         public void Unlock()
         {
             _locked = false;
@@ -29,13 +23,18 @@ namespace Entities.Props
         public void Interact()
         {
             if (_locked) return;
-            if (_portalPrefab == null || _fearConfig == null) return;
+            if (_fearConfig == null) return;
 
-            var portal = _portalPrefab;
-
-            portal.gameObject.SetActive(true);
-            portal.SetReverse(true);
-            portal.Initialize(_baseObjects, _portalObjects);
+            foreach (var obj in _оbjectsToDisable)
+            {
+                obj.SetActive(false);
+            }
+            
+            foreach (var obj in _оbjectsToEnable)
+            {
+                obj.SetActive(true);
+            }
+            
             
             if (_globalData != null)
             {

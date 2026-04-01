@@ -96,6 +96,10 @@ namespace Entities.UI
                             if (_pauseAnimator)
                                 _pauseAnimator.SetBool(InPause, true);
                         }
+                        else
+                        {
+                            _warmthGroup.DOFade(0, _crossFadeTime);
+                        }
                         break;
                     default:
                         _abilityController.DisableAllAbilities();

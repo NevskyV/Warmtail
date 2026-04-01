@@ -35,6 +35,7 @@ namespace Entities.UI
 
         private async void UpdateUI()
         {
+            if (!_addPrefab || !_shells || !_stars) return;
             var data = _globalData.Get<SavablePlayerData>();
             if (_needToAnimate)
             {

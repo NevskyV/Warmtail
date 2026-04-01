@@ -2,7 +2,9 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Entities.Localization;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -32,7 +34,9 @@ namespace Entities.UI
             _switchesParent.gameObject.SetActive(true);
             LayoutRebuilder.ForceRebuildLayoutImmediate(_switchesParent);
             Canvas.ForceUpdateCanvases();
+#if UNITY_EDITOR
             SceneView.RepaintAll();
+#endif
             await UniTask.WaitForSeconds(_transitionTime);
             _transitionDot.localPosition = new Vector3(_images[CurrentValue].transform.localPosition.x, 0,0);
         }

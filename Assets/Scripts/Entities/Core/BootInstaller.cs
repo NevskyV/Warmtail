@@ -25,6 +25,7 @@ namespace Entities.Core
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();
             Container.Bind<UIStateSystem>().FromInstance(_uiStateSystem).AsSingle();
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
+            Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
         }

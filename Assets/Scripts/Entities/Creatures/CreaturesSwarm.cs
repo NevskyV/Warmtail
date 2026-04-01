@@ -20,7 +20,8 @@ namespace Entities.Creatures
                 var creature = Instantiate(_creatures[Random.Range(0, _creatures.Length)], transform);
                 creature.transform.localPosition = Vector3.zero;
                 creature.SetSpeed(Random.Range(_minMaxSpeed.x, _minMaxSpeed.y));
-                var newTarget = new GameObject();
+                var newTarget = new GameObject("Target");
+                newTarget.transform.parent = transform;
                 newTarget.transform.position = transform.position;
                 _targetsList.Add(newTarget.transform);
                 creature.UpdateTarget(newTarget.transform);
