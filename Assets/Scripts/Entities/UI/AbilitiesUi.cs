@@ -269,6 +269,7 @@ namespace Entities.UI
         {
             for (int i = 0; i < _images.Length; i++)
             {
+                if (!_images[i]) return;
                 var parent = _images[i].transform.parent.GetComponent<SdfGroup>();
                 if (!warmthAbilities.Contains(i))
                 {

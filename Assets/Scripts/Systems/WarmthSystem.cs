@@ -92,10 +92,9 @@ namespace Systems
 
         public void AddCell()
         {
-            var max = MaxCells;
             _globalData.Edit<RuntimePlayerData>(data =>
             {
-                data.CurrentCells = Mathf.Min(data.CurrentCells + 1, max);
+                data.CurrentCells = MaxCells;
             });
         }
 

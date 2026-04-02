@@ -8,7 +8,7 @@ namespace Entities.Creatures
         [SerializeField] private MovableCreature[] _creatures;
         [SerializeField] private uint _count;
         [SerializeField] private Vector2 _bounds;
-        [SerializeField] private float _updatePathTime;
+
         [SerializeField] private Vector2 _minMaxSpeed;
         
         private List<Transform> _targetsList = new();
@@ -22,21 +22,18 @@ namespace Entities.Creatures
                 creature.SetSpeed(Random.Range(_minMaxSpeed.x, _minMaxSpeed.y));
                 var newTarget = new GameObject("Target");
                 newTarget.transform.parent = transform;
-                newTarget.transform.position = transform.position;
+                UpdatePosition(newTarget.transform);
                 _targetsList.Add(newTarget.transform);
                 creature.UpdateTarget(newTarget.transform);
+                creature.OnMoveComplete += UpdatePosition;
             }
-            InvokeRepeating(nameof(UpdatePosition), 0, _updatePathTime);
         }
 
-        private void UpdatePosition()
+        private void UpdatePosition(Transform target)
         {
-            foreach (var target in _targetsList)
-            {
-                var newPosition = new Vector2(Random.Range(transform.position.x -  _bounds.x /2, transform.position.x + _bounds.x /2),
-                    Random.Range(transform.position.y -  _bounds.y /2, transform.position.y + _bounds.y /2));
-                target.position = newPosition;
-            }
+            var newPosition = new Vector2(Random.Range(transform.position.x -  _bounds.x /2, transform.position.x + _bounds.x /2),
+                Random.Range(transform.position.y -  _bounds.y /2, transform.position.y + _bounds.y /2));
+            target.position = newPosition;
         }
 
 #if UNITY_EDITOR

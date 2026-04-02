@@ -21,7 +21,7 @@ namespace Entities.UI
     public class QuestVisuals : MonoBehaviour
     {
         [Title("Settings")]
-        [SerializeField] private List<QuestData> _allQuests;
+        [SerializeField] private List<QuestData> _allQuests = new();
         [SerializeField] private Camera _cam;
 
         [SerializeField, Dropdown(nameof(GetDropdownStrings))]
@@ -64,9 +64,8 @@ namespace Entities.UI
             var ids = _globalData.Get<SavablePlayerData>().QuestIds;
             foreach (var id in ids)
             {
-                var quest = AllQuests.Find(x => x.Id == id.Key);
+                var quest = _allQuests.Find(x => x.Id == id.Key);
                 if(quest) QuestSystem.StartQuest(quest, id.Value);
-                print("QUEST ID" + id.Key);
             }
         }
 

@@ -9,7 +9,7 @@ namespace Entities.Props
     public class WarmableIce : Warmable
     {
         private static readonly int DissolveAmount = Shader.PropertyToID("_DissolveAmount");
-        [SerializeField] private SpriteShapeRenderer _renderer;
+        [SerializeField] private SpriteRenderer _renderer;
         
         private Tween _tween;
         private MaterialPropertyBlock _propertyBlock;
@@ -30,7 +30,7 @@ namespace Entities.Props
         public override void WarmComplete()
         {
             _timer.Stop();
-            Destroy(gameObject);
+            ChangeState(false);
         }
 
         public override void Reset()

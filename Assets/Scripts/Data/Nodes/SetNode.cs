@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Data.Nodes
 {
-    public class SetNode : RuntimeNode
+    public record SetNode : RuntimeNode
     {
         [field: SerializeField] public List<SetStruct> Variables { get; private set; } = new();
 

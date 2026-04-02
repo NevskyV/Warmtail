@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Data.Nodes
 {
-    public class TextNode : RuntimeNode
+    public record TextNode : RuntimeNode
     {
         public string Text; 
         public Character Character;

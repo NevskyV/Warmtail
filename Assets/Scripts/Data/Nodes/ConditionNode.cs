@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Data.Nodes
 {
-    public class ConditionNode : RuntimeNode
+    public record ConditionNode : RuntimeNode
     {
         [field: SerializeField] public List<ConditionStruct> Conditions { get; private set; } = new();
 

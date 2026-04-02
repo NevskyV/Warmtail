@@ -113,7 +113,7 @@ namespace Systems.Abilities
             var outlineWidth = 0f;
             var inOutlineWidth = 0f;
             
-            DOTween.To(() => outlineWidth, x =>{
+            /*DOTween.To(() => outlineWidth, x =>{
                 outlineWidth = x;
                 propertyBlock.SetFloat(OutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
@@ -124,7 +124,7 @@ namespace Systems.Abilities
                 propertyBlock.SetFloat(InnerOutlineThickness,x);
                 renderer?.SetPropertyBlock(propertyBlock);
             }, 1.5f, 0.5f);
-            Debug.Log("interactable: " + interactable);
+            Debug.Log("interactable: " + interactable);*/
             StartAbility?.Invoke();
         }
         
@@ -137,17 +137,17 @@ namespace Systems.Abilities
             var outlineWidth = 0.005f;
             var inOutlineWidth = 1.5f;
             
-            DOTween.To(() => outlineWidth, x =>{
-                outlineWidth = x;
-                propertyBlock.SetFloat(OutlineThickness,x);
-                renderer?.SetPropertyBlock(propertyBlock);
-            }, 0f, 0.5f);
-            
-            DOTween.To(() => inOutlineWidth, x =>{
-                inOutlineWidth = x;
-                propertyBlock.SetFloat(InnerOutlineThickness,x);
-                renderer?.SetPropertyBlock(propertyBlock);
-            }, 0f, 0.5f);
+            //DOTween.To(() => outlineWidth, x =>{
+            //     outlineWidth = x;
+            //     propertyBlock.SetFloat(OutlineThickness,x);
+            //     renderer?.SetPropertyBlock(propertyBlock);
+            // }, 0f, 0.5f);
+            //
+            // DOTween.To(() => inOutlineWidth, x =>{
+            //     inOutlineWidth = x;
+            //     propertyBlock.SetFloat(InnerOutlineThickness,x);
+            //     renderer?.SetPropertyBlock(propertyBlock);
+            // }, 0f, 0.5f);
 
             if (_triggerZone.ObjectsInRange.Count == 0)
             {

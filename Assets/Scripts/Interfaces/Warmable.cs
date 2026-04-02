@@ -1,3 +1,4 @@
+using Entities.Props;
 using Systems;
 using UnityEngine;
 using UnityEngine.Events;
@@ -5,7 +6,7 @@ using Zenject;
 
 namespace Interfaces
 {
-    public class Warmable : MonoBehaviour
+    public class Warmable : SavableStateObject
     {
         [SerializeField] protected float _warmFactor = 0.1f;
         protected float _warmthAmount = 1;
