@@ -46,11 +46,14 @@ namespace Entities.UI
                 {
                     if (i + savable.Stars - _figures.Count < runtime.CurrentCells)
                     {
+                        if(i + savable.Stars - _figures.Count == runtime.CurrentCells - 1)
+                            _groups[i].GroupProperty.Alpha = 1 - runtime.CurrentCellProgress;
                         _groups[i].GroupProperty.FillColor = _activeColor;
                         _groups[i].GroupProperty.OutlineThickness = _activeOutline;
                     }
                     else
                     {
+                        _groups[i].GroupProperty.Alpha = 1;
                         _groups[i].GroupProperty.FillColor = _inactiveColor;
                         _groups[i].GroupProperty.OutlineThickness = 0f;
                     }

@@ -92,7 +92,7 @@ namespace Systems
             _currentNode.Activate();
         }
         
-        private void EndDialogue()
+        public void EndDialogue()
         {
             if (_visuals == null || _input == null) return;
             OnEndedDialogue?.Invoke(_id);
@@ -101,7 +101,6 @@ namespace Systems
             _dialogueGraph = null;
             _visuals.HideVisuals();
             _input.SwitchCurrentActionMap(_prevActionMap);
-            Debug.Log(_input.currentActionMap);
         }
     }
 }
