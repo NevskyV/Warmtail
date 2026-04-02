@@ -16,10 +16,10 @@ namespace Systems
         public const float Min = 0f;
         public const float Max = 100f;
 
-        private float _driftSpeed = 8f;
+        private float _driftSpeed = 1f;
         private float _hotThreshold = 65f;
-        private float _criticalCold = 10f;
-        private float _criticalHot = 90f;
+        private float _criticalCold = 5f;
+        private float _criticalHot = 95f;
 
         private static readonly AnimationCurve SpeedCurve = new(
             new Keyframe(0f, 0.85f),
@@ -75,6 +75,17 @@ namespace Systems
 
             ApplySpeed(newTemp);
             CheckCritical(newTemp);
+            
+            NormalizeTemp();
+        }
+
+        private async void NormalizeTemp()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+            await UniTask.Delay(TimeSpan.FromSeconds(2));
+            _cts = new CancellationTokenSource();
+            DriftLoop(_cts.Token).Forget();
         }
 
         private void ApplySpeed(float temp)
@@ -111,13 +122,13 @@ namespace Systems
 
                 var temp = _globalData.Get<RuntimePlayerData>().Temperature;
 
-                if (Mathf.Abs(temp - Neutral) < 0.01f)
+                if (Mathf.Abs(temp - Neutral) < 0.05f)
                 {
                     RestoreSpeed();
                     continue;
                 }
 
-                var step = _driftSpeed * DriftInterval;
+                var step = _driftSpeed;
                 Modify(temp < Neutral ? step : -step);
             }
         }

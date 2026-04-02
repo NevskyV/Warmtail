@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Data.Nodes
 {
-    public class ActionNode : RuntimeNode
+    public record ActionNode : RuntimeNode
     {
         public int EventInd;
 

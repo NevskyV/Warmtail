@@ -1,27 +1,35 @@
-﻿using DG.Tweening;
+﻿using System;
+using DG.Tweening;
 using Pathfinding;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Entities.Creatures
 {
     [RequireComponent(typeof(Rigidbody2D), typeof(Seeker))]
     public class MovableCreature : Creature
     {
-        [SerializeField] private float _speed = 100;
-        [SerializeField] private float _rotationSpeed = 100;
-        [SerializeField] private float _nextWaypointDist = 3;
-        [SerializeField] private float _pathUpdateTick = 1;
-        [SerializeField] private Vector3 _rotationOffset;
-        
+        [SerializeField] private float _speed = 5f;
+        [SerializeField] private float _rotationSpeed = 360f; // градусов в секунду
+        [SerializeField] private float _pathUpdateTick = 1f;
+        [SerializeField] private float _nextWaypointDist = 3f;
+
         [SerializeField] private Transform _target;
-        private Path _path;
-        private int _currentWaypoint;
-        private bool _pathCompleted;
-        
+
+        [Header("Tween")]
+        [SerializeField] private AnimationCurve _curve;
+
+        [Header("Rotation")]
+        [SerializeField] private float _rotationOffset = 90f;
+
         private Seeker _seeker;
         private Rigidbody2D _rb;
-        private Vector2 _lastPos;
+        private Tween _moveTween;
+
+        private Vector3 _lastPosition;
         
+        public Action<Transform> OnMoveComplete;
+
         public void SetSpeed(float speed) => _speed = speed;
 
         private void Awake()
@@ -29,53 +37,82 @@ namespace Entities.Creatures
             _seeker = GetComponent<Seeker>();
             _rb = GetComponent<Rigidbody2D>();
 
-            InvokeRepeating(nameof(UpdatePath), 0, _pathUpdateTick);
+            InvokeRepeating(nameof(UpdatePath), _pathUpdateTick, _pathUpdateTick);
+        }
+
+        private void UpdatePath()
+        {
+            if (_target == null) return;
+            if (Mathf.Approximately(_target.position.x, transform.position.x) && 
+                Mathf.Approximately(_target.position.y, transform.position.y))
+            {
+                OnMoveComplete?.Invoke(_target);
+                _seeker.StartPath(transform.position, _target.position, OnPathComplete);
+            }
         }
 
         private void OnPathComplete(Path p)
         {
-            if (!p.error)
-            {
-                _path = p;
-                _currentWaypoint = 0;
-            }
+            if (p.error || p.vectorPath.Count < 2) return;
+            StartMove(p.vectorPath);
         }
-        
-        private void UpdatePath()
+
+        private void StartMove(List<Vector3> points)
         {
-            if(_seeker.IsDone() && Vector3.Distance(_rb.position, _target.position) > _nextWaypointDist 
-                                )
-                _seeker.StartPath(_rb.position, _target.position, OnPathComplete);
+            _moveTween?.Kill();
+
+            float length = GetPathLength(points);
+            float duration = length / _speed;
+
+            _lastPosition = transform.position;
+
+            _moveTween = transform
+                .DOPath(points.ToArray(), duration, PathType.CatmullRom)
+                .SetEase(_curve)
+                .SetOptions(false)
+                .OnUpdate(() =>
+                {
+                    _rb.MovePosition(transform.position);
+
+                    RotateSmooth();
+                });
+        }
+
+        private void RotateSmooth()
+        {
+            Vector2 dir = (Vector2)(transform.position - _lastPosition);
+
+            if (dir.sqrMagnitude < 0.0001f) return;
+
+            float targetAngle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + _rotationOffset;
+
+            float newAngle = Mathf.MoveTowardsAngle(
+                _rb.rotation,
+                targetAngle,
+                _rotationSpeed * Time.deltaTime
+            );
+
+            _rb.MoveRotation(newAngle);
+
+            _lastPosition = transform.position;
+        }
+
+        private float GetPathLength(List<Vector3> points)
+        {
+            float length = 0f;
+
+            for (int i = 1; i < points.Count; i++)
+            {
+                length += Vector3.Distance(points[i - 1], points[i]);
+            }
+
+            return length;
         }
 
         public void UpdateTarget(Transform target)
         {
             _target = target;
-        }
-
-        private void FixedUpdate()
-        {
-            _lastPos =  _rb.position;
-            if (_path == null) return;
-
-            if (_currentWaypoint >= _path.vectorPath.Count)
-            {
-                _pathCompleted = true;
-                return;
-            }
-
-            _pathCompleted = false;
-
-            var dir = ((Vector2)_path.vectorPath[_currentWaypoint] - _rb.position).normalized;
-
-            Quaternion targetRotation = Quaternion.LookRotation(_target.position - transform.position, _rotationOffset);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, _rotationSpeed * Time.deltaTime);
-            transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z);
-            _rb.MovePosition(_rb.position + dir * (_speed * Time.deltaTime));
-            
-            float distance = Vector2.Distance(_rb.position, _path.vectorPath[_currentWaypoint]);
-            if (distance < _nextWaypointDist)
-                _currentWaypoint++;
+            _seeker.StartPath(transform.position, _target.position, OnPathComplete);
         }
     }
 }

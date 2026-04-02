@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace Editor
 {
@@ -19,6 +20,7 @@ namespace Editor
                 sheetName,
                 $"{sheetName}_{dialogueIndex}_"
             };
+            Debug.Log(lines);
 
             args.AddRange(lines.Select(l =>
                 l.key+"\t"+l.ru+"\t=GOOGLETRANSLATE(INDIRECT(ADDRESS(ROW(),COLUMN()-1)),\"ru\",\"en\")"

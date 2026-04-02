@@ -20,6 +20,7 @@ namespace Entities.UI
         [SerializeField] private float _delayTime;
         [SerializeField] private TMP_Text _textPrefab;
         [SerializeField] private RectTransform _textBounds;
+        [SerializeField] private RectTransform _textParent;
         private RectTransform _currentText;
         private LocalizationManager _localizationManager;
         private DialogueSystem _dialogueSystem;
@@ -56,7 +57,7 @@ namespace Entities.UI
         public void ShowVisuals()
         {
             _isEnded = false;
-            _currentText = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
+            _currentText = Instantiate(_textPrefab, _textParent).GetComponent<RectTransform>();
             _currentText.localPosition = ChooseRandomPosition();
             _uiStateSystem.SwitchCurrentStateAsync(UIState.Hidden).Forget();
         }
@@ -83,7 +84,7 @@ namespace Entities.UI
         
         public async void RequestSingleLine(string id, string prefix = "fragment_")
         {
-            var textRect = Instantiate(_textPrefab, _textBounds).GetComponent<RectTransform>();
+            var textRect = Instantiate(_textPrefab, _textParent).GetComponent<RectTransform>();
             textRect.localPosition = ChooseRandomPosition();
 
             var line = LocalizationManager.GetStringFromKey(prefix + id);
@@ -115,10 +116,16 @@ namespace Entities.UI
                 Random.Range(_textBounds.rect.yMin, _textBounds.rect.yMax));
         }
 
-        public void Skip()
+        public async void Skip()
         {
-            _dialogueSystem.EndDialogue();
-            HideVisuals();
+            var lastPerCharFadeTime =  _perCharFadeTime;
+            var lastDelayTime = _delayTime;
+            _perCharFadeTime = 0f;
+            _delayTime = 0;
+            _dialogueSystem.ActivateNewNode();
+            await UniTask.Delay(3000);
+            _perCharFadeTime = lastPerCharFadeTime;
+            _delayTime = lastDelayTime;
         }
         
     }

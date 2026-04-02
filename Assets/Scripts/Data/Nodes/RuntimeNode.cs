@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Data.Nodes
 {
     [Serializable]
-    public abstract class RuntimeNode
+    public abstract record RuntimeNode
     {
         public string NodeId;
         [SerializeReference] public List<string> NextNodeIds = new();
