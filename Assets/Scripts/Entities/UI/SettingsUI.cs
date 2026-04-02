@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Data;
 using Entities.Localization;
@@ -5,6 +6,7 @@ using Entities.UI.SDF;
 using TriInspector;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using Zenject;
 
@@ -29,6 +31,9 @@ namespace Entities.UI
         
         [GroupNext("Toggles")] 
         [SerializeField] private Toggle _fullScreenToggle;
+        [SerializeField] private Toggle _hdrToggle;
+        
+        [SerializeField] private List<UniversalRenderPipelineAsset> _renderAssets;
 
         private GlobalData _globalData;
         private SettingsData _localData;
@@ -55,12 +60,14 @@ namespace Entities.UI
             ChangeVolume("SfxVolume", _localData.SfxVolume);
             //UpdateUI
             _fullScreenToggle.isOn = _localData.FullscreenMode;
+            _hdrToggle.isOn = _localData.HDR;
             _graphicsSwitcher.CurrentValue = _localData.QualityLevel;
             _languageSwitcher.CurrentValue = _localData.Language;
             _mainSoundSlider.Value = _localData.MainSoundVolume;
             _musicSlider.Value = _localData.MusicVolume;
             _sfxSlider.Value = _localData.SfxVolume;
             //Add Listeners
+            _hdrToggle.onValueChanged.AddListener(ChangeHDRState);
             _fullScreenToggle.onValueChanged.AddListener(ChangeFullScreenState);
             _graphicsSwitcher.Event.AddListener(ChangeQuality);
             _languageSwitcher.Event.AddListener(ChangeLanguage);
@@ -74,6 +81,16 @@ namespace Entities.UI
             _mainSoundSlider.OnValueChange -= ChangeMainVolume;
             _musicSlider.OnValueChange -= ChangeMusicVolume;
             _sfxSlider.OnValueChange -= ChangeSfxVolume;
+        }
+        
+        public void ChangeHDRState(bool value)
+        {
+            foreach (var asset in _renderAssets)
+            {
+                asset.supportsHDR = value;
+            }
+            _localData.HDR = value;
+            SaveData();
         }
         
         public void ChangeFullScreenState(bool value)

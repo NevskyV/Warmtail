@@ -59,6 +59,7 @@ namespace Entities.UI
         [SerializeField] private float _activeAmplitude;
         [SerializeField] private float _defaultOpacity;
         [SerializeField] private float _activeOpacity;
+        [SerializeField] private float _disableOpacity;
         [Title("New ability")] 
         [SerializeField] private Transform _mainObject;
         [SerializeField] private Button _confirmButton;
@@ -70,13 +71,17 @@ namespace Entities.UI
         private PlayerConfig _playerConfig;
         private AbilitiesSystem _abilitiesSystem;
         private TipsVisuals _tipsVisuals;
+        private GlobalData _globalData;
+        private bool _isCasting;
 
         [Inject]
-        private void Construct(PlayerConfig playerConfig, AbilitiesSystem abilitiesSystem, TipsVisuals tipsVisuals)
+        private void Construct(PlayerConfig playerConfig, AbilitiesSystem abilitiesSystem, TipsVisuals tipsVisuals, 
+            GlobalData globalData)
         {
             _playerConfig = playerConfig;
             _abilitiesSystem =  abilitiesSystem;
             _tipsVisuals = tipsVisuals;
+            _globalData = globalData;
             _warmthAbilities = _playerConfig.Abilities.OfType<WarmthAbility>().ToList();
             
             _abilitiesSystem.OnSelect += SelectAbility;
@@ -84,6 +89,8 @@ namespace Entities.UI
             _abilitiesSystem.OnCast += Cast;
             _abilitiesSystem.OnStopCast += StopCast;
             _abilitiesSystem.OnAddAbility += AddAbility;
+            
+            _globalData.SubscribeTo<RuntimePlayerData>(() => HasCells());
         }
 
         private void Start()
@@ -201,52 +208,18 @@ namespace Entities.UI
 
         private void Cast(List<int> warmthAbilities)
         {
-            for (int i = 0; i < _images.Length; i++)
-            {
-                var parent = _images[i].transform.parent.GetComponent<SdfGroup>();
-                if (!warmthAbilities.Contains(i))
-                {
-                    var opacity = parent.GroupProperty.Alpha;
-                    DOTween.To(() => opacity, x =>{
-                        opacity = x;
-                        parent.GroupProperty.Alpha = x;
-                    }, _activeOpacity, 0.5f);
-                    CreateOutline(i, false);
-                }
-                else
-                {
-                    var amplitude = parent.GroupProperty.WaveAmp;
-                    DOTween.To(() => amplitude, x =>{
-                        amplitude = x;
-                        parent.GroupProperty.WaveAmp = x;
-                    }, _activeAmplitude, 0.5f);
-                    CreateOutline(i, true);
-                }
-            }
+            _isCasting = true;
+            if (!HasCells()) return;
+            SetAbilitiesGrey(warmthAbilities, _activeOpacity, _activeAmplitude);
+            SetAbilitiesOutline(warmthAbilities);
         }
         
         private void StopCast(List<int> warmthAbilities)
         {
-            for (int i = 0; i < _images.Length; i++)
-            {
-                var parent = _images[i].transform.parent.GetComponent<SdfGroup>();
-                if (!warmthAbilities.Contains(i))
-                {
-                    var opacity = parent.GroupProperty.Alpha;
-                    DOTween.To(() => opacity, x =>{
-                        opacity = x;
-                        parent.GroupProperty.Alpha =  x;
-                    }, _defaultOpacity, 0.5f);
-                }
-                else
-                {
-                    var amplitude = parent.GroupProperty.WaveAmp;
-                    DOTween.To(() => amplitude, x =>{
-                        amplitude = x;
-                        parent.GroupProperty.WaveAmp = x;
-                    }, _defaultAmplitude, 0.5f);
-                }
-            }
+            _isCasting = false;
+            if (!HasCells()) return;
+            SetAbilitiesGrey(warmthAbilities, _defaultOpacity, _defaultAmplitude);
+            SetAbilitiesOutline(warmthAbilities);
         }
 
         private void CreateOutline(int index, bool selected)
@@ -278,6 +251,58 @@ namespace Entities.UI
             _tipsVisuals?.ShowTip(_confirmAction);
             _tipsVisuals?.ShowTip(_useAction);
             HideAbilities();
+        }
+
+        private bool HasCells()
+        {
+            if (_globalData.Get<RuntimePlayerData>().CurrentCells == 0)
+            {
+                SetAbilitiesGrey(new(), _disableOpacity, _activeAmplitude);
+                return false;
+            }
+            if(!_isCasting)SetAbilitiesGrey(new(), _defaultOpacity, _defaultAmplitude);
+            return true;
+            
+        }
+
+        private void SetAbilitiesGrey(List<int> warmthAbilities, float endOpacity, float endAmplitude)
+        {
+            for (int i = 0; i < _images.Length; i++)
+            {
+                var parent = _images[i].transform.parent.GetComponent<SdfGroup>();
+                if (!warmthAbilities.Contains(i))
+                {
+                    var opacity = parent.GroupProperty.Alpha;
+                    DOTween.To(() => opacity, x =>{
+                        opacity = x;
+                        parent.GroupProperty.Alpha = x;
+                    }, endOpacity, 0.5f);
+                }
+                else
+                {
+                    var amplitude = parent.GroupProperty.WaveAmp;
+                    DOTween.To(() => amplitude, x =>{
+                        amplitude = x;
+                        parent.GroupProperty.WaveAmp = x;
+                    }, endAmplitude, 0.5f);
+                }
+            }
+        }
+
+        private void SetAbilitiesOutline(List<int> warmthAbilities)
+        {
+            for (int i = 0; i < _images.Length; i++)
+            {
+                if (!warmthAbilities.Contains(i))
+                {
+                    CreateOutline(i, false);
+                }
+                else
+                {
+
+                    CreateOutline(i, true);
+                }
+            }
         }
 
         private Type GetAbilityType(AbilityType type)

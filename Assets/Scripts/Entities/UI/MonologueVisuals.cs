@@ -114,6 +114,12 @@ namespace Entities.UI
             return new Vector2(Random.Range(_textBounds.rect.xMin, _textBounds.rect.xMax),
                 Random.Range(_textBounds.rect.yMin, _textBounds.rect.yMax));
         }
+
+        public void Skip()
+        {
+            _dialogueSystem.EndDialogue();
+            HideVisuals();
+        }
         
     }
 }

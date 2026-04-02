@@ -15,27 +15,47 @@ MonoBehaviour:
   <Id>k__BackingField: 8
   QuestType: 1
   <IsPermanent>k__BackingField: 1
+  <Reward>k__BackingField: 2
   <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
   <Layer>k__BackingField: 0
   <OnStart>k__BackingField:
   - rid: 6510803904226132092
   <OnComplete>k__BackingField:
-  - rid: 6510803904226132093
-  - rid: 6510803904226132097
+  - rid: 4719408513318387803
   <OnFail>k__BackingField: []
   <Sequence>k__BackingField:
   - Actions: []
     Tasks:
-    - rid: 6510803904226132094
+    - rid: 4719408513318387799
   - Actions: []
     Tasks:
-    - rid: 6510803904226132095
+    - rid: 4719408513318387800
   - Actions: []
     Tasks:
-    - rid: 6510803904226132096
+    - rid: 4719408513318387801
   references:
     version: 2
     RefIds:
+    - rid: 4719408513318387799
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _objId: torvald item
+        _needToBe: 0
+    - rid: 4719408513318387800
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _objId: torvald item 1
+        _needToBe: 0
+    - rid: 4719408513318387801
+      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _objId: torvald item 2
+        _needToBe: 0
+    - rid: 4719408513318387803
+      type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _graph: {fileID: 11400000, guid: 9303ad41eb4ea184dacc64089d05e439, type: 2}
+        _npcId: torvald
     - rid: 6510803904226132092
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -44,32 +64,3 @@ MonoBehaviour:
         - torvald item
         - torvald item 1
         - torvald item 2
-    - rid: 6510803904226132093
-      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _characterId: torvald
-        _splineId: torvald spline
-        _move: 1
-        _loop: 0
-    - rid: 6510803904226132094
-      type: {class: ActiveStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _objId: torvald item
-        _needToBe: 0
-    - rid: 6510803904226132095
-      type: {class: ActiveStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _objId: torvald item 1
-        _needToBe: 0
-    - rid: 6510803904226132096
-      type: {class: ActiveStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _objId: torvald item 2
-        _needToBe: 0
-    - rid: 6510803904226132097
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 1
-        _objectIds:
-        - torvald shop
-        _homeScene: 0
