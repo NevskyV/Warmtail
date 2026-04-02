@@ -17,18 +17,26 @@ MonoBehaviour:
   <IsPermanent>k__BackingField: 1
   <Scene>k__BackingField: Assets/Scenes/Gameplay.unity
   <Layer>k__BackingField: 0
-  <OnStart>k__BackingField: []
+  <OnStart>k__BackingField:
+  - rid: 6510803830513074264
   <OnComplete>k__BackingField: []
   <OnFail>k__BackingField: []
   <Sequence>k__BackingField:
   - Actions: []
     Tasks:
-    - rid: 7345391011349135620
+    - rid: 6510803830513074265
   references:
     version: 2
     RefIds:
-    - rid: 7345391011349135620
+    - rid: 6510803830513074264
+      type: {class: MarkAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _spawn: 1
+        _questData: {fileID: 11400000}
+        _position: {x: -24.84, y: 0}
+        _questVisualsId: quest visauls
+    - rid: 6510803830513074265
       type: {class: TriggerTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _prefab: {fileID: 3459850837378005844, guid: 4b5c61f41edd0b54aae236ec9d6ba332, type: 3}
-        _position: {x: 100000, y: 0}
+        _position: {x: -24.84, y: 0}

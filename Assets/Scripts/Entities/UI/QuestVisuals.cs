@@ -66,6 +66,7 @@ namespace Entities.UI
             {
                 var quest = AllQuests.Find(x => x.Id == id.Key);
                 if(quest) QuestSystem.StartQuest(quest, id.Value);
+                print("QUEST ID" + id.Key);
             }
         }
 
@@ -100,6 +101,7 @@ namespace Entities.UI
 
         public void UpdateProgress(QuestData data, Transform questObj = null)
         {
+            var questIds = _globalData.Get<SavablePlayerData>().QuestIds;
             if (!_createdQuests.ContainsKey(data)) return;
             if (questObj == null)
             {
@@ -108,10 +110,13 @@ namespace Entities.UI
             if(_surfacingSystem.CurrentLayerIndex == data.Layer){
                 var allQuestCount = data.Sequence.Count;
                 var questState = 0;
-                print(_globalData.Get<SavablePlayerData>().QuestIds.Keys.Count);
-                if (data.QuestType == QuestType.Serial) questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id][0];
-                if (data.QuestType == QuestType.Parallel) questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id].Count;
                 
+                if (questIds.Keys.Count > 0)
+                {
+                    if (data.QuestType == QuestType.Serial) questState = questIds[data.Id][0];
+                    if (data.QuestType == QuestType.Parallel) questState = questIds[data.Id].Count;
+                }
+
                 questObj.GetChild(2).GetComponent<LocalizedText>().SetNewKey(_correctLayerState);
                 questObj.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text = $"{questState}/{allQuestCount}";
             }
@@ -124,21 +129,23 @@ namespace Entities.UI
         
         public async void DestroyQuest(QuestData data)
         {
-            if (_createdMarks.ContainsKey(data)) DestroyMarks(data);
-            if (_createdMarks.ContainsKey(data)) _createdMarks.Remove(data);
-            
-            
-            _createdQuests[data].transform.GetChild(3).GetComponent<TMP_Text>().text = "+" + data.Reward;
-            _globalData.Edit<SavablePlayerData>(player =>
+            if (_createdMarks.ContainsKey(data))
             {
-                player.Shells += (int)data.Reward;
-            });
-            var animator = _createdQuests[data].GetComponent<Animator>();
-            animator.SetTrigger("Complete");
-            await UniTask.Delay(TimeSpan.FromSeconds(_completeAnimationDuration));
-            
-            if (_createdQuests.ContainsKey(data)) Destroy(_createdQuests[data]);
-            if (_createdQuests.ContainsKey(data)) _createdQuests.Remove(data);
+                DestroyMarks(data);
+                _createdMarks.Remove(data);
+            }
+
+            if (_createdQuests.ContainsKey(data))
+            {
+                _createdQuests[data].transform.GetChild(3).GetComponent<TMP_Text>().text = "+" + data.Reward;
+                _globalData.Edit<SavablePlayerData>(player => { player.Shells += (int)data.Reward; });
+                var animator = _createdQuests[data].GetComponent<Animator>();
+                animator.SetTrigger("Complete");
+                await UniTask.Delay(TimeSpan.FromSeconds(_completeAnimationDuration));
+
+                Destroy(_createdQuests[data]);
+                _createdQuests.Remove(data);
+            }
         }
         
         public void SpawnMarks(QuestData data, Vector2 markPos)
