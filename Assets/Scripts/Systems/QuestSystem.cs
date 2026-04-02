@@ -126,7 +126,11 @@ namespace Systems
         {
             Debug.Log("ira end quest " + _globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id));
             OnQuestEnded.Invoke(data, false);
-            data.OnComplete.ForEach(x => x.Invoke());
+            data.OnComplete.ForEach(x =>
+            {
+                x.SetEventsData(_eventsData);
+                x.Invoke();
+            });
             if(_globalData.Get<SavablePlayerData>().QuestIds.Keys.Contains(data.Id))
                 _globalData.Edit<SavablePlayerData>(playerData=> playerData.QuestIds.Remove(data.Id));
         }

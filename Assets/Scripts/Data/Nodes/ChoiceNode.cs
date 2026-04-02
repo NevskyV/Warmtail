@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Data.Nodes
 {
-    public class ChoiceNode : RuntimeNode
+    public record ChoiceNode : RuntimeNode
     {
         [field: SerializeField] public List<string> Choices { get; private set; } = new();
     
