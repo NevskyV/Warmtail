@@ -10,25 +10,29 @@ namespace Entities.Creatures
 
     public class Creature : MonoBehaviour
     {
+        [SerializeField] private int _id;
         [SerializeField] private CreatureTemperature _temperature = CreatureTemperature.Neutral;
         [SerializeField] private Animator _animator;
         [SerializeField] private float _interactionCooldown = 1f;
 
         private static readonly int InteractHash = Animator.StringToHash("Interact");
 
+        private BestiarySystem _bestiarySystem;
         private WarmthSystem _warmthSystem;
         private bool _onCooldown;
 
         [Inject]
-        private void Construct(WarmthSystem warmthSystem)
+        private void Construct(WarmthSystem warmthSystem, BestiarySystem bestiarySystem)
         {
             _warmthSystem = warmthSystem;
+            _bestiarySystem = bestiarySystem;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (_onCooldown || !other.CompareTag("Player")) return;
             Interact().Forget();
+            _bestiarySystem.AddCreature(_id);
         }
 
         private async UniTaskVoid Interact()

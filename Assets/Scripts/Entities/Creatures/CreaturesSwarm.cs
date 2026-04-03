@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 namespace Entities.Creatures
 {
@@ -12,12 +13,14 @@ namespace Entities.Creatures
         [SerializeField] private Vector2 _minMaxSpeed;
         
         private List<Transform> _targetsList = new();
+        [Inject] private DiContainer _diContainer;
 
         private void Start()
         {
             for(int i = 0; i < _count; i++)
             {
                 var creature = Instantiate(_creatures[Random.Range(0, _creatures.Length)], transform);
+                _diContainer.Inject(creature);
                 creature.transform.localPosition = Vector3.zero;
                 creature.SetSpeed(Random.Range(_minMaxSpeed.x, _minMaxSpeed.y));
                 var newTarget = new GameObject("Target");
@@ -35,12 +38,5 @@ namespace Entities.Creatures
                 Random.Range(transform.position.y -  _bounds.y /2, transform.position.y + _bounds.y /2));
             target.position = newPosition;
         }
-
-#if UNITY_EDITOR
-        private void OnDrawGizmos()
-        {
-            Gizmos.DrawCube(transform.position, _bounds);
-        }
-#endif
     }
 }

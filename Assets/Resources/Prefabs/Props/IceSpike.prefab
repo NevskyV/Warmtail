@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1861234805242358670}
+  - component: {fileID: 5152832126735541138}
   - component: {fileID: 5875980064474296472}
   - component: {fileID: 2016207450636474705}
   - component: {fileID: -6684068284525775282}
-  - component: {fileID: 5152832126735541138}
   m_Layer: 0
   m_Name: IceSpike
   m_TagString: Untagged
@@ -35,6 +35,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5152832126735541138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562607637019606974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00bb919f0cc6ce548a8f6d86ff8ccf05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.TemperatureSource
+  _id:
+    Value: 
+  _tempPerSecond: -10
+  _radius: 3
+  _forceMultiplier: -1000
 --- !u!212 &5875980064474296472
 SpriteRenderer:
   serializedVersion: 2
@@ -739,20 +756,3 @@ MonoBehaviour:
     - rid: 4061569158116278361
       type: {class: ShadowShape2DProvider_Collider2D, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
       data: 
---- !u!114 &5152832126735541138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 562607637019606974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00bb919f0cc6ce548a8f6d86ff8ccf05, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.TemperatureSource
-  _id:
-    Value: 
-  _tempPerSecond: -10
-  _radius: 3
-  _forceMultiplier: 0

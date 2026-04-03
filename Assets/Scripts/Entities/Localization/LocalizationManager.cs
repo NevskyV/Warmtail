@@ -33,6 +33,7 @@ namespace Entities.Localization
             {"Lumi", "1987237332"},
             {"Unknown", "1422272265"},
             {"Quests", "2071454227"},
+            {"Creatures", "178517266"},
         };
 
         public static ReactiveProperty<Language> CurrentLanguage { get; } = new(Language.ru);

@@ -167,6 +167,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Bestiary",
+                    "type": "Button",
+                    "id": "5f067e1d-5cd7-4af8-b4c0-d7523e890e64",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -195,7 +204,7 @@
                 {
                     "name": "",
                     "id": "f65c2559-5721-473c-b410-1ea03afd0d6d",
-                    "path": "<Gamepad>/buttonNorth",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -503,7 +512,7 @@
                 {
                     "name": "",
                     "id": "ac26fd04-3e61-4496-a848-4f574e5e3e9e",
-                    "path": "<Gamepad>/buttonWest",
+                    "path": "<Gamepad>/buttonNorth",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -613,7 +622,7 @@
                 {
                     "name": "",
                     "id": "1ba12aed-db2a-4f9f-adc9-ae9fac290765",
-                    "path": "<Gamepad>/select",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -640,6 +649,28 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Click",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05e54042-7010-4bf5-ba46-cba86dae0dbb",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Bestiary",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "23796c66-cb15-4774-93a6-138e6c184205",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Bestiary",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

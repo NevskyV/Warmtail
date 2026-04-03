@@ -45,7 +45,7 @@ namespace Entities.UI
             _globalData = globalData;
         }
 
-        private void Awake()
+        private void Start()
         {
             //Load Data
             _localData = _globalData.Get<SettingsData>();
@@ -58,6 +58,7 @@ namespace Entities.UI
             ChangeVolume("MainVolume", _localData.MainSoundVolume);
             ChangeVolume("MusicVolume", _localData.MusicVolume);
             ChangeVolume("SfxVolume", _localData.SfxVolume);
+            ChangeHDRState(_localData.HDR);
             //UpdateUI
             _fullScreenToggle.isOn = _localData.FullscreenMode;
             _hdrToggle.isOn = _localData.HDR;
