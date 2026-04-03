@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Entities.Props
 {
-    public class FearCore : MonoBehaviour, IInteractable
+    public class FearCore : SavableStateObject, IInteractable
     {
         [SerializeField] private bool _locked = true;
         [SerializeField] private FearConfig _fearConfig;
@@ -34,7 +34,7 @@ namespace Entities.Props
             {
                 obj.SetActive(true);
             }
-            
+            ChangeState(false);
             
             if (_globalData != null)
             {

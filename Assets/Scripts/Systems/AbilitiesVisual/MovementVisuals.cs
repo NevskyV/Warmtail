@@ -87,6 +87,7 @@ namespace Systems.AbilitiesVisual
                 {
                     foreach (var vfx in _loopVfx)
                     {
+                        if(vfx == null) continue;
                         var main = vfx.main;
                         main.loop = true;
                         vfx.Play();
@@ -117,7 +118,7 @@ namespace Systems.AbilitiesVisual
                 var ps = obj.GetComponent<ParticleSystem>();
                 var main = ps.main;
                 main.loop = false;
-                await UniTask.Delay(TimeSpan.FromSeconds(main.duration - ps.time));
+                await UniTask.Delay(TimeSpan.FromSeconds(ps.main.duration - ps.time));
             }
         }
 

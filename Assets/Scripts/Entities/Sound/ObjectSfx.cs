@@ -20,7 +20,8 @@ namespace Entities.Sound
                 _awaitable.Dispose();
                 _awaitable = null;
             }
-            var obj = Instantiate(new GameObject("sfx")).AddComponent<AudioSource>();
+            var obj = new GameObject("sfx").AddComponent<AudioSource>();
+            obj.outputAudioMixerGroup = _source.outputAudioMixerGroup;
             obj.PlayOneShot(_clips[sfxName]);
             obj.gameObject.AddComponent<AutoDestroy>().Destroy(5f);
         }
@@ -32,7 +33,8 @@ namespace Entities.Sound
                 DOTween.Kill(_awaitable);
                 _awaitable = null;
             }
-            var obj = Instantiate(new GameObject("sfx")).AddComponent<AudioSource>();
+            var obj = new GameObject("sfx").AddComponent<AudioSource>();
+            obj.outputAudioMixerGroup = _source.outputAudioMixerGroup;
             obj.PlayOneShot(sfx);
             obj.gameObject.AddComponent<AutoDestroy>().Destroy(5f);
         }

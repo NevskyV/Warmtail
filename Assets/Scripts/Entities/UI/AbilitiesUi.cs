@@ -37,6 +37,7 @@ namespace Entities.UI
 
         [Title("Configs")] 
         [SerializeField] private List<AbilityUIConfig> _abilitiesConfigs;
+        [SerializeField] private float _transitionDuration = 0.3f;
         
         [Title("Images to fill")] 
         [SerializeField] private AbilityImages[] _imagesArray;
@@ -141,10 +142,10 @@ namespace Entities.UI
                     
                     imges[2].GetComponent<Image>().sprite = _abilitiesConfigs.Find(x => GetAbilityType(x.Type) == ability.GetType()).Sprite;
                     imges[2].transform.parent.gameObject.SetActive(show);
-                    imges[0].DOSizeDelta(new Vector2(100,100), 0.5f);
+                    imges[0].DOSizeDelta(new Vector2(100,100), _transitionDuration);
                     foreach (var img in imges)
                     {
-                        img.DOLocalMove(new Vector3(-(maxDist - size) / 2 + (_distance + size) * index, 100), 0.5f);
+                        img.DOLocalMove(new Vector3(-(maxDist - size) / 2 + (_distance + size) * index, 100), _transitionDuration);
                     }
 
                     index++;
@@ -161,10 +162,10 @@ namespace Entities.UI
             foreach (var ability in _warmthAbilities)
             {
                 var imges = _imagesArray[_warmthAbilities.IndexOf(ability)].Images;
-                imges[0].DOSizeDelta(new Vector2(0,0), 0.5f);
+                imges[0].DOSizeDelta(new Vector2(0,0), _transitionDuration);
                 foreach (var img in imges)
                 {
-                    img.DOLocalMove(new Vector3(0, -300), 0.5f);
+                    img.DOLocalMove(new Vector3(0, -300), _transitionDuration);
                 }
             }
         }
@@ -195,7 +196,7 @@ namespace Entities.UI
                 {
                     _rhombuses[index].gameObject.SetActive(false);
                 }
-            }, targetSize, 0.5f);
+            }, targetSize, _transitionDuration);
             
             var confirmedParent = _images[index].transform.parent.GetComponent<SdfGroup>();
             
@@ -203,7 +204,7 @@ namespace Entities.UI
             DOTween.To(() => confirmedInlineWidth, x =>{
                 confirmedInlineWidth = x;
                 confirmedParent.GroupProperty.InlineThickness = x;
-            }, notConfirmed? _confirmedInWidth : _defaultInWidth, 0.5f);
+            }, notConfirmed? _confirmedInWidth : _defaultInWidth, _transitionDuration);
         }
 
         private void Cast(List<int> warmthAbilities)
@@ -228,11 +229,11 @@ namespace Entities.UI
             
             DOTween.To(() => selectedParent.GroupProperty.OutlineThickness, x =>{
                 selectedParent.GroupProperty.OutlineThickness = x;
-            }, selected? _selectedOutWidth : _defaultOutWidth, 0.5f);
+            }, selected? _selectedOutWidth : _defaultOutWidth, _transitionDuration);
             
             DOTween.To(() => selectedParent.GroupProperty.InOutlineThickness, x =>{
                 selectedParent.GroupProperty.InOutlineThickness = x;
-            }, selected? _selectedInOutWidth : _defaultInOutWidth, 0.5f);
+            }, selected? _selectedInOutWidth : _defaultInOutWidth, _transitionDuration);
             selectedParent.transform.parent.GetComponent<Image>().SetMaterialDirty();
         }
         
@@ -277,7 +278,7 @@ namespace Entities.UI
                     DOTween.To(() => opacity, x =>{
                         opacity = x;
                         parent.GroupProperty.Alpha = x;
-                    }, endOpacity, 0.5f);
+                    }, endOpacity, _transitionDuration);
                 }
                 else
                 {
@@ -285,7 +286,7 @@ namespace Entities.UI
                     DOTween.To(() => amplitude, x =>{
                         amplitude = x;
                         parent.GroupProperty.WaveAmp = x;
-                    }, endAmplitude, 0.5f);
+                    }, endAmplitude, _transitionDuration);
                 }
             }
         }

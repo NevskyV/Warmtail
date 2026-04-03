@@ -23,6 +23,7 @@ namespace Entities.Core
             Container.Bind<SaveSystem>().FromNew().AsSingle();
             Container.Bind<CrossfadeEffect>().FromNew().AsSingle();
             Container.Bind<ShoppingSystem>().FromNew().AsSingle();
+            Container.Bind<BestiarySystem>().FromNew().AsSingle();
             
             Container.Bind<SceneLoader>().FromInstance(_sceneLoader).AsSingle();
             Container.Bind<LocalizationManager>().FromInstance(_localizationManager).AsSingle();

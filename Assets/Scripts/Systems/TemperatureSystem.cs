@@ -61,6 +61,12 @@ namespace Systems
 
         public void Modify(float delta)
         {
+            ShadowModify(delta);
+            NormalizeTemp();
+        }
+
+        private void ShadowModify(float delta)
+        {
             float newTemp = 0f;
             _globalData.Edit<RuntimePlayerData>(data =>
             {
@@ -75,8 +81,6 @@ namespace Systems
 
             ApplySpeed(newTemp);
             CheckCritical(newTemp);
-            
-            NormalizeTemp();
         }
 
         private async void NormalizeTemp()
@@ -122,14 +126,14 @@ namespace Systems
 
                 var temp = _globalData.Get<RuntimePlayerData>().Temperature;
 
-                if (Mathf.Abs(temp - Neutral) < 0.05f)
+                if (Mathf.Abs(temp - Neutral) <= 1f)
                 {
                     RestoreSpeed();
                     continue;
                 }
 
                 var step = _driftSpeed;
-                Modify(temp < Neutral ? step : -step);
+                ShadowModify(temp < Neutral ? step : -step);
             }
         }
     }

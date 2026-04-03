@@ -25,7 +25,7 @@ MonoBehaviour:
     - rid: 5800212431756066978
     - rid: 6510803811907666103
     Tasks:
-    - rid: 5800212431756066986
+    - rid: 4719408548755013781
   _description: "\u0416\u0434\u0451\u0442 \u0432\u044B\u0445\u043E\u0434\u0430 \u0438\u0437
     \u043F\u043E\u0440\u0442\u0430\u043B\u0430, \u0430\u043A\u0442\u0438\u0432\u0438\u0440\u0443\u0435\u0442
     \u0422\u0435\u0440\u0442\u0438\u043B\u0443\u0441 \u0438 \u0424\u0438\u043D\u0438\u043A\u0441
@@ -34,6 +34,12 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 4719408548755013781
+      type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
+      data:
+        _questData: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
+        _start: 0
+        _home: 0
     - rid: 5800212431756066966
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -63,11 +69,6 @@ MonoBehaviour:
         _splineId: tertilus spline after fear gameplay
         _move: 0
         _loop: 0
-    - rid: 5800212431756066986
-      type: {class: SavabaleStateTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _objId: fear world
-        _needToBe: 0
     - rid: 6510803811907666103
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

@@ -6,10 +6,10 @@ using UnityEngine.Rendering;
 
 namespace Entities.Props
 {
-    public class FearPortal : MonoBehaviour
+    public class FearPortal : SavableStateObject
     {
-        [SerializeField] private List<GameObject> _baseObjects = new();
-        [SerializeField] private List<GameObject> _portalObjects = new();
+        [SerializeField] private List<SavableStateObject> _baseObjects = new();
+        [SerializeField] private List<SavableStateObject> _portalObjects = new();
         [SerializeField] private ParticleSystem _vfx;
         [SerializeField] private AudioClip _sfx;
         [SerializeField] private Volume _volume;
@@ -30,7 +30,6 @@ namespace Entities.Props
                 _audioSource = gameObject.AddComponent<AudioSource>();
             }
 
-            ApplyState(_startInPortalState);
         }
         
         public async UniTaskVoid Activate()
@@ -54,7 +53,7 @@ namespace Entities.Props
 
             if (_destroyAfterActivate)
             {
-                Destroy(gameObject);
+                ChangeState(false);
             }
 
             _isActivating = false;
@@ -64,11 +63,11 @@ namespace Entities.Props
         {
             foreach (var obj in _baseObjects)
             {
-                if (obj != null) obj.SetActive(!portalActive);
+                if (obj != null) obj.ChangeState(!portalActive);
             }
             foreach (var obj in _portalObjects)
             {
-                if (obj != null) obj.SetActive(portalActive);
+                if (obj != null) obj.ChangeState(portalActive);
             }
         }
         
