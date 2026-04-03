@@ -102,7 +102,7 @@ namespace Entities.UI
             
             string text = LocalizationManager.GetStringFromKey(node.Character + "_" + _system.DialogueGraph.DialogueId + "_" + node.NodeId);
             
-            if (_audioSource != null)
+            if (_audioSource != null && character != null)
             {
                 _audioSource.clip = character.Sound;
                 _audioSource.Play();
@@ -116,8 +116,10 @@ namespace Entities.UI
             }
             _boxName.text = displayName;
             _boxNameEffect.Refresh();
-            if(character.EmotionSprites.ContainsKey(node.Emotion))
+            if (character != null && character.EmotionSprites.ContainsKey(node.Emotion))
                 _boxImage.sprite = character.EmotionSprites[node.Emotion];
+            else
+                _boxImage.sprite = _holder.UnknownSprite;
             _boxText.text = text;
             _boxTextEffect.globalEffects[0].effect = _effect;
             _boxTextEffect.Refresh();

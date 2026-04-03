@@ -2208,6 +2208,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8242358387664453878}
   - component: {fileID: 3907302336474307310}
+  - component: {fileID: 4392532114915603901}
   m_Layer: 5
   m_Name: Circle (4)
   m_TagString: Untagged
@@ -2257,6 +2258,20 @@ MonoBehaviour:
     ParamsB: {x: 0, y: 0, z: 0, w: 0}
     GroupIndex: 0
   UseParent: 0
+--- !u!114 &4392532114915603901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6640934489923042512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af2f3f295d904a1496486c18c69a4958, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.SavableStateObject
+  _id:
+    Value: 
 --- !u!1 &6890766723902622536
 GameObject:
   m_ObjectHideFlags: 0

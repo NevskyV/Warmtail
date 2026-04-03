@@ -79,7 +79,7 @@ namespace Systems.Abilities
 
             input.actions["ActivateAbilities"].started += _ => StartCasting();
             input.actions["ActivateAbilities"].canceled += _ => StopCasting();
-            input.actions["ConfirmAbility"].canceled += _ => ConfirmAbility(_selectedIndex);
+            input.actions["ConfirmAbility"].performed += _ => ConfirmAbility(_selectedIndex);
             await UniTask.Delay(100);
             SelectAbility(0);
         }
