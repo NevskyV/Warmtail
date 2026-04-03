@@ -2,6 +2,7 @@ using Data;
 using Data.Player;
 using Interfaces;
 using System.Collections.Generic;
+using Systems;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,7 @@ namespace Entities.Props
         [SerializeField] private FearConfig _fearConfig;
         [SerializeField] private List<GameObject> _baseObjects = new();
         [SerializeField] private List<GameObject> _portalObjects = new();
+        [SerializeField] private int _tailId = -1;
         
         [Inject] private GlobalData _globalData;
 
@@ -22,10 +24,12 @@ namespace Entities.Props
             if (_portalPrefab != null)
                 _portalPrefab.gameObject.SetActive(false);
         }
+
         public void Unlock()
         {
             _locked = false;
         }
+
         public void Interact()
         {
             if (_locked) return;
@@ -43,6 +47,11 @@ namespace Entities.Props
                 if (!playerData.FearIds.Contains(_fearConfig.Id))
                 {
                     _globalData.Edit<SavablePlayerData>(data => data.FearIds.Add(_fearConfig.Id));
+                }
+
+                if (_tailId >= 0)
+                {
+                    _globalData.Edit<SavablePlayerData>(data => data.ActiveTailId = _tailId);
                 }
             }
         }

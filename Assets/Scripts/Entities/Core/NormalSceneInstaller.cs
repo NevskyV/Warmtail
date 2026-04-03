@@ -13,6 +13,7 @@ using Zenject;
 using Systems.Abilities;
 using Systems.Fears;
 using Systems.Environment;
+using Systems;
 using Systems.Swarm;
 using TriInspector;
 using Unity.Cinemachine;
@@ -95,6 +96,9 @@ namespace Entities.Core
             Container.BindInterfacesAndSelfTo<DailySystem>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<FearBuffSystem>().FromNew().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<TailSystem>().FromNew().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<CompanionPassiveSystem>().FromNew().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<WarmMemoriesSystem>().FromNew().AsSingle().NonLazy();
             
             QuestSystem questSystem = new();
             Container.Bind<QuestSystem>().FromInstance(questSystem).AsSingle();
