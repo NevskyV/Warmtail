@@ -11,7 +11,6 @@ namespace Entities.UI
 {
     public class WarmthVisualUI : MonoBehaviour
     {
-        [SerializeField] private SdfFigure _arcFigure;
         [SerializeField] private List<SdfGroup> _groups;
         [SerializeField] private List<SdfFigure> _figures;
         [SerializeField, ColorUsage(false, true)] private Color _activeColor;
@@ -33,6 +32,7 @@ namespace Entities.UI
 
         private void UpdateVisual()
         {
+            if(_figures == null || _figures.Count <= 0 || !_figures[0]){ return;}
             var runtime = _globalData.Get<RuntimePlayerData>();
             var savable = _globalData.Get<SavablePlayerData>();
 
@@ -46,30 +46,20 @@ namespace Entities.UI
                 {
                     if (i + savable.Stars - _figures.Count < runtime.CurrentCells)
                     {
+                        if(i + savable.Stars - _figures.Count == runtime.CurrentCells - 1)
+                            _groups[i].GroupProperty.Alpha = 1 - runtime.CurrentCellProgress;
                         _groups[i].GroupProperty.FillColor = _activeColor;
                         _groups[i].GroupProperty.OutlineThickness = _activeOutline;
                     }
                     else
                     {
+                        _groups[i].GroupProperty.Alpha = 1;
                         _groups[i].GroupProperty.FillColor = _inactiveColor;
                         _groups[i].GroupProperty.OutlineThickness = 0f;
                     }
                     _figures[i].gameObject.SetActive(true);
                 }
             }
-
-            if (!_arcFigure) return;
-
-            // float targetAngle = runtime.CurrentCells > 0
-            //     ? (runtime.CurrentCells * 1.0f / savable.Stars) * _maxAngle
-            //     : 0f;
-
-            // _tween?.Kill();
-            // _tween = DOTween.To(
-            //     () => _arcFigure.ShapeData.ParamsA.x,
-            //     x => _arcFigure.ShapeData.ParamsA.x = x,
-            //     targetAngle,
-            //     _smoothing);
         }
     }
 }

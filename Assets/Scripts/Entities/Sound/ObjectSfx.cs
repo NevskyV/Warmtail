@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using AYellowpaper.SerializedCollections;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Entities.Props;
 using UnityEngine;
 
 namespace Entities.Sound
@@ -19,9 +20,10 @@ namespace Entities.Sound
                 _awaitable.Dispose();
                 _awaitable = null;
             }
-            var obj = Instantiate(new GameObject("sfx")).AddComponent<AudioSource>();
+            var obj = new GameObject("sfx").AddComponent<AudioSource>();
+            obj.outputAudioMixerGroup = _source.outputAudioMixerGroup;
             obj.PlayOneShot(_clips[sfxName]);
-            Destroy(obj.gameObject, 5f);
+            obj.gameObject.AddComponent<AutoDestroy>().Destroy(5f);
         }
         
         public void PlaySfx(AudioClip sfx)
@@ -31,9 +33,10 @@ namespace Entities.Sound
                 DOTween.Kill(_awaitable);
                 _awaitable = null;
             }
-            var obj = Instantiate(new GameObject("sfx")).AddComponent<AudioSource>();
+            var obj = new GameObject("sfx").AddComponent<AudioSource>();
+            obj.outputAudioMixerGroup = _source.outputAudioMixerGroup;
             obj.PlayOneShot(sfx);
-            Destroy(obj.gameObject, 5f);
+            obj.gameObject.AddComponent<AutoDestroy>().Destroy(5f);
         }
         
         public async void PlayLoopSfx(AudioClip sfx, int delay = 0)

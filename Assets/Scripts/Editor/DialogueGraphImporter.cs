@@ -39,7 +39,14 @@ namespace Editor
             foreach (var graphPath in _editorGraphs)
             {
                 var editorGraph = GraphDatabase.LoadGraph<DialogueGraph>($"Assets/Editor/Dialogues/{graphPath}.dg");
-                var runtimeGraph = CreateInstance<RuntimeDialogueGraph>();
+                
+                var startNode = editorGraph.GetNodes().OfType<StartNode>().FirstOrDefault();
+                var dialogueId = NodePortHelper.GetPortValue<int>(startNode?.GetInputPortByName("Dialogue Id"));
+     
+                var runtimeGraph = AssetDatabase.AssetPathExists($"Assets/Resources/Configs/Dialogues/{dialogueId}.asset")?
+                    AssetDatabase.LoadAssetAtPath<RuntimeDialogueGraph>($"Assets/Resources/Configs/Dialogues/{dialogueId}.asset"):
+                    CreateInstance<RuntimeDialogueGraph>();
+                EditorUtility.SetDirty(runtimeGraph);
                 runtimeGraph.AllNodes = new();
 
                 var nodeIdMap = new Dictionary<INode, string>();
@@ -49,9 +56,7 @@ namespace Editor
                     nodeIdMap[node] = Guid.NewGuid().ToString();
                 }
 
-                var startNode = editorGraph.GetNodes().OfType<StartNode>().FirstOrDefault();
-                runtimeGraph.DialogueId =
-                    NodePortHelper.GetPortValue<int>(startNode?.GetInputPortByName("Dialogue Id"));
+                runtimeGraph.DialogueId = dialogueId;
                 var entryPort = startNode?.GetOutputPorts().FirstOrDefault()?.firstConnectedPort;
                 if (entryPort != null) runtimeGraph.EntryNodeId = nodeIdMap[entryPort.GetNode()];
 
@@ -70,9 +75,10 @@ namespace Editor
                     ((DialogueNode)iNode).Setup(runtimeNode, nodeIdMap);
                     runtimeGraph.AllNodes.Add(runtimeNode);
                 }
-
-                AssetDatabase.CreateAsset(runtimeGraph,
-                    $"Assets/Resources/Configs/Dialogues/{runtimeGraph.DialogueId}.asset");
+                
+                if(!AssetDatabase.AssetPathExists($"Assets/Resources/Configs/Dialogues/{dialogueId}.asset"))
+                    AssetDatabase.CreateAsset(runtimeGraph,$"Assets/Resources/Configs/Dialogues/{runtimeGraph.DialogueId}.asset");
+                AssetDatabase.SaveAssetIfDirty(runtimeGraph);
                 UploadToSheets(runtimeGraph);
             }
             LocalizationManager.LoadLocalizationTable();
@@ -88,6 +94,7 @@ namespace Editor
                 var sheet = node.Character.ToString();
                 uniqueCharacters.Add(node.Character);
                 var key = $"{sheet}_{graph.DialogueId}_{node.NodeId}";
+                Debug.Log(key);
                 mainLines.Add((key, node.Text));
             }
             
@@ -101,8 +108,10 @@ namespace Editor
                     i++;
                 }
             }
+            Debug.Log("unique count"+ uniqueCharacters.Count);
             foreach (var uniqueCharacter in uniqueCharacters)
             {
+                Debug.Log("unique "+ uniqueCharacter);
                 LocalizationExporter.Export(
                     uniqueCharacter.ToString(),
                     graph.DialogueId,

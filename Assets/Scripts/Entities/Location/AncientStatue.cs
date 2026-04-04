@@ -18,8 +18,7 @@ namespace Entities.Location
         [SerializeField] private SpeakableCharacter _teo;
         [SerializeField] private RuntimeDialogueGraph _graph;
         private const int _effectTime = 180;
-        [Inject] private GlobalData _globalData;
-        public bool CanInteract { get; private set; } = true;
+        public bool CanInteract { get; private set; }
 
         private void Start()
         {

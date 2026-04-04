@@ -79,7 +79,7 @@ namespace Systems.Abilities
 
             input.actions["ActivateAbilities"].started += _ => StartCasting();
             input.actions["ActivateAbilities"].canceled += _ => StopCasting();
-            input.actions["ConfirmAbility"].canceled += _ => ConfirmAbility(_selectedIndex);
+            input.actions["ConfirmAbility"].performed += _ => ConfirmAbility(_selectedIndex);
             await UniTask.Delay(100);
             SelectAbility(0);
         }
@@ -113,7 +113,7 @@ namespace Systems.Abilities
 
         private void StartCasting()
         {
-            if (_confirmedAbilities.Count <= 0 || _allAbilities.Count <= 0) return;
+            if (_confirmedAbilities.Count <= 0 || _allAbilities.Count <= 0 || _globalData.Get<RuntimePlayerData>().CurrentCells == 0) return;
             
             _activeAbilities.AddRange(_confirmedAbilities);
             if (_activeAbilities.Count > 1)

@@ -8,7 +8,7 @@ namespace Data
         public SerializedDictionary<string, bool> SavableObjects = new();
         public SerializedDictionary<string, int> SavableNpcState = new();
         public List<int> CollectedStars = new();
-        public List<int> CreaturesIds = new();
+        public HashSet<int> CreaturesIds = new();
         public int MaxCreatures;
         public List<int> ActivatedStatues = new(){0};
     }

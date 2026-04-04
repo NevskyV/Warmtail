@@ -69,7 +69,7 @@ namespace Systems
         public void ConsumeCurrentCell()
         {
             var runtime = _globalData.Get<RuntimePlayerData>();
-            if (runtime.CurrentCells <= 0) return;
+            if (runtime.CurrentCells <= 0 || runtime.CurrentCellProgress == 0f) return;
 
             _globalData.Edit<RuntimePlayerData>(data =>
             {
@@ -92,10 +92,9 @@ namespace Systems
 
         public void AddCell()
         {
-            var max = MaxCells;
             _globalData.Edit<RuntimePlayerData>(data =>
             {
-                data.CurrentCells = Mathf.Min(data.CurrentCells + 1, max);
+                data.CurrentCells = MaxCells;
             });
         }
 

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 817997006489199264}
   - component: {fileID: 8766717550607835501}
   - component: {fileID: 5870361071180809446}
+  - component: {fileID: -947893010696147967}
   m_Layer: 0
   m_Name: Fish
   m_TagString: Untagged
@@ -130,13 +131,13 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200535434524787944}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
+  m_LinearDamping: 1
+  m_AngularDamping: 1
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -161,12 +162,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcee3ec999d4425c811217f6e7809e39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Creatures.MovableCreature
+  _id: 1
   _temperature: 1
   _animator: {fileID: 0}
   _interactionCooldown: 1
   _speed: 5
-  _rotationSpeed: 400
+  _rotationSpeed: 360
+  _pathUpdateTick: 0.7
   _nextWaypointDist: 0.2
-  _pathUpdateTick: 0.5
-  _rotationOffset: {x: 0, y: 0, z: -1}
   _target: {fileID: 0}
+  _curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _rotationOffset: -90
+--- !u!58 &-947893010696147967
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200535434524787944}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.32

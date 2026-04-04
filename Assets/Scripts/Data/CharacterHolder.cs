@@ -11,6 +11,7 @@ namespace Data
         [SerializeField] private List<CharacterConfig> _characters;
         
         public List<CharacterConfig> Characters => _characters;
+        public Sprite UnknownSprite;
     }
 
     [Serializable]

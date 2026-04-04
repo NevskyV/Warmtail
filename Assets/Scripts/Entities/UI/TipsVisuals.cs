@@ -42,6 +42,8 @@ namespace Entities.UI
             }
         }
 
+        public void ShowTip(int index) => ShowTip(_tips[_playerInput.currentControlScheme][index].Action);
+
         public async void ShowTip(InputAction reference)
         {
             print(_playerInput.currentControlScheme);

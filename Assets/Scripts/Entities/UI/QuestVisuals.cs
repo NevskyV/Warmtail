@@ -1,4 +1,5 @@
-﻿using AYellowpaper.SerializedCollections;
+﻿using System;
+using AYellowpaper.SerializedCollections;
 using System.Collections.Generic;
 using System.IO;
 using Cysharp.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace Entities.UI
     public class QuestVisuals : MonoBehaviour
     {
         [Title("Settings")]
-        [SerializeField] private List<QuestData> _allQuests;
+        [SerializeField] private List<QuestData> _allQuests = new();
         [SerializeField] private Camera _cam;
 
         [SerializeField, Dropdown(nameof(GetDropdownStrings))]
@@ -31,7 +32,7 @@ namespace Entities.UI
         [SerializeField] private GameObject _questPrefab;
         [SerializeField] private RectTransform _questHud;
         [SerializeField, PreviewObject] private Sprite _mapMarkSprite;
-        
+        [SerializeField] private float _completeAnimationDuration = 1.5f;
         private SerializedDictionary<QuestData, List<MarksVisuals.Mark>> _createdMarks;
         private SerializedDictionary<QuestData, GameObject> _createdQuests;
 
@@ -63,7 +64,7 @@ namespace Entities.UI
             var ids = _globalData.Get<SavablePlayerData>().QuestIds;
             foreach (var id in ids)
             {
-                var quest = AllQuests.Find(x => x.Id == id.Key);
+                var quest = _allQuests.Find(x => x.Id == id.Key);
                 if(quest) QuestSystem.StartQuest(quest, id.Value);
             }
         }
@@ -99,6 +100,7 @@ namespace Entities.UI
 
         public void UpdateProgress(QuestData data, Transform questObj = null)
         {
+            var questIds = _globalData.Get<SavablePlayerData>().QuestIds;
             if (!_createdQuests.ContainsKey(data)) return;
             if (questObj == null)
             {
@@ -107,10 +109,13 @@ namespace Entities.UI
             if(_surfacingSystem.CurrentLayerIndex == data.Layer){
                 var allQuestCount = data.Sequence.Count;
                 var questState = 0;
-                print(_globalData.Get<SavablePlayerData>().QuestIds.Keys.Count);
-                if (data.QuestType == QuestType.Serial) questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id][0];
-                if (data.QuestType == QuestType.Parallel) questState = _globalData.Get<SavablePlayerData>().QuestIds[data.Id].Count;
                 
+                if (questIds.Keys.Count > 0)
+                {
+                    if (data.QuestType == QuestType.Serial) questState = questIds[data.Id][0];
+                    if (data.QuestType == QuestType.Parallel) questState = questIds[data.Id].Count;
+                }
+
                 questObj.GetChild(2).GetComponent<LocalizedText>().SetNewKey(_correctLayerState);
                 questObj.GetChild(2).GetChild(0).GetComponent<TMP_Text>().text = $"{questState}/{allQuestCount}";
             }
@@ -121,12 +126,25 @@ namespace Entities.UI
             }
         }
         
-        public void DestroyQuest(QuestData data)
+        public async void DestroyQuest(QuestData data)
         {
-            if (_createdQuests.ContainsKey(data)) Destroy(_createdQuests[data]);
-            if (_createdMarks.ContainsKey(data)) DestroyMarks(data);
-            if (_createdMarks.ContainsKey(data)) _createdMarks.Remove(data);
-            if (_createdQuests.ContainsKey(data)) _createdQuests.Remove(data);
+            if (_createdMarks.ContainsKey(data))
+            {
+                DestroyMarks(data);
+                _createdMarks.Remove(data);
+            }
+
+            if (_createdQuests.ContainsKey(data))
+            {
+                _createdQuests[data].transform.GetChild(3).GetComponent<TMP_Text>().text = "+" + data.Reward;
+                _globalData.Edit<SavablePlayerData>(player => { player.Shells += (int)data.Reward; });
+                var animator = _createdQuests[data].GetComponent<Animator>();
+                animator.SetTrigger("Complete");
+                await UniTask.Delay(TimeSpan.FromSeconds(_completeAnimationDuration));
+
+                Destroy(_createdQuests[data]);
+                _createdQuests.Remove(data);
+            }
         }
         
         public void SpawnMarks(QuestData data, Vector2 markPos)

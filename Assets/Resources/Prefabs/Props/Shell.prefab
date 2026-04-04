@@ -212,7 +212,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 146d1abf142ad0444a6c8b116d59a057, type: 2}
+  - {fileID: 2100000, guid: dc6aae19e3e377445b1714bef2d36b3f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -293,6 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd2b7c4d2744807a36bb70986816af2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Probs.Shell
+  _id:
+    Value: 
   _warmFactor: 0.27
   _warmEvent:
     m_PersistentCalls:

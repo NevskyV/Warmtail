@@ -12,74 +12,112 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa871b3d15394443b22bf02d69a17fd0, type: 3}
   m_Name: 3
   m_EditorClassIdentifier: Assembly-CSharp::Data.RuntimeDialogueGraph
-  <EntryNodeId>k__BackingField: 4fd2d804-3d29-4a80-b7b6-8f1b62c3c8e2
+  <EntryNodeId>k__BackingField: fe7ba578-d306-4308-bc25-db47fd4866b0
   <AllNodes>k__BackingField:
-  - rid: 6510803294068408584
-  - rid: 6510803294068408585
-  - rid: 6510803294068408586
-  - rid: 6510803294068408587
-  - rid: 6510803294068408588
-  - rid: 6510803294068408589
+  - rid: 4719408536454955191
+  - rid: 4719408536454955192
+  - rid: 4719408536454955193
+  - rid: 4719408536454955194
+  - rid: 4719408536454955195
+  - rid: 4719408536454955196
+  - rid: 4719408536454955197
+  - rid: 4719408536454955198
+  - rid: 4719408536454955199
   <DialogueId>k__BackingField: 3
   references:
     version: 2
     RefIds:
-    - rid: 6510803294068408584
+    - rid: 4719408536454955191
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 4fd2d804-3d29-4a80-b7b6-8f1b62c3c8e2
+        NodeId: fe7ba578-d306-4308-bc25-db47fd4866b0
         NextNodeIds:
-        - 9ae625d4-bff4-4d9a-801a-d6c7d4b478bd
+        - 4c9b92ae-2574-4dc7-8a22-7452143dacf4
         Text: "<link=wave>\u0412\u0410-\u0410-\u0410-\u0410-\u0410\u0423!</link>"
         Character: 0
         Emotion: 3
         DisplayName: 
-    - rid: 6510803294068408585
+    - rid: 4719408536454955192
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 9ae625d4-bff4-4d9a-801a-d6c7d4b478bd
+        NodeId: 4c9b92ae-2574-4dc7-8a22-7452143dacf4
         NextNodeIds:
-        - 39e3d7bb-08b1-4a9b-bb61-dcf23d1638ed
+        - f9e16926-ee7e-46be-8bba-9925a3b90af2
         Text: "\u0411\u043E\u043B\u044C\u0448\u043E\u0439 \u0420\u0438\u0444 \u0434\u0435\u0439\u0441\u0442\u0432\u0438\u0442\u0435\u043B\u044C\u043D\u043E
           \u0411\u041E\u041B\u042C\u0428\u041E\u0419."
         Character: 0
         Emotion: 1
         DisplayName: 
-    - rid: 6510803294068408586
+    - rid: 4719408536454955193
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: 39e3d7bb-08b1-4a9b-bb61-dcf23d1638ed
+        NodeId: f9e16926-ee7e-46be-8bba-9925a3b90af2
         NextNodeIds:
-        - f1dfb315-c9e7-4448-91cd-514a4def3129
+        - fd734ee2-22d5-4166-9b95-c442615bde0f
         Text: "\u0420\u0430\u0434, \u0447\u0442\u043E \u0442\u0435\u0431\u0435 \u043F\u043E\u043D\u0440\u0430\u0432\u0438\u043B\u043E\u0441\u044C,
           {playerName}."
         Character: 1
         Emotion: 1
         DisplayName: 
-    - rid: 6510803294068408587
+    - rid: 4719408536454955194
       type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: f1dfb315-c9e7-4448-91cd-514a4def3129
+        NodeId: fd734ee2-22d5-4166-9b95-c442615bde0f
         NextNodeIds:
-        - c48b294a-f043-4415-8f35-d5029cb1d6e9
+        - e748a67e-eca5-47b0-b9fe-bc3c241dcdcf
         Text: "\u0410 \u0432\u043E\u0442 \u0442\u0443\u0442 \u0442\u044B \u0431\u0443\u0434\u0435\u0448\u044C
           \u0436\u0438\u0442\u044C!"
         Character: 1
         Emotion: 1
         DisplayName: 
-    - rid: 6510803294068408588
-      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
-      data:
-        NodeId: 093c3c8d-f7ab-4a72-b2a4-dba725c28121
-        NextNodeIds: []
-        Text: "\u041F\u043E\u0439\u0434\u0451\u043C \u0432\u043D\u0443\u0442\u0440\u044C."
-        Character: 1
-        Emotion: 0
-        DisplayName: 
-    - rid: 6510803294068408589
+    - rid: 4719408536454955195
       type: {class: ActionNode, ns: Data.Nodes, asm: Assembly-CSharp}
       data:
-        NodeId: c48b294a-f043-4415-8f35-d5029cb1d6e9
+        NodeId: e748a67e-eca5-47b0-b9fe-bc3c241dcdcf
         NextNodeIds:
-        - 093c3c8d-f7ab-4a72-b2a4-dba725c28121
+        - 769d060b-9482-4c1c-bb48-9785a52f8ff2
         EventInd: 4
+    - rid: 4719408536454955196
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 1d602066-9c47-4145-aea1-62f372cd3bed
+        NextNodeIds:
+        - af592186-c5a8-4cc9-9749-cc449faaf7e4
+        Text: "\u041D\u043E \u044F \u043D\u0435 \u043C\u043E\u0433\u0443 \u0435\u0433\u043E
+          \u043F\u0440\u0438\u043D\u044F\u0442\u044C!"
+        Character: 0
+        Emotion: 5
+        DisplayName: 
+    - rid: 4719408536454955197
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: af592186-c5a8-4cc9-9749-cc449faaf7e4
+        NextNodeIds:
+        - 065803a4-5970-4c76-9f54-451473bb863a
+        Text: "\u042F \u0436\u0435 \u0442\u043E\u043B\u044C\u043A\u043E \u0447\u0442\u043E
+          \u0441 \u0432\u0430\u043C\u0438 \u043F\u043E\u0437\u043D\u0430\u043A\u043E\u043C\u0438\u043B\u0441\u044F."
+        Character: 0
+        Emotion: 5
+        DisplayName: 
+    - rid: 4719408536454955198
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 769d060b-9482-4c1c-bb48-9785a52f8ff2
+        NextNodeIds:
+        - 1d602066-9c47-4145-aea1-62f372cd3bed
+        Text: "<link=wave>\u0412-\u0432\u044B \u0441\u0435\u0440\u044C\u0437\u0435\u043D\u043E???</link>"
+        Character: 0
+        Emotion: 5
+        DisplayName: 
+    - rid: 4719408536454955199
+      type: {class: TextNode, ns: Data.Nodes, asm: Assembly-CSharp}
+      data:
+        NodeId: 065803a4-5970-4c76-9f54-451473bb863a
+        NextNodeIds: []
+        Text: "\u0414\u0430 \u043D\u0435 \u043F\u0435\u0440\u0435\u0436\u0438\u0432\u0430\u0439!
+          \u0422\u0443\u0442 \u043D\u0438\u043A\u0442\u043E \u0434\u0430\u0432\u043D\u043E
+          \u043D\u0435 \u0436\u0438\u0432\u0451\u0442, \u043F\u043E\u0439\u0434\u0451\u043C
+          \u0437\u0430 \u043C\u043D\u043E\u0439."
+        Character: 1
+        Emotion: 1
+        DisplayName: 

@@ -232,13 +232,17 @@ namespace Entities.Props
             {
                 _currentGhost.SetActive(true);
             }
-
-            SubscribeToCollider();
-
+            
             if (_currentPointIndex >= _ghostPoints.Count - 1)
             {
                 _onFinished?.Invoke();
+                Destroy(_currentGhost);
+                return;
             }
+
+            SubscribeToCollider();
+
+            
 
             _isMoving = false;
         }

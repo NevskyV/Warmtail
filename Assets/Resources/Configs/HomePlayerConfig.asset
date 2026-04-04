@@ -18,8 +18,6 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
     - rid: 4061568888548098190
       type: {class: PlayerMovement, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
@@ -57,7 +55,7 @@ MonoBehaviour:
       type: {class: InteractionAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
       data:
         <Visual>k__BackingField:
-          rid: -2
+          rid: 4719408536454955200
         _interactionRadius: 2.5
         _interactionOffset: {x: 0, y: 0, z: 0}
     - rid: 4061568888548098192
@@ -71,3 +69,9 @@ MonoBehaviour:
         _vfxOffset: {x: 0, y: 0, z: 0}
         _normalCamZoom: 3.5
         _activeCamZoom: 4
+    - rid: 4719408536454955200
+      type: {class: InteractionVisuals, ns: Systems.AbilitiesVisual, asm: Assembly-CSharp}
+      data:
+        <AbilityIndex>k__BackingField: 1
+        _reference: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+        _actionName: Interact
