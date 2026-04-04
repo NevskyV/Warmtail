@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Data;
 using DG.Tweening;
 using Entities.Localization;
 using Systems;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Zenject;
 
@@ -26,9 +28,15 @@ namespace Entities.UI
         [Inject] private GlobalData _globalData;
         [Inject] private UIStateSystem _uiStateSystem;
         [Inject] private ShoppingSystem _shoppingSystem;
+        [Inject] private PlayerInput _playerInput;
 
         private void Start()
         {
+            _playerInput.actions["Bestiary"].performed += _ =>
+            {
+                if(_globalData.Get<DialogueVarData>().Variables.Find(x => x.Name == "bestiaryOpen").Value == "true")
+                    _uiStateSystem.SwitchCurrentStateAsync(UIState.Bestiary).Forget();
+            };
             _uiStateSystem.OnStateChange += state =>
             {
                 if(state == UIState.Bestiary) LoadConfigs();
