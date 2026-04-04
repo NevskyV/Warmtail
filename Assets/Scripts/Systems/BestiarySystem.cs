@@ -1,4 +1,4 @@
-﻿using Data;
+using Data;
 using Zenject;
 
 namespace Systems
@@ -7,13 +7,16 @@ namespace Systems
     {
         private GlobalData _globalData;
         private ShoppingSystem _shoppingSystem;
+        private CompanionPassiveSystem _companionPassiveSystem;
         private CompanionItemData _companionItemData;
         
         [Inject] 
-        private void Construct(GlobalData globalData, ShoppingSystem shoppingSystem)
+        private void Construct(GlobalData globalData, ShoppingSystem shoppingSystem,
+            CompanionPassiveSystem companionPassiveSystem)
         {
             _globalData = globalData;
             _shoppingSystem = shoppingSystem;
+            _companionPassiveSystem = companionPassiveSystem;
         }
         
         public void AddCreature(int id)
@@ -29,12 +32,13 @@ namespace Systems
             {
                 Reward();
             }
-                
         }
 
         private void Reward()
         {
-            _shoppingSystem.BuyItem(_companionItemData,Character.Finix,true);
+            _shoppingSystem.BuyItem(_companionItemData, Character.Finix, true);
+            if (_companionItemData != null)
+                _companionPassiveSystem?.Register(_companionItemData.Type);
         }
     }
 }

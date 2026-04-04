@@ -15,7 +15,9 @@ namespace Systems
         public const float Neutral = 50f;
         public const float Min = 0f;
         public const float Max = 100f;
-
+        
+        public event Func<bool> OnBeforeCritical;
+        
         private float _driftSpeed = 1f;
         private float _hotThreshold = 65f;
         private float _criticalCold = 5f;
@@ -110,6 +112,19 @@ namespace Systems
         {
             if (_isCritical) return;
             if (temp > _criticalCold && temp < _criticalHot) return;
+
+            if (OnBeforeCritical != null)
+            {
+                foreach (Func<bool> handler in OnBeforeCritical.GetInvocationList())
+                {
+                    if (handler.Invoke())
+                    {
+                        _globalData.Edit<RuntimePlayerData>(data => data.Temperature = Neutral);
+                        RestoreSpeed();
+                        return;
+                    }
+                }
+            }
 
             _isCritical = true;
             _globalData.Edit<RuntimePlayerData>(data => data.Temperature = Neutral);
