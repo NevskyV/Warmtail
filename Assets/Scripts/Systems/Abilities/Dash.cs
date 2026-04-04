@@ -15,7 +15,6 @@ namespace Systems.Abilities
     public class DashAbility : WarmthAbility, IFixedTickable
     {
         [SerializeField] private float _destroyRadius = 1.5f;
-        [SerializeField] private float _dashCooldownDuration = 1f;
         [SerializeField] private int _normalSpeed = 60;
         [SerializeField] private int _dashSpeed = 100;
         [SerializeField] private int _slowdownSpeed = 30;
@@ -114,7 +113,7 @@ namespace Systems.Abilities
                 await UniTask.Delay(TimeSpan.FromSeconds(_slowdownDuration));
                 
                 ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
-                await UniTask.Delay(TimeSpan.FromSeconds(_dashCooldownDuration));
+                await UniTask.Delay(TimeSpan.FromSeconds(Cooldown));
             }
         }
 

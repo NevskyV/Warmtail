@@ -56,14 +56,22 @@ namespace Entities.UI
 
         private void OnEnable()
         {
-            if(_playerInput)
+            if (_playerInput)
+            {
                 _playerInput.actions["Escape"].performed += EscapeTransition;
+                _playerInput.actions["UI/Escape"].performed += EscapeTransition;
+            }
+
             _screenshotSystem.ScreenShotState += ChangeObjectState;
         }
         private void OnDestroy()
         {
-            if(_playerInput)
+            if (_playerInput)
+            {
                 _playerInput.actions["Escape"].performed -= EscapeTransition;
+                _playerInput.actions["UI/Escape"].performed -= EscapeTransition;
+            }
+
             _screenshotSystem.ScreenShotState -= ChangeObjectState;
         }
 
@@ -87,12 +95,14 @@ namespace Entities.UI
                         _abilityController.EnableLastAbilities();
                         if(_pauseAnimator)
                             _pauseAnimator.SetBool(InPause, false);
+                        _playerInput.SwitchCurrentActionMap("Player");
                         break;
                     case UIState.Hidden or UIState.Pause:
                         DOTween.To(() => _pauseVolume.weight, x => _pauseVolume.weight = x, 1, _crossFadeTime);
+                        _abilityController.DisableAllAbilities();
+                        _playerInput.SwitchCurrentActionMap("UI");
                         if (state == UIState.Pause){
                             _warmthGroup.DOFade(1, _crossFadeTime);
-                            _abilityController.DisableAllAbilities();
                             if (_pauseAnimator)
                                 _pauseAnimator.SetBool(InPause, true);
                         }
@@ -104,6 +114,7 @@ namespace Entities.UI
                     default:
                         _abilityController.DisableAllAbilities();
                         _warmthGroup.DOFade(0, _crossFadeTime);
+                        _playerInput.SwitchCurrentActionMap("UI");
                         break;
                 }
             }

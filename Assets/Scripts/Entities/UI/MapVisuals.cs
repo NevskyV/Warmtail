@@ -50,9 +50,10 @@ namespace Entities.UI
             _uiStateSystem = uiStateSystem;
 
             _playerInput.actions["Map"].performed += ChangeMapVisibility;
-            _playerInput.actions["Click"].performed += StartDrag;
-            _playerInput.actions["Click"].canceled += EndDrag;
-            _playerInput.actions["Scroll"].performed += ScaleMap;
+            _playerInput.actions["UI/Map"].performed += ChangeMapVisibility;
+            _playerInput.actions["UI/Click"].performed += StartDrag;
+            _playerInput.actions["UI/Click"].canceled += EndDrag;
+            _playerInput.actions["UI/ScrollMap"].performed += ScaleMap;
 
             _targetPos = _rectMap.anchoredPosition;
             _targetScale = _rectMap.localScale.x;
@@ -67,7 +68,7 @@ namespace Entities.UI
 
         private void Update()
         {
-            Vector2 moveInput = _playerInput.actions["Move"].ReadValue<Vector2>();
+            Vector2 moveInput = _playerInput.actions["UI/MoveMap"].ReadValue<Vector2>();
             if (moveInput.sqrMagnitude > 0.0001f)
             {
                 _targetPos += moveInput * (_moveSpeed * Time.deltaTime);

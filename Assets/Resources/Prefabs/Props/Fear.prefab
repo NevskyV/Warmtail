@@ -91,6 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62499b0f46c4ef7419e619246f7a83bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.FearCore
+  _id:
+    Value: 
   _locked: 1
   _fearConfig: {fileID: 11400000, guid: e65b326e7a0cd834393ef5fe79f4863c, type: 2}
   "_\u043EbjectsToDisable": []
@@ -633,7 +635,7 @@ MonoBehaviour:
   - {fileID: 1629706892914999442}
   - {fileID: 3239162045009569131}
   _ghostPrefab: {fileID: 1538068796962420400, guid: 01a15013b24709e47a785bab091993d3, type: 3}
-  _sparklePrefab: {fileID: 1538068796962420400, guid: 924faf1edbcaa984ea1c24440256a8f3, type: 3}
+  _sparklePrefab: {fileID: 4521576057855164183, guid: 0154e97efa05b14469ead7c3a5dc3950, type: 3}
   _sparkleMoveDuration: 1
   _sparkleEase: 7
   _sparkleCurveOffset: 1.5
@@ -884,6 +886,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a470ad874eeae742b027af42233840d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Props.FearPortal
+  _id:
+    Value: 
   _baseObjects:
   - {fileID: 5181204630676896465}
   _portalObjects:

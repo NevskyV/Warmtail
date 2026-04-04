@@ -23,7 +23,7 @@ namespace Data.Player
         
         public bool IsHomeOpened;
         public bool IsInFearWorld;
-        public bool GotAmulet;
+        public int CurrentTrail;
     }
     
     [Serializable]
