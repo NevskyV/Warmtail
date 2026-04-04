@@ -34,10 +34,9 @@ MonoBehaviour:
         Cooldown: 0
         <BaseMethodName>k__BackingField: ActivateDash
         _destroyRadius: 1.5
-        _dashCooldownDuration: 1
-        _normalSpeed: 130
-        _dashSpeed: 230
-        _slowdownSpeed: 30
+        _normalSpeed: 100
+        _dashSpeed: 260
+        _slowdownSpeed: 50
         _slowdownDuration: 2
     - rid: 676710221457391728
       type: {class: MetabolismAbility, ns: Systems.Abilities, asm: Assembly-CSharp}
