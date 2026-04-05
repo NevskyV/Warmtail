@@ -4,8 +4,6 @@ using Interfaces;
 using System.Collections.Generic;
 using Systems;
 using UnityEngine;
-using Zenject;
-
 namespace Entities.Props
 {
     public class FearCore : SavableStateObject, IInteractable
@@ -17,8 +15,6 @@ namespace Entities.Props
         [SerializeField] private int _tailId = -1;
         [SerializeField] private List<GameObject> _оbjectsToEnable = new();
         
-        [Inject] private GlobalData _globalData;
-
         private void Awake()
         {
             if (_portalPrefab != null)

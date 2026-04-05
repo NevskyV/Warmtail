@@ -96,6 +96,7 @@ namespace Entities.Core
             Container.BindInterfacesAndSelfTo<FearBuffSystem>().FromNew().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<TailSystem>().FromNew().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<CompanionPassiveSystem>().FromNew().AsSingle().NonLazy();
+            Container.Bind<BestiarySystem>().FromNew().AsSingle();
             Container.BindInterfacesAndSelfTo<WarmMemoriesSystem>().FromNew().AsSingle().NonLazy();
             
             QuestSystem questSystem = new();

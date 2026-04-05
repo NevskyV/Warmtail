@@ -1,38 +1,33 @@
-using Data;
-using Data.Player;
+using Interfaces;
 using Systems;
 using UnityEngine;
-using Zenject;
 
 namespace Entities.Puzzle.Modules
 {
-    public class ColdFishLure : MonoBehaviour
+    public class ColdFishLure : Warmable
     {
         [SerializeField] private Transform _targetPosition;
         [SerializeField] private float _followSpeed = 3f;
         [SerializeField] private float _arrivalRadius = 1f;
-        [SerializeField] private float _attractRange = 8f;
 
         private ColdFishLureModule _module;
         private Transform _playerTransform;
+        private bool _active;
         private bool _solved;
-
-        [Inject] private GlobalData _globalData;
-
-        [Inject]
-        private void Construct(Entities.PlayerScripts.Player player)
-        {
-            _playerTransform = player.Rigidbody.transform;
-        }
 
         public void Initialize(ColdFishLureModule module)
         {
             _module = module;
         }
 
+        public override void WarmComplete()
+        {
+            _active = true;
+        }
+
         private void Update()
         {
-            if (_solved) return;
+            if (!_active || _solved) return;
 
             if (_playerTransform == null)
             {
@@ -41,23 +36,8 @@ namespace Entities.Puzzle.Modules
                 else return;
             }
 
-            if (_globalData == null)
-            {
-                _globalData = FindObjectOfType<GlobalData>();
-                if (_globalData == null) return;
-            }
-
-            var data = _globalData.Get<RuntimePlayerData>();
-            bool playerIsHot = data.Temperature > TemperatureSystem.Neutral;
-
-            float distToPlayer = Vector2.Distance(transform.position, _playerTransform.position);
-            bool playerNearby = distToPlayer <= _attractRange;
-
-            if (playerIsHot && playerNearby)
-            {
-                transform.position = Vector2.MoveTowards(transform.position,
-                    _playerTransform.position, _followSpeed * Time.deltaTime);
-            }
+            transform.position = Vector2.MoveTowards(transform.position,
+                _playerTransform.position, _followSpeed * Time.deltaTime);
 
             if (_targetPosition != null)
             {
@@ -71,6 +51,13 @@ namespace Entities.Puzzle.Modules
         {
             _solved = true;
             _module?.Solve();
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            _active = false;
+            _solved = false;
         }
     }
 }
