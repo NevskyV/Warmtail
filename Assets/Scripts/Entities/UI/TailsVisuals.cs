@@ -71,7 +71,7 @@ namespace Entities.UI
                 sprite.enabled = true;
             }
 
-            _currentTrail.transform.position = _center;
+            if(_currentTrail)_currentTrail.transform.position = _center;
             _currentTrail = null;
         }
 
