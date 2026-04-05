@@ -13,13 +13,12 @@ MonoBehaviour:
   m_Name: Event 8
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: 56e1d695-8985-4e44-aa30-647858c2a75f
-  Once: 0
+  <Once>k__BackingField: 0
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
-  NextElement: {fileID: 11400000, guid: 3593bed53f4f56a4c8d7cda0e623e38b, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: 3593bed53f4f56a4c8d7cda0e623e38b, type: 2}
   Element:
     Actions:
-    - rid: 5800212002074788226
     - rid: 5800212216453791904
     Tasks:
     - rid: 5800212002074788225
@@ -33,13 +32,6 @@ MonoBehaviour:
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
         _id: tertilus gameplay
-    - rid: 5800212002074788226
-      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _active: 0
-        _objectIds:
-        - tertilus gameplay
-        _homeScene: 0
     - rid: 5800212216453791904
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

@@ -164,7 +164,7 @@ MonoBehaviour:
         ActiveTailId: -1
         IsHomeOpened: 0
         IsInFearWorld: 0
-        GotAmulet: 0
+        CurrentTrail: 0
     - rid: 4204128997775507584
       type: {class: DialogueVarData, ns: Data, asm: Assembly-CSharp}
       data:
@@ -207,6 +207,12 @@ MonoBehaviour:
           Value: false
         - Type: 1
           Name: bestiaryComplete
+          Value: false
+        - Type: 1
+          Name: bestiaryOpen
+          Value: false
+        - Type: 1
+          Name: fearMenuOpen
           Value: false
     - rid: 4204128997775507585
       type: {class: ShellsData, ns: Data, asm: Assembly-CSharp}

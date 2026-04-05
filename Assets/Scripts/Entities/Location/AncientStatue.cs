@@ -22,14 +22,20 @@ namespace Entities.Location
 
         private void Start()
         {
-            if (_globalData.Get<DialogueVarData>().Variables.Find(x => x.Name == "interactWTeo").Value == "true")
-            {
-                CanInteract = true;
-            }
+            _globalData.SubscribeTo<DialogueVarData>(CheckInteraction);
+            
             if (CanInteract && _globalData.Get<WorldData>().ActivatedStatues.Contains(_statueId))
             {
                 EnableEffect();
                 CanInteract = false;
+            }
+        }
+
+        private void CheckInteraction()
+        {
+            if (_globalData.Get<DialogueVarData>().Variables.Find(x => x.Name == "interactWTeo").Value == "true")
+            {
+                CanInteract = true;
             }
         }
         

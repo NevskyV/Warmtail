@@ -83,7 +83,7 @@ namespace Entities.UI
         public void ShowVisuals()
         {
             _uiStateSystem.SwitchCurrentStateAsync(UIState.Dialogue);
-            _input.actions.FindAction("Space").performed += RequestNewNode;
+            _input.actions.FindAction("Space").canceled += RequestNewNode;
             DOTween.To(() => _cam.Lens.OrthographicSize, value => _cam.Lens.OrthographicSize = value, _dialogueZoom, 1);
         }
         
@@ -91,7 +91,7 @@ namespace Entities.UI
         {
             if (_uiStateSystem.CurrentState != UIState.Shop)
                 _uiStateSystem.SwitchCurrentStateAsync(UIState.Normal);
-            _input.actions.FindAction("Space").performed -= RequestNewNode;
+            _input.actions.FindAction("Space").canceled -= RequestNewNode;
             DOTween.To(() => _cam.Lens.OrthographicSize, value => _cam.Lens.OrthographicSize = value, _defaultZoom, 1);
         }
         
