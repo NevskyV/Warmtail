@@ -36,6 +36,7 @@ namespace Entities.Puzzle.Modules
         private void Deactivate()
         {
             _active = false;
+            base.Reset();
             if (_spriteRenderer && _offSprite) _spriteRenderer.sprite = _offSprite;
             _module?.ReportDeactivated();
         }

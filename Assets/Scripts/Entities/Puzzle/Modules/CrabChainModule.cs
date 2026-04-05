@@ -1,8 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
-using Entities.Creatures;
-using Interfaces;
 using UnityEngine;
 
 namespace Entities.Puzzle.Modules
@@ -11,31 +8,32 @@ namespace Entities.Puzzle.Modules
     public class CrabChainModule : PuzzleModule
     {
         [SerializeField] private List<ChainCrab> _crabsInOrder = new();
-        [SerializeField] private float _chainDelaySeconds = 0.5f;
+
+        private int _warmedCount;
 
         public override void Activate()
         {
             if (_crabsInOrder.Count == 0) return;
-            _crabsInOrder[0].Initialize(0, this);
+            _warmedCount = 0;
+            for (int i = 0; i < _crabsInOrder.Count; i++)
+            {
+                if (_crabsInOrder[i] == null) continue;
+                bool playerActivatable = i == 0;
+                _crabsInOrder[i].Initialize(i, this, playerActivatable);
+            }
         }
 
         public void ReportCrabWarmed(int index)
         {
-            int next = index + 1;
-            if (next >= _crabsInOrder.Count)
-            {
+            _warmedCount++;
+            if (_warmedCount >= _crabsInOrder.Count)
                 Solve();
-                return;
-            }
-            PropagateChain(next).Forget();
         }
 
-        private async UniTaskVoid PropagateChain(int index)
+        public override void Reset()
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(_chainDelaySeconds));
-            if (_crabsInOrder[index] == null) return;
-            _crabsInOrder[index].Initialize(index, this);
-            _crabsInOrder[index].TriggerChain();
+            base.Reset();
+            _warmedCount = 0;
         }
     }
 }

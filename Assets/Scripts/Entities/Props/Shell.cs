@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Data;
 using Data.Player;
 using DG.Tweening;
@@ -17,15 +17,13 @@ namespace Entities.Props
         [SerializeField] private int _shellsAmount;
         [SerializeField] private string _sfx;
         [SerializeField] private ParticleSystem _vfx;
-        private GlobalData _globalData;
         private MaterialPropertyBlock _propertyBlock;
         private SpriteRenderer _renderer;
         private Tween _tween;
- 
+
         [Inject]
-        public void Construct(GlobalData globalData)
+        public void Construct()
         {
-            _globalData = globalData;
             DailySystem.OnLoadedResources += LoadShell;
             DailySystem.OnDiscardedResources += DiscardShell;
         }
