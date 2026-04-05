@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using Data;
 using Data.Player;
+using Entities.Localization;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,8 @@ namespace Entities.UI
         [SerializeField] private List<FearConfig> _fears;
         [SerializeField] private List<SpriteRenderer> _playerSpites;
         [SerializeField] private List<TrailRenderer> _trails;
+        [SerializeField] private LocalizedText _nameText;
+        [SerializeField] private LocalizedText _descriptionText;
         [SerializeField] private float _speed;
         [SerializeField] private float _radius;
 
@@ -24,6 +27,7 @@ namespace Entities.UI
         [Inject] private CinemachineCamera _cam;
         private Vector2 _center;
         private TrailRenderer _currentTrail;
+        private float _angle;
 
         private void Start()
         {
@@ -54,8 +58,10 @@ namespace Entities.UI
             {
                 sprite.enabled = false;
             }
-
-            _currentTrail = _trails[_globalData.Get<SavablePlayerData>().CurrentTrail];
+            
+            var data = _globalData.Get<SavablePlayerData>();
+            _currentTrail = _trails[data.FearIds[data.CurrentTrail]];
+            _center = _currentTrail.transform.position;
         }
 
         private void HideVisuals()
@@ -64,27 +70,38 @@ namespace Entities.UI
             {
                 sprite.enabled = true;
             }
-            
+
+            if(_currentTrail)_currentTrail.transform.position = _center;
             _currentTrail = null;
         }
 
         public void SwitchCurrentTrail(int offset)
         {
-            var newTrail = _globalData.Get<SavablePlayerData>().CurrentTrail + offset;
+            var data = _globalData.Get<SavablePlayerData>();
+            var newTrail = data.FearIds[data.CurrentTrail + offset];
+            if(newTrail >= data.FearIds.Count) newTrail = 0;
+            else if(newTrail < 0) newTrail =  data.FearIds.Count - 1;
             _globalData.Edit<SavablePlayerData>(data => data.CurrentTrail = newTrail);
             for (int i = 0; i < _trails.Count; i++)
             {
                 _trails[i].gameObject.SetActive(i == newTrail);
             }
-            _currentTrail = _trails[newTrail];
+            _currentTrail = _currentTrail? _trails[newTrail] : null;
+            _nameText.SetNewKey(_fears[newTrail].Name);
+            _descriptionText.SetNewKey(_fears[newTrail].Description);
         }
 
         private void Update()
         {
-            if(_currentTrail)
-                _currentTrail.transform.localPosition = 
-                    new Vector2(_center.x + Mathf.Cos(_speed * Time.deltaTime) * _radius,
-                                _center.y + Mathf.Sin(_speed * Time.deltaTime) * _radius);
+            if (_currentTrail)
+            {
+                _angle += _speed * Time.deltaTime;
+                
+                float x = Mathf.Cos(_angle) * _radius;
+                float y = Mathf.Sin(_angle) * _radius;
+                
+                _currentTrail.transform.position = _center + new Vector2(x, y);
+            }
         }
     }
 }

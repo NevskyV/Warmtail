@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Pushable
+  - FishDestination
   layers:
   - Default
   - TransparentFX
@@ -13,10 +14,10 @@ TagManager:
   - Water
   - UI
   - VisibleObjects
-  - 131312312
+  - Background
   - LayerTransition
   - Walls
-  - 
+  - Pushable
   - 
   - 
   - 
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Walls
     uniqueID: 1981055533
+    locked: 0
+  - name: Pushable
+    uniqueID: 768984007
     locked: 0
   m_RenderingLayers:
   - Default

@@ -4,28 +4,26 @@ using Zenject;
 
 namespace Entities.Props
 {
+    [RequireComponent(typeof(Collider2D))]
     public class WaterFlow : MonoBehaviour
     {
         [SerializeField] private Vector2 _flowDirection = Vector2.right;
         [SerializeField] private float _flowForce = 10f;
 
         private Rigidbody2D _playerRb;
+        private Collider2D _collider2D;
 
         [Inject]
         private void Construct(Player player)
         {
             _playerRb = player.Rigidbody;
+            _collider2D = GetComponent<Collider2D>();
         }
 
         private void FixedUpdate()
         {
-            if (_playerRb == null) return;
-
-            var col = GetComponent<Collider2D>();
-            if (col == null) return;
-
-            if (col.OverlapPoint(_playerRb.position))
-                _playerRb.AddForce(_flowDirection.normalized * _flowForce * Time.fixedDeltaTime, ForceMode2D.Force);
+            if (_collider2D.OverlapPoint(_playerRb.position))
+                _playerRb.AddForce(_flowDirection.normalized * (_flowForce * Time.fixedDeltaTime), ForceMode2D.Force);
         }
 
         private void OnTriggerStay2D(Collider2D other)
