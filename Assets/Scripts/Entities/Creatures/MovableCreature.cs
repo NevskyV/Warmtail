@@ -9,6 +9,7 @@ namespace Entities.Creatures
     [RequireComponent(typeof(Rigidbody2D), typeof(Seeker))]
     public class MovableCreature : Creature
     {
+        [SerializeField] private bool _updateWhenFar;
         [SerializeField] private float _speed = 5f;
         [SerializeField] private float _rotationSpeed = 360f; // градусов в секунду
         [SerializeField] private float _pathUpdateTick = 1f;
@@ -43,7 +44,8 @@ namespace Entities.Creatures
         private void UpdatePath()
         {
             if (_target == null) return;
-            if (Mathf.Approximately(_target.position.x, transform.position.x) && 
+            if (_updateWhenFar && !Mathf.Approximately(_target.position.x, transform.position.x) && 
+                !Mathf.Approximately(_target.position.y, transform.position.y) || !_updateWhenFar && Mathf.Approximately(_target.position.x, transform.position.x) && 
                 Mathf.Approximately(_target.position.y, transform.position.y))
             {
                 OnMoveComplete?.Invoke(_target);
@@ -112,6 +114,7 @@ namespace Entities.Creatures
         public void UpdateTarget(Transform target)
         {
             _target = target;
+            if (target == null) return;
             _seeker.StartPath(transform.position, _target.position, OnPathComplete);
         }
     }

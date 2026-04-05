@@ -91,7 +91,7 @@ namespace Entities.UI
             _abilitiesSystem.OnStopCast += StopCast;
             _abilitiesSystem.OnAddAbility += AddAbility;
             
-            _globalData.SubscribeTo<RuntimePlayerData>(() => HasCells());
+            _globalData.SubscribeTo<RuntimePlayerData>(() => HasCells(null));
         }
 
         private void Start()
@@ -210,7 +210,7 @@ namespace Entities.UI
         private void Cast(List<int> warmthAbilities)
         {
             _isCasting = true;
-            if (!HasCells()) return;
+            if (!HasCells(warmthAbilities)) return;
             SetAbilitiesGrey(warmthAbilities, _activeOpacity, _activeAmplitude);
             SetAbilitiesOutline(warmthAbilities);
         }
@@ -218,7 +218,7 @@ namespace Entities.UI
         private void StopCast(List<int> warmthAbilities)
         {
             _isCasting = false;
-            if (!HasCells()) return;
+            if (!HasCells(warmthAbilities)) return;
             SetAbilitiesGrey(warmthAbilities, _defaultOpacity, _defaultAmplitude);
             SetAbilitiesOutline(warmthAbilities);
         }
@@ -254,11 +254,12 @@ namespace Entities.UI
             HideAbilities();
         }
 
-        private bool HasCells()
+        private bool HasCells(List<int> warmthAbilities)
         {
             if (_globalData.Get<RuntimePlayerData>().CurrentCells == 0)
             {
-                SetAbilitiesGrey(new(), _disableOpacity, _activeAmplitude);
+                SetAbilitiesGrey(new(), _disableOpacity, _defaultAmplitude);
+                SetAbilitiesOutline(warmthAbilities);
                 return false;
             }
             if(!_isCasting)SetAbilitiesGrey(new(), _defaultOpacity, _defaultAmplitude);

@@ -10,7 +10,7 @@ namespace Entities.Puzzle.Modules
     [Serializable]
     public class ColdFishLureModule : PuzzleModule
     {
-        [SerializeField] private ColdFishLure _fish;
+        [SerializeField] private PullableCreature _fish;
 
         public override void Activate()
         {
