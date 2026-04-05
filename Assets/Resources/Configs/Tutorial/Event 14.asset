@@ -34,7 +34,7 @@ MonoBehaviour:
     - rid: 5800212002074788249
       type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _quest: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
+        _quest: {fileID: 11400000, guid: e62b050b562b8d142a83af9e612deda9, type: 2}
     - rid: 5800212318539743357
       type: {class: ActivateObjectsAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -45,6 +45,7 @@ MonoBehaviour:
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
+        _onLoad: 0
         _objectIds:
         - puzzle finix quest lever
         - puzzle finix quest gear

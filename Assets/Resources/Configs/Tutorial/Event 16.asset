@@ -22,6 +22,7 @@ MonoBehaviour:
     - rid: 5800212002074788253
     - rid: 5800212002074788254
     - rid: 6510803830513074266
+    - rid: 4719408586194944168
     Tasks:
     - rid: 5800212002074788252
   _description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
@@ -31,6 +32,14 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 4719408586194944168
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _onLoad: 0
+        _objectIds:
+        - fear world
+        _homeScene: 0
     - rid: 5800212002074788252
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:

@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using Data;
 using Data.Player;
+using DG.Tweening;
 using Systems;
 using UnityEngine;
 using Zenject;
@@ -9,13 +11,21 @@ namespace Entities.PlayerScripts
     public class TemperatureEffects : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private List<Transform> _scaleTargets;
         [SerializeField] private AnimationCurve _visibilityCurve = new(
             new Keyframe(0f, 0.6f),
             new Keyframe(0.5f, 1f),
             new Keyframe(1f, 0.6f)
         );
+        [SerializeField] private AnimationCurve _widthCurve = new(
+            new Keyframe(0f, 0.6f),
+            new Keyframe(0.5f, 1f),
+            new Keyframe(1f, 1.25f)
+        );
+        [SerializeField] private float _scaleTweenDuration = 0.3f;
 
         private GlobalData _globalData;
+        private Tween _scaleTween;
 
         [Inject]
         private void Construct(GlobalData globalData)
@@ -36,8 +46,26 @@ namespace Entities.PlayerScripts
                 c.a = _visibilityCurve.Evaluate(t);
                 _renderer.color = c;
             }
+
+            ApplyWidth(t);
         }
 
-        private void ApplyWidth(float t) { }
+        private void ApplyWidth(float t)
+        {
+            foreach (var target in _scaleTargets)
+            {
+                if(!target) continue;
+                float targetScale = _widthCurve.Evaluate(t);
+                var newScale = new Vector3(targetScale, target.localScale.y, target.localScale.z);
+
+                _scaleTween?.Kill();
+                _scaleTween = target.DOScale(newScale, _scaleTweenDuration).SetEase(Ease.OutSine);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            _scaleTween?.Kill();
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Entities.Props;
 using Entities.Puzzle.Modules;
 using Entities.Puzzle.Rewards;
@@ -15,9 +15,11 @@ namespace Entities.Puzzle
         
         [Inject] private DiContainer _diContainer;
         
+        private bool _isComplete;
+
         private void Start()
         {
-            _puzzleCompletion = new(_modules.Count);
+            _puzzleCompletion = new List<bool>(new bool[_modules.Count]);
             foreach (var module in _modules)
             {
                 _diContainer.Inject(module);
@@ -29,15 +31,24 @@ namespace Entities.Puzzle
         
         private void CheckCompletion(PuzzleModule module)
         {
-            _puzzleCompletion[_modules.IndexOf(module)] = true;
+            if (_isComplete) return;
+
+            int index = _modules.IndexOf(module);
+            if (index < 0) return;
+
+            _puzzleCompletion[index] = true;
             if (_puzzleCompletion.TrueForAll(x => x))
-            {
                 Reward();
-            }
         }
         
         private void Reward()
         {
+            if (_isComplete) return;
+            _isComplete = true;
+
+            foreach (var module in _modules)
+                module.OnSolve -= CheckCompletion;
+
             _reward.Get();
             ChangeState(false);
         }

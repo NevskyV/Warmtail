@@ -19,8 +19,9 @@ MonoBehaviour:
   <NextElement>k__BackingField: {fileID: 11400000, guid: 17c5365e98d58ba408ce45fea83c0d1b, type: 2}
   Element:
     Actions:
-    - rid: 5800212431756066950
     - rid: 5800212431756066976
+    - rid: 4719408586194944171
+    - rid: 4719408586194944172
     Tasks:
     - rid: 5800212431756066951
   _description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
@@ -31,11 +32,20 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5800212431756066950
-      type: {class: NotificationAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+    - rid: 4719408586194944171
+      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
-        _popup: {fileID: 1307311160032710671, guid: 59dadbe6c4e811a46bb47fe7b48629a0, type: 3}
-        _parentId: popup's parent gameplay
+        _characterId: tertilus gameplay
+        _splineId: tertilus spline after fear gameplay
+        _move: 1
+        _loop: 0
+    - rid: 4719408586194944172
+      type: {class: SplineAnimateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _characterId: finix gameplay
+        _splineId: finix spline after fear 1 gameplay
+        _move: 1
+        _loop: 0
     - rid: 5800212431756066951
       type: {class: SpeakTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:

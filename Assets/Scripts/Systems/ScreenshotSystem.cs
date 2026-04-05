@@ -30,7 +30,7 @@ namespace Systems
             _rootFolderPath = Path.Combine(Application.persistentDataPath, "Screenshots");
             _sceneLoader.SceneStartLoading += DisableAutoScreenshot;
             _sceneLoader.SceneLoaded += EnableAutoScreenshot;
-            _playerInput.actions["F12"].performed += _ => TakeScreenShot(ScreenshotType.User);
+            _playerInput.actions["Screenshot"].performed += _ => TakeScreenShot(ScreenshotType.User);
         }
 
         public async void TakeScreenShot(ScreenshotType type)

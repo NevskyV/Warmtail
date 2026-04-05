@@ -20,6 +20,7 @@ namespace Data.Player
         public SerializedDictionary<int, List<int>> QuestIds;
         public List<int> FearIds = new();
         public int ActiveFearId = -1;
+        public int ActiveTailId = -1;
         
         public bool IsHomeOpened;
         public bool IsInFearWorld;

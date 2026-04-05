@@ -29,8 +29,15 @@ namespace Entities.UI
         {
             _playerInput.actions["FearMenu"].performed += _ =>
             {
-                if(_globalData.Get<DialogueVarData>().Variables.Find(x => x.Name == "fearMenuOpen").Value == "true")
-                    _uiStateSystem.SwitchCurrentStateAsync(UIState.FearMenu).Forget();
+                if (_globalData.Get<DialogueVarData>().Variables.Find(x => x.Name == "fearMenuOpen").Value == "true")
+                {
+                    if(_uiStateSystem.CurrentState == UIState.Normal)
+                        _uiStateSystem.SwitchCurrentStateAsync(UIState.FearMenu).Forget();
+                    else if (_uiStateSystem.CurrentState == UIState.FearMenu)
+                        _uiStateSystem.SwitchCurrentStateAsync(UIState.Normal).Forget();
+                }
+                    
+                    
             };
             _uiStateSystem.OnStateChange += state =>
             {

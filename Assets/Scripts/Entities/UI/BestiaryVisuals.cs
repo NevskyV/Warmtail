@@ -34,8 +34,13 @@ namespace Entities.UI
         {
             _playerInput.actions["Bestiary"].performed += _ =>
             {
-                if(_globalData.Get<DialogueVarData>().Variables.Find(x => x.Name == "bestiaryOpen").Value == "true")
-                    _uiStateSystem.SwitchCurrentStateAsync(UIState.Bestiary).Forget();
+                if (_globalData.Get<DialogueVarData>().Variables.Find(x => x.Name == "bestiaryOpen").Value == "true")
+                {
+                    if(_uiStateSystem.CurrentState == UIState.Normal)
+                        _uiStateSystem.SwitchCurrentStateAsync(UIState.Bestiary).Forget();
+                    else if (_uiStateSystem.CurrentState == UIState.Bestiary)
+                        _uiStateSystem.SwitchCurrentStateAsync(UIState.Normal).Forget();
+                }
             };
             _uiStateSystem.OnStateChange += state =>
             {
