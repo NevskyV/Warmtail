@@ -142,14 +142,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237a0dc99b9b13f4b93f8be38fda2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.Modules.SequenceLever
+  _id:
+    Value: 
   _warmFactor: 0.1
   _warmEvent:
     m_PersistentCalls:
       m_Calls: []
-  _activeDuration: 3
+  _activeDuration: 6
   _spriteRenderer: {fileID: 7741299068490315816}
-  _onSprite: {fileID: -340556097151413547, guid: f0a86fd894371d94ab6acc0895efa0be, type: 3}
-  _offSprite: {fileID: -8064546664992996585, guid: f0a86fd894371d94ab6acc0895efa0be, type: 3}
+  _onSprite: {fileID: -3975624549204834352, guid: 56d95a2c9929ee147bdf2a5abbb7d7e7, type: 3}
+  _offSprite: {fileID: -3867694489055747270, guid: 0ae1a137a585293409dc1d2b18e8da9d, type: 3}
 --- !u!1 &4707107329512706103
 GameObject:
   m_ObjectHideFlags: 0
@@ -292,14 +294,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237a0dc99b9b13f4b93f8be38fda2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.Modules.SequenceLever
+  _id:
+    Value: 
   _warmFactor: 0.1
   _warmEvent:
     m_PersistentCalls:
       m_Calls: []
-  _activeDuration: 3
+  _activeDuration: 6
   _spriteRenderer: {fileID: 3816723314722715811}
-  _onSprite: {fileID: -340556097151413547, guid: f0a86fd894371d94ab6acc0895efa0be, type: 3}
-  _offSprite: {fileID: -8064546664992996585, guid: f0a86fd894371d94ab6acc0895efa0be, type: 3}
+  _onSprite: {fileID: -3975624549204834352, guid: 56d95a2c9929ee147bdf2a5abbb7d7e7, type: 3}
+  _offSprite: {fileID: -3867694489055747270, guid: 0ae1a137a585293409dc1d2b18e8da9d, type: 3}
 --- !u!1 &6882214303507356368
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,6 +480,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 237a0dc99b9b13f4b93f8be38fda2f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Puzzle.Modules.SequenceLever
+  _id:
+    Value: 
   _warmFactor: 0.1
   _warmEvent:
     m_PersistentCalls:

@@ -18,7 +18,7 @@ namespace Systems
         
         public event Func<bool> OnBeforeCritical;
         
-        private float _driftSpeed = 1f;
+        private float _driftSpeed = 0.25f;
         private float _hotThreshold = 65f;
         private float _criticalCold = 5f;
         private float _criticalHot = 95f;

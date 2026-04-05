@@ -68,6 +68,7 @@ namespace Entities.Puzzle.Modules
 
         private void Complete()
         {
+            gameObject.SetActive(false);
             _solved = true;
             _module?.Solve();
         }
