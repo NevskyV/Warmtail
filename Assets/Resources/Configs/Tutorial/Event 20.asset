@@ -31,6 +31,7 @@ MonoBehaviour:
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 0
+        _onLoad: 1
         _objectIds:
         - dialogue after fear
         - tertilus gameplay
@@ -40,6 +41,7 @@ MonoBehaviour:
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
+        _onLoad: 0
         _objectIds:
         - tertilus shop
         - lumi fear world

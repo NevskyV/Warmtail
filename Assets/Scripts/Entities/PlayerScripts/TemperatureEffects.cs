@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Data;
 using Data.Player;
 using DG.Tweening;
@@ -10,7 +11,7 @@ namespace Entities.PlayerScripts
     public class TemperatureEffects : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _renderer;
-        [SerializeField] private Transform _scaleTarget;
+        [SerializeField] private List<Transform> _scaleTargets;
         [SerializeField] private AnimationCurve _visibilityCurve = new(
             new Keyframe(0f, 0.6f),
             new Keyframe(0.5f, 1f),
@@ -51,12 +52,15 @@ namespace Entities.PlayerScripts
 
         private void ApplyWidth(float t)
         {
-            var target = _scaleTarget != null ? _scaleTarget : transform;
-            float targetScale = _widthCurve.Evaluate(t);
-            var newScale = new Vector3(targetScale, target.localScale.y, target.localScale.z);
+            foreach (var target in _scaleTargets)
+            {
+                if(!target) continue;
+                float targetScale = _widthCurve.Evaluate(t);
+                var newScale = new Vector3(targetScale, target.localScale.y, target.localScale.z);
 
-            _scaleTween?.Kill();
-            _scaleTween = target.DOScale(newScale, _scaleTweenDuration).SetEase(Ease.OutSine);
+                _scaleTween?.Kill();
+                _scaleTween = target.DOScale(newScale, _scaleTweenDuration).SetEase(Ease.OutSine);
+            }
         }
 
         private void OnDestroy()

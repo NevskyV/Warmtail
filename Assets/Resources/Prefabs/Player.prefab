@@ -1004,6 +1004,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.PlayerScripts.TemperatureEffects
   _renderer: {fileID: 5180723391565173055}
+  _scaleTargets:
+  - {fileID: 2250985345280370894}
+  - {fileID: 5327608150979566421}
+  - {fileID: 3443423359255971811}
+  - {fileID: 3815858040066255590}
+  - {fileID: 6766679236554003128}
+  - {fileID: 4923077469567905897}
+  - {fileID: 2341553886743251412}
   _visibilityCurve:
     serializedVersion: 2
     m_Curve:
@@ -1037,6 +1045,40 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  _widthCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.006942749
+      value: 0.79677737
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1.25
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  _scaleTweenDuration: 0.3
 --- !u!1 &4136618706733116839
 GameObject:
   m_ObjectHideFlags: 0
@@ -2654,7 +2696,6 @@ GameObject:
   - component: {fileID: 3755738543174450356}
   - component: {fileID: 6347704955744984045}
   - component: {fileID: 6844192179848606129}
-  - component: {fileID: 7112013801775556759}
   m_Layer: 0
   m_Name: bone_1
   m_TagString: Player
@@ -2774,19 +2815,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.26, y: 0}
   m_Radius: 0.25
---- !u!114 &7112013801775556759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8993698924874261376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb38487ce21a499fbdcae375074261bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Entities.PlayerScripts.HeadCollision
-  _minVelocity: 1
 --- !u!1 &9109073560321622875
 GameObject:
   m_ObjectHideFlags: 0
