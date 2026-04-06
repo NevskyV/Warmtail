@@ -18,8 +18,7 @@ namespace Systems.Abilities
         public Action EndAbility { get; set; }
         [field: SerializeReference] public IAbilityVisual Visual { get; set; }
 
-        [Header("Movement Settings")]
-        public float MoveForce = 100f;
+        [Header("Movement Settings")] public float MoveForce = 100f;
 
         [SerializeField] private float _moreForge = 100f;
         [SerializeField] private float _drag = 5f;
@@ -81,7 +80,6 @@ namespace Systems.Abilities
                 _accelerationTimer += Time.fixedDeltaTime;
                 float normalizedTime = Mathf.Clamp01(_accelerationTimer / _accelerationTime);
                 float accelerationMultiplier = _accelerationCurve.Evaluate(normalizedTime);
-
                 Vector2 force = _moveInput * (MoveForce * accelerationMultiplier);
                 rb.AddForce(force * _moreForge, ForceMode2D.Force);
 

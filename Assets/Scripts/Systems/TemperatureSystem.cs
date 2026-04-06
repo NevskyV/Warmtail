@@ -98,14 +98,14 @@ namespace Systems
         {
             if (_baseMoveForce <= 0f) return;
             if (_playerConfig.Abilities[0] is not PlayerMovement movement) return;
-            movement.MoveForce = _baseMoveForce * SpeedCurve.Evaluate(temp / Max);
+            //movement.MoveForce = _baseMoveForce * SpeedCurve.Evaluate(temp / Max);
         }
 
         private void RestoreSpeed()
         {
             if (_baseMoveForce <= 0f) return;
             if (_playerConfig.Abilities[0] is not PlayerMovement movement) return;
-            movement.MoveForce = _baseMoveForce;
+            //movement.MoveForce = _baseMoveForce;
         }
 
         private void CheckCritical(float temp)

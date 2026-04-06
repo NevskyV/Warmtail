@@ -108,12 +108,7 @@ namespace Systems.Abilities
                 _camNoise.enabled = false;
                 _dashLoopRunning = false;
                 _rumble.DisableRumble();
-                
-                ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _slowdownSpeed;
-                await UniTask.Delay(TimeSpan.FromSeconds(_slowdownDuration));
-                
                 ((PlayerMovement)_playerConfig.Abilities[0]).MoveForce = _normalSpeed;
-                await UniTask.Delay(TimeSpan.FromSeconds(Cooldown));
             }
         }
 

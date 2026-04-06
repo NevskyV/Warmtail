@@ -29,6 +29,8 @@ namespace Systems.Abilities
         public Action<List<int>> OnCast;
         public Action<List<int>> OnStopCast;
         public Action<int> OnAddAbility;
+        public List<int> ActiveAbilities => _activeAbilities;
+        public List<int> AllAbilities => _activeAbilities;
         
         [Inject]
         public void Construct(PlayerConfig config, GlobalData globalData, PlayerInput input, ComboSystem comboSystem, SceneLoader loader)

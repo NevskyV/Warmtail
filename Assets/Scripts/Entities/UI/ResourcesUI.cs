@@ -24,6 +24,8 @@ namespace Entities.UI
         [Inject]
         public void Construct(GlobalData globalData)
         {
+            _shellsPos = _shells.GetComponent<RectTransform>().anchoredPosition;
+            _starsPos = _stars.GetComponent<RectTransform>().anchoredPosition;
             _globalData = globalData;
             _globalData.SubscribeTo<SavablePlayerData>(UpdateUI);
         }
@@ -32,8 +34,6 @@ namespace Entities.UI
         {
             UpdateUI();
             _needToAnimate = true;
-            _shellsPos = _shells.GetComponent<RectTransform>().anchoredPosition;
-            _starsPos = _stars.GetComponent<RectTransform>().anchoredPosition;
         }
 
         private async void UpdateUI()
@@ -60,7 +60,7 @@ namespace Entities.UI
                     _stars.transform.DOShakePosition(_transitionDuration, _strength);
                 }
 
-                await UniTask.Delay(TimeSpan.FromSeconds(_transitionDuration) * 0.9f);
+                await UniTask.Delay(TimeSpan.FromSeconds(_transitionDuration) * 1.05f);
             }
 
             _shells.GetComponent<RectTransform>().anchoredPosition = _shellsPos;
