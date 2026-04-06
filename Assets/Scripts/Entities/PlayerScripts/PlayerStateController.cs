@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
 using Data;
+using DG.Tweening;
 using EasyTextEffects.Editor.MyBoxCopy.Extensions;
 using ModestTree;
 using Systems;
@@ -15,7 +16,8 @@ namespace Entities.PlayerScripts
     public class PlayerStateController : MonoBehaviour
     {
         private static readonly int IsSleeping = Animator.StringToHash("IsSleeping");
-        
+        private static readonly int HugIndex = Animator.StringToHash("Hug");
+
         private Player _player;
         private PlayerAbilityController _abilityController;
         private PlayerInput _input;
@@ -48,11 +50,7 @@ namespace Entities.PlayerScripts
         {
             _input.SwitchCurrentActionMap("UI");
             _abilityController.DisableAllAbilities();
-            _rbs.Except(_player.Rigidbody).ForEach(x =>
-            {
-                x.bodyType = RigidbodyType2D.Static;
-                x.simulated = false;
-            });
+            BonesActive(false);
             
             _player.Animator.enabled = true;
             _player.Animator.SetBool(IsSleeping, false);
@@ -63,27 +61,39 @@ namespace Entities.PlayerScripts
             _input.SwitchCurrentActionMap("Player");
             
             _player.Animator.enabled = false;
-            _abilityController.EnableLastAbilities();
-            _rbs.ForEach(x =>
-            {
-                x.bodyType = RigidbodyType2D.Dynamic;
-                x.simulated = true;
-            });
+            BonesActive(true);
         }
         
         public void Sleep()
         {
-            if(_rbs.Count == 0) _rbs = _player.GetComponentsInChildren<Rigidbody2D>().ToList();
-            _rbs.ForEach(x =>
-            {
-                x.bodyType = RigidbodyType2D.Static;
-                x.simulated = false;
-            });
+            BonesActive(false);
             
             _player.Animator.enabled = true;
             _player.Animator.SetBool(IsSleeping, true);
             
             _abilityController.DisableAllAbilities();
+        }
+
+        public async void Hug(Transform character)
+        {
+            BonesActive(false);
+
+            _player.Rigidbody.transform.DORotate(
+                Quaternion.FromToRotation(_player.Rigidbody.transform.position, character.position).eulerAngles, 0.5f);
+            _player.Animator.SetTrigger(HugIndex);
+            await UniTask.Delay(TimeSpan.FromSeconds(_player.Animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.1f) * 2);
+            
+            BonesActive(true);
+        }
+
+        private void BonesActive(bool active)
+        {
+            if(_rbs.Count == 0) _rbs = _player.GetComponentsInChildren<Rigidbody2D>().ToList();
+            _rbs.ForEach(x =>
+            {
+                x.bodyType = active? RigidbodyType2D.Dynamic:RigidbodyType2D.Static;
+                x.simulated = active;
+            });
         }
 
         public void Die()
