@@ -51,24 +51,19 @@ namespace Entities.PlayerScripts
             _input.SwitchCurrentActionMap("UI");
             _abilityController.DisableAllAbilities();
             BonesActive(false);
-            
-            _player.Animator.enabled = true;
             _player.Animator.SetBool(IsSleeping, false);
             
             await UniTask.Delay(TimeSpan.FromSeconds(_player.Animator.GetCurrentAnimatorClipInfo(0)[0].clip.length - 0.1f));
             if (_player.Animator.GetBool(IsSleeping)) return;
             
             _input.SwitchCurrentActionMap("Player");
-            
-            _player.Animator.enabled = false;
+            _abilityController.EnableLastAbilities();
             BonesActive(true);
         }
         
         public void Sleep()
         {
             BonesActive(false);
-            
-            _player.Animator.enabled = true;
             _player.Animator.SetBool(IsSleeping, true);
             
             _abilityController.DisableAllAbilities();
@@ -94,6 +89,7 @@ namespace Entities.PlayerScripts
                 x.bodyType = active? RigidbodyType2D.Dynamic:RigidbodyType2D.Static;
                 x.simulated = active;
             });
+            _player.Animator.enabled = !active;
         }
 
         public void Die()
