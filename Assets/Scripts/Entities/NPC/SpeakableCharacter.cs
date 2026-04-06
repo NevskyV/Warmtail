@@ -39,7 +39,7 @@ namespace Entities.NPC
         
         public void Interact()
         {
-            if (_splineAnimate && Math.Abs(_splineAnimate.ElapsedTime - _splineAnimate.Duration) > 0.1f && _splineAnimate.ElapsedTime > 0.1f) return;
+            if (_splineAnimate && _splineAnimate.IsPlaying) return;
             InteractTrigger();
         }
 

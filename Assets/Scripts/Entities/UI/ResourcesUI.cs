@@ -19,10 +19,13 @@ namespace Entities.UI
         [SerializeField] private float _strength = 5f;
         private GlobalData _globalData;
         private bool _needToAnimate = false;
+        private Vector2 _shellsPos, _starsPos;
         
         [Inject]
         public void Construct(GlobalData globalData)
         {
+            _shellsPos = _shells.GetComponent<RectTransform>().anchoredPosition;
+            _starsPos = _stars.GetComponent<RectTransform>().anchoredPosition;
             _globalData = globalData;
             _globalData.SubscribeTo<SavablePlayerData>(UpdateUI);
         }
@@ -57,9 +60,11 @@ namespace Entities.UI
                     _stars.transform.DOShakePosition(_transitionDuration, _strength);
                 }
 
-                await UniTask.Delay(TimeSpan.FromSeconds(_transitionDuration) * 0.9f);
+                await UniTask.Delay(TimeSpan.FromSeconds(_transitionDuration) * 1.05f);
             }
 
+            _shells.GetComponent<RectTransform>().anchoredPosition = _shellsPos;
+            _stars.GetComponent<RectTransform>().anchoredPosition = _starsPos;
             _shells.text = data.Shells.ToString();
             _stars.text = data.Stars.ToString();
         }

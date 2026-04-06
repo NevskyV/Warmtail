@@ -32,25 +32,23 @@ namespace Entities.UI
         
         private PlayerInput _playerInput;
         private PlayerAbilityController _abilityController;
-        private ScreenshotSystem _screenshotSystem;
         public UIState CurrentState { get; private set; }
         public Action<UIState> OnStateChange { get; set; }
 
         [Inject]
-        private void Construct(PlayerInput input, ScreenshotSystem screenshotSystem, [InjectOptional] PlayerAbilityController abilityController)
+        private void Construct(PlayerInput input, [InjectOptional] PlayerAbilityController abilityController)
         {
             _playerInput = input;
             _abilityController = abilityController;
-            _screenshotSystem = screenshotSystem;
         }
 
-        private void ChangeObjectState(bool state)
+        public void ChangeObjectState(bool state)
         {
             gameObject.SetActive(state);
             if (state)
             {
                 SwitchCurrentStateAsync(UIState.Photo).Forget();
-                _screenshot.sprite = ImageLoadSystem.LoadNewSprite(_screenshotSystem.LastScreenShotPath);
+                _screenshot.sprite = ImageLoadSystem.LoadNewSprite(ScreenshotSystem.LastScreenShotPath);
             }
         }
 
@@ -60,8 +58,6 @@ namespace Entities.UI
             {
                 _playerInput.actions["Escape"].performed += EscapeTransition;
             }
-
-            _screenshotSystem.ScreenShotState += ChangeObjectState;
         }
         private void OnDestroy()
         {
@@ -69,8 +65,6 @@ namespace Entities.UI
             {
                 _playerInput.actions["Escape"].performed -= EscapeTransition;
             }
-
-            _screenshotSystem.ScreenShotState -= ChangeObjectState;
         }
 
         private void EscapeTransition(InputAction.CallbackContext ctx)

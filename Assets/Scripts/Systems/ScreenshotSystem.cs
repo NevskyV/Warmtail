@@ -15,17 +15,18 @@ namespace Systems
         private readonly string _rootFolderPath;
         private CancellationTokenSource _cts;
         public Action<bool> ScreenShotState = null;
-        private string _lastScreenShotPath; 
         private PlayerInput _playerInput;
         private SceneLoader _sceneLoader;
+        private UIStateSystem _uiStateSystem;
         
-        public string LastScreenShotPath => _lastScreenShotPath;
+        public static string LastScreenShotPath { get; private set; }
 
         [Inject]
-        public ScreenshotSystem(PlayerInput playerInput, SceneLoader sceneLoader)
+        public ScreenshotSystem(PlayerInput playerInput, SceneLoader sceneLoader, UIStateSystem uiStateSystem)
         {
             _playerInput =  playerInput;
             _sceneLoader = sceneLoader;
+            _uiStateSystem = uiStateSystem;
             _cts = new CancellationTokenSource();
             _rootFolderPath = Path.Combine(Application.persistentDataPath, "Screenshots");
             _sceneLoader.SceneStartLoading += DisableAutoScreenshot;
@@ -35,6 +36,7 @@ namespace Systems
 
         public async void TakeScreenShot(ScreenshotType type)
         {
+            if (_uiStateSystem.CurrentState != UIState.Normal) return;
             var fileName = $"Screenshot_{DateTime.Now:dd-MM-yyyy_HH-mm-ss}.png";
             
             var typeFolderPath = Path.Combine(_rootFolderPath, type.ToString());
@@ -45,8 +47,10 @@ namespace Systems
             }
             
             var fullFilePath = Path.Combine(typeFolderPath, fileName);
-            _lastScreenShotPath = fullFilePath;
+
+            LastScreenShotPath =  fullFilePath;
             ScreenShotState?.Invoke(false);
+            _uiStateSystem.ChangeObjectState(false);
             await UniTask.WaitForEndOfFrame();
             
             ScreenCapture.CaptureScreenshot(fullFilePath);
@@ -54,12 +58,14 @@ namespace Systems
             await UniTask.WaitForEndOfFrame();
             ScreenShotState?.Invoke(true);
 
+            _uiStateSystem.ChangeObjectState(true);
+            
             Debug.Log($"Take {type} screenshot saved to: {fullFilePath}");
         }
 
         public void DeleteScreenShot()
         {
-            File.Delete(_lastScreenShotPath);
+            File.Delete(LastScreenShotPath);
         }
 
         public void Dispose()
