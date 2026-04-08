@@ -10,8 +10,11 @@ public class SessionManager : ITickable, IDisposable
 
     public SessionManager()
     {
+
         _startTime = Time.time;
-        _currentSession = new SessionData();
+ 
+
+       _currentSession = new SessionData();
     }
 
     public void Tick()

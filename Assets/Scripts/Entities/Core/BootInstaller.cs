@@ -19,7 +19,8 @@ namespace Entities.Core
         [SerializeField] private PlayableDirector _director;
         [SerializeField] private TimelineAsset _longTimeline;
         [SerializeField] private TimelineAsset _shortTimeline;
-        
+         private SessionManager _sessionManager = new();
+
         public override void InstallBindings()
         {
             Container.Bind<PlayerInput>().FromInstance(_playerInput).AsSingle();
@@ -27,11 +28,14 @@ namespace Entities.Core
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
             Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
+            Container.Inject(_sessionManager);
+
         }
 
         [Inject]
         private void Construct(GlobalData data)
         {
+            
             _director.Play(data.Get<RuntimePlayerData>().WasInGame ? _shortTimeline : _longTimeline);
             data.Edit<RuntimePlayerData>(playerData => playerData.WasInGame = true);
         }

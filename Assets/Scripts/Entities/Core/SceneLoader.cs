@@ -22,6 +22,7 @@ namespace Entities.Core
         private AsyncOperation _asyncLoad;
         [Inject] private DiContainer _container;
         [Inject] private GlobalData _globalData;
+
         
         private void Start()
         {
@@ -52,7 +53,10 @@ namespace Entities.Core
             if (sceneInd != "Start")
             {
                 _globalData.Edit<SavablePlayerData>(data => data.LastScene = sceneInd);
+
             }
-        }
+           
+       
+    }
     }
 }
