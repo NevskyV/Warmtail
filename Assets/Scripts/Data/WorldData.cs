@@ -11,6 +11,9 @@ namespace Data
         public HashSet<int> CreaturesIds = new();
         public int MaxCreatures;
         public List<int> ActivatedStatues = new(){0};
+        public int ManualWorld;
+        public int ManualCharaster;
+        public int ManualPuzzle;
     }
 
 }
