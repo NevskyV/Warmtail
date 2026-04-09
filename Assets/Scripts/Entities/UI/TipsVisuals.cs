@@ -56,6 +56,12 @@ namespace Entities.UI
         
         public void HideTip(InputAction reference)
         {
+            if (string.IsNullOrEmpty(_playerInput.currentControlScheme))
+            {
+                Debug.Log("ControlScheme is NULL!");
+                return;
+            }
+
             var inputData = _tips[_playerInput.currentControlScheme].Find(x => x.Action.action == reference);
             inputData.UI.SetActive(false);
             _lastInputActions.Remove(inputData.Action);

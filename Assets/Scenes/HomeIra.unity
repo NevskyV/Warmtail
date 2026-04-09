@@ -794,19 +794,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 400902949}
-        m_TargetAssemblyTypeName: Entities.Props.SavableStateObject, Assembly-CSharp
-        m_MethodName: ChangeState
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
   _needToShow: 1
 --- !u!1 &204354682
 GameObject:
@@ -3927,7 +3915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2391104436727695036, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1921.9736
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 2664046397044501612, guid: 81db9e2702253ce4f8ef46913b81c238, type: 3}
       propertyPath: m_IsActive
@@ -7547,7 +7535,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392402724778464448, guid: 58b8c4a212a1a9d468e1b40b62a9880b, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1921.9734
+      value: 1919.9998
       objectReference: {fileID: 0}
     - target: {fileID: 3392402724778464448, guid: 58b8c4a212a1a9d468e1b40b62a9880b, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -11460,7 +11448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2560530096375336482, guid: d00fe628844b78b40a9dc13f897425a8, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 1921.9736
+      value: 1920
       objectReference: {fileID: 0}
     - target: {fileID: 2560530096375336482, guid: d00fe628844b78b40a9dc13f897425a8, type: 3}
       propertyPath: m_LocalPosition.x
