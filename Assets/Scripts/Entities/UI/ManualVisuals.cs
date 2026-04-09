@@ -73,7 +73,9 @@ namespace Entities.UI
             List<int> unlockedPages = _manualSystem.GetUnlockedPages(_currentChapter);
             if (unlockedPages.Count == 0) return;
             _leftPage = Instantiate(_pages[_currentChapter][unlockedPages[x % unlockedPages.Count]], _leftSide);
+            _leftPage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
             _rightPage = Instantiate(_pages[_currentChapter][unlockedPages[(x+1) % unlockedPages.Count]], _rightSide);
+            _rightPage.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, 0);
         }
     }
 }
