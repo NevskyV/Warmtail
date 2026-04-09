@@ -67,6 +67,9 @@ namespace Entities.Core
             
             Container.Inject(_questSystem);
 
+            Container.BindInterfacesAndSelfTo<WarmthSystem>().FromNew().AsSingle();
+            Container.BindInterfacesAndSelfTo<TemperatureSystem>().FromNew().AsSingle();
+            Container.BindInterfacesAndSelfTo<CompanionPassiveSystem>().FromNew().AsSingle().NonLazy();
             Container.BindInterfacesAndSelfTo<PlayerMovement>().FromInstance(_playerConfig.Abilities
                 .OfType<PlayerMovement>().First()).AsSingle();
             
