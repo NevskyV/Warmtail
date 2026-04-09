@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Event 11
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: a025d32a-1616-4cbb-98c3-cf8d563f4327
-  Once: 0
+  <Once>k__BackingField: 0
   <AnyScene>k__BackingField: 1
   Scene: 
-  NextElement: {fileID: 11400000, guid: fc654383d40fdc04398ed519016b3792, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: fc654383d40fdc04398ed519016b3792, type: 2}
   Element:
     Actions:
     - rid: 5800212002074788236
@@ -36,6 +36,7 @@ MonoBehaviour:
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
+        _onLoad: 0
         _objectIds:
         - finix gameplay
         _homeScene: 0
@@ -54,6 +55,6 @@ MonoBehaviour:
     - rid: 5800212216453792139
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _questData: {fileID: 11400000, guid: 37bd43537256fbb4e9d2c07105777df8, type: 2}
+        _questData: {fileID: 11400000, guid: fff34e33ef2d4fc45b784ac25b758253, type: 2}
         _start: 0
         _home: 1
