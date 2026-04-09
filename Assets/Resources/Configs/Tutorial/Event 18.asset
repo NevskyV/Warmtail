@@ -37,13 +37,14 @@ MonoBehaviour:
     - rid: 4719408548755013781
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _questData: {fileID: 11400000, guid: 53d31db22a94d9b448beefbc22573680, type: 2}
+        _questData: {fileID: 11400000, guid: 808a613be07c6734f8f1ec6234beb68d, type: 2}
         _start: 0
         _home: 0
     - rid: 5800212431756066966
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
+        _onLoad: 0
         _objectIds:
         - dialogue after fear
         _homeScene: 0
@@ -51,6 +52,7 @@ MonoBehaviour:
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
         _active: 1
+        _onLoad: 0
         _objectIds:
         - tertilus gameplay
         - finix gameplay

@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Event 15
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: cf082b3f-74a2-42f4-a438-04f777e3eb0e
-  Once: 0
+  <Once>k__BackingField: 0
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
-  NextElement: {fileID: 11400000, guid: 9a9fbf97e4b59364ea934deb769c6712, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: 9a9fbf97e4b59364ea934deb769c6712, type: 2}
   Element:
     Actions:
     - rid: 5800212002074788251
@@ -31,7 +31,7 @@ MonoBehaviour:
     - rid: 5800212002074788250
       type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
       data:
-        _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
+        _questData: {fileID: 11400000, guid: e62b050b562b8d142a83af9e612deda9, type: 2}
         _start: 0
         _home: 0
     - rid: 5800212002074788251
