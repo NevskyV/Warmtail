@@ -1,4 +1,5 @@
 using Entities.PlayerScripts;
+using Entities.UI;
 using Systems;
 using UnityEngine;
 using Zenject;
@@ -13,6 +14,7 @@ namespace Entities.Props
 
         private TemperatureSystem _temperatureSystem;
         private Rigidbody2D _playerRb;
+        [Inject] private UIStateSystem _uiStateSystem;
 
         [Inject]
         private void Construct(TemperatureSystem temperatureSystem, Player player)
@@ -23,7 +25,7 @@ namespace Entities.Props
 
         private void FixedUpdate()
         {
-            if (!_playerRb || _temperatureSystem == null) return;
+            if (!_playerRb || _temperatureSystem == null || _uiStateSystem.CurrentState != UIState.Normal) return;
 
             var dist = Vector2.Distance(_playerRb.position, (Vector2)transform.position);
             if (dist > _radius) return;
