@@ -15,7 +15,7 @@ namespace Entities.Puzzle.Modules
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (_module == null) return;
-            if (!other.CompareTag("Pushable") && !other.CompareTag("Player")) return;
+            if (!other.CompareTag("pushable")) return;
             GetComponent<SpriteRenderer>().sprite = _sprite;
             _module.Solve();
         }
