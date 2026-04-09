@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 213c096ae1a2be44c945f538012275fa, type: 3}
+  m_Name: Event 10
+  m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
+  _idNod: 91ad09a5-f8e4-4cfc-802d-4a8695e3d181
+  <Once>k__BackingField: 0
+  <AnyScene>k__BackingField: 0
+  Scene: Assets/Scenes/HomeIra.unity
+  <NextElement>k__BackingField: {fileID: 11400000, guid: f250226c84b04e74e88c28e9e16a6044, type: 2}
+  Element:
+    Actions:
+    - rid: 1618607774383472796
+    Tasks: []
+  _description: "\u041F\u043E\u044F\u0432\u043B\u044F\u0435\u0442\u0441\u044F \u043A\u043D\u043E\u043F\u043A\u0430
+    \u0441\u0442\u0440\u043E\u0438\u0442\u0435\u043B\u044C\u0441\u0442\u0432\u0430"
+  references:
+    version: 2
+    RefIds:
+    - rid: 1618607774383472796
+      type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _active: 1
+        _onLoad: 0
+        _objectIds:
+        - build button
+        _homeScene: 1
