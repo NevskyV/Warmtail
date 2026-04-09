@@ -64,6 +64,8 @@ namespace Entities.UI
             var ids = _globalData.Get<SavablePlayerData>().QuestIds;
             foreach (var id in ids)
             {
+                Debug.Log("ira id = " + id  );
+                Debug.Log("ira id.Key = " + id.Key  );
                 if (!_allQuests.Exists(x => x.Id == id.Key)) continue;
                 var quest = _allQuests.Find(x => x.Id == id.Key);
                 if(quest) QuestSystem.StartQuest(quest, id.Value);
