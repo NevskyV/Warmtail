@@ -4,6 +4,7 @@ namespace Entities.Puzzle.Modules
 {
     public class ButtonPressTrigger : MonoBehaviour
     {
+        [SerializeField] private Sprite _sprite;
         private ButtonPressModule _module;
 
         public void Initialize(ButtonPressModule module)
@@ -15,6 +16,7 @@ namespace Entities.Puzzle.Modules
         {
             if (_module == null) return;
             if (!other.CompareTag("Pushable") && !other.CompareTag("Player")) return;
+            GetComponent<SpriteRenderer>().sprite = _sprite;
             _module.Solve();
         }
     }

@@ -12,7 +12,7 @@ namespace Data
         public int MaxCreatures;
         public List<int> ActivatedStatues = new(){0};
         public List<int> ManualWorld;
-        public List<int> ManualCharaster;
+        public List<int> ManualCharacter;
         public List<int> ManualPuzzle;
     }
 

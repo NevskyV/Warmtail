@@ -21,19 +21,12 @@ MonoBehaviour:
     Actions:
     - rid: 5800212002074788251
     - rid: 5800212002074788255
-    Tasks:
-    - rid: 5800212002074788250
+    Tasks: []
   _description: "\u0416\u0434\u0451\u0442 \u043A\u0432\u0435\u0441\u0442, \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442
     \u0434\u0438\u0430\u043B\u043E\u0433 \u0424\u0438\u043D\u0438\u043A\u0441"
   references:
     version: 2
     RefIds:
-    - rid: 5800212002074788250
-      type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _questData: {fileID: 11400000, guid: e62b050b562b8d142a83af9e612deda9, type: 2}
-        _start: 0
-        _home: 0
     - rid: 5800212002074788251
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
