@@ -60,6 +60,7 @@ namespace Entities.Core
             Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             Container.Bind<DailySystem>().FromNew().AsSingle();
             Container.Bind<EventsData>().FromNew().AsSingle();
+            Container.Bind<BestiarySystem>().FromNew().AsSingle();
             Container.Bind<MarksVisuals>().FromInstance(_marksVisuals).AsSingle();
             Container.Bind<TipsVisuals>().FromInstance(_tipsVisuals).AsSingle();
             Container.Bind<QuestSystem>().FromInstance(_questSystem).AsSingle();

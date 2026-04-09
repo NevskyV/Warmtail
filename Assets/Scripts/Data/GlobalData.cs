@@ -37,6 +37,7 @@ namespace Data
                 if (File.Exists(settingsfilePath)) File.Delete(settingsfilePath);
                 if(Directory.Exists(manualSavesPath)) Directory.Delete(manualSavesPath, true);
                 Debug.Log("Data deleted!");
+                LoadAutoSave();
             }
             catch (Exception e)
             {
