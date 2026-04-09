@@ -13,27 +13,20 @@ MonoBehaviour:
   m_Name: Event 15
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: cf082b3f-74a2-42f4-a438-04f777e3eb0e
-  Once: 0
+  <Once>k__BackingField: 0
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
-  NextElement: {fileID: 11400000, guid: 9a9fbf97e4b59364ea934deb769c6712, type: 2}
+  <NextElement>k__BackingField: {fileID: 11400000, guid: 9a9fbf97e4b59364ea934deb769c6712, type: 2}
   Element:
     Actions:
     - rid: 5800212002074788251
     - rid: 5800212002074788255
-    Tasks:
-    - rid: 5800212002074788250
+    Tasks: []
   _description: "\u0416\u0434\u0451\u0442 \u043A\u0432\u0435\u0441\u0442, \u0434\u043E\u0431\u0430\u0432\u043B\u044F\u0435\u0442
     \u0434\u0438\u0430\u043B\u043E\u0433 \u0424\u0438\u043D\u0438\u043A\u0441"
   references:
     version: 2
     RefIds:
-    - rid: 5800212002074788250
-      type: {class: QuestTask, ns: Systems.Tasks, asm: Assembly-CSharp}
-      data:
-        _questData: {fileID: 11400000, guid: 3a59fad43ad67ac438e089152789f252, type: 2}
-        _start: 0
-        _home: 0
     - rid: 5800212002074788251
       type: {class: SetDialogueGraphAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:

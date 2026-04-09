@@ -12,6 +12,7 @@ namespace Systems
     public class ShoppingSystem
     {
         [Inject] private GlobalData _globalData;
+        [Inject] private SessionSystem _sessionSystem;
         
         public void BuyItem(BuyableItemData item, Character character, bool isLast)
         {
@@ -20,6 +21,7 @@ namespace Systems
             else
             {
                 _globalData.Edit<SavablePlayerData>(data => {data.Shells -= item.Price;});
+                _sessionSystem.AddItemBought();
                 Debug.Log("ракушек теперь " + _globalData.Get<SavablePlayerData>().Shells);
                 if (isLast) PurchaseLastItem (character);
 

@@ -185,6 +185,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Manual",
+                    "type": "Button",
+                    "id": "413bb961-1011-4155-bf11-88441c60f4a2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -620,7 +629,7 @@
                 {
                     "name": "",
                     "id": "627833c1-c0a3-4eba-8acc-ea39be71bb22",
-                    "path": "<Gamepad>/dpad/left",
+                    "path": "<Gamepad>/select",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Gamepad",
@@ -713,6 +722,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "FearMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "81688a18-7907-4d61-ae8e-647bd781d321",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Manual",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1b720c1e-66e4-44fb-82e8-4c64f6c70b1a",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Manual",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

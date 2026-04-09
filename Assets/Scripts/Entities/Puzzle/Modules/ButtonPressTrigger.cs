@@ -4,6 +4,7 @@ namespace Entities.Puzzle.Modules
 {
     public class ButtonPressTrigger : MonoBehaviour
     {
+        [SerializeField] private Sprite _sprite;
         private ButtonPressModule _module;
 
         public void Initialize(ButtonPressModule module)
@@ -14,7 +15,8 @@ namespace Entities.Puzzle.Modules
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (_module == null) return;
-            if (!other.CompareTag("Pushable") && !other.CompareTag("Player")) return;
+            if (!other.CompareTag("pushable")) return;
+            GetComponent<SpriteRenderer>().sprite = _sprite;
             _module.Solve();
         }
     }
