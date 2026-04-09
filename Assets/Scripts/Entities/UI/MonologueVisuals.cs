@@ -73,8 +73,8 @@ namespace Entities.UI
         {
             _currentText.localPosition = ChooseRandomPosition();
             var line = LocalizationManager.GetStringFromKey("Star_"+ _dialogueSystem.DialogueGraph.DialogueId+ "_" + node.NodeId);
-            
-            _currentLineDuration = line.Length * _perCharFadeTime + _delayTime;
+            _currentLineDuration = _perCharFadeTime <= 0?0 :
+                line.Length * _perCharFadeTime + _delayTime;
             print(line);
             _currentText.GetComponent<TMP_Text>().text = line;
             var effect = _currentText.GetComponent<TextEffect>();

@@ -135,6 +135,6 @@ namespace Entities.UI
     [Serializable]
     public enum UIState
     {
-        Normal, Settings, Pause, Dialogue, Building, Shop, Map, Bestiary, FearMenu, MusicSelection, Photo, Hidden
+        Normal, Settings, Pause, Dialogue, Building, Shop, Map, Bestiary, FearMenu, MusicSelection, Photo, Hidden, Manual
     }
 }

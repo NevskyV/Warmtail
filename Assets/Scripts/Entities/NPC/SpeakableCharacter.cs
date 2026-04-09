@@ -16,6 +16,7 @@ namespace Entities.NPC
 {
     public class SpeakableCharacter : SavableStateObject, IInteractable, IEventInvoker
     {
+        [SerializeField] private int _creatureId;
         [field: SerializeField] public RuntimeDialogueGraph Graph { get; set; }
         [field: SerializeField] public List<UnityEvent> Actions { get; set; }
         [field: SerializeField] public List<UnityEvent> SavableState { get; private set; }
@@ -23,6 +24,8 @@ namespace Entities.NPC
         private DialogueVisuals _visuals;
         private UIStateSystem _uiStateSystem;
         private SplineAnimate _splineAnimate;
+        
+        [Inject] private BestiarySystem _bestiarySystem;
 
         [Inject]
         private void Construct(DialogueSystem dialogueSystem, DialogueVisuals visuals, UIStateSystem uiStateSystem)
@@ -40,6 +43,7 @@ namespace Entities.NPC
         public void Interact()
         {
             if (_splineAnimate && _splineAnimate.IsPlaying) return;
+            _bestiarySystem.AddCreature(_creatureId);
             InteractTrigger();
         }
 

@@ -17,15 +17,17 @@ namespace Entities.Props
         [SerializeField] private int _shellsAmount;
         [SerializeField] private string _sfx;
         [SerializeField] private ParticleSystem _vfx;
+        private SessionSystem _sessionSystem;
         private MaterialPropertyBlock _propertyBlock;
         private SpriteRenderer _renderer;
         private Tween _tween;
 
         [Inject]
-        public void Construct()
+        public void Construct(SessionSystem sessionSystem)
         {
             DailySystem.OnLoadedResources += LoadShell;
             DailySystem.OnDiscardedResources += DiscardShell;
+            _sessionSystem = sessionSystem;
         }
 
         private void Start()
@@ -58,6 +60,7 @@ namespace Entities.Props
             });
             OnShellsChanged?.Invoke();
             _timer.Stop();
+            _sessionSystem.AddShell();
             GetComponent<ObjectSfx>().PlaySfx(_sfx);
             ObjectSpawnSystem.Spawn(_vfx, transform.position);
             Destroy(gameObject);
