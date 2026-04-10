@@ -64,6 +64,8 @@ namespace Entities.UI
             var ids = _globalData.Get<SavablePlayerData>().QuestIds;
             foreach (var id in ids)
             {
+                Debug.Log("ira id = " + id  );
+                Debug.Log("ira id.Key = " + id.Key  );
                 if (!_allQuests.Exists(x => x.Id == id.Key)) continue;
                 var quest = _allQuests.Find(x => x.Id == id.Key);
                 if(quest) QuestSystem.StartQuest(quest, id.Value);
@@ -72,7 +74,7 @@ namespace Entities.UI
 
         public async void SpawnQuest(QuestData data)
         {
-            if (data == null) return;
+            if (data == null || _createdMarks.ContainsKey(data)) return;
             if (_createdQuests.ContainsKey(data) && _createdMarks.ContainsKey(data)) return;
             var newQuest = _diContainer.InstantiatePrefab(_questPrefab, _questHud).transform;
             if (!newQuest) return;

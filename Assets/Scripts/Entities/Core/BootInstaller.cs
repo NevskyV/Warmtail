@@ -19,7 +19,7 @@ namespace Entities.Core
         [SerializeField] private PlayableDirector _director;
         [SerializeField] private TimelineAsset _longTimeline;
         [SerializeField] private TimelineAsset _shortTimeline;
-         private SessionManager _sessionManager = new();
+         private SessionSystem _sessionSystem = new();
 
         public override void InstallBindings()
         {
@@ -28,7 +28,7 @@ namespace Entities.Core
             Container.Bind<InputSystemUIInputModule>().FromInstance(_uiInput).AsSingle();
             Container.Bind<ScreenshotSystem>().FromNew().AsSingle();
             Container.Bind<GamepadRumble>().FromNew().AsSingle();
-            Container.Inject(_sessionManager);
+            Container.Inject(_sessionSystem);
 
         }
 

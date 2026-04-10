@@ -21,6 +21,7 @@ MonoBehaviour:
     Actions:
     - rid: 5800212318539743431
     - rid: 5800212431756066975
+    - rid: 1618607787608637539
     - rid: 4719408513318387861
     - rid: 4719408586194944169
     Tasks:
@@ -32,6 +33,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1618607787608637539
+      type: {class: EndQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _quest: {fileID: 11400000, guid: 771a9b84d572de847a2a483e0f685425, type: 2}
     - rid: 4719408513318387861
       type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
