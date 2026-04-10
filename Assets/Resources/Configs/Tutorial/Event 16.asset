@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Event 16
   m_EditorClassIdentifier: Assembly-CSharp::Systems.Tutorial.EventConfig
   _idNod: 52303779-41c1-4656-bb7c-74d85501e59f
-  <Once>k__BackingField: 1
+  <Once>k__BackingField: 0
   <AnyScene>k__BackingField: 0
   Scene: Assets/Scenes/Gameplay.unity
   <NextElement>k__BackingField: {fileID: 11400000, guid: 8030c91fa0bc55949806ba169922ea30, type: 2}
@@ -21,8 +21,8 @@ MonoBehaviour:
     Actions:
     - rid: 5800212002074788253
     - rid: 5800212002074788254
-    - rid: 6510803830513074266
     - rid: 4719408586194944168
+    - rid: 1618607787608637538
     Tasks:
     - rid: 5800212002074788252
   _description: "\u0416\u0434\u0451\u0442 \u043A\u043E\u043D\u0446\u0430 \u0434\u0438\u0430\u043B\u043E\u0433\u0430,
@@ -32,6 +32,10 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: 1618607787608637538
+      type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
+      data:
+        _quest: {fileID: 11400000, guid: 771a9b84d572de847a2a483e0f685425, type: 2}
     - rid: 4719408586194944168
       type: {class: SavableStateAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
       data:
@@ -56,7 +60,3 @@ MonoBehaviour:
       data:
         _graph: {fileID: 11400000, guid: d63495bebd650b5409805fcca9d8fe32, type: 2}
         _npcId: finix gameplay
-    - rid: 6510803830513074266
-      type: {class: StartQuestAction, ns: Systems.SequenceActions, asm: Assembly-CSharp}
-      data:
-        _quest: {fileID: 11400000, guid: 771a9b84d572de847a2a483e0f685425, type: 2}
